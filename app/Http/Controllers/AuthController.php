@@ -8,12 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 class AuthController extends Controller
 {
+
     public function login(Request $request)
     {
         return view('auth.login');
     }
+
     public function postLogin(Request $request) {
-        // Kiểm tra dữ liệu nhập vào
         $rules = [
             'email' =>'required|email',
             'password' => 'required'
@@ -34,6 +35,7 @@ class AuthController extends Controller
 
             if( Auth::attempt($params)) {
                 // Kiểm tra đúng email và mật khẩu sẽ chuyển trang
+
                 return redirect('home');
             } else {
                // dd($validator);

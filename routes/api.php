@@ -17,3 +17,26 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'contract'], function () {
+    Route::get('/postJan', 'ContractController@postJan');
+    Route::get('/postJun', 'ContractController@postJun');
+    Route::get('/postFeb', 'ContractController@postFeb');
+    Route::get('/postDec', 'ContractController@postDec');
+    Route::get('/postJul', 'ContractController@postJul');
+    Route::get('/postNov', 'ContractController@postNov');
+    Route::get('/postSep', 'ContractController@postSep');
+    Route::get('/postOct', 'ContractController@postOct');
+    Route::get('/postAug', 'ContractController@postAug');
+    Route::get('/postMay', 'ContractController@postMay');
+    Route::get('/postMar', 'ContractController@postMar');
+    Route::get('/postApr', 'ContractController@postApr');
+
+});
+Route::group(['prefix' => 'product'], function () {
+    Route::post('/pickupBanner/{id}', 'ContractController@pickupBanner');
+
+
+});
+
+

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="892bb13c-5cb5-400f-89b2-e3e12443959f" name="192.168.1.71">
+        <fileTransfer rootFolder="/var/www/html/haivanad" accessType="SFTP" host="192.168.1.71" port="22" sshConfigId="e8fda723-aa22-4334-b357-021860cd1375" sshConfig="root@192.168.1.71:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
