@@ -35,7 +35,7 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
             <div class="container-fluid">
                 <div class="header-mobile-inner">
                     <a class="logo" href="/">
-                        <img src="asset/images/icon/logo.png" alt="CoolAdmin"/>
+                        <img src="asset/images/icon/logo.png" alt="HaiVan.vn"/>
                     </a>
                     <button class="hamburger hamburger--slider" type="button">
                                 <span class="hamburger-box">
@@ -72,7 +72,7 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
     <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
             <a href="{{'/haivanad'}}">
-                <img src="/asset/images/icon/logo.png" alt="HaiVanAD.vn"/>
+                <img src="/asset/images/icon/logo.png" alt="HaiVan.vn"/>
             </a>
         </div>
         <div class="menu-sidebar__content js-scrollbar1">
