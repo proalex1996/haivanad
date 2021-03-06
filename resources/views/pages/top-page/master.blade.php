@@ -25,7 +25,7 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
 <link href="{{asset('vendor/slick/slick.css')}}" rel="stylesheet" media="all">
 <link href="{{asset('vendor/select2/select2.min.css')}}" rel="stylesheet" media="all">
 <link href="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet" media="all">
-<script src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+<script href="{{asset('public/asset/js/fontawesome.js')}}"></script>
 <link href="{{asset('public/asset/css/theme.css')}}" rel="stylesheet" media="all">
 </head>
 <body class="animsition">
