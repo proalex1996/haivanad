@@ -27,7 +27,10 @@ class HomeController extends Controller
     {
         return view('pages.top-page.index');
     }
-
+    public function user(Request $request)
+    {
+        return view('auth.user');
+    }
     public function postAPIchart(Request $request)
     {
         $contract = ContractModel::all();

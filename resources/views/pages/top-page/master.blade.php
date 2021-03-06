@@ -254,7 +254,7 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                                         </div>
                                         <div class="account-dropdown__body">
                                             <div class="account-dropdown__item">
-                                                <a href="#">
+                                                <a href="{{url('/home/user')}}">
                                                     <i class="zmdi icon-account"></i>Tài Khoản</a>
                                             </div>
                                             <div class="account-dropdown__item">

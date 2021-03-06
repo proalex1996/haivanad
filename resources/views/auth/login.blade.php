@@ -43,7 +43,7 @@
                             @csrf
                             <div class="form-group">
                                 <label>Tên Đăng Nhập</label>
-                                <input class="au-input au-input--full" type="email" name= "email" placeholder="email">
+                                <input class="au-input au-input--full" type="text" name= "email" placeholder="email">
                             </div>
                             <div class="form-group">
                                 <label>Mật Khẩu</label>
@@ -60,11 +60,13 @@
                                     <input type="checkbox" name="remember">Nhớ tài khoản
                                 </label>
                             </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Đăng Nhập</button>
-                            <label>
-                                <a href="#">Quên mật khẩu</a>
-                            </label>
+                                <button class="au-btn au-btn--block au-btn--green m-b-5" type="submit">Đăng Nhập</button>
                         </form>
+                        <div class="forget-password">
+                            <label>
+                                <a  href="#">Quên mật khẩu</a>
+                            </label>
+                        </div>
                         <div class="register-link">
                             <p>
                                 Chưa có tài khoản đăng nhập? Liên Hệ: 0889881010
