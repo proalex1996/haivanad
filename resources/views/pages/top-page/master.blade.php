@@ -37,6 +37,11 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                     <a class="logo" href="{{'/haivanad'}}">
                         <img src="{{asset('public/asset/images/logo.png')}}" alt="HaiVan"/>
                     </a>
+                    <button class="hamburger hamburger--slider" type="button">
+                                <span class="hamburger-box" >
+                                    <span class="hamburger-inner"></span>
+                                </span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -99,18 +104,14 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
             <div class="section__content section__content--p30">
                 <div class="container-fluid">
                     <div class="header-wrap">
-                        <form class="form-header" action="" method="POST">
+                        <form class="form-header " action="" method="POST">
                             <input class="au-input au-input--xl" type="text" name="search"
                                    placeholder="Tìm kiếm hợp đông &amp; báo cáo..."/>
                             <button class="au-btn--submit" type="submit">
                                 <i class="zmdi zmdi-search"></i>
                             </button>
-                            <button class="hamburger hamburger--slider" type="button">
-                                <span class="hamburger-box"  style="left: 17px">
-                                    <span class="hamburger-inner"></span>
-                                </span>
-                            </button>
                         </form>
+
                         <div class="header-button">
                             <div class="noti-wrap">
                                 <div class="noti__item js-item-menu">
@@ -262,7 +263,7 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                                             </div>
                                         </div>
                                         <div class="account-dropdown__footer">
-                                            <a href="#">
+                                            <a href="{{url('/auth/logout')}}">
                                                 <i class="zmdi icon-logout"></i>Đăng Xuất</a>
                                         </div>
                                     </div>

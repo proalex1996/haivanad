@@ -337,7 +337,7 @@ section {
 @media (max-width: 991px) {
     .page-container {
         position: relative;
-        top: 88px;
+        top: 111px;
         padding-left: 0;
     }
 }
@@ -401,12 +401,15 @@ section {
     -moz-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
+
 }
 
 .login-checkbox label input[type="checkbox"] {
-    margin-right: 8px;
+    margin: 6px;
 }
-
+.login-checkbox label {
+    margin-l: 9px;
+}
 .login-checkbox > label > a {
     color: #ff2e44;
 }
@@ -1195,6 +1198,9 @@ section {
 }
 .form-control  {
    display: inline-flex;
+    margin: -3px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 .form-customer {
     -webkit-border-radius: 2px;
@@ -1271,7 +1277,6 @@ section {
 @media (max-width: 991px) {
     .header-desktop {
         position: relative;
-        top: 24px;
         left: 0;
         height: 170px;
     }
@@ -1292,6 +1297,7 @@ section {
 @media (max-width: 991px) {
     .logo {
         text-align: center;
+        width: 175px;
     }
 }
 
@@ -1795,7 +1801,7 @@ section {
     display: none;
     position: absolute;
     width: 100%;
-    top: 113px;
+    top: 60px;
     z-index: 20;
 }
 

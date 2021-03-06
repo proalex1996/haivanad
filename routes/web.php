@@ -25,7 +25,7 @@ use App\Http\Controllers\MenuController;
 Route::group(['prefix' => 'auth'], function () {
     Route::get('/login', 'AuthController@login');
     Route::post('/postlogin', 'AuthController@postlogin');
-    Route::post('/logout','AuthController@logout');
+    Route::get('/logout','AuthController@logout');
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/', 'HomeController@index');
 
