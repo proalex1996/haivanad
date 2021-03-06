@@ -4827,6 +4827,7 @@ section {
     font-size: 14px;
     padding: 12px 40px;
     padding-right: 10px;
+    overflow-x: auto;
 }
 
 .table-data3 tbody td.process {
