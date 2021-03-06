@@ -61,16 +61,15 @@
                                 <label>
                                     <input type="checkbox" name="remember">Nhớ tài khoản
                                 </label>
-                                <label>
-                                    <a href="#">Quên mật khẩu</a>
-                                </label>
                             </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Đăng Nhập</button>
-
+                            <label>
+                                <a href="#">Quên mật khẩu</a>
+                            </label>
                         </form>
                         <div class="register-link">
                             <p>
-                                Đây là trang đăng nhập với tài khoản đã được cấp trước.
+                                Chưa có tài khoản đăng nhập? Liên Hệ: 0889881010
                             </p>
                         </div>
                     </div>

@@ -35,7 +35,7 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
             <div class="container-fluid">
                 <div class="header-mobile-inner">
                     <a class="logo" href="/">
-                        <img src="asset/images/icon/logo.png" alt="HaiVan.vn"/>
+                        <img src="{{asset('public/asset/images/logo.png')}}" alt="HaiVan"/>
                     </a>
                     <button class="hamburger hamburger--slider" type="button">
                                 <span class="hamburger-box">
@@ -51,12 +51,12 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                     @foreach ($menus as $menu)
                         <li class="has-sub">
                             <a class="js-arrow" href="{{url($menu->link)}}">
-                                <i class="{{$menu->icoin}} m-r-10"></i>{{$menu->item_menu}}</a>
+                                <div class="{{$menu->icoin}} m-r-10"><div class="item-menu">{{$menu->item_menu}}</div></a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                 @foreach (\App\Model\MenuModel::where('id_parent',$menu->id)->get() as $item)
                                     <li>
-                                        <a href="{{url($item->link)}}"><i
-                                                class="{{$item->icoin}} m-r-10"></i>{{$item->item_menu}}</a>
+                                        <a href="{{url($item->link)}}"><div
+                                                class="{{$item->icoin}} m-r-10"></div><div class="item-menu">{{$item->item_menu}}</div></a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -72,7 +72,7 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
     <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
             <a href="{{'/haivanad'}}">
-                <img src="/asset/images/icon/logo.png" alt="HaiVan.vn"/>
+                <img src="{{asset('public/asset/images/logo.png')}}" alt="HaiVan"/>
             </a>
         </div>
         <div class="menu-sidebar__content js-scrollbar1">
@@ -81,12 +81,12 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                     @foreach ($menus as $menu)
                         <li class="has-sub">
                             <a class="js-arrow" href="{{url($menu->link)}}">
-                                <i class="{{$menu->icoin}} m-r-10"></i>{{$menu->item_menu}}</a>
+                                <div class="{{$menu->icoin}} m-r-10"></div><div class="item-menu">{{$menu->item_menu}}</div></a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                 @foreach (\App\Model\MenuModel::where('id_parent',$menu->id)->get() as $item)
                                     <li>
-                                        <a href="{{url($item->link)}}"><i
-                                                class="{{$item->icoin}} m-r-10"></i>{{$item->item_menu}}</a>
+                                        <a href="{{url($item->link)}}"><div
+                                                class="{{$item->icoin}} m-r-10"></div><div class="item-menu">{{$item->item_menu}}</div></a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -119,18 +119,18 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                                     <span class="quantity">1</span>
                                     <div class="mess-dropdown js-dropdown">
                                         <div class="mess__title">
-                                            <p>Đây là dữ liệu test</p>
+                                            <p>Bản demo</p>
                                         </div>
 
                                         <div class="mess__item">
                                             <div class="image img-cir img-40">
-                                                <img src="asset/images/icon/avatar-06.jpg" alt="Michelle Moreno"/>
+                                                <img src="asset/images/icon/avatar-06.jpg" alt="Bản demo"/>
                                             </div>
                                             <div class="content">
 
-                                                <h6>Đây là dữ liệu test</h6>
-                                                <p>Đây là dữ liệu test</p>
-                                                <span class="time">Đây là dữ liệu test</span>
+                                                <h6>Bản demo</h6>
+                                                <p>Bản demo</p>
+                                                <span class="time">Bản demo</span>
 
                                             </div>
 
@@ -140,13 +140,13 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                                                 <img src="images/icon/avatar-04.jpg" alt="Diane Myers"/>
                                             </div>
                                             <div class="content">
-                                                <h6>Đây là dữ liệu test</h6>
-                                                <p>YĐây là dữ liệu test</p>
-                                                <span class="time">Đây là dữ liệu test</span>
+                                                <h6>Bản demo</h6>
+                                                <p>Bản demo</p>
+                                                <span class="time">Bản demo</span>
                                             </div>
                                         </div>
                                         <div class="mess__footer">
-                                            <a href="#">Đây là dữ liệu test</a>
+                                            <a href="#">Bản demo</a>
                                         </div>
                                     </div>
                                 </div>
@@ -155,37 +155,37 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                                     <span class="quantity">1</span>
                                     <div class="email-dropdown js-dropdown">
                                         <div class="email__title">
-                                            <p>Đây là dữ liệu test</p>
+                                            <p>Bản demo</p>
                                         </div>
                                         <div class="email__item">
                                             <div class="image img-cir img-40">
-                                                <img src="images/icon/avatar-06.jpg" alt="Cynthia Harvey"/>
+                                                <img src="images/icon/avatar-06.jpg" alt="Bản demo"/>
                                             </div>
                                             <div class="content">
-                                                <p>Đây là dữ liệu test</p>
-                                                <span>Đây là dữ liệu test</span>
-                                            </div>
-                                        </div>
-                                        <div class="email__item">
-                                            <div class="image img-cir img-40">
-                                                <img src="images/icon/avatar-05.jpg" alt="Cynthia Harvey"/>
-                                            </div>
-                                            <div class="content">
-                                                <p>Đây là dữ liệu test</p>
-                                                <span>Đây là dữ liệu test</span>
+                                                <p>Bản demo</p>
+                                                <span>Bản demo</span>
                                             </div>
                                         </div>
                                         <div class="email__item">
                                             <div class="image img-cir img-40">
-                                                <img src="images/icon/avatar-04.jpg" alt="Cynthia Harvey"/>
+                                                <img src="images/icon/avatar-05.jpg" alt="Bản demo"/>
                                             </div>
                                             <div class="content">
-                                                <p>Đây là dữ liệu test</p>
-                                                <span>Đây là dữ liệu test</span>
+                                                <p>Bản demo</p>
+                                                <span>Bản demo</span>
+                                            </div>
+                                        </div>
+                                        <div class="email__item">
+                                            <div class="image img-cir img-40">
+                                                <img src="images/icon/avatar-04.jpg" alt="Bản demo"/>
+                                            </div>
+                                            <div class="content">
+                                                <p>Bản demo</p>
+                                                <span>Bản demo</span>
                                             </div>
                                         </div>
                                         <div class="email__footer">
-                                            <a href="#">Đây là dữ liệu test</a>
+                                            <a href="#">Bản demo</a>
                                         </div>
                                     </div>
                                 </div>
@@ -194,15 +194,15 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                                     <span class="quantity">3</span>
                                     <div class="notifi-dropdown js-dropdown">
                                         <div class="notifi__title">
-                                            <p>Đây là dữ liệu test</p>
+                                            <p>Bản demo</p>
                                         </div>
                                         <div class="notifi__item">
                                             <div class="bg-c1 img-cir img-40">
                                                 <i class="zmdi zmdi-email-open"></i>
                                             </div>
                                             <div class="content">
-                                                <p>Đây là dữ liệu test</p>
-                                                <span class="date">Đây là dữ liệu test</span>
+                                                <p>Bản demo</p>
+                                                <span class="date">Bản demo</span>
                                             </div>
                                         </div>
                                         <div class="notifi__item">
@@ -210,8 +210,8 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                                                 <i class="zmdi zmdi-account-box"></i>
                                             </div>
                                             <div class="content">
-                                                <p>Đây là dữ liệu test</p>
-                                                <span class="date">Đây là dữ liệu test</span>
+                                                <p>Bản demo</p>
+                                                <span class="date">Bản demo</span>
                                             </div>
                                         </div>
                                         <div class="notifi__item">
@@ -219,12 +219,12 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                                                 <i class="zmdi zmdi-file-text"></i>
                                             </div>
                                             <div class="content">
-                                                <p>Đây là dữ liệu test</p>
-                                                <span class="date">Đây là dữ liệu test</span>
+                                                <p>Bản demo</p>
+                                                <span class="date">Bản demo</span>
                                             </div>
                                         </div>
                                         <div class="notifi__footer">
-                                            <a href="#">Đây là dữ liệu test</a>
+                                            <a href="#">Bản demo</a>
                                         </div>
                                     </div>
                                 </div>
@@ -232,7 +232,7 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
                                     <div class="image">
-                                        <img src="{{asset('public/asset/images/account.png')}}" alt="John Doe"/>
+                                        <img src="{{asset('public/asset/images/account.png')}}" alt="Bản demo"/>
                                     </div>
                                     <div class="content">
                                         <a class="js-acc-btn" href="#">
@@ -242,14 +242,14 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                                         <div class="info clearfix">
                                             <div class="image">
                                                 <a href="#">
-                                                    <img src="images/icon/avatar-01.jpg" alt="John Doe"/>
+                                                    <img src="images/icon/avatar-01.jpg" alt="Bản demo"/>
                                                 </a>
                                             </div>
                                             <div class="content">
                                                 <h5 class="name">
-                                                    <a href="#">Đây là dữ liệu test</a>
+                                                    <a href="#">Bản demo</a>
                                                 </h5>
-                                                <span class="email">Đây là dữ liệu test</span>
+                                                <span class="email">Bản demo</span>
                                             </div>
                                         </div>
                                         <div class="account-dropdown__body">
