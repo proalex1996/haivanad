@@ -14823,11 +14823,41 @@ section {
 }
 .icon-about{
     display: inline-flex;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     margin: unset;
     background-image: url(../images/about.png);
+}
+.icon-account{
+    display: inline-flex;
+    width: 35px;
+    height: 35px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: unset;
+    background-image: url(../images/pencil.png);
+}
+.icon-set-up{
+    display: inline-flex;
+    width: 35px;
+    height: 35px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: unset;
+    background-image: url(../images/settings.png);
+}
+.icon-logout{
+    display: inline-flex;
+    width: 35px;
+    height: 35px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: unset;
+    background-image: url(../images/sign-out.png);
 }

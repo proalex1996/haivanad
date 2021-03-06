@@ -36,21 +36,21 @@
             <div class="login-wrap">
                 <div class="login-content">
                     <div class="login-logo">
-                        <a href="#">
-                            <img src="" alt="">
+                        <a href="{{'/haivan'}}">
+                            <img src="{{asset('public/asset/images/logo.png')}}" alt="HaiVan">
                         </a>
                     </div>
                     <div class="login-form">
                         <form action="postlogin" method="post">
                             @csrf
                             <div class="form-group">
-                                <label>Email</label>
+                                <label>Tên Đăng Nhập</label>
                                 <input class="au-input au-input--full" type="email" name= "email" placeholder="email">
                             </div>
                             <div class="form-group">
                                 <label>Mật Khẩu</label>
                                 <input class="au-input au-input--full" type="password" name="password"
-                                       placeholder="password">
+                                       placeholder="Mật khẩu">
                             </div>
                             @if(\Session('error'))
                                 <div class="m-l-95 color-session">

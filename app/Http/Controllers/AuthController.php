@@ -46,4 +46,8 @@ class AuthController extends Controller
             }
         }
     }
+    public function logout(){
+        $_SESSION['admin'] = '';
+        return redirect('/login')->with('notice', 'Bạn đã đăng xuất thành công khỏi hệ thống');
+    }
 }

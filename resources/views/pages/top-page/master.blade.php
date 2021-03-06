@@ -242,7 +242,7 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                                         <div class="info clearfix">
                                             <div class="image">
                                                 <a href="#">
-                                                    <img src="images/icon/avatar-01.jpg" alt="Bản demo"/>
+                                                    <img src="{{asset('public/asset/images/account.png')}}" alt="Bản demo"/>
                                                 </a>
                                             </div>
                                             <div class="content">
@@ -255,16 +255,16 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                                         <div class="account-dropdown__body">
                                             <div class="account-dropdown__item">
                                                 <a href="#">
-                                                    <i class="zmdi zmdi-account"></i>Tài Khoản</a>
+                                                    <i class="zmdi icon-account"></i>Tài Khoản</a>
                                             </div>
                                             <div class="account-dropdown__item">
                                                 <a href="#">
-                                                    <i class="zmdi zmdi-settings"></i>Cài Đặt</a>
+                                                    <i class="zmdi icon-set-up"></i>Cài Đặt</a>
                                             </div>
                                         </div>
                                         <div class="account-dropdown__footer">
                                             <a href="#">
-                                                <i class="zmdi zmdi-power"></i>Đăng Xuất</a>
+                                                <i class="zmdi icon-logout"></i>Đăng Xuất</a>
                                         </div>
                                     </div>
                                 </div>
