@@ -98,7 +98,7 @@ p {
 
 .fixed_header table{
     display: block;
-    overflow-x: auto;
+    overflow-x: hidden;
     max-height: 570px;
     white-space: nowrap;
     border-spacing: 100px;
@@ -408,7 +408,7 @@ section {
     margin: 6px;
 }
 .login-checkbox label {
-    margin-l: 9px;
+    margin-left: -7px;
 }
 .login-checkbox > label > a {
     color: #ff2e44;
@@ -14886,3 +14886,12 @@ section {
     margin: unset;
     vertical-align: text-bottom;
 }
+.forget-password{
+    float: right;
+    margin-left: 309px;
+    width: 150px;
+}
+.forget-password a{
+    color: #fa4251;
+}
+

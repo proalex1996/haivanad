@@ -16,7 +16,7 @@ class AuthController extends Controller
 
     public function postLogin(Request $request) {
         $rules = [
-            'email' =>'required|email',
+            'email' =>'required',
             'password' => 'required'
         ];
         $messages = [
