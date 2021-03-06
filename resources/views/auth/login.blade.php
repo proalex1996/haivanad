@@ -37,7 +37,7 @@
                 <div class="login-content">
                     <div class="login-logo">
                         <a href="#">
-                            <img src="../public/asset/images/icon/logo.png" alt="CoolAdmin">
+                            <img src="" alt="">
                         </a>
                     </div>
                     <div class="login-form">
@@ -48,7 +48,7 @@
                                 <input class="au-input au-input--full" type="email" name= "email" placeholder="email">
                             </div>
                             <div class="form-group">
-                                <label>Password</label>
+                                <label>Mật Khẩu</label>
                                 <input class="au-input au-input--full" type="password" name="password"
                                        placeholder="password">
                             </div>
@@ -65,7 +65,7 @@
                                     <a href="#">Quên mật khẩu</a>
                                 </label>
                             </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Đăng Nhập</button>
 
                         </form>
                         <div class="register-link">
