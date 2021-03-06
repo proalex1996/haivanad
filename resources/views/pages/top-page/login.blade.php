@@ -9,7 +9,7 @@
                     <div class="login-content">
                         <div class="login-logo">
                             <a href="#">
-                                <img src="./asset/images/icon/logo.png" alt="CoolAdmin">
+                                <img src="" alt="Hải Vân">
                             </a>
                         </div>
                         <div class="login-form">
@@ -21,9 +21,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
-                                    <div class="invalid-feedback">Mật khẩ không được để trống</div>
+                                    <label>Mật Khẩu</label>
+                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Mật Khẩu">
+                                    <div class="invalid-feedback">Mật khẩu không được để trống</div>
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
@@ -33,7 +33,7 @@
                                         <a href="#">Quên mật khẩu</a>
                                     </label>
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button>
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Đăng Nhập</button>
                             </form>
                             <div class="register-link">
                                 <p>
