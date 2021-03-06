@@ -34,14 +34,9 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
         <div class="header-mobile__bar">
             <div class="container-fluid">
                 <div class="header-mobile-inner">
-                    <a class="logo" href="/">
+                    <a class="logo" href="{{'/haivanad'}}">
                         <img src="{{asset('public/asset/images/logo.png')}}" alt="HaiVan"/>
                     </a>
-                    <button class="hamburger hamburger--slider" type="button">
-                                <span class="hamburger-box">
-                                    <span class="hamburger-inner"></span>
-                                </span>
-                    </button>
                 </div>
             </div>
         </div>
@@ -51,12 +46,11 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                     @foreach ($menus as $menu)
                         <li class="has-sub">
                             <a class="js-arrow" href="{{url($menu->link)}}">
-                                <div class="{{$menu->icoin}} m-r-10"><div class="item-menu">{{$menu->item_menu}}</div></a>
+                                <i class="{{$menu->icoin}} m-r-10"></i><i class="parent-menu">{{$menu->item_menu}}</i></a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                 @foreach (\App\Model\MenuModel::where('id_parent',$menu->id)->get() as $item)
                                     <li>
-                                        <a href="{{url($item->link)}}"><div
-                                                class="{{$item->icoin}} m-r-10"></div><div class="item-menu">{{$item->item_menu}}</div></a>
+                                        <a href="{{url($item->link)}}"><i class="{{$item->icoin}}"></i><i  class="parent-menu">{{$item->item_menu}}</i></a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -110,6 +104,11 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                                    placeholder="Tìm kiếm hợp đông &amp; báo cáo..."/>
                             <button class="au-btn--submit" type="submit">
                                 <i class="zmdi zmdi-search"></i>
+                            </button>
+                            <button class="hamburger hamburger--slider" type="button">
+                                <span class="hamburger-box"  style="left: 17px">
+                                    <span class="hamburger-inner"></span>
+                                </span>
                             </button>
                         </form>
                         <div class="header-button">
@@ -315,18 +314,18 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
     <script src="{{asset('vendor/slick/slick.min.js')}}"></script>
     <script src="{{asset('vendor/wow/wow.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap-progressbar/bootstrap-progressbar.min.js')}}"></script>
-        <script src="{{asset('vendor/counter-up/jquery.waypoints.min.js')}}"></script>
+    <script src="{{asset('vendor/counter-up/jquery.waypoints.min.js')}}"></script>
     <script src="{{asset('vendor/counter-up/jquery.counterup.min.js')}}"></script>
     <script src="{{asset('vendor/circle-progress/circle-progress.min.js')}}"></script>
     <script src="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
     <script src="{{asset('vendor/chartjs/Chart.bundle.min.js')}}"></script>
     <script src="{{asset('vendor/select2/select2.min.js')}}"></script>
-    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script src="{{asset('public/asset/js/jquery-ui.js')}}"></script>
     <script src="{{asset('vendor/animsition/animsition.min.js')}}"></script>
     <script src="{{asset('public/asset/js/main.js')}}"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
+    <script src="{{asset('public/asset/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('public/asset/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('public/asset/css/dataTables.bootstrap4.min.css')}}"></script>
 </footer>
 
 </html>
