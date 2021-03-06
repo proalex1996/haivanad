@@ -14757,3 +14757,77 @@ section {
 .banner-banner{
     display: inline-flex;
 }
+.icon-web-style{
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: unset; !important;
+}
+.icon-contract{
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: unset;
+    background-image: url(../images/contract.png);
+}
+.item-menu{
+    display: inline-flex;
+    margin-left: 20px;
+    padding-top: 10px ;
+    position: fixed;
+}
+.icon-customer{
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: unset;
+    background-image: url(../images/customer.png);
+}
+.icon-info{
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: unset;
+    background-image: url(../images/info.png);
+}
+.icon-product{
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: unset;
+    background-image: url(../images/product.png);
+}
+.icon-dashbroad{
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: unset;
+    background-image: url(../images/dashbroad.png);
+}
+.icon-about{
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: unset;
+    background-image: url(../images/about.png);
+}
