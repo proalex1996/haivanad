@@ -28,6 +28,7 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
 <script href="{{asset('public/asset/js/fontawesome.js')}}"></script>
 <link href="{{asset('public/asset/css/theme.css')}}" rel="stylesheet" media="all">
 </head>
+
 <body class="animsition">
 <div class="page-wrapper">
     <header class="header-mobile d-block d-lg-none">

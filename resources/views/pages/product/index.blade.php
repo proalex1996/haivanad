@@ -22,10 +22,12 @@
         <div class="row m-t-30">
 
             <div class="col-md-9">
+
                 <div class="fixed_header">
                     <table id="table-data_reponse" class="table table-borderless table-data3">
                         <thead>
                         <tr>
+                            <th><input type="checkbox" id="check-all" name="title"></th>
                             <th>STT</th>
                             <th>Mã Pano</th>
                             <th>Địa Chỉ</th>
@@ -37,11 +39,11 @@
 
                         </tr>
                         </thead>
-
                             <tbody>
                             @foreach($banners as $banner)
                                 @if ($banner->id_status == 2)
                                 <tr class="status--warn">
+                                    <td><input type="checkbox" id="check-box" name="check-box"></td>
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->id}}</a>
                                         <div class="dropdown-menu">
@@ -52,19 +54,15 @@
                                                data-id_data="{{$banner->id}}" data-toggle="modal"
                                                data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa
                                                 hợp đồng</a>
-                                            <hr>
-                                            <a id="open-dueContract" class="dropdown-item"
-                                               data-toggle="modal" data-target="#exampleModalCenter"
-                                               onclick="openPickup(this)">Đặt Chổ</a>
                                         </div>
                                     </td>
-                                    <td class="id_banner">{{$banner->id_banner}}</td>
+                                    <td class="id_banner">2021+{{$banner->id_banner}}</td>
                                     <td>{{$banner->banner_adress}}</td>
                                     <td>{{$banner->size_banner}}</td>
                                     <td>{{$banner->height_banner}}</td>
                                     <td>{{$banner->light_system}}</td>
                                     <td>{{$banner->content}}</td>
-                                    <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                    <td><a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->name_status}}</a>
                                         <div class="dropdown-menu">
                                             @foreach($status_banners as $status_banner)
@@ -75,6 +73,7 @@
                                     </td>
                                 @else
                                     <tr>
+                                        <td><input type="checkbox" id="check-box" name="check-box"></td>
                                         <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                                aria-expanded="false" id="dropdownMenuLink"> {{$banner->id}}</a>
                                             <div class="dropdown-menu">
@@ -85,13 +84,9 @@
                                                    data-id_data="{{$banner->id}}" data-toggle="modal"
                                                    data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa
                                                     hợp đồng</a>
-                                                <hr>
-                                                <a id="open-dueContract" class="dropdown-item"
-                                                   data-toggle="modal" data-target="#exampleModalCenter"
-                                                   onclick="openPickup(this)">Đặt Chổ</a>
                                             </div>
                                         </td>
-                                        <td class="id_banner">{{$banner->id_banner}}</td>
+                                        <td class="id_banner">2021+{{$banner->id_banner}}</td>
                                         <td>{{$banner->banner_adress}}</td>
                                         <td>{{$banner->size_banner}}</td>
                                         <td>{{$banner->height_banner}}</td>
@@ -135,6 +130,7 @@
                                 </tbody>
                                 @endforeach
                             </table>
+
                         </div>
                     </div>
                 </div>
@@ -248,3 +244,4 @@
 {{--        </div>--}}
 {{--    </div>--}}
 {{--</div>--}}
+

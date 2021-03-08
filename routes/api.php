@@ -35,6 +35,7 @@ Route::group(['prefix' => 'contract'], function () {
 });
 Route::group(['prefix' => 'product'], function () {
     Route::post('/pickupBanner/{id}', 'ContractController@pickupBanner');
+    Route::get('/apitable', 'ProductController@apiProduct');
 
 
 });
