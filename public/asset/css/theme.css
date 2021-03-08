@@ -98,7 +98,7 @@ p {
 
 .fixed_header table{
     display: block;
-    overflow-x: hidden;
+    overflow-x: auto;
     max-height: 570px;
     white-space: nowrap;
     border-spacing: 100px;

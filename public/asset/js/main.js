@@ -1947,6 +1947,14 @@ $(document).ready(function () {
 // }
 
 $( "#riverroad-tb" ).tooltip({ content: '<img src="'+$( "#riverroad-tb" ).attr("data")+'" />' });
+// Chức năng chọn hết
 
+
+document.getElementById('check-all').onclick = function() {
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    for (var checkbox of checkboxes) {
+        checkbox.checked = this.checked;
+    }
+}
 
 

@@ -47,6 +47,21 @@ class ProductController extends Controller
             'status_banners' =>$status_banner
         ]);
     }
+    public function apiProduct()
+    {
+        $banners = DB::table('banner')
+            ->join('status_banner', 'banner.name_status', '=', 'status_banner.id_status')
+            ->select('banner.id','status_banner.id_status', 'banner.id_banner','status_banner.name_status', 'banner.banner_adress',
+                'banner.thumb_banner', 'banner.light_system', 'banner.content', 'banner.size_banner', 'banner.height_banner')
+            ->groupBy('id')->orderBy('id', 'DESC')->paginate();
+        $status_banner = DB::table('status_banner')->select('*')->get();
+        $contract = DB::table('contract')
+            ->join('banner', 'contract.id_banner', '=', 'banner.id_banner')
+            ->join('customer', 'contract.id_customer', '=', 'customer.customer_id')
+            ->select('banner.id_banner', 'contract.id_contract', 'customer.name_customer')->groupBy('contract.id')->orderBy('contract.id','DESC')->first();
+        return json_encode($banners);
+
+    }
 
 
     public function createProduct(Request $request)
