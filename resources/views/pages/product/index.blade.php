@@ -20,11 +20,41 @@
             </div>
         </div>
         <div class="row m-t-30">
-
             <div class="col-md-9">
+                <form class="post-form-sort" action="{{url('/product')}}" method="post" style="margin-bottom: 3em">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-2 col-sm-12 m-t-10">
+                            <label for="exampleFormControlInput1 ">Mã Pano</label>
+                            <input type="text" class="form-control" id="id_banner" name="id_banner" placeholder="Mã Pano">
 
-                <div class="fixed_header">
-                    <table id="table-data_reponse" class="table table-borderless table-data3">
+                        </div>
+                        <div class="col-md-2 col-sm-12 m-t-10">
+                            <label for="exampleFormControlInput1 ">Trạng thái</label>
+                            <select type="text" class="form-control" id="id_status" name="id_status">
+                                <option value="">Tất Cả</option>
+                                @foreach($status_banners as $status)
+                                <option value="{{$status->id_status}}">{{$status->name_status}}</option>
+                                @endforeach
+
+                            </select>
+                        </div>
+                        <div class="col-md-2 col-sm-12 m-t-10">
+                            <label for="exampleFormControlInput1 ">Hệ Thống Đèn</label>
+                            <input type="text" class="form-control" id="light_system" name="light_system"
+                                   placeholder="Hệ thống đèn">
+                        </div>
+                        <div class="col-md-2 col-sm-12 m-t-10 align-self-end" >
+
+                            <button class="btn btn-primary btn-block" type="submit" aria-expanded="false">Tìm</button>
+                        </div>
+
+                    </div>
+                </form>
+
+                <div class="table-container fixed_header ">
+                    <table class="table table-borderless table-data3 table-test-responsive">
+
                         <thead>
                         <tr>
                             <th><input type="checkbox" id="check-all" name="title"></th>
@@ -39,9 +69,9 @@
 
                         </tr>
                         </thead>
-                            <tbody>
-                            @foreach($banners as $banner)
-                                @if ($banner->id_status == 2)
+                        <tbody class="overflow-scroll">
+                        @foreach($banners as $banner)
+                            @if ($banner->id_status == 2)
                                 <tr class="status--warn">
                                     <td><input type="checkbox" id="check-box" name="check-box"></td>
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
@@ -53,7 +83,7 @@
                                             <a id="open-deleteProduct" class="dropdown-item"
                                                data-id_data="{{$banner->id}}" data-toggle="modal"
                                                data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa
-                                                hợp đồng</a>
+                                               </a>
                                         </div>
                                     </td>
                                     <td class="id_banner">2021+{{$banner->id_banner}}</td>
@@ -67,47 +97,50 @@
                                         <div class="dropdown-menu">
                                             @foreach($status_banners as $status_banner)
                                                 <a class="dropdown-item"
+                                                   href="{{\Illuminate\Support\Facades\URL::to('product/pickupBanner'.$status_banner->id_status)."/".$banner->id}}"></a>
+                                            @endforeach
+                                        </div>
+                                    </td>
+                            @elseif($banner->id_status==1)
+                                <tr>
+                                    <td><input type="checkbox" id="check-box" name="check-box"></td>
+                                    <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                           aria-expanded="false" id="dropdownMenuLink"> {{$banner->id}}</a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item"
+                                               href="{{\Illuminate\Support\Facades\URL::to('product/update')."/".$banner->id}}">Sửa
+                                                thông tin Pano</a>
+                                            <a id="open-deleteProduct" class="dropdown-item"
+                                               data-id_data="{{$banner->id}}" data-toggle="modal"
+                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa</a>
+                                        </div>
+                                    </td>
+                                    <td class="id_banner">2021+{{$banner->id_banner}}</td>
+                                    <td>{{$banner->banner_adress}}</td>
+                                    <td>{{$banner->size_banner}}</td>
+                                    <td>{{$banner->height_banner}}</td>
+                                    <td>{{$banner->light_system}}</td>
+                                    <td>{{$banner->content}}</td>
+                                    <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                           aria-expanded="false" id="dropdownMenuLink"> {{$banner->name_status}}</a>
+                                        <div class="dropdown-menu">
+                                            @foreach($status_banners as $status_banner)
+                                                <a class="dropdown-item"
                                                    href="{{\Illuminate\Support\Facades\URL::to('product/pickupBanner'.$status_banner->id_status)."/".$banner->id}}">{{$status_banner->name_status}}</a>
                                             @endforeach
                                         </div>
                                     </td>
-                                @else
-                                    <tr>
-                                        <td><input type="checkbox" id="check-box" name="check-box"></td>
-                                        <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                               aria-expanded="false" id="dropdownMenuLink"> {{$banner->id}}</a>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item"
-                                                   href="{{\Illuminate\Support\Facades\URL::to('product/update')."/".$banner->id}}">Sửa
-                                                    thông tin Pano</a>
-                                                <a id="open-deleteProduct" class="dropdown-item"
-                                                   data-id_data="{{$banner->id}}" data-toggle="modal"
-                                                   data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa
-                                                    hợp đồng</a>
-                                            </div>
-                                        </td>
-                                        <td class="id_banner">2021+{{$banner->id_banner}}</td>
-                                        <td>{{$banner->banner_adress}}</td>
-                                        <td>{{$banner->size_banner}}</td>
-                                        <td>{{$banner->height_banner}}</td>
-                                        <td>{{$banner->light_system}}</td>
-                                        <td>{{$banner->content}}</td>
-                                        <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                               aria-expanded="false" id="dropdownMenuLink"> {{$banner->name_status}}</a>
-                                            <div class="dropdown-menu">
-                                                @foreach($status_banners as $status_banner)
-                                                    <a class="dropdown-item"
-                                                       href="{{\Illuminate\Support\Facades\URL::to('product/pickupBanner'.$status_banner->id_status)."/".$banner->id}}">{{$status_banner->name_status}}</a>
-                                                @endforeach
-                                            </div>
-                                        </td>
-                                @endif
-                            @endforeach
-                            </tbody>
+                            @endif
+                        @endforeach
+                        </tbody>
 
 
                     </table>
                 </div>
+
+
+
+
             </div>
             <div class="col-lg-3">
                 <div class="au-card au-card--bg-blue au-card-top-countries m-b-30">

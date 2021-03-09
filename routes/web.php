@@ -51,6 +51,17 @@ Route::group(['prefix' => 'contract'], function () {
         Route::get('/destroy/{id}', 'ContractController@destroy');
     });
 });
+Route::group(['prefix' => 'users'], function () {
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('/', 'staffController@getIndex');
+        Route::get('/add', 'ContractController@addContract');
+        Route::get('/update/{id}', 'ContractController@update');
+        Route::post('/update/{id}', 'ContractController@update');
+        Route::post('/add', 'ContractController@createContract');
+        Route::get('/download', 'ContractController@getDownload');
+        Route::get('/destroy/{id}', 'ContractController@destroy');
+    });
+});
 Route::group(['prefix' => 'customer'], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/', 'CustomerController@getIndex');
@@ -63,13 +74,15 @@ Route::group(['prefix' => 'customer'], function () {
         Route::post('/import-customer', 'CustomerController@import');
         Route::get('/download-exmple', 'CustomerController@dowloadExample');
         Route::get('/export', 'CustomerController@export');
+        Route::get('/sort/{id}', 'CustomerController@export');
 
     });
 
 });
 Route::group(['prefix' => 'product'], function () {
     Route::group(['middleware'=>'auth'],function (){
-       Route::get('/','ProductController@getIndex');
+        Route::get('/','ProductController@getIndex');
+        Route::post('/','ProductController@getIndex');
         Route::post('/add', 'ProductController@createProduct');
         Route::get('/add', 'ProductController@addProduct');
         Route::get('/import-product', 'ProductController@importProduct');
@@ -82,6 +95,7 @@ Route::group(['prefix' => 'product'], function () {
         Route::get('/pickupBanner1/{id}', 'ProductController@pickupBanner1');
         Route::get('/pickupBanner2/{id}', 'ProductController@pickupBanner2');
         Route::get('/genpptx','ProductController@generateppt');
+        Route::get('/sort?={id}', 'ProductController@getsortStatus');
     });
 }
 );

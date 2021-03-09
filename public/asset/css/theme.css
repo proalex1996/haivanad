@@ -95,14 +95,22 @@ img {
 p {
     margin: 0;
 }
-
-.fixed_header table{
+.fixed_header table
+{
     display: block;
     overflow-x: auto;
-    max-height: 570px;
+    max-height: 500px;
     white-space: nowrap;
     border-spacing: 100px;
-
+    overflow-y: scroll;
+}
+.fixed_header th{
+    position: sticky;
+    top: 0; /* Don't forget this, required for the stickiness */
+    background: #333;
+}
+.table-container{
+    width: 100% !important;
 }
 /*.fixed_header thead tr{*/
 /*    display: block;*/
@@ -4762,6 +4770,7 @@ section {
 
 .table-data3 thead {
     background: #333;
+    position: sticky;
 }
 
 .table-data3 thead tr th {
@@ -14894,4 +14903,53 @@ section {
 .forget-password a{
     color: #fa4251;
 }
+.sort-btn{
+    position: relative;
+    margin-bottom: 10px;
+    margin-left: 500px;
+}
+.sort-btn a{
+    padding-left: 10px;
+    color: black;
+}
+.sort-form-group{
+    display: inline-flex;
+    height: 30px;
+    width: 390px;
+    margin-top: 35px;
+    padding-left: 70px;
+}
+.sort-form-group label{
+    width: 155px;
+    margin-top: 5px;
+}
+.sort-form-group input{
+    width: 140px;
+    margin-top: 3px;
+}
+.sort-form-group button{
+    margin-top: 4px;
+    height: 30px;
+}
 
+.sort-form{
+    margin-bottom: 1rem;
+    height: 114px;
+}
+.sort-button{
+    float: right;
+    margin-top: 70px;
+    padding-right: 30px;
+}
+.sort-button button{
+    width: 93px;
+}
+.btn-delete-all{
+    background-color: #fa4251;
+    border-collapse: collapse;
+    width: 100px;
+    height: 40px;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    padding: 10px;
+}
