@@ -29,13 +29,25 @@ class ProductController extends Controller
         $this->productRepository = $productRepository;
     }
 
-    public function getIndex()
+    public function getIndex(Request $request)
     {
         $banners = DB::table('banner')
             ->join('status_banner', 'banner.name_status', '=', 'status_banner.id_status')
             ->select('banner.id','status_banner.id_status', 'banner.id_banner', 'thumb_banner', 'status_banner.name_status', 'banner.banner_adress',
-                'banner.thumb_banner', 'banner.light_system', 'banner.content', 'banner.size_banner', 'banner.height_banner')
-            ->groupBy('id')->orderBy('id', 'DESC')->get();
+                'banner.thumb_banner', 'banner.light_system', 'banner.content', 'banner.size_banner', 'banner.height_banner');
+            if(!empty($request->id_status))
+            {
+                $banners = $banners ->where('status_banner.id_status','=',$request->id_status);
+            };
+            if(!empty($request->id_banner))
+            {
+            $banners = $banners ->where('banner.id_banner','=',$request->id_banner);
+            }
+            if(!empty($request->light_system))
+            {
+            $banners = $banners ->where('banner.light_system','=',$request->light_system);
+            }
+           $banners = $banners ->groupBy('id')->orderBy('id', 'DESC')->get();
         $status_banner = DB::table('status_banner')->select('*')->get();
         $contract = DB::table('contract')
             ->join('banner', 'contract.id_banner', '=', 'banner.id_banner')

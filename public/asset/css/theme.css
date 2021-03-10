@@ -1087,7 +1087,7 @@ section {
 .rs-select2--light .select2-container--default .select2-selection--single .select2-selection__arrow {
     height: 40px;
     top: 0;
-    right: 13px;
+    right: 5px;
 }
 
 .rs-select2--light .select2-container--default .select2-selection--single .select2-selection__arrow b {

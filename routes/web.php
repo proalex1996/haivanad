@@ -54,7 +54,10 @@ Route::group(['prefix' => 'contract'], function () {
 Route::group(['prefix' => 'users'], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/', 'staffController@getIndex');
-        Route::get('/add', 'ContractController@addContract');
+        Route::post('/','staffController@getIndex');
+
+        Route::get('/add', 'staffController@addUsers');
+        Route::post('/add', 'staffController@addUsers');
         Route::get('/update/{id}', 'ContractController@update');
         Route::post('/update/{id}', 'ContractController@update');
         Route::post('/add', 'ContractController@createContract');
