@@ -115,120 +115,9 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
 
                         <div class="header-button">
                             <div class="noti-wrap">
-                                <div class="noti__item js-item-menu">
-                                    <i class="zmdi zmdi-comment-more"></i>
-                                    <span class="quantity">1</span>
-                                    <div class="mess-dropdown js-dropdown">
-                                        <div class="mess__title">
-                                            <p>Bản demo</p>
-                                        </div>
+                                <a class="noti__item " href="https://id.zalo.me/"><i class="zmdi zmdi-email"></i>
+                                      </a>
 
-                                        <div class="mess__item">
-                                            <div class="image img-cir img-40">
-                                                <img src="asset/images/icon/avatar-06.jpg" alt="Bản demo"/>
-                                            </div>
-                                            <div class="content">
-
-                                                <h6>Bản demo</h6>
-                                                <p>Bản demo</p>
-                                                <span class="time">Bản demo</span>
-
-                                            </div>
-
-                                        </div>
-                                        <div class="mess__item">
-                                            <div class="image img-cir img-40">
-                                                <img src="images/icon/avatar-04.jpg" alt="Diane Myers"/>
-                                            </div>
-                                            <div class="content">
-                                                <h6>Bản demo</h6>
-                                                <p>Bản demo</p>
-                                                <span class="time">Bản demo</span>
-                                            </div>
-                                        </div>
-                                        <div class="mess__footer">
-                                            <a href="#">Bản demo</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="noti__item js-item-menu">
-                                    <i class="zmdi zmdi-email"></i>
-                                    <span class="quantity">1</span>
-                                    <div class="email-dropdown js-dropdown">
-                                        <div class="email__title">
-                                            <p>Bản demo</p>
-                                        </div>
-                                        <div class="email__item">
-                                            <div class="image img-cir img-40">
-                                                <img src="images/icon/avatar-06.jpg" alt="Bản demo"/>
-                                            </div>
-                                            <div class="content">
-                                                <p>Bản demo</p>
-                                                <span>Bản demo</span>
-                                            </div>
-                                        </div>
-                                        <div class="email__item">
-                                            <div class="image img-cir img-40">
-                                                <img src="images/icon/avatar-05.jpg" alt="Bản demo"/>
-                                            </div>
-                                            <div class="content">
-                                                <p>Bản demo</p>
-                                                <span>Bản demo</span>
-                                            </div>
-                                        </div>
-                                        <div class="email__item">
-                                            <div class="image img-cir img-40">
-                                                <img src="images/icon/avatar-04.jpg" alt="Bản demo"/>
-                                            </div>
-                                            <div class="content">
-                                                <p>Bản demo</p>
-                                                <span>Bản demo</span>
-                                            </div>
-                                        </div>
-                                        <div class="email__footer">
-                                            <a href="#">Bản demo</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="noti__item js-item-menu">
-                                    <i class="zmdi zmdi-notifications"></i>
-                                    <span class="quantity">3</span>
-                                    <div class="notifi-dropdown js-dropdown">
-                                        <div class="notifi__title">
-                                            <p>Bản demo</p>
-                                        </div>
-                                        <div class="notifi__item">
-                                            <div class="bg-c1 img-cir img-40">
-                                                <i class="zmdi zmdi-email-open"></i>
-                                            </div>
-                                            <div class="content">
-                                                <p>Bản demo</p>
-                                                <span class="date">Bản demo</span>
-                                            </div>
-                                        </div>
-                                        <div class="notifi__item">
-                                            <div class="bg-c2 img-cir img-40">
-                                                <i class="zmdi zmdi-account-box"></i>
-                                            </div>
-                                            <div class="content">
-                                                <p>Bản demo</p>
-                                                <span class="date">Bản demo</span>
-                                            </div>
-                                        </div>
-                                        <div class="notifi__item">
-                                            <div class="bg-c3 img-cir img-40">
-                                                <i class="zmdi zmdi-file-text"></i>
-                                            </div>
-                                            <div class="content">
-                                                <p>Bản demo</p>
-                                                <span class="date">Bản demo</span>
-                                            </div>
-                                        </div>
-                                        <div class="notifi__footer">
-                                            <a href="#">Bản demo</a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
@@ -299,8 +188,17 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
             <div class="section__content section__content--p30">
 
                 @yield('content')
+
             </div>
         </div>
+{{--        <div class="col-md-12">--}}
+{{--            <ul class="social-network social-circle">--}}
+{{--                <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>--}}
+{{--                <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>--}}
+{{--                <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>--}}
+{{--                <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>--}}
+{{--            </ul>--}}
+{{--        </div>--}}
         <div class="col-sm-12 m-t-100">
             <hr>
             <div class="copyright">
