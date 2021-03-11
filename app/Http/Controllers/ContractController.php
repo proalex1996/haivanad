@@ -38,7 +38,7 @@ class ContractController extends Controller
         $validated = $request->validate($this->rules());
     }
 
-    public function getContract()
+    public function getContract(Request $request)
     {
         $contracts = DB::table('contract')
             ->join('customer', 'id_customer', '=', 'customer.customer_id')
@@ -47,7 +47,19 @@ class ContractController extends Controller
             ->join('kind_contract', 'kind', '=', 'kind_contract.id_contract')
             ->join('contract_status', 'status_contract','=','contract_status.id_contract')
             ->select('contract.id', 'contract.id_contract', 'name_customer', 'banner.id_banner', 'contract.content','contract_status.name_status','kind_contract.name_kind',
-                'date_start', 'date_end', 'name_staff', 'value_contract')->groupBy('contract.id')->orderBy('contract.id','DESC')->get();
+                'date_start', 'date_end', 'name_staff', 'value_contract');
+        if(!empty($request->id_contract))
+        {
+            $contracts = $contracts ->where('id_contract' ,'LIKE','%'.$request->id_contract.'%');
+
+        }
+        if(!empty($request->id_banner))
+        {
+            $contracts = $contracts ->where('id_contract' ,'LIKE','%'.$request->id_banner.'%');
+
+        }
+
+            $contracts = $contracts->groupBy('contract.id')->orderBy('contract.id','DESC')->get();
         return view('pages.contract.contract', ['contracts' => $contracts]);
 
 
