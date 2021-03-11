@@ -78,7 +78,7 @@
                         <tbody class="overflow-scroll">
                         @foreach($banners as $banner)
                             @if ($banner->id_status == 2)
-                                <tr class="status--warn">
+                                <tr class="status--process">
                                     <td><input type="checkbox" id="check-box" name="check-box"></td>
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->id}}</a>
@@ -115,7 +115,7 @@
                                         </div>
                                     </td>
                             @elseif($banner->id_status==1)
-                                <tr class="status--warn">
+                                <tr>
                                     <td><input type="checkbox" id="check-box" name="check-box"></td>
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->id}}</a>
