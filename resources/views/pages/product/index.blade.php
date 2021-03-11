@@ -59,11 +59,18 @@
                             <th><input type="checkbox" id="check-all" name="title"></th>
                             <th>STT</th>
                             <th>Mã Pano</th>
+                            <th>Vị Trí</th>
                             <th>Địa Chỉ</th>
+                            <th>Quận/Huyện</th>
+                            <th>Thành Phố</th>
+                            <th>Loại Hình Sản Phẩm</th>
+                            <th>Kết Cấu</th>
                             <th>Kích Thước</th>
                             <th>Tổng Chiều Cao</th>
                             <th>Hệ Thống Đèn</th>
-                            <th>Nội Dung Quản Cáo Hiện Tại</th>
+                            <th>Đặt Điểm</th>
+                            <th>Lưu Lượng Người</th>
+                            <th>Điểm Escom</th>
                             <th>Trạng thái</th>
 
                         </tr>
@@ -86,22 +93,29 @@
                                         </div>
                                     </td>
                                     <td class="id_banner">2021+{{$banner->id_banner}}</td>
+                                    <td>{{$banner->location}}</td>
                                     <td>{{$banner->banner_adress}}</td>
+                                    <td>{{$banner->quan}}</td>
+                                    <td>{{$banner->tinh}}</td>
+                                    <td>{{$banner->id_typebanner}}</td>
+                                    <td>{{$banner->id_system}}</td>
                                     <td>{{$banner->size_banner}}</td>
-                                    <td>{{$banner->height_banner}}</td>
+                                    <td>{{$banner->height_banner}}mm</td>
                                     <td>{{$banner->light_system}}</td>
-                                    <td>{{$banner->content}}</td>
-                                    <td><a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                    <td>{{$banner->dac_diem}}</td>
+                                    <td>{{$banner->flow}}</td>
+                                    <td>{{$banner->escom}}</td>
+                                    <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->name_status}}</a>
                                         <div class="dropdown-menu">
                                             @foreach($status_banners as $status_banner)
                                                 <a class="dropdown-item"
-                                                   href="{{\Illuminate\Support\Facades\URL::to('product/pickupBanner'.$status_banner->id_status)."/".$banner->id}}"></a>
+                                                   href="{{\Illuminate\Support\Facades\URL::to('product/pickupBanner'.$status_banner->id_status)."/".$banner->id}}">{{$status_banner->name_status}}</a>
                                             @endforeach
                                         </div>
                                     </td>
                             @elseif($banner->id_status==1)
-                                <tr>
+                                <tr class="status--warn">
                                     <td><input type="checkbox" id="check-box" name="check-box"></td>
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->id}}</a>
@@ -111,15 +125,24 @@
                                                 thông tin Pano</a>
                                             <a id="open-deleteProduct" class="dropdown-item"
                                                data-id_data="{{$banner->id}}" data-toggle="modal"
-                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa</a>
+                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa
+                                            </a>
                                         </div>
                                     </td>
                                     <td class="id_banner">2021+{{$banner->id_banner}}</td>
+                                    <td>{{$banner->location}}</td>
+
                                     <td>{{$banner->banner_adress}}</td>
+                                    <td>{{$banner->quan}}</td>
+                                    <td>{{$banner->tinh}}</td>
+                                    <td>{{$banner->id_typebanner}}</td>
+                                    <td>{{$banner->id_system}}</td>
                                     <td>{{$banner->size_banner}}</td>
-                                    <td>{{$banner->height_banner}}</td>
+                                    <td>{{$banner->height_banner}}mm</td>
                                     <td>{{$banner->light_system}}</td>
-                                    <td>{{$banner->content}}</td>
+                                    <td>{{$banner->dac_diem}}</td>
+                                    <td>{{$banner->flow}}</td>
+                                    <td>{{$banner->escom}}</td>
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->name_status}}</a>
                                         <div class="dropdown-menu">
@@ -142,7 +165,7 @@
 
             </div>
             <div class="col-lg-3">
-                <div class="au-card au-card--bg-blue au-card-top-countries m-b-30">
+                <div class="au-card au-card--bg-blue au-card-top-countries m-b-30 " style="margin-top: 3em">
                     <div class="au-card-inner">
                         <div class="table-responsive ">
                             <table class="table table-top-countries">

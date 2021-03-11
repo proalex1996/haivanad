@@ -1,6 +1,5 @@
 <?php
 $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC')->get();
-
 ?><!doctype html>
 <html lang="en">
 <meta charset="UTF-8">
@@ -46,24 +45,24 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                 </div>
             </div>
         </div>
-        <nav class="navbar-mobile">
-            <div class="container-fluid">
-                <ul class="navbar-mobile__list list-unstyled">
-                    @foreach ($menus as $menu)
-                        <li class="has-sub">
-                            <a class="js-arrow" href="{{url($menu->link)}}">
-                                <i class="{{$menu->icoin}} m-r-10"></i><i class="parent-menu">{{$menu->item_menu}}</i></a>
-                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                                @foreach (\App\Model\MenuModel::where('id_parent',$menu->id)->get() as $item)
-                                    <li>
-                                        <a href="{{url($item->link)}}"><i class="{{$item->icoin}}"></i><i  class="parent-menu">{{$item->item_menu}}</i></a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </li>
+        <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar__list">
+                @foreach ($menus as $menu)
+                    <li class="has-sub">
+                        <a class="js-arrow" href="{{url($menu->link)}}">
+                            <div class="{{$menu->icoin}} m-r-10"></div><div class="item-menu">{{$menu->item_menu}}</div></a>
+                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                            @foreach (\App\Model\MenuModel::where('id_parent',$menu->id)->get() as $item)
+                                <li>
+                                    <a href="{{url($item->link)}}"><div
+                                            class="{{$item->icoin}} m-r-10"></div><div class="item-menu">{{$item->item_menu}}</div></a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
                     @endforeach
-                </ul>
-            </div>
+                    </li>
+            </ul>
         </nav>
     </header>
     {{--End Header Mobile--}}

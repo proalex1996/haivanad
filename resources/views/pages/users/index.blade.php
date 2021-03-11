@@ -7,12 +7,12 @@
                 <div class="overview-wrap">
                     <h2 class="title-1">Quản Trị</h2>
                     <div class="exp-excel">
-                        <a class="au-btn au-btn-icon au-btn--blue" href="contract/add">
+                        <a class="au-btn au-btn-icon au-btn--blue" href="user/export-staff">
                             <i class="zmdi zmdi-plus"></i>Xuất file Excel
                         </a>
                     </div>
                     <div class="add-contract">
-                        <a class="au-btn au-btn-icon au-btn--blue" href="contract/add">
+                        <a class="au-btn au-btn-icon au-btn--blue" href="users/add">
                             <i class="zmdi zmdi-plus"></i>Thêm mới nhân viên
                         </a>
                     </div>
@@ -65,7 +65,6 @@
                         <th>Email</th>
                         <th>Chi Nhánh</th>
                         <th>Lương Cơ Bản</th>
-                        <th>Lương KPA</th>
                         <th>Trạng thái</th>
                         <th>Phân Quyền</th>
                     </tr>
@@ -78,15 +77,15 @@
                                    aria-expanded="false" id="dropdownMenuLink"> {{$user->id}}</a>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item"
-                                       href="{{\Illuminate\Support\Facades\URL::to('product/update')."/".$user->id}}">Sửa
+                                       href="{{\Illuminate\Support\Facades\URL::to('users/update')."/".$user->id}}">Sửa
                                         thông tin nhân viên</a>
-                                    <a id="open-deleteProduct" class="dropdown-item"
+                                    <a id="open-deleteStaff" class="dropdown-item"
                                        data-id_data="{{$user->id}}" data-toggle="modal"
                                        data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa
                                     </a>
                                 </div>
                             </td>
-                            <td class="id_banner">2021+{{$user->id_staff}}</td>
+                            <td class="id_banner">2021{{$user->id}}</td>
                             <td>{{$user->name}}</td>
 
                             <td>{{$user->born}}</td>
@@ -99,27 +98,38 @@
                             <td>{{$user->name_branch}}</td>
 
                             <td>{{$user->bassic_salary}}</td>
-
-                            <td>{{$user->extra_salary}}</td>
-                            <td><a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                   aria-expanded="false" id="dropdownMenuLink"> {{$user->status}}</a>
-                                <div class="dropdown-menu">
-                                    @foreach($statuss as $status)
-                                        <a class="dropdown-item"
-                                           href="#">{{$status->status}}</a>
-                                    @endforeach
-                                </div>
-                            </td>
+                            @if($user->id_status == 1)
+                                <td class="status--process">
+                                    <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                       aria-expanded="false" id="dropdownMenuLink"
+                                    > {{$user->status}}</a>
+                                    <div class="dropdown-menu">
+                                        @foreach($statuss as $status)
+                                            <a class="dropdown-item"
+                                               href="{{\Illuminate\Support\Facades\URL::to('users/status'.$status->id_status)."/".$user->id}}">{{$status->status}}</a>
+                                        @endforeach
+                                    </div>
+                            @elseif($user->id_status == 2)
+                                <td class="status--denied">
+                                    <a type="button" class="dropdown-toggle status--warn" data-toggle="dropdown" aria-haspopup="true"
+                                       aria-expanded="false" id="dropdownMenuLink"
+                                    > {{$user->status}}</a>
+                                    <div class="dropdown-menu">
+                                        @foreach($statuss as $status)
+                                            <a class="dropdown-item"
+                                               href="{{\Illuminate\Support\Facades\URL::to('users/status'.$status->id_status)."/".$user->id}}">{{$status->status}}</a>
+                                        @endforeach
+                                    </div>
+                            @endif
                             @if($user->id_pq == 1)
                             <td class="status--process">
-
                                     <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                        aria-expanded="false" id="dropdownMenuLink"
                                        > {{$user->name_pq}}</a>
                                 <div class="dropdown-menu">
                                     @foreach($pqs as $pq)
                                         <a class="dropdown-item"
-                                           href="#">{{$pq->name_pq}}</a>
+                                           href="{{\Illuminate\Support\Facades\URL::to('users/quyen'.$pq->id_pq)."/".$user->id}}">{{$pq->name_pq}}</a>
                                     @endforeach
                                 </div>
                                 @elseif($user->id_pq == 2)
@@ -130,7 +140,7 @@
                                     <div class="dropdown-menu">
                                         @foreach($pqs as $pq)
                                             <a class="dropdown-item"
-                                               href="#">{{$pq->name_pq}}</a>
+                                               href="{{\Illuminate\Support\Facades\URL::to('users/quyen'.$pq->id_pq)."/".$user->id}}">{{$pq->name_pq}}</a>
                                         @endforeach
                                     </div>
                                 @endif
@@ -144,26 +154,26 @@
         </div>
     </div>
 @endsection
-{{--<div class="modal fade" id="detroy">--}}
-{{--    <div class="modal-dialog modal-dialog-centered">--}}
-{{--        <div class="modal-content">--}}
-{{--            <div class="modal-header">--}}
-{{--                <h4 class="modal-title">Thông Báo</h4>--}}
-{{--                <button type="button" class="close" data-dismiss="modal">×</button>--}}
-{{--            </div>--}}
-{{--            <div class="modal-body">--}}
-{{--                Xác nhận xóa--}}
-{{--            </div>--}}
-{{--            <div class="modal-footer">--}}
-{{--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>--}}
-{{--                <a type="button" id="destroy-value"--}}
-{{--                   data-destroy-link="{{\Illuminate\Support\Facades\URL::to('product/destroy')."/"}}"--}}
-{{--                   class="btn btn-primary">Xác Nhận--}}
-{{--                </a>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
+<div class="modal fade" id="detroy">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thông Báo</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+                Xác nhận xóa
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <a type="button" id="destroy-value"
+                   data-destroy-link="{{\Illuminate\Support\Facades\URL::to('users/destroy')."/"}}"
+                   class="btn btn-primary">Xác Nhận
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 {{--<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"--}}

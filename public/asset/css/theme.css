@@ -1222,7 +1222,7 @@ section {
     padding: 5px;
     position: relative;
     z-index: 2;
-    width: 100%;
+    width: 160%;
     height: calc(2.25rem + 2px);
 }
 
@@ -14952,4 +14952,19 @@ section {
     margin-bottom: 1rem;
     color: #ffffff;
     padding: 10px;
+}
+.form-staff label{
+    display: inline-flex;
+    padding-right: 20px;
+    padding-left: 10px;
+    width: 400px;
+}
+.form_select{
+    width: 160%; !important;
+}
+.date_picker{
+    width: 168px;
+    height: 42px;
+    padding-left: 8px;
+    display: inline-flex;
 }

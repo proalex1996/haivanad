@@ -34,7 +34,8 @@ class ProductController extends Controller
         $banners = DB::table('banner')
             ->join('status_banner', 'banner.name_status', '=', 'status_banner.id_status')
             ->select('banner.id','status_banner.id_status', 'banner.id_banner', 'thumb_banner', 'status_banner.name_status', 'banner.banner_adress',
-                'banner.thumb_banner', 'banner.light_system', 'banner.content', 'banner.size_banner', 'banner.height_banner');
+                'banner.thumb_banner', 'banner.light_system', 'banner.content', 'banner.size_banner', 'banner.height_banner' ,'banner.tinh','banner.quan','banner.location',
+                'id_typebanner','banner.id_system','dac_diem','banner.flow','banner.escom');
             if(!empty($request->id_status))
             {
                 $banners = $banners ->where('status_banner.id_status','=',$request->id_status);
@@ -79,17 +80,31 @@ class ProductController extends Controller
     public function createProduct(Request $request)
     {
         $product = new ProductModel();
-        $file = $request->file('thumb_banner');
+//        $file = $request->file('thumb_banner');
         $product->id_banner = $request->id_banner;
+        $product->location = $request->location;
+
         $product->banner_adress = $request->banner_adress;
+
+        $product->quan = $request->quan;
+
+        $product->tinh = $request->tinh;
+
+        $product->id_typebanner = $request->id_typebanner;
+        $product->id_system = $request->id_system;
         $product->size_banner = $request->size_banner;
-        $imageName = time() . '.' . $file->getClientOriginalExtension();
-        $destinationPath = public_path('storage');
-        $file->move($destinationPath, $imageName);
-        $product->thumb_banner = $imageName;
-        $product->content = $request->banner_content;
+
+//        $imageName = time() . '.' . $file->getClientOriginalExtension();
+//        $destinationPath = public_path('storage');
+//        $file->move($destinationPath, $imageName);
+//        $product->thumb_banner = $imageName;
         $product->light_system = $request->light_system;
-         $product->thumb_banner = $request->thumb_banner;
+
+        $product->dac_diem = $request->dac_diem;
+
+        $product->flow = $request->flow;
+
+        $product->escom = $request->escom;
         $product->save();
         return redirect()->action('ProductController@getIndex');
     }

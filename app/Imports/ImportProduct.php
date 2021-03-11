@@ -13,18 +13,25 @@ class ImportProduct implements ToModel, WithStartRow
     {
         return new ProductModel([
             'id_banner' => $row[0],
-            'banner_adress' => $row[1],
-            'size_banner' => $row[2],
-            'height_banner' => $row[3],
-            'light_system' => $row[4],
-            'content' => $row[5],
-            'thumb_banner' => $row[6],
-            'status' => $row[7],
+            'location' => $row[1],
+            'banner_adress' => $row[2],
+            'quan' => $row[3],
+            'tinh' => $row[4],
+            'id_typebanner' => $row[5],
+            'id_system' => $row[6],
+            'size_banner' => $row[7],
+            'height_banner' => $row[8],
+            'light_system' => $row[9,
+            'content' => $row[10],
+            'dac_diem' => $row[11],
+            'flow' => $row[12],
+            'escom' => $row[13],
+            'status' => $row[14],
         ]);
     }
 
     public function startRow(): int
     {
-        return 2;
+        return 4;
     }
 }
