@@ -4,37 +4,41 @@
 namespace App\Http\Controllers;
 
 
+use App\Imports\ImportStaff;
+use App\Model\staffModel;
+use App\Repositories\Staff\staffRepositoryEloquent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
+use Maatwebsite\Excel\Facades\Excel;
 
 class staffController extends Controller
 {
-    public function quyenController()
+    protected $staffRepository;
+
+    public function __construct( staffRepositoryEloquent $staffRepository)
     {
-        $acc = DB::table('staff')
-            ->join('user', 'id_use', '=', 'id_staff')
-            ->select('*')->get();
-        return view('pages.top-page.master', ['accs' => $acc]);
+        $this->staffRepository = $staffRepository;
     }
 
     public function getIndex(Request $request)
     {
         $users = DB::table('users')
-            ->join('branch', 'id_staff', '=', 'id_branch')
+            ->join('branch', 'users.id_branch', '=', 'branch.id_branch')
             ->join('salary', 'users.id_salary', '=', 'salary.id_salary')
             ->join('status', 'users.id_status', '=', 'status.id_status')
             ->join('phan_quyen', 'id_phan_quyen', '=', 'phan_quyen.id_pq')
-            ->select('users.id', 'users.id_staff', 'users.name', 'email', 'created_at', 'staff_adress', 'staff_phone', 'id_CMND',
-                'branch.name_branch', 'status.status', 'bassic_salary', 'users.born', 'extra_salary',
+            ->select('users.id', 'phan_quyen.name_pq','users.id_branch', 'users.name', 'email', 'created_at', 'staff_adress', 'staff_phone', 'id_CMND',
+                'branch.name_branch', 'status.status', 'bassic_salary', 'users.born',
                 'phan_quyen.name_pq', 'phan_quyen.id_pq', 'status.id_status');
         if (!empty($request->id_name)) {
-            $users = $users->where('users.name', '=', $request->id_name);
+            $users = $users->where('users.name', '=', '%'.$request->id_name.'%');
         }
         if (!empty($request->id_status)) {
             $users = $users->where('status.id_status', '=', $request->id_status);
         }
         if (!empty($request->id_staff)) {
-            $users = $users->where('users.id_staff', 'LIKE', '%'.$request->id_staff.'%');
+            $users = $users->where('users.id', 'LIKE', '%'.$request->id_staff.'%');
         }
         $users = $users->get();
         $statuss = DB::table('status')->select('*')->get();
@@ -44,5 +48,109 @@ class staffController extends Controller
             'statuss' => $statuss,
             'pqs' => $pq
         ]);
+    }
+    public function createStaff(){
+        $branchs = DB::table('branch')->select('*')->get();
+        $salarys = DB::table('salary')->select('*')->get();
+        $statuss = DB::table('status')->select('*')->get();
+        $phan_quyen = DB::table('phan_quyen')->select('*')->get();
+        return view('pages.users.add',[
+           'branchs' => $branchs,
+            'salarys' => $salarys,
+            'statuss' => $statuss,
+            'phan_quyen' => $phan_quyen
+        ]);
+    }
+    public function addStaff(Request $request){
+        $users = new staffModel();
+        $users->id_branch = $request->staff_branch;
+        $users->name = $request->name_staff;
+        $users->email = $request->staff_email;
+        $users->staff_phone = $request->staff_phone;
+        $users->staff_adress = $request->staff_adress;
+        $users->id_CMND = $request->id_cmnd;
+        $users->born = $request->date_start;
+        $users->id_salary = $request->bassic_salary;
+        $users->id_status = $request->staff_status;
+        $users->id_phan_quyen = $request->id_pq;
+        $users->save();
+        return redirect()->action('staffController@getIndex');
+    }
+    public function update(Request $request, $id)
+    {
+        $data = $request->all();
+        if (!empty($data)) {
+            $up = $this->staffRepository->update($id, $data);
+            return redirect()->action('staffController@getIndex');
+        }
+        $staffs = $this->staffRepository->find($id);
+        $statuss = DB::table('status')->select('*')->get();
+        $branchs = DB::table('branch')->select('*')->get();
+        $salarys = DB::table('salary') ->select('*')->get();
+        $pq = DB::table('phan_quyen')->select('*')->get();
+        return view('pages.users.update', [
+            'staffs' => $staffs,
+            'statuss' => $statuss,
+            'branchs' => $branchs,
+            'salarys' => $salarys,
+            'pqs' => $pq
+        ]);
+    }
+    public function destroy($id)
+    {
+        try {
+            $del = staffModel::find($id);
+            $del->delete();
+            return redirect('/users');
+        } catch (\Exception $e) {
+            'Xóa thất bại';
+            return redirect(URL::to('users'));
+
+        }
+    }
+    public function importStaff(){
+        return view('pages.users.import');
+    }
+    public function import(Request $request)
+    {
+        $file = $request->file('file');
+        if (!empty($file)) {
+            Excel::import(new ImportStaff, $file);
+            return redirect()->action('staffController@getIndex');
+        } else {
+            return ['File Dữ Liệu trống'];
+        }
+    }
+    public function quyen1($id){
+        $staff = staffModel::find($id);
+        if($staff){
+            $staff->id_phan_quyen = 1;
+            $result = $staff->update();
+        }
+        return redirect()->action('staffController@getIndex');
+    }
+    public function quyen2($id){
+        $staff = staffModel::find($id);
+        if($staff){
+            $staff->id_phan_quyen = 2;
+            $result = $staff->update();
+        }
+        return redirect()->action('staffController@getIndex');
+    }
+    public function status1($id){
+        $status = staffModel::find($id);
+        if($status){
+            $status->id_status = 1;
+            $result = $status->update();
+        }
+        return redirect()->action('staffController@getIndex');
+    }
+    public function status2($id){
+        $status = staffModel::find($id);
+        if($status){
+            $status->id_status = 2;
+            $result = $status->update();
+        }
+        return redirect()->action('staffController@getIndex');
     }
 }

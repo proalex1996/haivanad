@@ -13,11 +13,17 @@ class ProductModel extends Model
     protected $fillable = [
         'id_banner',
         'thumb_banner',
+        'location',
         'banner_adress',
+        'quan',
+        'tinh',
+        'id_typebanner',
+        'id_system',
         'size_banner',
         'height_banner',
-        'content',
         'light_system',
+        'flow',
+        'dac_diem',
         'name_status'
     ];
 }

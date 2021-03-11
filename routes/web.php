@@ -57,14 +57,18 @@ Route::group(['prefix' => 'users'], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/', 'staffController@getIndex');
         Route::post('/','staffController@getIndex');
-
-        Route::get('/add', 'staffController@addUsers');
-        Route::post('/add', 'staffController@addUsers');
-        Route::get('/update/{id}', 'ContractController@update');
-        Route::post('/update/{id}', 'ContractController@update');
-        Route::post('/add', 'ContractController@createContract');
+        Route::get('/add', 'staffController@createStaff');
+        Route::post('/add', 'staffController@addStaff');
+        Route::get('/update/{id}', 'staffController@update');
+        Route::post('/update/{id}', 'staffController@update');
         Route::get('/download', 'ContractController@getDownload');
-        Route::get('/destroy/{id}', 'ContractController@destroy');
+        Route::get('/destroy/{id}', 'staffController@destroy');
+        Route::get('/quyen1/{id}', 'staffController@quyen1');
+        Route::get('/quyen2/{id}', 'staffController@quyen2');
+        Route::get('/status1/{id}', 'staffController@status1');
+        Route::get('/status2/{id}', 'staffController@status2');
+        Route::get('/import-staff', 'staffController@importStaff');
+        Route::post('/import-staff', 'staffController@import');
     });
 });
 Route::group(['prefix' => 'customer'], function () {
