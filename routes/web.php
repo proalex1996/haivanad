@@ -43,6 +43,8 @@ Route::group(['prefix' => 'home'], function () {
 Route::group(['prefix' => 'contract'], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/', 'ContractController@getContract');
+        Route::post('/', 'ContractController@getContract');
+
         Route::get('/add', 'ContractController@addContract');
         Route::get('/update/{id}', 'ContractController@update');
         Route::post('/update/{id}', 'ContractController@update');
