@@ -46,7 +46,7 @@ class ContractController extends Controller
             ->join('banner', 'contract.id_banner', '=', 'banner.id')
             ->join('kind_contract', 'kind', '=', 'kind_contract.id_contract')
             ->join('contract_status', 'status_contract','=','contract_status.id_contract')
-            ->select('contract.id', 'contract.id_contract', 'name_customer', 'banner.id_banner', 'contract.content','contract_status.name_status','kind_contract.name_kind',
+            ->select('contract.id', 'contract.id_contract', 'name_customer','customer.contact_name', 'contract.note_contract','banner.id_banner', 'contract.content','contract_status.name_status','kind_contract.name_kind',
                 'date_start', 'date_end', 'name_staff', 'value_contract');
         if(!empty($request->id_contract))
         {

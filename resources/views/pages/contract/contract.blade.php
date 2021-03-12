@@ -33,14 +33,15 @@
                             <th>Tên Banner</th>
                             <th>Nội Dung</th>
                             <th>Trạng Thái</th>
-
                             <th>Loại Hợp Đồng</th>
                             <th>Thời Gian</th>
                             <th>Ngày Bắt Đầu</th>
                             <th>Ngày Kết Thúc</th>
                             <th>Thời Hạn Còn Lại</th>
+                            <th>Người Liên Hệ</th>
                             <th>Nhân Viên Phụ Trách</th>
                             <th>Giá trị hợp đồng</th>
+                            <th>Ghi Chú</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -66,17 +67,21 @@
                                     <td>{{$contract->name_customer}}</td>
                                     <td>{{$contract->id_banner}}</td>
                                     <td><a
-                                            href="{{URL::to('/public/storage/contract') . '/' . $contract->content}}"></a>{{$contract->content}}
+                                            href="{{URL::to('/public/storage/contract') . '/' . $contract->content}}">Tải
+                                            về</a>
                                     </td>
                                     <td>{{$contract->name_status}}</td>
                                     <td>{{$contract->name_kind}}</td>
-                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end)->timestamp() - \App\Utilili\DateTimeFormat::getDate($contract->date_start)->timestamp()}}</td>
+                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate($contract->date_start) + 1}} Ngày</td>
                                     <td class="date_start">{{$contract->date_start}}</td>
                                     <td class="date_end">{{$contract->date_end}}</td>
+                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}} Ngày</td>
+                                    <td>{{$contract->contact_name}}</td>
                                     <td>{{$contract->name_staff}}</td>
                                     <td class="value_contract"><span>{{$contract->value_contract}}</span>
                                         VND
                                     </td>
+                                    <td>{{$contract->note_contract}}</td>
                                 </tr>
                             @elseif('60' > \App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString()) &&
                                     \App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString()) > '0.0')
@@ -109,10 +114,12 @@
                                     <td class="date_start">{{$contract->date_start}}</td>
                                     <td class="date_end">{{$contract->date_end}}</td>
                                     <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}} Ngày</td>
+                                    <td>{{$contract->contact_name}}</td>
                                     <td>{{$contract->name_staff}}</td>
                                     <td class="value_contract"><span>{{$contract->value_contract}}</span>
                                         VND
                                     </td>
+                                    <td>{{$contract->note_contract}}</td>
                                 </tr>
                             @elseif((\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())) > '60')
                                 <tr class="dropdown status--process">
@@ -142,12 +149,16 @@
                                     </td>
                                     <td>{{$contract->name_status}}</td>
                                     <td>{{$contract->name_kind}}</td>
+                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate($contract->date_start) + 1}} Ngày</td>
                                     <td class="date_start">{{$contract->date_start}}</td>
                                     <td class="date_end">{{$contract->date_end}}</td>
+                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}} Ngày</td>
+                                    <td>{{$contract->contact_name}}</td>
                                     <td>{{$contract->name_staff}}</td>
                                     <td class="value_contract"><span>{{$contract->value_contract}}</span>
                                         VND
                                     </td>
+                                    <td>{{$contract->note_contract}}</td>
                                 </tr>
                             @endif
                         @endforeach

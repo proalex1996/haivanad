@@ -45,8 +45,8 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                 </div>
             </div>
         </div>
-        <nav class="navbar-sidebar">
-            <ul class="list-unstyled navbar__list">
+        <nav class="navbar-mobile">
+            <ul class="navbar-mobile__list list-unstyled">
                 @foreach ($menus as $menu)
                     <li class="has-sub">
                         <a class="js-arrow" href="{{url($menu->link)}}">
@@ -114,7 +114,7 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
                         </form>
 
                         <div class="header-button">
-                            <div class="noti-wrap">
+                            <div class="noti-wrap js-aroww">
                                 <a class="noti__item " href="https://id.zalo.me/"><i class="zmdi zmdi-email"></i>
                                       </a>
 
