@@ -28,21 +28,24 @@
                         <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Tên Hợp Đồng</th>
+                            <th>Mã Hợp Đồng</th>
                             <th>Tên Khách Hàng</th>
                             <th>Tên Banner</th>
                             <th>Nội Dung</th>
                             <th>Trạng Thái</th>
+
                             <th>Loại Hợp Đồng</th>
+                            <th>Thời Gian</th>
                             <th>Ngày Bắt Đầu</th>
                             <th>Ngày Kết Thúc</th>
+                            <th>Thời Hạn Còn Lại</th>
                             <th>Nhân Viên Phụ Trách</th>
                             <th>Giá trị hợp đồng</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($contracts as $contract)
-                            @if (\App\Utilili\DateTimeFormat::getDate($contract->date_end) < '0')
+                            @if ( (\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())) < '0')
                                 <tr class="status--denied dropdown">
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$contract->id}}</a>
@@ -63,11 +66,11 @@
                                     <td>{{$contract->name_customer}}</td>
                                     <td>{{$contract->id_banner}}</td>
                                     <td><a
-                                            href="{{URL::to('/public/storage/contract') . '/' . $contract->content}}">Tải
-                                            về</a>
+                                            href="{{URL::to('/public/storage/contract') . '/' . $contract->content}}"></a>{{$contract->content}}
                                     </td>
                                     <td>{{$contract->name_status}}</td>
                                     <td>{{$contract->name_kind}}</td>
+                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end)->timestamp() - \App\Utilili\DateTimeFormat::getDate($contract->date_start)->timestamp()}}</td>
                                     <td class="date_start">{{$contract->date_start}}</td>
                                     <td class="date_end">{{$contract->date_end}}</td>
                                     <td>{{$contract->name_staff}}</td>
@@ -75,7 +78,8 @@
                                         VND
                                     </td>
                                 </tr>
-                            @elseif('60' > \App\Utilili\DateTimeFormat::getDate($contract->date_end) && \App\Utilili\DateTimeFormat::getDate($contract->date_end) > '0.0')
+                            @elseif('60' > \App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString()) &&
+                                    \App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString()) > '0.0')
                                 <tr class="status--warn dropdown">
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$contract->id}}</a>
@@ -101,14 +105,16 @@
                                     </td>
                                     <td>{{$contract->name_status}}</td>
                                     <td>{{$contract->name_kind}}</td>
+                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate($contract->date_start) + 1}} Ngày</td>
                                     <td class="date_start">{{$contract->date_start}}</td>
                                     <td class="date_end">{{$contract->date_end}}</td>
+                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}} Ngày</td>
                                     <td>{{$contract->name_staff}}</td>
                                     <td class="value_contract"><span>{{$contract->value_contract}}</span>
                                         VND
                                     </td>
                                 </tr>
-                            @elseif(\App\Utilili\DateTimeFormat::getDate($contract->date_end) > '60')
+                            @elseif((\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())) > '60')
                                 <tr class="dropdown status--process">
                                     <td class=" contract_id"><a class="dropdown-toggle" data-toggle="dropdown"
                                                                 aria-haspopup="true"
@@ -120,7 +126,7 @@
                                                 thông tin hợp đồng</a>
                                             <a id="open-deleteContract" class="dropdown-item"
                                                data-id_data="{{$contract->id}}" data-toggle="modal"
-                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa Thông Tin Khách Hàng</a>
+                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa</a>
                                             <hr>
                                             <a id="open-dueContract" class="dropdown-item"
                                                data-contract_id="{{$contract->id}}" data-toggle="modal"

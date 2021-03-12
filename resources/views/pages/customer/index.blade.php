@@ -33,6 +33,7 @@
                             <th>Tên Liên Hệ</th>
                             <th>Mã Số Thuế</th>
                             <th>Số Điện Thoại</th>
+                            <th>Địa Chỉ</th>
                             <th>Email</th>
                             <th>Loại khách hàng</th>
                             <th>Khả năng thanh toán</th>
@@ -58,7 +59,8 @@
                                     <td>{{$customer->name_customer}}</td>
                                     <td>{{$customer->contact_name}}</td>
                                     <td>{{$customer->mst}}</td>
-                                    <td>{{$customer->phone_customer}}</td>
+                                    <td>{{$customer->phone_customer}}</td>=
+                                    <td>{{$customer->adress_customer}}</td>
                                     <td>{{$customer->email_customer}}</td>
                                     <td>{{$customer->name_type}}</td>
                                     <td>{{$customer->name_solvency}}</td>
