@@ -43,7 +43,7 @@ class CustomerController extends Controller
             ->join('type_customer','type_customer','=','type_customer.id')
             ->join('status','status_customer','=','status.id_status')
             ->join('solvency','solvency','=','solvency.id')
-            ->select('customer.id','customer.customer_id','customer.name_customer','contact_name','mst','phone_customer','email_customer','type_customer.name_type','solvency.name_solvency','mass','status')->paginate(20);
+            ->select('customer.id','customer.customer_id','customer.name_customer','customer.adress_customer','contact_name','mst','phone_customer','email_customer','type_customer.name_type','solvency.name_solvency','mass','status')->paginate(20);
         return view('pages.customer.index',['customers' => $customers]);
     }
 
