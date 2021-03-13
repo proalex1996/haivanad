@@ -46,8 +46,10 @@ class ContractController extends Controller
             ->join('banner', 'contract.id_banner', '=', 'banner.id')
             ->join('kind_contract', 'kind', '=', 'kind_contract.id_contract')
             ->join('contract_status', 'status_contract','=','contract_status.id_contract')
-            ->select('contract.id', 'contract.id_contract', 'name_customer','customer.contact_name', 'contract.note_contract','banner.id_banner', 'contract.content','contract_status.name_status','kind_contract.name_kind',
-                'date_start', 'date_end', 'name_staff', 'value_contract');
+            ->select('contract.id', 'contract.id_contract', 'name_customer','customer.contact_name', 'contract.note_contract','contract.pay_due',
+                'contract.gianam','banner.id_banner', 'contract.content','contract_status.name_status','kind_contract.name_kind',
+                'date_start', 'date_end', 'name_staff','contract.now_content', 'value_contract','contract.gia9thang','contract.gia3thang','contract.gia6thang');
+
         if(!empty($request->id_contract))
         {
             $contracts = $contracts ->where('id_contract' ,'LIKE','%'.$request->id_contract.'%');
@@ -109,6 +111,12 @@ class ContractController extends Controller
         $contract->kind = $request->kind_name;
         $contract->value_contract = $request->value_contract;
         $contract->status_contract = $request->status;
+        $contract->gianam = $request->gianam;
+        $contract->gia9thang = $request->gia9thang;
+        $contract->gia6thang = $request->gia6thang;
+        $contract->gia3thang = $request->gia3thang;
+        $contract->pay_due = $request->pay_due;
+        $contract->now_content = $request->now_content;
         //$pdf = PDF::loadview('contract.blade.php',$file);
         $storage = Storage::putFileAs('contract', $file, $fileName);
         $contract->save();

@@ -74,10 +74,14 @@
                     <label for="dateofbirth">Ngày kết thúc</label>
                     <input type="date" value="{{$contract->date_end}}" name="date_end" id="dateofbirth" required>
                 </div>
+                <div class='col-sm-6'>
+                    <label for="dateofbirth">Ngày Thanh Toán</label>
+                    <input type="date" value="{{$contract->pay_due}}" name="pay_due" id="dateofbirth" required>
+                </div>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Loại hợp đồng</label>
-                <select class="form-control" value="{{$contract->kind_name}}" id="kind_name" name="kind">
+                <select class="form-control" id="kind_name" name="kind">
                     @foreach($kind_contract as $kind)
                         @if($kind->id_contract == $contract ->kind)
                         <option value="{{$kind->id_contract}}" selected>{{$kind->name_kind}}</option>
@@ -86,6 +90,30 @@
                         @endif
                     @endforeach
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1 uname">Giá Năm</label>
+                <input type="text" class="form-control" value="{{$contract->gianam}}" id="id_contract"
+                       name="gianam"
+                       placeholder="Giá Năm">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1 uname">Giá 3 Tháng</label>
+                <input type="text" class="form-control" value="{{$contract->gia3thang}}" id="id_contract"
+                       name="gianam"
+                       placeholder="Giá 3 Tháng">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1 uname">Giá 6 Tháng</label>
+                <input type="text" class="form-control" value="{{$contract->gia6thang}}" id="id_contract"
+                       name="gia6thang"
+                       placeholder="Giá 6 Tháng">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1 uname">Giá 9 Tháng</label>
+                <input type="text" class="form-control" value="{{$contract->gia9thang}}" id="id_contract"
+                       name="gia9thang"
+                       placeholder="Giá 9 Tháng">
             </div>
             <div class="form-group">
                 <label for="exampleFormControlInput1">Giá trị hợp đồng</label>
@@ -98,7 +126,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlSelect1">Loại hợp đồng</label>
+                <label for="exampleFormControlSelect1">Trạng Thái Hợp Đồng</label>
                 <select class="form-control" id="status" name="status_contract">
                     @foreach($status as $stt)
                         @if ($stt -> id_contract == $contract->status_contract)

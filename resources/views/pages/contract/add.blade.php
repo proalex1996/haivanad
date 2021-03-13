@@ -52,15 +52,20 @@
                 </select>
             </div>
             <div class="row form-group">
-                <div class='col-sm-6'>
+                <div class='col-sm-4'>
                     <label for="dateofbirth" style="width: 160px">Ngày bắt đầu:</label>
                     <input type="date" name="date_start" id="dateofbirth" required>
                     <div class="invalid-feedback m-l-20">Vui lòng nhập ngày bắt đầu hợp đồng</div>
                 </div>
-                <div class='col-sm-6'>
+                <div class='col-sm-4'>
                     <label for="dateofbirth" style="width: 130px" >Ngày kết thúc</label>
                     <input type="date" name="date_end" id="dateofbirth" required>
                     <div class="invalid-feedback m-l-20">Vui lòng nhập ngày kết thúc hợp đồng</div>
+                </div>
+                <div class='col-sm-4'>
+                    <label for="dateofbirth" style="width: 130px" >Lịch thanh toán</label>
+                    <input type="date" name="pay_due" id="pay_due" required>
+                    <div class="invalid-feedback m-l-20">Vui lòng nhập lịch thanh toán hợp đồng</div>
                 </div>
             </div>
             <div class="form-group">
@@ -87,6 +92,11 @@
                         <option value="{{$stt->id_contract}}">{{$stt->name_status}}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1 uname">Ghi Chú</label>
+                <input type="text" class="form-control" id="note_contract" name="note_contract"
+                       placeholder="Ghi Chú">
             </div>
             <div class="form-group">
                 <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">
