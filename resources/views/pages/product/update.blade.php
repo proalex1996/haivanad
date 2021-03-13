@@ -17,10 +17,41 @@
                 <div class="invalid-feedback">Mã Pano không được để trống</div>
             </div>
             <div class="form-customer">
+                <label for="exampleFormControlInput1 uname">Tên Vị Trí: </label>
+                <input type="text" class="form-customer-input" value="{{$banners ->id_banner}}" id="location" name="location"
+                       placeholder="Tên Vị Trí" required>
+                <div class="invalid-feedback">Tên Vị Trí không được để trống</div>
+            </div>
+
+            <div class="form-customer">
                 <label for="exampleFormControlInput1 uname">Địa Chỉ: </label>
                 <input type="text" class="form-customer-input" value="{{$banners->banner_adress}}" id="banner_adress" name="banner_adress"
                        placeholder="Địa chỉ" required>
                 <div class="invalid-feedback">Địa chỉ không được để trống</div>
+            </div>
+            <div class="form-customer">
+                <label for="exampleFormControlInput1 uname">Quận/Huyện: </label>
+                <input type="text" class="form-customer-input" value="{{$banners->banner_adress}}" id="quan" name="quan"
+                       placeholder="Quận/Huyện" required>
+                <div class="invalid-feedback">Quận/Huyện không được để trống</div>
+            </div>
+            <div class="form-customer">
+                <label for="exampleFormControlInput1 uname">Tỉnh: </label>
+                <input type="text" class="form-customer-input" value="{{$banners->banner_adress}}" id="tinh" name="tinh"
+                       placeholder="Tỉnh/Thành Phố" required>
+                <div class="invalid-feedback">Quận/Huyện không được để trống</div>
+            </div>
+            <div class="form-customer">
+                <label for="exampleFormControlInput1 uname">Loại Hình Sản Phẩm: </label>
+                <input type="text" class="form-customer-input" value="{{$banners->banner_adress}}" id="id_typebanner" name="id_typebanner"
+                       placeholder="Loại Hình Sản Phẩm" required>
+                <div class="invalid-feedback">Loại Hình Sản Phẩm không được để trống</div>
+            </div>
+            <div class="form-customer">
+                <label for="exampleFormControlInput1 uname">Kết Cấu: </label>
+                <input type="text" class="form-customer-input" value="{{$banners->banner_adress}}" id="id_system" name="id_system"
+                       placeholder="Loại Hình Sản Phẩm" required>
+                <div class="invalid-feedback">Kết Cấu không được để trống</div>
             </div>
             <div class="form-customer">
                 <label for="exampleFormControlInput1 uname">Kích Thước:</label>
@@ -42,6 +73,41 @@
                 <input type="text" class="form-customer-input" id="banner_content" value="{{$banners->content}}" name="banner_content"
                        placeholder="Địa chỉ" required>
                 <div class="invalid-feedback">Nội không được để trống</div>
+            </div>
+            <div class="form-customer">
+                <label for="exampleFormControlInput1 uname">Đặt điểm: </label>
+                <input type="text" class="form-customer-input" id="dac_diem" value="{{$banners->content}}" name="dac_diem"
+                       placeholder="Địa chỉ" >
+            </div>
+            <div class="form-customer">
+                <label for="exampleFormControlInput1 uname">Lưu Lượng người: </label>
+                <input type="text" class="form-customer-input" id="flow" value="{{$banners->content}}" name="flow"
+                       placeholder="Địa chỉ">
+            </div>
+            <div class="form-customer">
+                <label for="exampleFormControlInput1 uname">Điểm Escom: </label>
+                <input type="text" class="form-customer-input" id="escom" value="{{$banners->content}}" name="escom"
+                       placeholder="Điểm Escom">
+            </div>
+            <div class="form-customer">
+                <label for="exampleFormControlInput1 uname">Giá năm: </label>
+                <input type="text" class="form-customer-input" id="gianam" value="{{$banners->content}}" name="gianam"
+                       placeholder="Giá năm">
+            </div>
+            <div class="form-customer">
+                <label for="exampleFormControlInput1 uname">Giá 9 Tháng: </label>
+                <input type="text" class="form-customer-input" id="gia9thang" value="{{$banners->content}}" name="gia9thang"
+                       placeholder="Giá 9 Tháng">
+            </div>
+            <div class="form-customer">
+                <label for="exampleFormControlInput1 uname">Giá 6 Tháng: </label>
+                <input type="text" class="form-customer-input" id="gia6thang" value="{{$banners->content}}" name="gia6thang"
+                       placeholder="Địa chỉ">
+            </div>
+            <div class="form-customer">
+                <label for="exampleFormControlInput1 uname">Giá 3 Tháng: </label>
+                <input type="text" class="form-customer-input" id="gia3thang" value="{{$banners->content}}" name="gia3thang"
+                       placeholder="Giá 3 Tháng">
             </div>
             <div class="form-customer">
                 <label for="exampleFormControlSelect1">Trạng Thái</label>

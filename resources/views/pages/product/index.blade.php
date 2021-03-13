@@ -59,6 +59,7 @@
                             <th><input type="checkbox" id="check-all" name="title"></th>
                             <th>STT</th>
                             <th>Mã Pano</th>
+                            <th>Trạng thái</th>
                             <th>Vị Trí</th>
                             <th>Địa Chỉ</th>
                             <th>Quận/Huyện</th>
@@ -71,7 +72,7 @@
                             <th>Đặt Điểm</th>
                             <th>Lưu Lượng Người</th>
                             <th>Điểm Escom</th>
-                            <th>Trạng thái</th>
+
 
                         </tr>
                         </thead>
@@ -93,6 +94,15 @@
                                         </div>
                                     </td>
                                     <td class="id_banner">2021+{{$banner->id_banner}}</td>
+                                    <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                           aria-expanded="false" id="dropdownMenuLink"> {{$banner->name_status}}</a>
+                                        <div class="dropdown-menu">
+                                            @foreach($status_banners as $status_banner)
+                                                <a class="dropdown-item"
+                                                   href="{{\Illuminate\Support\Facades\URL::to('product/pickupBanner'.$status_banner->id_status)."/".$banner->id}}">{{$status_banner->name_status}}</a>
+                                            @endforeach
+                                        </div>
+                                    </td>
                                     <td>{{$banner->location}}</td>
                                     <td>{{$banner->banner_adress}}</td>
                                     <td>{{$banner->quan}}</td>
@@ -105,15 +115,7 @@
                                     <td>{{$banner->dac_diem}}</td>
                                     <td>{{$banner->flow}}</td>
                                     <td>{{$banner->escom}}</td>
-                                    <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                           aria-expanded="false" id="dropdownMenuLink"> {{$banner->name_status}}</a>
-                                        <div class="dropdown-menu">
-                                            @foreach($status_banners as $status_banner)
-                                                <a class="dropdown-item"
-                                                   href="{{\Illuminate\Support\Facades\URL::to('product/pickupBanner'.$status_banner->id_status)."/".$banner->id}}">{{$status_banner->name_status}}</a>
-                                            @endforeach
-                                        </div>
-                                    </td>
+
                             @elseif($banner->id_status==1)
                                 <tr>
                                     <td><input type="checkbox" id="check-box" name="check-box"></td>
@@ -130,6 +132,15 @@
                                         </div>
                                     </td>
                                     <td class="id_banner">2021+{{$banner->id_banner}}</td>
+                                    <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                           aria-expanded="false" id="dropdownMenuLink"> {{$banner->name_status}}</a>
+                                        <div class="dropdown-menu">
+                                            @foreach($status_banners as $status_banner)
+                                                <a class="dropdown-item"
+                                                   href="{{\Illuminate\Support\Facades\URL::to('product/pickupBanner'.$status_banner->id_status)."/".$banner->id}}">{{$status_banner->name_status}}</a>
+                                            @endforeach
+                                        </div>
+                                    </td>
                                     <td>{{$banner->location}}</td>
 
                                     <td>{{$banner->banner_adress}}</td>
@@ -143,15 +154,7 @@
                                     <td>{{$banner->dac_diem}}</td>
                                     <td>{{$banner->flow}}</td>
                                     <td>{{$banner->escom}}</td>
-                                    <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                           aria-expanded="false" id="dropdownMenuLink"> {{$banner->name_status}}</a>
-                                        <div class="dropdown-menu">
-                                            @foreach($status_banners as $status_banner)
-                                                <a class="dropdown-item"
-                                                   href="{{\Illuminate\Support\Facades\URL::to('product/pickupBanner'.$status_banner->id_status)."/".$banner->id}}">{{$status_banner->name_status}}</a>
-                                            @endforeach
-                                        </div>
-                                    </td>
+
                             @endif
                         @endforeach
                         </tbody>

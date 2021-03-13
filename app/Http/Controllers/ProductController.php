@@ -83,28 +83,21 @@ class ProductController extends Controller
 //        $file = $request->file('thumb_banner');
         $product->id_banner = $request->id_banner;
         $product->location = $request->location;
-
         $product->banner_adress = $request->banner_adress;
-
         $product->quan = $request->quan;
-
         $product->tinh = $request->tinh;
-
         $product->id_typebanner = $request->id_typebanner;
         $product->id_system = $request->id_system;
         $product->size_banner = $request->size_banner;
-
 //        $imageName = time() . '.' . $file->getClientOriginalExtension();
 //        $destinationPath = public_path('storage');
 //        $file->move($destinationPath, $imageName);
 //        $product->thumb_banner = $imageName;
         $product->light_system = $request->light_system;
-
         $product->dac_diem = $request->dac_diem;
-
         $product->flow = $request->flow;
-
         $product->escom = $request->escom;
+        $product->note_contract = $request->note_contract;
         $product->save();
         return redirect()->action('ProductController@getIndex');
     }

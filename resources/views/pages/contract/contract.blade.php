@@ -40,6 +40,7 @@
                             <th>Thời Hạn Còn Lại</th>
                             <th>Người Liên Hệ</th>
                             <th>Nhân Viên Phụ Trách</th>
+                            <th>Lịch Thanh Toán</th>
                             <th>Giá trị hợp đồng</th>
                             <th>Ghi Chú</th>
                         </tr>
@@ -81,6 +82,7 @@
                                     <td class="value_contract"><span>{{$contract->value_contract}}</span>
                                         VND
                                     </td>
+                                    <td>{{$contract->pay_due}}</td>
                                     <td>{{$contract->note_contract}}</td>
                                 </tr>
                             @elseif('60' > \App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString()) &&
