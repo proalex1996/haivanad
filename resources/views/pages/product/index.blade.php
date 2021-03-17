@@ -20,15 +20,15 @@
             </div>
         </div>
         <div class="row m-t-30">
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <form class="post-form-sort" action="{{url('/product')}}" method="post" style="margin-bottom: 3em">
                     @csrf
                     <div class="row">
-                        <div class="col-md-2 col-sm-12 m-t-10">
+                        <div class="col-md-3 col-sm-12 m-t-10">
                             <label for="exampleFormControlInput1 ">Mã Pano</label>
                             <input type="text" class="form-control" id="id_banner" name="id_banner" placeholder="Mã Pano">
                         </div>
-                        <div class="col-md-2 col-sm-12 m-t-10">
+                        <div class="col-md-3 col-sm-12 m-t-10">
                             <label for="exampleFormControlInput1 ">Trạng thái</label>
                             <select type="text" class="form-control" id="id_status" name="id_status">
                                 <option value="">Tất Cả</option>
@@ -38,13 +38,12 @@
 
                             </select>
                         </div>
-                        <div class="col-md-2 col-sm-12 m-t-10">
+                        <div class="col-md-3 col-sm-12 m-t-10">
                             <label for="exampleFormControlInput1 ">Hệ Thống Đèn</label>
                             <input type="text" class="form-control" id="light_system" name="light_system"
                                    placeholder="Hệ thống đèn">
                         </div>
-                        <div class="col-md-2 col-sm-12 m-t-10 align-self-end" >
-
+                        <div class="col-md-3 col-sm-12 m-t-10 align-self-end" >
                             <button class="btn btn-primary btn-block" type="submit" aria-expanded="false">Tìm</button>
                         </div>
 
@@ -53,25 +52,13 @@
 
                 <div class="table-container fixed_header ">
                     <table class="table table-borderless table-data3 table-test-responsive">
-
                         <thead>
                         <tr>
                             <th><input type="checkbox" id="check-all" name="title"></th>
-                            <th>STT</th>
-                            <th>Mã Pano</th>
-                            <th>Trạng thái</th>
-                            <th>Vị Trí</th>
-                            <th>Địa Chỉ</th>
-                            <th>Quận/Huyện</th>
-                            <th>Thành Phố</th>
-                            <th>Loại Hình Sản Phẩm</th>
-                            <th>Kết Cấu</th>
-                            <th>Kích Thước</th>
-                            <th>Tổng Chiều Cao</th>
-                            <th>Hệ Thống Đèn</th>
-                            <th>Đặt Điểm</th>
-                            <th>Lưu Lượng Người</th>
-                            <th>Điểm Escom</th>
+                            <th width="20%">STT</th>
+                            <th width="20%">Mã Pano</th>
+                            <th width="60%">Trạng thái</th>
+                            <th></th>
 
 
                         </tr>
@@ -93,7 +80,7 @@
                                                </a>
                                         </div>
                                     </td>
-                                    <td class="id_banner">2021+{{$banner->id_banner}}</td>
+                                    <td class="id_banner">2021{{$banner->id_banner}}</td>
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->name_status}}</a>
                                         <div class="dropdown-menu">
@@ -103,18 +90,9 @@
                                             @endforeach
                                         </div>
                                     </td>
-                                    <td>{{$banner->location}}</td>
-                                    <td>{{$banner->banner_adress}}</td>
-                                    <td>{{$banner->quan}}</td>
-                                    <td>{{$banner->tinh}}</td>
-                                    <td>{{$banner->id_typebanner}}</td>
-                                    <td>{{$banner->id_system}}</td>
-                                    <td>{{$banner->size_banner}}</td>
-                                    <td>{{$banner->height_banner}}mm</td>
-                                    <td>{{$banner->light_system}}</td>
-                                    <td>{{$banner->dac_diem}}</td>
-                                    <td>{{$banner->flow}}</td>
-                                    <td>{{$banner->escom}}</td>
+
+                                    <td><a href="{{url('/product/update/'.$banner->id)}}">Xem Chi Tiết</a></td>
+
 
                             @elseif($banner->id_status==1)
                                 <tr>
@@ -141,56 +119,11 @@
                                             @endforeach
                                         </div>
                                     </td>
-                                    <td>{{$banner->location}}</td>
-
-                                    <td>{{$banner->banner_adress}}</td>
-                                    <td>{{$banner->quan}}</td>
-                                    <td>{{$banner->tinh}}</td>
-                                    <td>{{$banner->id_typebanner}}</td>
-                                    <td>{{$banner->id_system}}</td>
-                                    <td>{{$banner->size_banner}}</td>
-                                    <td>{{$banner->height_banner}}mm</td>
-                                    <td>{{$banner->light_system}}</td>
-                                    <td>{{$banner->dac_diem}}</td>
-                                    <td>{{$banner->flow}}</td>
-                                    <td>{{$banner->escom}}</td>
-
+                                    <td><a href="{{url('/product/update/'.$banner->id)}}">Xem Chi Tiết</a></td>
                             @endif
                         @endforeach
                         </tbody>
-
-
                     </table>
-                </div>
-
-
-
-
-            </div>
-            <div class="col-lg-3">
-                <div class="au-card au-card--bg-blue au-card-top-countries m-b-30 " style="margin-top: 3em">
-                    <div class="au-card-inner">
-                        <div class="table-responsive ">
-                            <table class="table table-top-countries">
-                                <div class="header-table-banner "> Danh sách Pano đã ký hợp đồng</div>
-                                <thead class="head-table">
-                                <tr>
-                                    <td>Mã Pano</td>
-                                    <td class="text-right">Mã Hợp Đồng</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($contracts as $contract)
-                                    <tr title="Khách hàng: {{$contract->name_customer}}">
-                                        <td>{{$contract->id_banner}}</td>
-                                        <td class="text-right">{{$contract->id_contract}}</td>
-                                    </tr>
-                                </tbody>
-                                @endforeach
-                            </table>
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

@@ -37,7 +37,7 @@
                 <div class="invalid-feedback">Tên liên hệ không được để trống</div>
             </div>
             <div class="form-customer">
-                <label for="exampleFormControlInput1 uname" style="width: 340px";>Số Điện Thoại:</label>
+                <label for="exampleFormControlInput1 uname" style="width: 340px">Số Điện Thoại:</label>
                 <input class="form-customer-input" type="number" id="phone_customer" name="phone_customer" size="20" maxlength="10" placeholder="Số Điện Thoại" required>
                 <div class="invalid-feedback">Số điện thoại không được để trống</div>
             </div>

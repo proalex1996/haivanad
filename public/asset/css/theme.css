@@ -1222,7 +1222,7 @@ section {
     padding: 5px;
     position: relative;
     z-index: 2;
-    width: 160%;
+    width: 180%;
     height: calc(2.25rem + 2px);
 }
 
@@ -14969,3 +14969,72 @@ section {
     padding-left: 8px;
     display: inline-flex;
 }
+.form-location{
+    display: flex; !important;
+    width: 500px;
+    margin-bottom: 1rem;
+
+}
+.form-location>label{
+    width: 130px;
+
+}
+.form-dac-diem{
+    height:100px;
+    width:500px;
+    border:2px solid black;
+}
+
+.form-dac-diem>label{
+    display: contents!important;
+    width:30px;
+    margin-top:-10px;
+    margin-left:5px;
+}
+.display{
+    margin-bottom: 5rem;
+    max-width: 100%;
+}
+fieldset {
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+}
+
+.border-text {
+    border: 1px solid #0a0a0a !important;
+    margin-bottom: 2rem;
+}
+.border-text-product {
+    border: 1px solid #0a0a0a !important;
+}
+.border-text-product>legend {
+    width: 250px;
+    margin-left: 10px;
+}
+.border-text .form-customer > label {
+    width: 343px;
+!important;
+}
+
+.border-text .form-customer > select {
+    width: 343px;
+!important;
+}
+
+p#innerPara {
+    padding: 20px;
+}
+
+legend {
+    width: 150px;
+    margin-left: 10px;
+}
+.display{
+
+    overflow-x: auto; !important;
+
+}
+

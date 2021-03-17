@@ -28,27 +28,11 @@ class ProductController extends Controller
     {
         $this->productRepository = $productRepository;
     }
-
     public function getIndex(Request $request)
     {
         $banners = DB::table('banner')
             ->join('status_banner', 'banner.name_status', '=', 'status_banner.id_status')
-            ->select('banner.id','status_banner.id_status', 'banner.id_banner', 'thumb_banner', 'status_banner.name_status', 'banner.banner_adress',
-                'banner.thumb_banner', 'banner.light_system', 'banner.content', 'banner.size_banner', 'banner.height_banner' ,'banner.tinh','banner.quan','banner.location',
-                'id_typebanner','banner.id_system','dac_diem','banner.flow','banner.escom');
-            if(!empty($request->id_status))
-            {
-                $banners = $banners ->where('status_banner.id_status','=',$request->id_status);
-            };
-            if(!empty($request->id_banner))
-            {
-            $banners = $banners ->where('banner.id_banner','=',$request->id_banner);
-            }
-            if(!empty($request->light_system))
-            {
-            $banners = $banners ->where('banner.light_system','=',$request->light_system);
-            }
-           $banners = $banners ->groupBy('id')->orderBy('id', 'DESC')->get();
+            ->select('banner.id','status_banner.name_status','status_banner.id_status', 'banner.id_banner')->groupBy('banner.id')->orderBy('banner.id','DESC')->get();
         $status_banner = DB::table('status_banner')->select('*')->get();
         $contract = DB::table('contract')
             ->join('banner', 'contract.id_banner', '=', 'banner.id_banner')
@@ -56,7 +40,6 @@ class ProductController extends Controller
             ->select('banner.id_banner', 'contract.id_contract', 'customer.name_customer')->groupBy('contract.id')->orderBy('contract.id','DESC')->get();
         return view('pages.product.index', [
             'banners' => $banners,
-            'contracts' => $contract,
             'status_banners' =>$status_banner
         ]);
     }
@@ -89,24 +72,27 @@ class ProductController extends Controller
         $product->id_typebanner = $request->id_typebanner;
         $product->id_system = $request->id_system;
         $product->size_banner = $request->size_banner;
-//        $imageName = time() . '.' . $file->getClientOriginalExtension();
-//        $destinationPath = public_path('storage');
-//        $file->move($destinationPath, $imageName);
-//        $product->thumb_banner = $imageName;
+        $product->height_banner = $request->height_banner;
+        $product->content = basename($request->thumb_banner->getClientOriginalName());
+        $file = $request->file('thumb_banner');
+        $fileName = $request->file('thumb_banner')->getClientOriginalName();
         $product->light_system = $request->light_system;
         $product->dac_diem = $request->dac_diem;
         $product->flow = $request->flow;
         $product->escom = $request->escom;
-        $product->note_contract = $request->note_contract;
+        $product->note_banner = $request->note_banner;
+        $storage = Storage::putFileAs('content', $file, $fileName);
         $product->save();
         return redirect()->action('ProductController@getIndex');
     }
 
     public function addProduct()
     {
+        $type_banners = DB::table('type_banner')->select('*')->get();
         $product = DB::table('banner')->select('*')->get();
         $status = DB::table('status_banner')->select('*')->get();
         return view('pages.product.add', [
+            'type_banners' => $type_banners,
             'products' => $product,
             'statuss' => $status
         ]);
@@ -132,15 +118,28 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
+
+
+
         if (!empty($data)) {
+
+            if (!empty($data['thumb_banner'])) {
+                $data['thumb_banner'] = basename($request->thumb_banner->getClientOriginalName());
+                $file = $request->file('thumb_banner');
+                $fileName = $request->file('thumb_banner')->getClientOriginalName();
+                $storage = Storage::putFileAs('content', $file, $fileName);
+            }
             $up = $this->productRepository->update($id, $data);
             return redirect()->action('ProductController@getIndex');
         }
+
         $banners = $this->productRepository->find($id);
         $statuss = DB::table('status_banner')->select('*')->get();
+        $type_banner = DB::table('type_banner')->select('*')->get();
         return view('pages.product.update', [
             'banners' => $banners,
-            'statuss' => $statuss
+            'statuss' => $statuss,
+            'type_banners' => $type_banner
         ]);
     }
 

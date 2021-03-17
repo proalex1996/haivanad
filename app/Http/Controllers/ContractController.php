@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 
 use App\Model\ContractModel;
 
+use App\Model\DetailModel;
 use App\Repositories\Contract\ContractRepositoryEloquent;
 use Barryvdh\DomPDF\Facade as PDF;
 use FontLib\Table\Type\name;
+use http\Message;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
+use MongoDB\Driver\Session;
 use phpDocumentor\Reflection\Project;
 use PhpOffice\PhpWord\Shared\ZipArchive;
 
@@ -85,13 +88,18 @@ class ContractController extends Controller
         $staff = DB::table('staff')->select('*')->get();
         $customer = DB::table('customer')->select('*')->get();
         $status = DB::table('contract_status')->select('*')->get();
-
+        $detail_payment = DB::table('detail_payment')->select('*')->get();
+        $nguon = DB::table('nguon_customer')->select('*')->get();
+        $type_banners = DB::table('type_banner')->select('*')->get();
         return view('pages.contract.add', [
             'banners' => $banner,
             'kind_contract' => $kind_contract,
             'staffs' => $staff,
             'customer' => $customer,
-            'status' => $status
+            'status' => $status,
+            'detail_payments' => $detail_payment,
+            'nguons' => $nguon,
+            'type_banners' => $type_banners
         ]);
 
     }
@@ -197,6 +205,28 @@ class ContractController extends Controller
         $del->delete();
         return redirect('/contract');
     }
+    public function delete_payment(Request $request)
+    {
+        $data = $request->all();
+        $ids = $request->ids;
+        $del = DetailModel::find($ids);
+        try{
+            $del->where('id',$ids)->delele();
+        }
+        catch (\Exception $e)
+        {
+           return $e;
+        }
 
+
+    }
+    function ApiCustomer(){
+        $data = DB::table('customer')
+           ->join('positions','customer.position_customer','=','positions.id_position')
+            ->join('nguon_customer','customer.id_nguon','=','nguon_customer.id_nguon')
+            ->select('*')
+            ->get();
+         return json_encode(['customer'=>$data],200);
+    }
 
 }

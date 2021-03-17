@@ -31,11 +31,12 @@ Route::group(['prefix' => 'contract'], function () {
     Route::get('/postMay', 'ContractController@postMay');
     Route::get('/postMar', 'ContractController@postMar');
     Route::get('/postApr', 'ContractController@postApr');
+    Route::post('/delete', 'ContractController@delete_payment');
+    Route::get('/getCustomer', 'ContractController@ApiCustomer');
 
 });
 Route::group(['prefix' => 'product'], function () {
     Route::post('/pickupBanner/{id}', 'ContractController@pickupBanner');
-    Route::get('/apitable', 'ProductController@apiProduct');
 
 
 });

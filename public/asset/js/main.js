@@ -1953,14 +1953,125 @@ document.getElementById('check-all').onclick = function() {
     }
 }
 
-$("#check-all").click(function() {
-    var checked_status = this.checked;
-    $(".button-check-delete").prop('disabled', true);
-    if (checked_status == true) {
-        $("#button-check-delete").removeAttr("disabled");
-    } else {
-        $("#button-check-delete").attr("disabled", "disabled");
-    }
-});
+// $("#check-all").click(function() {
+//     var checked_status = this.checked;
+//     $(".button-check-delete").prop('disabled', true);
+//     if (checked_status == true) {
+//         $("#button-check-delete").removeAttr("disabled");
+//     } else {
+//         $("#button-check-delete").attr("disabled", "disabled");
+//     }
+// });
+getCountries()
+function getCountries() {
+    $.ajax({
+        url: "https://thongtindoanhnghiep.co/api/city",
+        async: false,
+        success: function (result) {
+            var cities = result.LtsItem;
 
+            $.each(cities, function (index, ele) {
+                if($('#tinh')[0].getAttribute('data-target') == ele.ID)
+                {
+                    $('#tinh').append(`<option value='${ele.ID}' selected>${ele.Title}</option>`);
+                }else
+                {
+                    $('#tinh').append(`<option value='${ele.ID}' >${ele.Title}</option>`);
+                }
+
+            });
+            getQuan($('#tinh'));
+        }
+    });
+}
+
+function getQuan(element) {
+    var id = $(element).find(":selected").val();
+    $.ajax({
+        url: "https://thongtindoanhnghiep.co/api/city/" + id + "/district",
+        async: false,
+        success: function (result) {
+            var quan = result;
+
+            var select = document.getElementById("quan");
+            var length = select.options.length;
+            for (i = length-1; i >= 0; i--) {
+                select.options[i] = null;
+            }
+            $.each(quan, function (index, ele) {
+
+                if($('#quan')[0].getAttribute('data-target') == ele.ID)
+                {
+                    $('#quan').append(`<option value='${ele.ID}' selected>${ele.Title}</option>`);
+                }else
+                {
+
+                    $('#quan').append(`<option value='${ele.ID}' >${ele.Title}</option>`);
+                }
+
+            });
+        }
+    });
+}
+function addPayment(){
+    $('#idBodyPayment').append(
+        `  <tr>
+                                <td><input type="checkbox" id="check-box" name="check-box[]" class="m-r-10"></td>
+                                <td><input type="text" class="form-control" id="mst" name="mst" required></td>
+                                <td><input type="text" class="form-control" id="mst" name="mst" required></td>
+                                <td><input type="text" class="form-control" id="mst" name="mst" required></td>
+                                <td><input type="text" class="form-control" id="mst" name="mst" required></td>
+                                <td><input type="text" class="form-control" id="mst" name="mst" required></td>
+                                <td><input type="date" class="form-control" name="pay_due" id="pay_due" required>
+                                </td>
+                            </tr>
+`
+    )
+
+}
+function deletePayment() {
+    var arrIds = [];
+    var checked = $("input[name *='check-box[]' ]:checked");
+
+    $.each(checked, function( index, element ) {
+        arrIds.push($(element).val());
+    });
+
+    $.ajax({
+        url: "https://192.168.1.8/haivanad/api/contract/delete",
+        method: "POST",
+        data: {ids: arrIds},
+        async: false,
+        success: function (result) {
+
+            console.log('123123');
+        }
+    });
+}
+function deleteRowPayment() {
+    var arrId = [];
+    var checked = $("input[name *='check-box[]' ]:checked");
+
+    $.each(checked, function( index, element ) {
+        var td = element.closest("td");
+        td.closest("tr").remove();
+    });
+
+}
+getCustomer()
+function getCustomer() {
+    $.ajax({
+        url: "https://haivan.kaviet.vn/api/contract/getCustomer/",
+        async: false,
+        success: function (result) {
+            var datas = result.customer;
+            $.each(datas, function (index, ele) {
+                {
+                    $('#name_customer').append(`<option value='${ele.id}'>${ele.name_customer}</option>`);
+                }
+
+            });
+        }
+    });
+}
 

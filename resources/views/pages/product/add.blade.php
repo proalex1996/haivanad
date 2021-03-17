@@ -19,11 +19,19 @@
                            placeholder="Mã Pano" size="20" required>
                     <div class="invalid-feedback">Mã Pano không được để trống</div>
                 </div>
+
                 <div class="form-customer">
-                    <label for="exampleFormControlInput1 uname">Tên Pano:</label>
-                    <input type="text" class="form-customer-input" id="name_banner" name="name_banner"
-                           placeholder="Tên Pano" required>
-                    <div class="invalid-feedback">Tên Pano không được để trống</div>
+                    <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm</label>
+                    <select class="form-control" id="id_typebanner" name="id_typebanner">
+                        @foreach($type_banners as $type_banner)
+                            <option value="{{$type_banner->id_typebanner}}">{{$type_banner->name_type}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-customer">
+                    <label for="exampleFormControlInput1 uname">Kết Cấu: </label>
+                    <input type="text" class="form-customer-input" id="id_system" name="id_system"
+                           placeholder="Kết Cấu">
                 </div>
                 <div class="form-customer">
                     <label for="exampleFormControlInput1 uname">Vị Trí:</label>
@@ -37,24 +45,16 @@
                     <div class="invalid-feedback">Địa chỉ không được để trống</div>
                 </div>
                 <div class="form-customer">
-                    <label for="exampleFormControlInput1 uname">Quận/Huyện: </label>
-                    <input type="text" class="form-customer-input" id="quan" name="quan"
-                           placeholder="Quận/Huyện">
+                    <label for="exampleFormControlSelect1">Tỉnh/Thành Phố</label>
+                    <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
+                        <option value="">-- Chọn tỉnh thành --</option>
+                    </select>
                 </div>
                 <div class="form-customer">
-                    <label for="exampleFormControlInput1 uname">Tỉnh: </label>
-                    <input type="text" class="form-customer-input" id="tinh" name="tinh"
-                           placeholder="Tỉnh">
-                </div>
-                <div class="form-customer">
-                    <label for="exampleFormControlInput1 uname">Loại hình Sản Phẩm: </label>
-                    <input type="text" class="form-customer-input" id="id_typebanner" name="id_typebanner"
-                           placeholder="Loại hình Sản Phẩm">
-                </div>
-                <div class="form-customer">
-                    <label for="exampleFormControlInput1 uname">Kết Cấu: </label>
-                    <input type="text" class="form-customer-input" id="id_system" name="id_system"
-                           placeholder="Kết Cấu">
+                    <label for="exampleFormControlSelect1">Quận/Huyện</label>
+                    <select class="form-control" id="quan" name="quan">
+                        <option value="">-- Chọn Quận/Huyện --</option>
+                    </select>
                 </div>
                 <div class="form-customer">
                     <label for="exampleFormControlInput1 uname">Kích Thước:</label>
@@ -74,11 +74,8 @@
                            placeholder="Hệ thống đèn" required>
                     <div class="invalid-feedback">Hệ thống đèn không được để trống</div>
                 </div>
-                <div class="form-customer">
-                    <label for="exampleFormControlInput1 uname">Đặc điểm: </label>
-                    <input class="form-customer-input" type="number" id="dac_diem" name="dac_diem"
-                           placeholder="Đặc điểm">
-                </div>
+
+
                 <div class="form-customer">
                     <label for="exampleFormControlInput1 uname">Lưu Lượng Người: </label>
                     <input class="form-customer-input" type="number" id="flow" name="flow"
@@ -89,12 +86,29 @@
                     <input class="form-customer-input" type="text" id="escom" name="escom" placeholder="Điểm Escom">
                 </div>
                 <div class="form-customer">
+                    <label for="exampleFormControlInput1 uname">Ghi Chú: </label>
+                    <input class="form-customer-input" type="text" id="note_banner" name="note_banner" placeholder="Ghí Chú">
+                </div>
+
+                <div class="form-customer">
                     <label for="exampleFormControlSelect1">Trạng Thái</label>
                     <select class="form-control" id="status_banner" name="status_banner">
                         @foreach($statuss as $status)
                             <option value="{{$status->id_status}}">{{$status->name_status}}</option>
                         @endforeach
                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Đặt Điểm</label>
+                    <textarea class="form-control" id="dac_diem" name="dac_diem" rows="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Hình Ảnh</label>
+                    <div class="custom-file">
+                        <label class="custom-file-label" for="validatedCustomFile">Chọn file...</label>
+                        <input type="file" class="custom-file-input" accept="image/*" id="thumb_banner"
+                               name="thumb_banner" multiple required>
+                    </div>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">

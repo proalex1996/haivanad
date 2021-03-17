@@ -24,6 +24,7 @@ class ProductModel extends Model
         'light_system',
         'flow',
         'dac_diem',
-        'name_status'
+        'status_banner',
+        'note_banner'
     ];
 }
