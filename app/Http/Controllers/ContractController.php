@@ -91,15 +91,17 @@ class ContractController extends Controller
         $detail_payment = DB::table('detail_payment')->select('*')->get();
         $nguon = DB::table('nguon_customer')->select('*')->get();
         $type_banners = DB::table('type_banner')->select('*')->get();
+        $position = DB::table('positions')->select('*')->get();
         return view('pages.contract.add', [
             'banners' => $banner,
             'kind_contract' => $kind_contract,
             'staffs' => $staff,
-            'customer' => $customer,
+            'customers' => $customer,
             'status' => $status,
             'detail_payments' => $detail_payment,
             'nguons' => $nguon,
-            'type_banners' => $type_banners
+            'type_banners' => $type_banners,
+            'positions' => $position
         ]);
 
     }
@@ -220,11 +222,14 @@ class ContractController extends Controller
 
 
     }
-    function ApiCustomer(){
+    function ApiCustomer(Request $request){
+        $request->all();
         $data = DB::table('customer')
            ->join('positions','customer.position_customer','=','positions.id_position')
             ->join('nguon_customer','customer.id_nguon','=','nguon_customer.id_nguon')
+
             ->select('*')
+            ->where('customer.customer_id','=',$request ->id)
             ->get();
          return json_encode(['customer'=>$data],200);
     }

@@ -26,7 +26,7 @@
             </div>
             <div class="form-customer">
                 <label for="exampleFormControlInput1 uname" style="width: 340px;">Mã Số Thuế:</label>
-                <input type="text" class="form-customer-input" id="mst_customer" name="mst_customer"
+                <input type="text" class="form-customer-input" id="mst" name="mst"
                        placeholder="Mã Số Thuế" required>
                 <div class="invalid-feedback">Mã Khách hàng không được để trống</div>
             </div>
@@ -66,7 +66,7 @@
                 <label for="exampleFormControlSelect1" style="width: 340px;">Trạng Thái</label>
                 <select class="form-control" id="status" name="status_customer">
                     @foreach($statuss as $status)
-                        <option value="{{$status->id_staff}}">{{$status->status}}</option>
+                        <option value="{{$status->id_status}}">{{$status->status}}</option>
                     @endforeach
                 </select>
             </div>

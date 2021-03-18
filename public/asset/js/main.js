@@ -1,7 +1,6 @@
 (function ($) {
     // USE STRICT
     "use strict";
-
     try {
         //WidgetChart 1
         var ctx = document.getElementById("widgetChart1");
@@ -1743,7 +1742,8 @@ function openDestroyDialog(element, submitType) {
     var link = $("#destroy-value").data('destroy-link');
     $("#" + submitType).attr("href", link + product);
 }
-function openDueContract(element){
+
+function openDueContract(element) {
     var contract = $(element).closest('tr.dropdown');
     var startDate = contract.children('td.date_start').text();
     $('input[name=date_start]').val(startDate);
@@ -1756,7 +1756,7 @@ function openDueContract(element){
     $("#due-contract").attr("action", link + contract)
 };
 
-function get(element){
+function get(element) {
 
 }
 
@@ -1942,27 +1942,19 @@ $(document).ready(function () {
 //     }
 // }
 
-$( "#riverroad-tb" ).tooltip({ content: '<img src="'+$( "#riverroad-tb" ).attr("data")+'" />' });
+$("#riverroad-tb").tooltip({content: '<img src="' + $("#riverroad-tb").attr("data") + '" />'});
 // Chức năng chọn hết
 
 
-document.getElementById('check-all').onclick = function() {
+document.getElementById('check-all').onclick = function () {
     var checkboxes = document.querySelectorAll('input[type="checkbox"]');
     for (var checkbox of checkboxes) {
         checkbox.checked = this.checked;
     }
 }
 
-// $("#check-all").click(function() {
-//     var checked_status = this.checked;
-//     $(".button-check-delete").prop('disabled', true);
-//     if (checked_status == true) {
-//         $("#button-check-delete").removeAttr("disabled");
-//     } else {
-//         $("#button-check-delete").attr("disabled", "disabled");
-//     }
-// });
 getCountries()
+
 function getCountries() {
     $.ajax({
         url: "https://thongtindoanhnghiep.co/api/city",
@@ -1971,11 +1963,9 @@ function getCountries() {
             var cities = result.LtsItem;
 
             $.each(cities, function (index, ele) {
-                if($('#tinh')[0].getAttribute('data-target') == ele.ID)
-                {
+                if ($('#tinh')[0].getAttribute('data-target') == ele.ID) {
                     $('#tinh').append(`<option value='${ele.ID}' selected>${ele.Title}</option>`);
-                }else
-                {
+                } else {
                     $('#tinh').append(`<option value='${ele.ID}' >${ele.Title}</option>`);
                 }
 
@@ -1995,16 +1985,14 @@ function getQuan(element) {
 
             var select = document.getElementById("quan");
             var length = select.options.length;
-            for (i = length-1; i >= 0; i--) {
+            for (i = length - 1; i >= 0; i--) {
                 select.options[i] = null;
             }
             $.each(quan, function (index, ele) {
 
-                if($('#quan')[0].getAttribute('data-target') == ele.ID)
-                {
+                if ($('#quan')[0].getAttribute('data-target') == ele.ID) {
                     $('#quan').append(`<option value='${ele.ID}' selected>${ele.Title}</option>`);
-                }else
-                {
+                } else {
 
                     $('#quan').append(`<option value='${ele.ID}' >${ele.Title}</option>`);
                 }
@@ -2013,7 +2001,8 @@ function getQuan(element) {
         }
     });
 }
-function addPayment(){
+
+function addPayment() {
     $('#idBodyPayment').append(
         `  <tr>
                                 <td><input type="checkbox" id="check-box" name="check-box[]" class="m-r-10"></td>
@@ -2029,11 +2018,12 @@ function addPayment(){
     )
 
 }
+
 function deletePayment() {
     var arrIds = [];
     var checked = $("input[name *='check-box[]' ]:checked");
 
-    $.each(checked, function( index, element ) {
+    $.each(checked, function (index, element) {
         arrIds.push($(element).val());
     });
 
@@ -2048,30 +2038,48 @@ function deletePayment() {
         }
     });
 }
+
 function deleteRowPayment() {
     var arrId = [];
     var checked = $("input[name *='check-box[]' ]:checked");
 
-    $.each(checked, function( index, element ) {
+    $.each(checked, function (index, element) {
         var td = element.closest("td");
         td.closest("tr").remove();
     });
 
 }
-getCustomer()
-function getCustomer() {
-    $.ajax({
-        url: "https://haivan.kaviet.vn/api/contract/getCustomer/",
-        async: false,
-        success: function (result) {
-            var datas = result.customer;
-            $.each(datas, function (index, ele) {
-                {
-                    $('#name_customer').append(`<option value='${ele.id}'>${ele.name_customer}</option>`);
-                }
 
-            });
+function getCustomer() {
+    var data = $('#name_customer').val();
+    $.ajax({
+        url: "http://192.168.1.48/haivanad/api/contract/getCustomer/" + data,
+        async: false,
+        method: "POST",
+        success: function (result) {
+            var datas = "";
+            datas = JSON.parse(result).customer;
+            if (datas.length > 0) {
+                $.each(datas, function (index, ele) {
+                    $('#id_nguoncustomer').append(`<option value='${ele.id_nguon}' selected>${ele.name_nguon}</option>`);
+                    $('#position_customer').append(`<option value='${ele.position_customer}' selected>${ele.name_position}</option>`);
+                    $('#mst').val(ele.mst);
+                    $('#adress_customer').val(ele.adress_customer);
+                    $('#phone_customer').val(ele.phone_customer);
+                    $('#name_contact').val(ele.phone_customer);
+                    $('#contact_name').val(ele.contact_name);
+                });
+            } else if (datas.length == 0) {
+                $('#id_nguoncustomer').val('');
+                $('#adress_customer').val('');
+                $('#phone_customer').val('');
+                $('#mst').val('');
+                $('#contact_name').val('');
+                $('#position_customer').val('');
+            }
+
         }
+
     });
 }
 
