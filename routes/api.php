@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::middleware('auth:api')->get('/contract', function (Request $request) {
+
+});
 
 Route::group(['prefix' => 'contract'], function () {
     Route::get('/postJan', 'ContractController@postJan');
@@ -32,9 +35,13 @@ Route::group(['prefix' => 'contract'], function () {
     Route::get('/postMar', 'ContractController@postMar');
     Route::get('/postApr', 'ContractController@postApr');
     Route::post('/delete', 'ContractController@delete_payment');
+    Route::post('/getCustomer/{id}', 'ContractController@ApiCustomer');
     Route::get('/getCustomer', 'ContractController@ApiCustomer');
 
+
+
 });
+
 Route::group(['prefix' => 'product'], function () {
     Route::post('/pickupBanner/{id}', 'ContractController@pickupBanner');
 

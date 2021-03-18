@@ -1,7 +1,7 @@
 @extends('pages.top-page.master')
 @section('title','Thêm Pano')
 @section('content')
-    <div class="container-fluid">
+    <div class="container-fluid" onload="getCountries()">
         <div class="col-md-12 m-b-40">
             <div class="overview-wrap">
                 <h2 class="title-1">Thêm Mới Pano</h2>

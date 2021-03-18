@@ -2,7 +2,7 @@
 @section('title','Thêm Hợp Đồng')
 @section('content')
 
-    <div class="container-fluid">
+    <div class="container-fluid" >
         <div class="col-md-12 m-b-40">
             <div class="overview-wrap">
                 <h2 class="title-1">Thêm Mới Hợp đồng</h2>
@@ -40,135 +40,242 @@
             </div>
             <fieldset class="border-text">
                 <legend class='text-left'>Khách Hàng</legend>
-                <div class="form-customer">
-                    <label for="exampleFormControlSelect1">Tên khách hàng</label>
-                    <select class="form-control" id="name_customer" name="name_customer">
-                            <option value="">--Chọn Khách Hàng--</option>
-                    </select>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <label for="exampleFormControlSelect1">Tên khách hàng</label>
+                                </div>
+                                <div class="col-md-8 col-sm-12">
+                                    <select class="form-control" id="name_customer" name="name_customer" onchange="getCustomer()">
+                                        <option value="">--Chọn Khách Hàng--</option>
+                                        @foreach($customers as $customer)
+                                            <option value="{{$customer->customer_id}}">{{$customer->name_customer}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <label for="exampleFormControlSelect1">Nguồn Khách Hàng</label>
+                                </div>
+                                <div class="col-md-8 col-sm-12">
+                                    <select class="form-control" id="id_nguoncustomer" name="id_nguoncustomer">
+                                        <option value="">--Chọn Nguồn Khách Hàng--</option>
+
+                                    </select>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                <div class="form-customer">
-                    <label for="exampleFormControlSelect1">Nguồn Khách Hàng</label>
-                    <select class="form-control" id="id_nguoncustomer" name="id_nguoncustomer">
-                        @foreach($nguons as $nguon)
-                            <option value="{{$nguon->id_nguon}}">{{$nguon->id_nguon}}</option>
-                        @endforeach
-                    </select>
-                </div>
+
+
                 <div class="container-fluid">
                     <div class="form-group">
                         <label for="exampleFormControlInput1 uname">Địa Chỉ</label>
                         <input type="text" class="form-control" id="adress_customer" name="adress_customer"
-                               placeholder="Địa Chỉ" required>
+                               placeholder="Địa Chỉ" value="" required>
                         <div class="invalid-feedback">Địa chỉ không được để trống</div>
                     </div>
                     <div class="row">
-                        <div class="form-customer">
-                            <label for="exampleFormControlInput1 uname">Số Điện Thoại</label>
-                            <input type="text" class="form-control" id="phone_customer" name="phone_customer"
-                                   maxlength="10" required>
-                            <div class="invalid-feedback">Số điện thoại không được để trống</div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <label for="exampleFormControlInput1 uname">MST</label>
+                                </div>
+                                <div class="col-md-8 col-sm-12">
+                                    <input type="text" class="form-control" value="" id="mst" name="mst" placeholder="Mã Số Thuế" required>
+                                    <div class="invalid-feedback">MST không được để trống</div>
+                                </div>
+
+                            </div>
                         </div>
-                        <div class="form-customer">
-                            <label for="exampleFormControlInput1 uname">MST</label>
-                            <input type="text" class="form-control" id="mst" name="mst" required>
-                            <div class="invalid-feedback">MST không được để trống</div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-5 col-sm-12">
+                                    <label for="exampleFormControlInput1 uname" style="width: 284px;">Số Điện Thoại</label>
+                                </div>
+                                <div class="col-md-7 col-sm-12">
+                                    <input type="text" class="form-control" id="phone_customer" name="phone_customer" placeholder="Số Điện Thoại"
+                                           maxlength="10" value="" required>
+                                    <div class="invalid-feedback">Số điện thoại không được để trống</div>
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-customer">
-                            <label for="exampleFormControlInput1 uname">Đại Diện</label>
-                            <input type="text" class="form-control" id="contact_name" name="contact_name"
-                                   placeholder="Tên Hợp đồng" required>
-                            <div class="invalid-feedback">Đại Diện không được để trống</div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <label for="exampleFormControlInput1 uname" style="width: 100px;">Đại Diện</label>
+                                </div>
+                                <div class="col-md-8 col-sm-12">
+                                    <input type="text" class="form-control" value="" id="contact_name" name="contact_name"
+                                           placeholder="Tên Người Đại Diện" required>
+                                    <div class="invalid-feedback">Đại Diện không được để trống</div>
+                                </div>
+
+                            </div>
                         </div>
-                        <div class="form-customer">
-                            <label for="exampleFormControlInput1 uname">Chức Vụ</label>
-                            <input type="text" class="form-control" id="position_customer" name="position_customer"
-                                   placeholder="Chức Vụ" required>
-                            <div class="invalid-feedback">Chức Vụ không được để trống</div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-5 col-sm-12">
+                                    <label for="exampleFormControlSelect1" style="width: 116px;">Chức Vụ</label>
+                                </div>
+                                <div class="col-md-7 col-sm-12">
+                                    <select class="form-control" id="position_customer" name="position_customer">
+                                        <option value="">--Chức Vụ--</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </fieldset>
             <fieldset class="border-text border-text-product">
                 <legend class='text-left'>Thông Tin Sản Phẩm</legend>
-                <div class="form-customer">
-                    <label for="exampleFormControlSelect1">Mã Sản Phẩm</label>
-                    <select class="form-control" id="name_customer" name="name_customer">
-                        @foreach($customer as $name_customer)
-                            <option value="{{$name_customer->customer_id}}">{{$name_customer->name_customer}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-customer">
-                    <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm</label>
-                    <select class="form-control" id="name_customer" name="name_customer">
-                        @foreach($type_banners as $type_banner)
-                            <option value="{{$type_banner->id_typebanner}}">{{$type_banner->name_type}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-customer">
-                    <label for="exampleFormControlSelect1">Kết Cấu</label>
-                    <select class="form-control" id="name_customer" name="name_customer">
-                        @foreach($customer as $name_customer)
-                            <option value="{{$name_customer->customer_id}}">{{$name_customer->name_customer}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-customer">
-                    <label for="exampleFormControlSelect1">Vị Trí</label>
-                    <select class="form-control" id="name_customer" name="name_customer">
-                        @foreach($customer as $name_customer)
-                            <option value="{{$name_customer->customer_id}}">{{$name_customer->name_customer}}</option>
-                        @endforeach
-                    </select>
-                </div>
                 <div class="container-fluid">
-                    <div class="form-group">
-                        <label for="exampleFormControlInput1 uname">Địa Chỉ</label>
-                        <input type="text" class="form-control" id="adress_customer" name="adress_customer"
-                               placeholder="Tên Hợp đồng" required>
-                        <div class="invalid-feedback">Địa chỉ không được để trống</div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="exampleFormControlSelect1" style="width: 150px;">Mã Sản Phẩm</label>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <select class="form-control" id="name_customer" name="name_customer">
+                                        @foreach($banners as $banner)
+                                            <option value="{{$banner->id}}">{{$banner->id_banner}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm</label>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <select class="form-control" id="name_customer" name="name_customer">
+                                            <option value="">--Loại Hình--</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                        </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="exampleFormControlSelect1">Kết Cấu</label>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <input type="text" class="form-control" value="" id="id_system" name="id_system"
+                                           placeholder="Kết Cấu" required>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <label for="exampleFormControlSelect1">Vị Trí</label>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <input type="text" class="form-control" value="" id="location" name="location"
+                                           placeholder="Vị Trí" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   <div class="row">
+                       <div class="col-md-12">
+                           <div class="row">
+                               <div class="col-md-2 col-sm-12">
+                                   <label for="exampleFormControlInput1 uname">Địa Chỉ</label>
+                               </div>
+                               <div class="col-md-8 col-sm-12">
+                                   <input type="text" class="form-control" id="adress_customer" name="adress_customer"
+                                          placeholder="Vị trí Pano" required>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="row">
+                                    <div class="col-md-4  col-sm-12">
+                                        <label for="exampleFormControlSelect1">Tỉnh/Thành</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="tinh" name="tinh" onchange="getQuan()">
+                                                    <option value=""></option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Quận/Huyện</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" class="form-control" value="" id="quan" name="quan"
+                                               placeholder="Vị Trí" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-customer">
                             <label for="exampleFormControlSelect1">Tỉnh/Thành Phố</label>
+
+                        </div>
+                        <div class="form-customer">
+                            <label for="exampleFormControlSelect1">Quận/Huyện</label>
                             <select class="form-control" id="name_customer" name="name_customer">
-                                @foreach($customer as $name_customer)
-                                    <option value="{{$name_customer->customer_id}}">{{$name_customer->name_customer}}</option>
-                                @endforeach
+                                {{--                            @foreach($customer as $name_customer)--}}
+                                {{--                                <option value="{{$name_customer->customer_id}}">{{$name_customer->name_customer}}</option>--}}
+                                {{--                            @endforeach--}}
                             </select>
                         </div>
-                    <div class="form-customer">
-                        <label for="exampleFormControlSelect1">Quận/Huyện</label>
-                        <select class="form-control" id="name_customer" name="name_customer">
-                            @foreach($customer as $name_customer)
-                                <option value="{{$name_customer->customer_id}}">{{$name_customer->name_customer}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-customer">
-                        <label for="exampleFormControlSelect1">Kết Cấu</label>
-                        <select class="form-control" id="name_customer" name="name_customer">
-                            @foreach($customer as $name_customer)
-                                <option value="{{$name_customer->customer_id}}">{{$name_customer->name_customer}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-customer">
-                        <label for="exampleFormControlSelect1">Vị Trí</label>
-                        <select class="form-control" id="name_customer" name="name_customer">
-                            @foreach($customer as $name_customer)
-                                <option value="{{$name_customer->customer_id}}">{{$name_customer->name_customer}}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                        <div class="form-customer">
+                            <label for="exampleFormControlSelect1">Kết Cấu</label>
+                            <select class="form-control" id="name_customer" name="name_customer">
+                                {{--                            @foreach($customer as $name_customer)--}}
+                                {{--                                <option value="{{$name_customer->customer_id}}">{{$name_customer->name_customer}}</option>--}}
+                                {{--                            @endforeach--}}
+                            </select>
+                        </div>
                         <div class="form-customer">
                             <label for="exampleFormControlSelect1">Vị Trí</label>
                             <select class="form-control" id="name_customer" name="name_customer">
-                                @foreach($customer as $name_customer)
-                                    <option value="{{$name_customer->customer_id}}">{{$name_customer->name_customer}}</option>
-                                @endforeach
+                                {{--                            @foreach($customer as $name_customer)--}}
+                                {{--                                <option value="{{$name_customer->customer_id}}">{{$name_customer->name_customer}}</option>--}}
+                                {{--                            @endforeach--}}
+                            </select>
+                        </div>
+                        <div class="form-customer">
+                            <label for="exampleFormControlSelect1">Vị Trí</label>
+                            <select class="form-control" id="name_customer" name="name_customer">
+                                {{--                                @foreach($customer as $name_customer)--}}
+                                {{--                                    <option value="{{$name_customer->customer_id}}">{{$name_customer->name_customer}}</option>--}}
+                                {{--                                @endforeach--}}
                             </select>
                         </div>
                         <div class="form-customer">
@@ -182,21 +289,23 @@
                             <input type="text" class="form-control" id="mst" name="mst" required>
                             <div class="invalid-feedback">MST không được để trống</div>
                         </div>
-                    <div class="form-customer">
-                        <label for="exampleFormControlInput1 uname">Diện Tích</label>
-                        <input type="text" class="form-control" id="mst" name="mst" required>
-                        <div class="invalid-feedback">MST không được để trống</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Nội dung Chi Tiết</label>
-                        <div class="custom-file">
-                            <label class="custom-file-label" for="validatedCustomFile">Chọn file...</label>
-                            <input type="file" class="custom-file-input" accept=".doc,.docx,.pdf" id="content_contract"
-                                   name="content_contract" required>
-                            <div class="invalid-feedback">Định dạng file phải là .doc, .docx, .pdf</div>
+                        <div class="form-customer">
+                            <label for="exampleFormControlInput1 uname">Diện Tích</label>
+                            <input type="text" class="form-control" id="mst" name="mst" required>
+                            <div class="invalid-feedback">MST không được để trống</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Nội dung Chi Tiết</label>
+                            <div class="custom-file">
+                                <label class="custom-file-label" for="validatedCustomFile">Chọn file...</label>
+                                <input type="file" class="custom-file-input" accept=".doc,.docx,.pdf" id="content_contract"
+                                       name="content_contract" required>
+                                <div class="invalid-feedback">Định dạng file phải là .doc, .docx, .pdf</div>
+                            </div>
+                        </div>
                         </div>
                     </div>
-                    </div>
+                </div>
             </fieldset>
 
             <fieldset class="border-text">
