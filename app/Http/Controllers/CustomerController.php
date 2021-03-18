@@ -66,7 +66,7 @@ class CustomerController extends Controller
         $customer = new CustomerModel();
         $customer->customer_id = $request->customer_id;
         $customer->name_customer = $request->name_customer;
-        $customer->mst = $request->mst_customer;
+        $customer->mst = $request->mst;
         $customer->contact_name = $request->contact_name;
         $customer->phone_customer = $request->phone_customer;
         $customer->email_customer = $request->email_customer;
