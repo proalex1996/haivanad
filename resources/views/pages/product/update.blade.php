@@ -1,5 +1,5 @@
 @extends('pages.top-page.master')
-@section('title','Thêm Pano')
+@section('title','Chi Tiết Pano')
 @section('content')
 
     <div class="container-fluid">
@@ -11,12 +11,13 @@
                 </a>
             </div>
         </div>
-        <form action="add" enctype="multipart/form-data" class="needs-validation" method="post">
+        <form action="{{\Illuminate\Support\Facades\URL::to('/product/update/' . $banners->id)}}"
+              enctype="multipart/form-data" class="needs-validation" method="post">
             @csrf
             <div class="form-staff">
                 <div class="form-customer">
                     <label for="exampleFormControlInput1 uname">Mã Pano: </label>
-                    <input type="text" class="form-customer-input" id="id_banner" value="{{$banners->id}}" name="id_banner"
+                    <input type="text" class="form-customer-input" id="id_banner" value="{{$banners->id_banner}}" name="id_banner"
                            placeholder="Mã Pano" size="20" required>
                     <div class="invalid-feedback">Mã Pano không được để trống</div>
                 </div>
@@ -28,7 +29,7 @@
 
                 <div class="form-customer">
                     <label for="exampleFormControlSelect1">Tỉnh/Thành Phố</label>
-                    <select class="form-control" id="tinh" name="tinh" data-target="{{$banners->tinh}}" onchange="getQuan(this)">
+                    <select class="form-control" id="tinh" name="tinh" data-target="{{$banners->tinh}}" onclick="getQuan(this)">
                         <option value="">-- Chọn tỉnh thành --</option>
                     </select>
                 </div>
@@ -64,7 +65,7 @@
                 </div>
                 <div class="form-customer">
                     <label for="exampleFormControlSelect1">Trạng Thái</label>
-                    <select class="form-control" id="status_banner" name="status_banner">
+                    <select class="form-control" id="status_banner" name="name_status">
                         @foreach($statuss as $status)
                             @if($banners->name_banner == $status->id_status)
                                 <option value="{{$status->id_status}}" selected>{{$status->name_status}}</option>
@@ -106,11 +107,8 @@
                     <label for="exampleFormControlInput1 uname">Điểm Escom: </label>
                     <input class="form-customer-input" type="text" id="escom" name="escom" value="{{$banners->escom}}" placeholder="Điểm Escom">
                 </div>
-                <div class="form-customer">
-                    <label for="exampleFormControlInput1 uname">Ghi Chú: </label>
-                    <input class="form-customer-input" type="text" id="note_banner" value="{{$banners->note_banner}}"  name="note_banner" placeholder="Ghí Chú">
-                </div>
 
+                <div class="form-group">
                     <label for="exampleFormControlSelect1">Hình Ảnh</label>
                     <div class="custom-file">
                         <label class="custom-file-label" for="validatedCustomFile">{{$banners->thumb_banner}}</label>
@@ -118,20 +116,25 @@
                                accept="image/*" id="content_contract"
                                name="thumb_banner" {{is_null($banners->thumb_banner) ? "required" : ""}}>
                         <input type="hidden" name="content_hide" value="{{$banners->thumb_banner}}">
-                        <div class="invalid-feedback">Định dạng file phải là .img, .png</div>
+                        <div class="invalid-feedback">Định dạng file phải là .doc, .docx, .pdf</div>
                     </div>
+                </div>
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Đặt Điểm</label>
                     <textarea class="form-control" id="dac_diem" name="dac_diem" rows="5">{{$banners->dac_diem}}</textarea>
+                </div>
+                <div class="form-customer">
+                    <label for="exampleFormControlInput1 uname">Ghi Chú: </label>
+                    <input class="form-customer-input" type="text" id="note_banner" value="{{$banners->note_banner}}"  name="note_banner" placeholder="Ghí Chú">
                 </div>
 
                 <div class="form-group">
                     <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">
                         <i class="zmdi zmdi-plus"></i>Sửa
                     </button>
-                    <a type="button"  href="{{url('/product')}}" class="au-btn au-btn-icon au-btn--blue float-right m-b-25 m-r-10">
+                    <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25 m-r-10">
                         <i class="zmdi zmdi-plus"></i>Quay lại
-                    </a>
+                    </button>
                 </div>
             </div>
         </form>

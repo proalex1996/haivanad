@@ -13,8 +13,8 @@
             <div class="form-staff">
             <div class="form-customer">
                 <label for="exampleFormControlInput1 uname">Tên nhân viên </label>
-                <input type="text" class="form-customer-input" value="{{$staffs ->name}}" id="staff_name" name="staff_name"
-                       placeholder="Mã Pano" size="20" required>
+                <input type="text" class="form-customer-input" value="{{$staffs ->name}}" id="name" name="name"
+                     required>
                 <div class="invalid-feedback">Tên nhân viên không được để trống</div>
             </div>
             <div class="form-customer">

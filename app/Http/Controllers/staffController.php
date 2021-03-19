@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Exports\ExportProduct;
 use App\Imports\ImportStaff;
 use App\Model\staffModel;
 use App\Repositories\Staff\staffRepositoryEloquent;
@@ -125,6 +126,13 @@ class staffController extends Controller
         } else {
             return ['File Dữ Liệu trống'];
         }
+    }
+    public function export()
+    {
+        return Excel::download(new ExportProduct(), 'product.xlsx');
+    }
+    public function dowloadExample(){
+        return redirect('public/storage/contract/ExmpleProduct.xlsx');
     }
     public function quyen1($id){
         $staff = staffModel::find($id);

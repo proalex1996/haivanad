@@ -32,7 +32,17 @@ class ProductController extends Controller
     {
         $banners = DB::table('banner')
             ->join('status_banner', 'banner.name_status', '=', 'status_banner.id_status')
-            ->select('banner.id','status_banner.name_status','status_banner.id_status', 'banner.id_banner')->groupBy('banner.id')->orderBy('banner.id','DESC')->get();
+            ->select('banner.id','status_banner.name_status','status_banner.id_status', 'banner.id_banner');
+        if(!empty($request->id_banner)){
+            $banners = $banners->where('banner.id_banner','LIKE','%'.$request->id_banner.'%');
+        }
+        if(!empty($request->id_status)){
+            $banners = $banners->where('banner.name_status','=',$request->id_status);
+        }
+        if(!empty($request->system_banner)){
+            $banners = $banners->where('banner.system_banner','=','%'.$request->system_banner.'%');
+        };
+        $banners = $banners->groupBy('banner.id')->orderBy('banner.id','DESC')->get();
         $status_banner = DB::table('status_banner')->select('*')->get();
         $contract = DB::table('contract')
             ->join('banner', 'contract.id_banner', '=', 'banner.id_banner')
@@ -73,7 +83,7 @@ class ProductController extends Controller
         $product->id_system = $request->id_system;
         $product->size_banner = $request->size_banner;
         $product->height_banner = $request->height_banner;
-        $product->content = basename($request->thumb_banner->getClientOriginalName());
+        $product->thumb_banner = basename($request->thumb_banner->getClientOriginalName());
         $file = $request->file('thumb_banner');
         $fileName = $request->file('thumb_banner')->getClientOriginalName();
         $product->light_system = $request->light_system;
@@ -120,11 +130,8 @@ class ProductController extends Controller
         $data = $request->all();
 
 
-
         if (!empty($data)) {
-
-            if (!empty($data['thumb_banner'])) {
-                $data['thumb_banner'] = basename($request->thumb_banner->getClientOriginalName());
+            if (!empty($data['thumb_banner'])){
                 $file = $request->file('thumb_banner');
                 $fileName = $request->file('thumb_banner')->getClientOriginalName();
                 $storage = Storage::putFileAs('content', $file, $fileName);
