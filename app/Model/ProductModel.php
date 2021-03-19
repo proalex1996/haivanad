@@ -9,22 +9,24 @@ use Illuminate\Database\Eloquent\Model;
 class ProductModel extends Model
 {
     protected $table = 'banner';
+    protected $dateFormat = 'dd-mm-YYYY';
     public $timestamps = false;
     protected $fillable = [
         'id_banner',
-        'thumb_banner',
+        'flow',
+        'tinh',
         'location',
         'banner_adress',
         'quan',
-        'tinh',
-        'id_typebanner',
         'id_system',
         'size_banner',
+        'name_status',
         'height_banner',
         'light_system',
-        'flow',
+        'id_typebanner',
+        'escom',
         'dac_diem',
-        'status_banner',
-        'note_banner'
+        'note_banner',
+        'thumb_banner'
     ];
 }

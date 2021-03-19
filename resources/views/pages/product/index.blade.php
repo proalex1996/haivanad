@@ -23,31 +23,32 @@
             <div class="col-md-12">
                 <form class="post-form-sort" action="{{url('/product')}}" method="post" style="margin-bottom: 3em">
                     @csrf
-                    <div class="row">
-                        <div class="col-md-3 col-sm-12 m-t-10">
-                            <label for="exampleFormControlInput1 ">Mã Pano</label>
-                            <input type="text" class="form-control" id="id_banner" name="id_banner" placeholder="Mã Pano">
-                        </div>
-                        <div class="col-md-3 col-sm-12 m-t-10">
-                            <label for="exampleFormControlInput1 ">Trạng thái</label>
-                            <select type="text" class="form-control" id="id_status" name="id_status">
-                                <option value="">Tất Cả</option>
-                                @foreach($status_banners as $status)
-                                <option value="{{$status->id_status}}">{{$status->name_status}}</option>
-                                @endforeach
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12 m-t-10">
+                                <label for="exampleFormControlInput1 ">Mã Pano</label>
+                                <input type="text" class="form-control" id="id_banner" name="id_banner"
+                                       placeholder="Mã Pano">
+                            </div>
+                            <div class="col-md-3 col-sm-12 m-t-10">
+                                <label for="exampleFormControlInput1 ">Trạng thái</label>
+                                <select type="text" class="form-control" id="id_status" name="id_status">
+                                    <option value="">Tất Cả</option>
+                                    @foreach($status_banners as $status)
+                                        <option value="{{$status->id_status}}">{{$status->name_status}}</option>
+                                    @endforeach
 
-                            </select>
+                                </select>
+                            </div>
+                            <div class="col-md-3 col-sm-12 m-t-10">
+                                <label for="exampleFormControlInput1 ">Kích Thước</label>
+                                <input type="text" class="form-control" id="size_banner" name="size_banner"
+                                       placeholder="Kích Thước">
+                            </div>
+                            <div class="col-md-3 col-sm-12 ">
+                                <button class="btn btn-primary btn-block" style="width:40px " type="submit" aria-expanded="false">Tìm
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-md-3 col-sm-12 m-t-10">
-                            <label for="exampleFormControlInput1 ">Hệ Thống Đèn</label>
-                            <input type="text" class="form-control" id="light_system" name="light_system"
-                                   placeholder="Hệ thống đèn">
-                        </div>
-                        <div class="col-md-3 col-sm-12 m-t-10 align-self-end" >
-                            <button class="btn btn-primary btn-block" type="submit" aria-expanded="false">Tìm</button>
-                        </div>
-
-                    </div>
                 </form>
 
                 <div class="table-container fixed_header ">
@@ -77,7 +78,7 @@
                                             <a id="open-deleteProduct" class="dropdown-item"
                                                data-id_data="{{$banner->id}}" data-toggle="modal"
                                                data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa
-                                               </a>
+                                            </a>
                                         </div>
                                     </td>
                                     <td class="id_banner">2021{{$banner->id_banner}}</td>

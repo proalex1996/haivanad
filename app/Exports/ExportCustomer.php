@@ -15,7 +15,7 @@ class ExportCustomer implements FromQuery, WithHeadings
     {
         return CustomerModel::query()
             ->join('type_customer','type_customer','=','type_customer.id')
-            ->join('status','status_customer','=','status.id_staff')
+            ->join('status','status_customer','=','status.id_status')
             ->join('solvency','solvency','=','solvency.id')
             ->select('customer.id','customer.customer_id','customer.name_customer','contact_name','mst','phone_customer','email_customer','type_customer.name_type','solvency.name_solvency','mass','status')->orderBy('id')->getQuery();
     }

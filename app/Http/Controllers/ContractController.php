@@ -50,7 +50,7 @@ class ContractController extends Controller
             ->join('kind_contract', 'kind', '=', 'kind_contract.id_contract')
             ->join('contract_status', 'status_contract','=','contract_status.id_contract')
             ->select('contract.id', 'contract.id_contract', 'name_customer','customer.contact_name', 'contract.note_contract','contract.pay_due',
-                'contract.gianam','banner.id_banner', 'contract.content','contract_status.name_status','kind_contract.name_kind',
+                'contract.gianam','contract.thue','banner.id_banner', 'contract.content','contract_status.name_status','kind_contract.name_kind',
                 'date_start', 'date_end', 'name_staff','contract.now_content', 'value_contract','contract.gia9thang','contract.gia3thang','contract.gia6thang');
 
         if(!empty($request->id_contract))
@@ -111,6 +111,7 @@ class ContractController extends Controller
         $contract = new ContractModel();
         $contract->id_contract = $request->id_contract;
         $contract->id_customer = $request->name_customer;
+        $contract->thue = $request->thue
         $contract->id_staff = $request->name_staff;
         $contract->id_banner = $request->id_banner;
         $contract->content = basename($request->content_contract->getClientOriginalName());

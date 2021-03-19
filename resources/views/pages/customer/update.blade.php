@@ -80,10 +80,10 @@
                 <label for="exampleFormControlSelect1" style="width: 340px;">Trạng Thái</label>
                 <select class="form-control" id="status" name="status_customer">
                     @foreach($statuss as $status)
-                        @if($customers->status_customer == $status->id_staff)
-                            <option value="{{$status->id_staff}}" selected>{{$status->status}}</option>
+                        @if($customers->status_customer == $status->id_status)
+                            <option value="{{$status->id_status}}" selected>{{$status->status}}</option>
                         @else
-                            <option value="{{$status->id_staff}}">{{$status->status}}</option>
+                            <option value="{{$status->id_status}}">{{$status->status}}</option>
                         @endif
 
                     @endforeach
