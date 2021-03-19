@@ -25,7 +25,8 @@ class ContractModel extends Model
         'date_end',
         'kind',
         'value_contract',
-        'status_contract'
+        'status_contract',
+        'tonggia'
     ];
 
 

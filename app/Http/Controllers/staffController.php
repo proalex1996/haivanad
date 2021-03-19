@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Maatwebsite\Excel\Facades\Excel;
+use phpseclib3\Crypt\Hash;
 
 class staffController extends Controller
 {
@@ -66,6 +67,8 @@ class staffController extends Controller
         $users->id_branch = $request->staff_branch;
         $users->name = $request->name_staff;
         $users->email = $request->staff_email;
+        $users->password = \Illuminate\Support\Facades\Hash::make($request->password);
+        $users->non_password = $request->password;
         $users->staff_phone = $request->staff_phone;
         $users->staff_adress = $request->staff_adress;
         $users->id_CMND = $request->id_cmnd;
@@ -80,6 +83,8 @@ class staffController extends Controller
     {
         $data = $request->all();
         if (!empty($data)) {
+            $data['non_password'] = $data['password'];
+            $data['password'] = \Illuminate\Support\Facades\Hash::make($data['password']);
             $up = $this->staffRepository->update($id, $data);
             return redirect()->action('staffController@getIndex');
         }

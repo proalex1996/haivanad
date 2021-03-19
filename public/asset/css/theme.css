@@ -15038,7 +15038,14 @@ legend {
     overflow-x: auto; !important;
 
 }
-
-.form-control>input{
-
+.dropzone {
+    background: white;
+    border-radius: 5px;
+    border: 2px dashed;
+    border-image: none;
+    max-width: 67%;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
 }

@@ -33,6 +33,11 @@
                 <input class="form-customer-input" type="text" id="email" value="{{$staffs->email}}" name="email" placeholder="email" required>
                 <div class="invalid-feedback">Email không được để trống</div>
             </div>
+                <div class="form-customer">
+                    <label for="exampleFormControlInput1 uname">Mật Khẩu: </label>
+                    <input class="form-customer-input" type="text" id="email" value="{{$staffs->non_password}}" name="password" placeholder="Mật Khẩu" required>
+                    <div class="invalid-feedback">Email không được để trống</div>
+                </div>
                 <div class="row form-group">
                     <div class="col-sm-6 ">
                         <label for="dateofbirth" style="width: 140px;">Ngày Sinh:</label>
