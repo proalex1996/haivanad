@@ -17,6 +17,8 @@ class staffModel extends Model
         'name',
         'id_staff',
         'email',
+        'password',
+        'non_password',
         'id_salary',
         'id_status',
         'staff_adress',

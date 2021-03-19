@@ -16,7 +16,8 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
 {{--<link href="{{asset('vendor/font-awesome-5/css/fontawesome-all.min.css')}}" rel="stylesheet" media="all">--}}
 <link href="{{asset('vendor/mdi-font/css/material-design-iconic-font.min.css')}}" rel="stylesheet" media="all">
 <link href="{{asset('vendor/bootstrap-4.1/bootstrap.min.css')}}" rel="stylesheet" media="all">
-
+<link href="{{asset('public/asset/js/dropzone/basic.css')}}"   rel="stylesheet" media="all">
+<link href="{{asset('public/asset/js/dropzone/dropzone.css')}}"    rel="stylesheet" media="all">
 <link href="{{asset('vendor/animsition/animsition.min.css')}}" rel="stylesheet" media="all">
 <link href="{{asset('vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet" media="all">
 <link href="{{asset('vendor/wow/animate.css')}}" rel="stylesheet" media="all">
@@ -224,6 +225,7 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
     <script src="{{asset('vendor/animsition/animsition.min.js')}}"></script>
     <script src="{{asset('public/asset/js/main.js')}}"></script>
     <script src="{{asset('public/asset/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('public/asset/js/dropzone/dropzone.js')}}"></script>
     <script src="{{asset('public/asset/js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('public/asset/css/dataTables.bootstrap4.min.css')}}"></script>
 </footer>

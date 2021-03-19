@@ -26,7 +26,11 @@ class ContractModel extends Model
         'kind',
         'value_contract',
         'status_contract',
+<<<<<<< HEAD
+        'tonggia'
+=======
         'thue'
+>>>>>>> main
     ];
 
 

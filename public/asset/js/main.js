@@ -1783,164 +1783,7 @@ $(document).ready(function () {
 
 });
 
-// function callAjaxLease() {
-//     // Recent Report
-//     const brandProduct = 'rgba(0,181,233,0.8)';
-//     const brandService = 'rgba(0,173,95,0.8)';
-//     var Jan,Feb, Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec ;
-//     $.ajax({
-//         url: "http://192.168.1.22/haivanad/api/contract/postJan",
-//         async: false,
-//         success: function (result) {
-//             Jan = JSON.parse(result).total;
-//         }
-//     });
-//
-//
-//     $.ajax({
-//         url: "http://192.168.1.22/haivanad/api/contract/postFeb",
-//         async: false,
-//         success: function (result) {
-//             Feb = JSON.parse(result).total;
-//         }
-//     });
-//     $.ajax({
-//         url: "http://192.168.1.22/haivanad/api/contract/postMar",
-//         async: false,
-//         success: function (result) {
-//             Mar = JSON.parse(result).total;
-//         }
-//     });
-//     $.ajax({
-//         url: "http://192.168.1.22/haivanad/api/contract/postApr",
-//         async: false,
-//         success: function (result) {
-//             Apr = JSON.parse(result).total;
-//         }
-//     });
-//     $.ajax({
-//         url: "http://192.168.1.22/haivanad/api/contract/postMay",
-//         async: false,
-//         success: function (result) {
-//             May = JSON.parse(result).total;
-//         }
-//     });
-//     $.ajax({
-//         url: "http://192.168.1.22/haivanad/api/contract/postJun",
-//         async: false,
-//         success: function (result) {
-//             Jun = JSON.parse(result).total;
-//         }
-//     });
-//     $.ajax({
-//         url: "http://192.168.1.22/haivanad/api/contract/postJul",
-//         async: false,
-//         success: function (result) {
-//            Jul = JSON.parse(result).total;
-//         }
-//     });
-//     $.ajax({
-//         url: "http://192.168.1.22/haivanad/api/contract/postAug",
-//         async: false,
-//         success: function (result) {
-//             Aug = JSON.parse(result).total;
-//         }
-//     });
-//     $.ajax({
-//         url: "http://192.168.1.22/haivanad/api/contract/postSep",
-//         async: false,
-//         success: function (result) {
-//             Sep = JSON.parse(result).total;
-//         }
-//     });
-//     $.ajax({
-//         url: "http://192.168.1.22/haivanad/api/contract/postOct",
-//         async: false,
-//         success: function (result) {
-//             Oct = JSON.parse(result).total;
-//         }
-//     });
-//     $.ajax({
-//         url: "http://192.168.1.22/haivanad/api/contract/postNov",
-//         async: false,
-//         success: function (result) {
-//             Nov = JSON.parse(result).total;
-//         }
-//     });
-//     $.ajax({
-//         url: "http://192.168.1.22/haivanad/api/contract/postDec",
-//         async: false,
-//         success: function (result) {
-//             Dec = JSON.parse(result).total;
-//         }
-//     });
-//
-//     var ctx = document.getElementById("recent-rep-chart");
-//     if (ctx) {
-//         ctx.height = 250;
-//         var myChart = new Chart(ctx, {
-//             type: 'line',
-//             data: {
-//                 labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October','November','December'],
-//                 datasets: [
-//                     {
-//                         label: 'My First dataset',
-//                         backgroundColor: brandService,
-//                         borderColor: 'transparent',
-//                         pointHoverBackgroundColor: '#fff',
-//                         borderWidth: 0,
-//                         data: [Jan, Feb,Mar,Apr,May,Jun,Jul ,Aug ,Sep,Oct,Nov,Dec ]
-//
-//                     }
-//                 ]
-//             },
-//             options: {
-//                 maintainAspectRatio: true,
-//                 legend: {
-//                     display: false
-//                 },
-//                 responsive: true,
-//                 scales: {
-//                     xAxes: [{
-//                         gridLines: {
-//                             drawOnChartArea: true,
-//                             color: '#f2f2f2'
-//                         },
-//                         ticks: {
-//                             fontFamily: "Poppins",
-//                             fontSize: 12
-//                         }
-//                     }],
-//                     yAxes: [{
-//                         ticks: {
-//                             beginAtZero: true,
-//                             maxTicksLimit: 5,
-//                             stepSize: 50,
-//                             max: 150,
-//                             fontFamily: "Poppins",
-//                             fontSize: 12
-//                         },
-//                         gridLines: {
-//                             display: true,
-//                             color: '#f2f2f2'
-//
-//                         }
-//                     }]
-//                 },
-//                 elements: {
-//                     point: {
-//                         radius: 0,
-//                         hitRadius: 10,
-//                         hoverRadius: 4,
-//                         hoverBorderWidth: 3
-//                     }
-//                 }
-//
-//
-//             }
-//         });
-//     }
-// }
+
 
 $("#riverroad-tb").tooltip({content: '<img src="' + $("#riverroad-tb").attr("data") + '" />'});
 // Chức năng chọn hết
@@ -2081,5 +1924,15 @@ function getCustomer() {
         }
 
     });
+
 }
+function getTong() {
+    var gia = $('#value_contract').val();
+    var thue = $('#thue').val();
+    var tonggia = (gia+thue)/100
+    $('#tong').val(tonggia);
+
+
+}
+
 

@@ -38,6 +38,13 @@
                     <div class="invalid-feedback">Email không được để trống</div>
                 </div>
                 <div class="form-customer">
+                    <label for="exampleFormControlInput1 uname">Mật Khẩu: </label>
+                    <input type="text" class="form-customer-input" id="password" name="password"
+                           placeholder="Mật Khẩu" required>
+                    <div class="invalid-feedback">Email không được để trống</div>
+                </div>
+
+                <div class="form-customer">
                     <label for="exampleFormControlInput1 uname">Địa Chỉ: </label>
                     <input type="text" class="form-customer-input" id="staff_adress" name="staff_adress"
                            placeholder="Địa chỉ" required>
