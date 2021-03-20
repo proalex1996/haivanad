@@ -19,12 +19,13 @@ class ExportStaff implements FromQuery, WithHeadings
             ->join('salary','users.id_salary','=','salary.id_salary')
             ->join('branch','users.id_branch','=','branch.id_branch')
             ->join('positions','users.id_position','=','positions.id_position')
+            ->join('status','users.id_status','=','status.id_status')
 
-            ->select('users.id','users.name','users.email','users.staff_phone','users.id_CMND','users.born','users.staff_adress','branch.name_branch','positions.name_position','salary.bassic_salary','users.created_at')->orderBy('id','DESC')->getQuery();
+            ->select('users.id','users.name','users.email','users.staff_phone','users.id_CMND','users.born','users.staff_adress','branch.name_branch','positions.name_position','salary.bassic_salary','status.status','users.created_at')->orderBy('id','DESC')->getQuery();
     }
 
     public function headings(): array
     {
-        return ['STT','Họ Và Tên','Email','Số Điện Thoại','CMND','Năm Sinh','Địa Chỉ','Chi Nhánh','Chức Vụ','Lương','Trạng Thái','Ngày Tạo'];
+        return ['MÃ NHÂN VIÊN','Họ Và Tên','Email','Số Điện Thoại','CMND','Năm Sinh','Địa Chỉ','Chi Nhánh','Chức Vụ','Lương','Trạng Thái','Ngày Tạo'];
     }
 }
