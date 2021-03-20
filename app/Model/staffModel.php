@@ -13,6 +13,7 @@ class staffModel extends Model
     public $timestamps = false;
     protected $dateFormat = 'dd-mm-YYYY';
     protected $fillable = [
+        'id',
         'id_branch',
         'name',
         'id_staff',
@@ -26,6 +27,7 @@ class staffModel extends Model
         'id_CMND',
         'id_phan_quyen',
         'born',
+        'io_position'
 
     ];
 }

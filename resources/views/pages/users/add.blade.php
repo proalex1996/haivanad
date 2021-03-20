@@ -59,6 +59,14 @@
                     </select>
                 </div>
                 <div class="form-customer">
+                    <label for="exampleFormControlSelect1">Chức Vụ</label>
+                    <select class="form-control form_select" id="id_position" name="id_position">
+                        @foreach($branchs as $branch)
+                            <option value="{{$branch->id_branch}}">{{$branch->name_branch}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-customer">
                     <label for="exampleFormControlSelect1">Lương Cơ Bản</label>
                     <select class="form-control form_select" id="bassic_salary" name="bassic_salary">
                         @foreach($salarys as $salary)

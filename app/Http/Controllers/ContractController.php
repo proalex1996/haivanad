@@ -41,13 +41,6 @@ class ContractController extends Controller
         $validated = $request->validate($this->rules());
     }
 
-
-
-
-
-
-
-
     public function getContract(Request $request)
     {
         $contracts = DB::table('contract')
