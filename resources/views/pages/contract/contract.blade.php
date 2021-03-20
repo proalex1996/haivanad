@@ -22,6 +22,7 @@
         </div>
         <div class="row m-t-30">
             <div class="col-md-12">
+                <div class="fixed_header">
                     <table id="table-data_reponse" class="table table-borderless table-data3 ">
                         <thead>
                         <tr>
@@ -138,7 +139,7 @@
                         </tbody>
                     </table>
                 </div>
-
+            </div>
         </div>
     </div>
 @endsection

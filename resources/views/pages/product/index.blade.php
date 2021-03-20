@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="overview-wrap">
                     <h2 class="title-1">Quản Lý Sản Phẩm</h2>
-                    <div class="exp-excel">
+                    <div class="exp-excel m-r-10">
                         <a class="au-btn au-btn-icon au-btn--blue" href="product/export">
                             <i class="zmdi zmdi-plus"></i>Xuất file Excel
                         </a>
@@ -30,24 +30,25 @@
                                        placeholder="Mã Pano">
                             </div>
                             <div class="col-md-3 col-sm-12 m-t-10">
+                                <label for="exampleFormControlInput1 ">Kích Thước</label>
+                                <input type="text" class="form-control" id="size_banner" name="size_banner"
+                                       placeholder="Kích Thước">
+                            </div>
+                            <div class="col-md-3 col-sm-12 m-t-10">
                                 <label for="exampleFormControlInput1 ">Trạng thái</label>
                                 <select type="text" class="form-control" id="id_status" name="id_status">
                                     <option value="">Tất Cả</option>
                                     @foreach($status_banners as $status)
                                         <option value="{{$status->id_status}}">{{$status->name_status}}</option>
                                     @endforeach
-
                                 </select>
                             </div>
-                            <div class="col-md-3 col-sm-12 m-t-10">
-                                <label for="exampleFormControlInput1 ">Kích Thước</label>
-                                <input type="text" class="form-control" id="size_banner" name="size_banner"
-                                       placeholder="Kích Thước">
-                            </div>
-                            <div class="col-md-3 col-sm-12 ">
-                                <button class="btn btn-primary btn-block" style="width:40px " type="submit" aria-expanded="false">Tìm
+                            <div class="col-md-2 col-sm-12 m-t-30">
+                                <label for="exampleFormControlInput1 "></label>
+                                <button class="btn btn-primary btn-block" type="submit" aria-expanded="false">Tìm
                                 </button>
                             </div>
+
                         </div>
                 </form>
 

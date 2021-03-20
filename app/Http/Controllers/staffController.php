@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 
 use App\Exports\ExportProduct;
+use App\Exports\ExportStaff;
 use App\Imports\ImportStaff;
 use App\Model\staffModel;
 use App\Repositories\Staff\staffRepositoryEloquent;
@@ -30,8 +31,9 @@ class staffController extends Controller
             ->join('salary', 'users.id_salary', '=', 'salary.id_salary')
             ->join('status', 'users.id_status', '=', 'status.id_status')
             ->join('phan_quyen', 'id_phan_quyen', '=', 'phan_quyen.id_pq')
+            ->join('positions','users.id_position','=','positions.id_position')
             ->select('users.id', 'phan_quyen.name_pq','users.id_branch', 'users.name', 'email', 'created_at', 'staff_adress', 'staff_phone', 'id_CMND',
-                'branch.name_branch', 'status.status', 'bassic_salary', 'users.born',
+                'branch.name_branch', 'status.status','positions.name_position', 'bassic_salary', 'users.born',
                 'phan_quyen.name_pq', 'phan_quyen.id_pq', 'status.id_status');
         if (!empty($request->id_name)) {
             $users = $users->where('users.name', '=', '%'.$request->id_name.'%');
@@ -56,11 +58,13 @@ class staffController extends Controller
         $salarys = DB::table('salary')->select('*')->get();
         $statuss = DB::table('status')->select('*')->get();
         $phan_quyen = DB::table('phan_quyen')->select('*')->get();
+        $positions = DB::table('positions')->select('*')->get();
         return view('pages.users.add',[
            'branchs' => $branchs,
             'salarys' => $salarys,
             'statuss' => $statuss,
-            'phan_quyen' => $phan_quyen
+            'phan_quyen' => $phan_quyen,
+            'positions' => $positions
         ]);
     }
     public function addStaff(Request $request){
@@ -74,6 +78,7 @@ class staffController extends Controller
         $users->staff_adress = $request->staff_adress;
         $users->id_CMND = $request->id_cmnd;
         $users->born = $request->date_start;
+        $users->id_position = $request->id_position;
         $users->id_salary = $request->bassic_salary;
         $users->id_status = $request->staff_status;
         $users->id_phan_quyen = $request->id_pq;
@@ -127,10 +132,6 @@ class staffController extends Controller
             return ['File Dữ Liệu trống'];
         }
     }
-    public function export()
-    {
-        return Excel::download(new ExportProduct(), 'product.xlsx');
-    }
     public function dowloadExample(){
         return redirect('public/storage/contract/ExmpleProduct.xlsx');
     }
@@ -165,5 +166,9 @@ class staffController extends Controller
             $result = $status->update();
         }
         return redirect()->action('staffController@getIndex');
+    }
+    public function export()
+    {
+        return Excel::download(new ExportStaff, 'Danh Sách Nhân Viên.xlsx');
     }
 }
