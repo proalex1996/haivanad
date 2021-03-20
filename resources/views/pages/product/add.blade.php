@@ -31,12 +31,12 @@
                 <div class="form-customer">
                     <label for="exampleFormControlInput1 uname">Kết Cấu: </label>
                     <input type="text" class="form-customer-input" id="id_system" name="id_system"
-                           placeholder="Kết Cấu">
+                           placeholder="Kết Cấu" required>
                 </div>
                 <div class="form-customer">
                     <label for="exampleFormControlInput1 uname">Vị Trí:</label>
                     <input type="text" class="form-customer-input" id="location" name="location"
-                           placeholder="Tên Vị Trí">
+                           placeholder="Tên Vị Trí" required>
                 </div>
                 <div class="form-customer">
                     <label for="exampleFormControlInput1 uname">Địa Chỉ: </label>
@@ -79,15 +79,15 @@
                 <div class="form-customer">
                     <label for="exampleFormControlInput1 uname">Lưu Lượng Người: </label>
                     <input class="form-customer-input" type="number" id="flow" name="flow"
-                           placeholder="Lưu Lượng Người">
+                           placeholder="Lưu Lượng Người" required>
                 </div>
                 <div class="form-customer">
                     <label for="exampleFormControlInput1 uname">Điểm Escom: </label>
-                    <input class="form-customer-input" type="text" id="escom" name="escom" placeholder="Điểm Escom">
+                    <input class="form-customer-input" type="text" id="escom" name="escom" placeholder="Điểm Escom" required>
                 </div>
                 <div class="form-customer">
                     <label for="exampleFormControlInput1 uname">Ghi Chú: </label>
-                    <input class="form-customer-input" type="text" id="note_banner" name="note_banner" placeholder="Ghí Chú">
+                    <input class="form-customer-input" type="text" id="note_banner" name="note_banner" placeholder="Ghi Chú" required>
                 </div>
 
                 <div class="form-customer">
@@ -99,8 +99,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Đặt Điểm</label>
-                    <textarea class="form-control" id="dac_diem" name="dac_diem" rows="5"></textarea>
+                    <label for="exampleFormControlTextarea1">Đặc Điểm</label>
+                    <textarea class="form-control" id="dac_diem" name="dac_diem" rows="5" ></textarea>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Hình Ảnh</label>

@@ -87,7 +87,7 @@ class CustomerController extends Controller
             $up = $this->customerRepository->update($id, $data);
             return redirect()->action('CustomerController@getIndex');
         }
-        $customer = $this->customerRepository->find($id)->first();
+        $customer = $this->customerRepository->find($id);
         $status = DB::table('status')->select('*')->get();
         $type_customer = DB::table('type_customer')->select('*')->get();
         $solvency = DB::table('solvency')->select('*')->get();

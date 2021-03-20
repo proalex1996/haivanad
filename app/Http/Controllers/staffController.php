@@ -35,8 +35,8 @@ class staffController extends Controller
             ->select('users.id', 'phan_quyen.name_pq','users.id_branch', 'users.name', 'email', 'created_at', 'staff_adress', 'staff_phone', 'id_CMND',
                 'branch.name_branch', 'status.status','positions.name_position', 'bassic_salary', 'users.born',
                 'phan_quyen.name_pq', 'phan_quyen.id_pq', 'status.id_status');
-        if (!empty($request->id_name)) {
-            $users = $users->where('users.name', '=', '%'.$request->id_name.'%');
+        if (!empty($request->staff_phone)) {
+            $users = $users->where('users.staff_phone', 'LiKE', '%'.$request->staff_phone.'%');
         }
         if (!empty($request->id_status)) {
             $users = $users->where('status.id_status', '=', $request->id_status);

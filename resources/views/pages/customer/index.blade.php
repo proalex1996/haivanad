@@ -52,14 +52,14 @@
                                                 thông tin khách hàng</a>
                                             <a id="open-deleteContract" class="dropdown-item"
                                                data-id_data="{{$customer->id}}" data-toggle="modal"
-                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa hợp đồng</a>
+                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa Thông Tin Khách Hàng</a>
                                         </div>
                                     </td>
                                     <td>{{$customer->customer_id}}</td>
                                     <td>{{$customer->name_customer}}</td>
                                     <td>{{$customer->contact_name}}</td>
                                     <td>{{$customer->mst}}</td>
-                                    <td>{{$customer->phone_customer}}</td>=
+                                    <td>{{$customer->phone_customer}}</td>
                                     <td>{{$customer->adress_customer}}</td>
                                     <td>{{$customer->email_customer}}</td>
                                     <td>{{$customer->name_type}}</td>

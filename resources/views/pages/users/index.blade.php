@@ -40,13 +40,13 @@
                             </select>
                         </div>
                         <div class="col-md-3 col-sm-12 m-t-10">
-                            <label for="exampleFormControlInput1 ">Họ Tên</label>
-                            <input type="text" class="form-control" id="light_system" name="id_name"
-                                   placeholder="Họ Tên">
+                            <label for="exampleFormControlInput1 ">Số Điện Thoại</label>
+                            <input type="text" class="form-control" id="staff_phone" name="staff_phone"
+                                   placeholder="Số Điện Thoại">
                         </div>
                         <div class="col-md-2 col-sm-12 m-t-10 align-self-end">
 
-                            <button class="btn btn-primary btn-block" type="submit" aria-expanded="false">Tìm</button>
+                            <button class="btn btn-primary btn-block" style="margin-bottom: 16px;" type="submit" aria-expanded="false">Tìm</button>
                         </div>
 
                     </div>
@@ -87,7 +87,7 @@
                                         </a>
                                     </div>
                                 </td>
-                                <td class="id_banner">2021{{$user->id}}</td>
+                                <td class="id_banner">{{$user->id}}</td>
                                 <td>{{$user->name}}</td>
 
                                 <td>{{$user->born}}</td>

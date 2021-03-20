@@ -11,6 +11,7 @@ class CustomerModel extends Model
     protected $table = 'customer';
     public $timestamps = false;
     protected $fillable = [
+        'id',
         'customer_id',
         'name_customer',
         'mst',

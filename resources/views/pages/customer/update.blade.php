@@ -4,11 +4,10 @@
     <div class="container-fluid">
         <div class="col-md-12 m-b-40">
             <div class="overview-wrap" style="width: 400px;">
-                <a href="{{url('/')}}">Trang Chủ>></a><a href="{{url('/customer')}}">Khách Hàng>></a>Sửa thông tin hợp
-                đồng
+                <a href="{{url('/customer')}}">Khách Hàng</a>
             </div>
         </div>
-        <form action="{{\Illuminate\Support\Facades\URL::to('/customer/update/' . $customers->id)}}"
+        <form action="{{\Illuminate\Support\Facades\URL::to('/customer/update/'.$customers->id)}}"
               enctype="multipart/form-data" class="needs-validation" method="post">
             @csrf
             <div class="form-customer">
@@ -91,7 +90,7 @@
             </div>
             <div class="form-customer">
                 <label for="exampleFormControlInput1 uname" style="width: 250px;">Khối Lượng:</label>
-                <input class="form-customer-input" type="text" value="{{$customers->mass}}" id="mass" name="mass" size="20" placeholder="Khối lượng">
+                <input class="form-customer-input" type="text" value="{{$customers->mass}}" id="mass" name="mass" size="20" placeholder="Khối lượng" required>
             </div>
 
             <div class="form-group">

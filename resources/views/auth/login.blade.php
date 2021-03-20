@@ -43,7 +43,7 @@
                             @csrf
                             <div class="form-group">
                                 <label>Tên Đăng Nhập</label>
-                                <input class="au-input au-input--full" type="text" name= "email" placeholder="email">
+                                <input class="au-input au-input--full" type="text" name= "email" placeholder="Tên Đăng Nhập"required>
                             </div>
                             <div class="form-group">
                                 <label>Mật Khẩu</label>

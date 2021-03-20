@@ -72,7 +72,7 @@
             </div>
             <div class="form-customer">
                 <label for="exampleFormControlInput1 uname" style="width: 250px;">Khối Lượng:</label>
-                <input class="form-customer-input" type="text" id="mass" name="mass" size="20" placeholder="Khối lượng">
+                <input class="form-customer-input" type="text" id="mass" name="mass" size="20" placeholder="Khối lượng" required>
             </div>
             <div class="form-group">
                 <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">

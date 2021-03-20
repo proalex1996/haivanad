@@ -61,8 +61,8 @@
                 <div class="form-customer">
                     <label for="exampleFormControlSelect1">Chức Vụ</label>
                     <select class="form-control form_select" id="id_position" name="id_position">
-                        @foreach($branchs as $branch)
-                            <option value="{{$branch->id_branch}}">{{$branch->name_branch}}</option>
+                        @foreach($positions as $position)
+                            <option value="{{$position->id_position}}">{{$position->name_position}}</option>
                         @endforeach
                     </select>
                 </div>
