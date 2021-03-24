@@ -12,6 +12,7 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="au theme template">
 <link href="{{asset('public/asset/css/font-face.css')}}" rel="stylesheet" media="all">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 {{--<link href="{{asset('vendor/font-awesome-4.7/css/font-awesome.min.css')}}" rel="stylesheet" media="all">--}}
 {{--<link href="{{asset('vendor/font-awesome-5/css/fontawesome-all.min.css')}}" rel="stylesheet" media="all">--}}
 <link href="{{asset('vendor/mdi-font/css/material-design-iconic-font.min.css')}}" rel="stylesheet" media="all">
@@ -210,6 +211,8 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
 </body>
 <footer>
     <script src="{{asset('vendor/jquery-3.2.1.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="{{asset('vendor/bootstrap-4.1/popper.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap-4.1/bootstrap.min.js')}}"></script>
     <script src="{{asset('vendor/slick/slick.min.js')}}"></script>

@@ -56,7 +56,6 @@
                     <table class="table table-borderless table-data3 table-test-responsive">
                         <thead>
                         <tr>
-                            <th><input type="checkbox" id="check-all" name="title"></th>
                             <th width="20%">STT</th>
                             <th width="20%">Mã Pano</th>
                             <th width="60%">Trạng thái</th>
@@ -69,7 +68,6 @@
                         @foreach($banners as $banner)
                             @if ($banner->id_status == 2)
                                 <tr class="status--process">
-                                    <td><input type="checkbox" id="check-box" name="check-box"></td>
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->id}}</a>
                                         <div class="dropdown-menu">
@@ -98,7 +96,6 @@
 
                             @elseif($banner->id_status==1)
                                 <tr>
-                                    <td><input type="checkbox" id="check-box" name="check-box"></td>
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->id}}</a>
                                         <div class="dropdown-menu">

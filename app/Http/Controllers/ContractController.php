@@ -108,7 +108,6 @@ class ContractController extends Controller
             'type_banners' => $type_banners,
             'positions' => $position
         ]);
-
     }
 
     public function createContract(Request $request)
@@ -228,7 +227,7 @@ class ContractController extends Controller
 
 
     }
-    function ApiCustomer(Request $request){
+   public function ApiCustomer(Request $request){
         $request->all();
         $data = DB::table('customer')
            ->join('positions','customer.position_customer','=','positions.id_position')
@@ -239,5 +238,22 @@ class ContractController extends Controller
             ->get();
          return json_encode(['customer'=>$data],200);
     }
+   public function APIProduct(Request $request){
+        $request->all();
+        $data = DB::table('banner')
+            ->select(DB::raw('COUNT(id_banner) as total_id'))
+
+            ->where('id_banner','=',$request->id_banner)->get();
+       return json_encode(['banner'=>$data],200);
+   }
+   public function getProduct(Request $request){
+       $request->all();
+       $data = DB::table('banner')
+           ->join('type_banner','banner.id_typebanner','=','type_banner.id_typebanner')
+           ->select('*')
+
+           ->where('id_banner','=',$request->id_banner)->get();
+       return json_encode(['banner'=>$data],200);
+   }
 
 }

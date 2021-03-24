@@ -1784,15 +1784,17 @@ $(document).ready(function () {
 });
 
 
-
 $("#riverroad-tb").tooltip({content: '<img src="' + $("#riverroad-tb").attr("data") + '" />'});
+
 // Chức năng chọn hết
 
 
-document.getElementById('check-all').onclick = function () {
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    for (var checkbox of checkboxes) {
-        checkbox.checked = this.checked;
+function checkAll() {
+    document.getElementById('check-all').onclick = function () {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        for (var checkbox of checkboxes) {
+            checkbox.checked = this.checked;
+        }
     }
 }
 
@@ -1800,20 +1802,19 @@ getCountries()
 
 function getCountries() {
     $.ajax({
-        url: "https://thongtindoanhnghiep.co/api/city",
+        url: "https://api.mysupership.vn/v1/partner/areas/province",
         async: false,
         success: function (result) {
-            var cities = result.LtsItem;
+            var cities = result.results;
 
             $.each(cities, function (index, ele) {
-                if ($('#tinh')[0].getAttribute('data-target') == ele.ID) {
-                    $('#tinh').append(`<option value='${ele.ID}' selected>${ele.Title}</option>`);
+                if ($('#tinh')[0].getAttribute('data-target') == ele.code) {
+                    $('#tinh').append(`<option value='${ele.code}' selected>${ele.name}</option>`);
                 } else {
-                    $('#tinh').append(`<option value='${ele.ID}' >${ele.Title}</option>`);
+                    $('#tinh').append(`<option value='${ele.code}' >${ele.name}</option>`);
                 }
-
             });
-            getQuan($('#tinh'));
+
         }
     });
 }
@@ -1821,10 +1822,10 @@ function getCountries() {
 function getQuan(element) {
     var id = $(element).find(":selected").val();
     $.ajax({
-        url: "https://thongtindoanhnghiep.co/api/city/" + id + "/district",
+        url: "https://api.mysupership.vn/v1/partner/areas/district?province=" + id,
         async: false,
         success: function (result) {
-            var quan = result;
+            var quan = result.results;
 
             var select = document.getElementById("quan");
             var length = select.options.length;
@@ -1833,11 +1834,11 @@ function getQuan(element) {
             }
             $.each(quan, function (index, ele) {
 
-                if ($('#quan')[0].getAttribute('data-target') == ele.ID) {
-                    $('#quan').append(`<option value='${ele.ID}' selected>${ele.Title}</option>`);
+                if ($('#quan')[0].getAttribute('data-target') == ele.code) {
+                    $('#quan').append(`<option value='${ele.code}' selected>${ele.name}</option>`);
                 } else {
 
-                    $('#quan').append(`<option value='${ele.ID}' >${ele.Title}</option>`);
+                    $('#quan').append(`<option value='${ele.code}' >${ele.name}</option>`);
                 }
 
             });
@@ -1896,7 +1897,7 @@ function deleteRowPayment() {
 function getCustomer() {
     var data = $('#name_customer').val();
     $.ajax({
-        url: "http://192.168.1.48/haivanad/api/contract/getCustomer/" + data,
+        url: "http://192.168.1.38:8888/haivanad/api/contract/getCustomer/" + data,
         async: false,
         method: "POST",
         success: function (result) {
@@ -1926,13 +1927,99 @@ function getCustomer() {
     });
 
 }
+
+$(document).ready(function () {
+    toastr.options = {
+        'closeButton': true,
+        'debug': false,
+        'newestOnTop': false,
+        'progressBar': false,
+        'positionClass': 'toast-top-right',
+        'preventDuplicates': false,
+        'showDuration': '1000',
+        'hideDuration': '1000',
+        'timeOut': '5000',
+        'extendedTimeOut': '1000',
+        'showEasing': 'swing',
+        'hideEasing': 'linear',
+        'showMethod': 'fadeIn',
+        'hideMethod': 'fadeOut',
+    }
+});
+
 function getTong() {
     var gia = $('#value_contract').val();
     var thue = $('#thue').val();
-    var tonggia = (gia+thue)/100
+    var tonggia = (gia + thue) / 100
     $('#tong').val(tonggia);
 
 
 }
+
+function getProduct() {
+    var data = $('#id_banner').val();
+    $.ajax({
+        url: 'http://192.168.1.38:8888/haivanad/api/contract/getProduct/' + data,
+        async: false,
+        method: 'POST',
+        success: function (result) {
+            var datas = JSON.parse(result).banner[0].total_id;
+            if (datas > 0) {
+                toastr.error('Mã Pano đã tồn tại')
+            }
+        }
+    });
+}
+
+function product() {
+    var data = $('#id_banner').val();
+    $.ajax({
+        url: 'http://192.168.1.38:8888/haivanad/api/contract/product/' + data,
+        async: false,
+        method: 'POST',
+        success: function (result) {
+            var datas = JSON.parse(result).banner;
+            if (datas.length > 0) {
+                $.each(datas, function (index, ele) {
+                    $('#id_typebanner').append(`<option value='${ele.id_typebanner}' selected>${ele.name_type}</option>`);
+                    $('#id_system').val(ele.id_system)
+                    $('#location').val(ele.location);
+                    $('#dien_tích').val(ele.dien_tich);
+                    $('#tinh').val(ele.tinh);
+                    getQuan($('#tinh'))
+                    $('#quan').val(ele.quan);
+                    $('#banner_adress').val(ele.banner_adress);
+                    $.ajax({
+                        url: 'https://api.mysupership.vn/v1/partner/areas/district?province=' + $('#tinh').val(),
+                        async: false,
+                        success: function (result) {
+                            var quan = result.results;
+                            var id_quan = $('#quan').val()
+                            $.each(quan, function (index, element) {
+                                if (id_quan == element.code) {
+                                    $('#quan').append(`<option value='${element.code}' selected>${element.name}</option>`);
+                                    return false;
+                                }
+                            })
+                        }
+                    })
+
+
+                })
+            }
+            else if (datas.length == 0) {
+                $('#id_nguoncustomer').val('');
+                $('#adress_customer').val('');
+                $('#phone_customer').val('');
+                $('#mst').val('');
+                $('#contact_name').val('');
+                $('#position_customer').val('');
+            }
+
+
+        }
+    })
+    }
+
 
 

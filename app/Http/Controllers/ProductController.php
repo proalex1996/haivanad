@@ -28,6 +28,7 @@ class ProductController extends Controller
     {
         $this->productRepository = $productRepository;
     }
+
     public function getIndex(Request $request)
     {
         $banners = DB::table('banner')
@@ -132,6 +133,7 @@ class ProductController extends Controller
 
         if (!empty($data)) {
             if (!empty($data['thumb_banner'])){
+                $data['thumb_banner'] = basename($request->thumb_banner->getClientOriginalName());
                 $file = $request->file('thumb_banner');
                 $fileName = $request->file('thumb_banner')->getClientOriginalName();
                 $storage = Storage::putFileAs('content', $file, $fileName);

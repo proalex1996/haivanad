@@ -23,20 +23,15 @@ Route::middleware('auth:api')->get('/contract', function (Request $request) {
 
 Route::group(['prefix' => 'contract'], function () {
     Route::get('/postJan', 'ContractController@postJan');
-    Route::get('/postJun', 'ContractController@postJun');
-    Route::get('/postFeb', 'ContractController@postFeb');
-    Route::get('/postDec', 'ContractController@postDec');
-    Route::get('/postJul', 'ContractController@postJul');
-    Route::get('/postNov', 'ContractController@postNov');
-    Route::get('/postSep', 'ContractController@postSep');
-    Route::get('/postOct', 'ContractController@postOct');
-    Route::get('/postAug', 'ContractController@postAug');
-    Route::get('/postMay', 'ContractController@postMay');
-    Route::get('/postMar', 'ContractController@postMar');
-    Route::get('/postApr', 'ContractController@postApr');
+
     Route::post('/delete', 'ContractController@delete_payment');
     Route::post('/getCustomer/{id}', 'ContractController@ApiCustomer');
     Route::get('/getCustomer', 'ContractController@ApiCustomer');
+    Route::post('/getProduct/{id_banner}', 'ContractController@APIProduct');
+    Route::get('/getProduct', 'ContractController@APIProduct');
+    Route::post('/product/{id_banner}', 'ContractController@getProduct');
+    Route::get('/product', 'ContractController@getProduct');
+
 
 
 
