@@ -15051,7 +15051,8 @@ legend {
 }
 .input-images{
     border-style: dashed;
-    border-color: #0a0a0a;
+    border-color: #5a6268;
+    border-width: 1.5px;
 }
 div.polaroid {
     width: 30%;
@@ -15061,7 +15062,7 @@ div.polaroid {
     margin-right: auto;
     position: center;
 }
-div.container {
+div.container-image-text> {
     text-align: center;
     padding: 10px 20px;
 }

@@ -16,7 +16,7 @@
                 <div class="container-fluid">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1">Mã Pano: </label>
@@ -29,7 +29,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1">Kết Cấu: </label>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1 uname">Vị Trí:</label>
@@ -56,7 +56,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1 uname">Địa Chỉ: </label>
@@ -72,7 +72,7 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1 uname">Kích Thước:</label>
@@ -85,7 +85,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1 uname">Tổng Chiều Cao: </label>
@@ -101,7 +101,7 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1 uname">Hệ Thống Đèn: </label>
@@ -114,7 +114,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1 uname">Lưu Lượng Người: </label>
@@ -130,7 +130,7 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1 uname">Điểm Escom: </label>
@@ -143,7 +143,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1 uname">Ghi Chú: </label>
@@ -158,10 +158,10 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Tỉnh/Thành Phố</label>
+                                        <label for="exampleFormControlSelect1">Tỉnh/Thành Phố:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
@@ -174,10 +174,10 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Quận/Huyện</label>
+                                        <label for="exampleFormControlSelect1">Quận/Huyện:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <select class="form-control" id="quan" name="quan">
@@ -190,10 +190,10 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm</label>
+                                        <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <select class="form-control" id="id_typebanner" name="id_typebanner">
@@ -206,10 +206,10 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Trạng Thái</label>
+                                        <label for="exampleFormControlSelect1">Trạng Thái:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <select class="form-control" id="status_banner" name="status_banner">
@@ -224,13 +224,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Hình Ảnh</label>
+                        <label for="exampleFormControlSelect1">Hình Ảnh:</label>
                         <div class="input-images">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Đặc Điểm</label>
+                        <label for="exampleFormControlTextarea1">Đặc Điểm:</label>
                         <textarea class="form-control" id="dac_diem" name="dac_diem" rows="5"></textarea>
                     </div>
                     <div class="form-group">

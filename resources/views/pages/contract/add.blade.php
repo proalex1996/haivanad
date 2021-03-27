@@ -268,7 +268,7 @@
                             <div class="polaroid">
                                 <img src="{{config('config_app.domain.method').config('config_app.domain.url')
                             .config('config_app.domain.port').config('config_app.domain.name').'/public/storage/content/1-10.jpg'}}" alt="1-10.jpg" style="width:100%">
-                                <div class="container">
+                                <div class="container container-image-text">
                                     <p>1-10.jpg</p>
                                 </div>
                             </div>
