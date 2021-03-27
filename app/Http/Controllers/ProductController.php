@@ -7,11 +7,13 @@ namespace App\Http\Controllers;
 use App\Exports\ExportProduct;
 use App\Imports\ImportProduct;
 use App\Imports\TestSheetImport;
+use App\Model\PhotoModel;
 use App\Model\PickupModel;
 use App\Model\ProductModel;
 use App\Repositories\Product\ProductRepositoryEloquent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Maatwebsite\Excel\Facades\Excel;
@@ -29,43 +31,48 @@ class ProductController extends Controller
         $this->productRepository = $productRepository;
     }
 
+    public function store(Request $request)
+    {
+    }
+
     public function getIndex(Request $request)
     {
         $banners = DB::table('banner')
             ->join('status_banner', 'banner.name_status', '=', 'status_banner.id_status')
-            ->select('banner.id','status_banner.name_status','status_banner.id_status', 'banner.id_banner');
-        if(!empty($request->id_banner)){
-            $banners = $banners->where('banner.id_banner','LIKE','%'.$request->id_banner.'%');
+            ->select('banner.id', 'status_banner.name_status', 'status_banner.id_status', 'banner.id_banner');
+        if (!empty($request->id_banner)) {
+            $banners = $banners->where('banner.id_banner', 'LIKE', '%' . $request->id_banner . '%');
         }
-        if(!empty($request->id_status)){
-            $banners = $banners->where('banner.name_status','=',$request->id_status);
+        if (!empty($request->id_status)) {
+            $banners = $banners->where('banner.name_status', '=', $request->id_status);
         }
-        if(!empty($request->system_banner)){
-            $banners = $banners->where('banner.system_banner','LIKE','%'.$request->system_banner.'%');
+        if (!empty($request->system_banner)) {
+            $banners = $banners->where('banner.system_banner', 'LIKE', '%' . $request->system_banner . '%');
         };
-        $banners = $banners->groupBy('banner.id')->orderBy('banner.id','DESC')->get();
+        $banners = $banners->groupBy('banner.id')->orderBy('banner.id', 'DESC')->get();
         $status_banner = DB::table('status_banner')->select('*')->get();
         $contract = DB::table('contract')
             ->join('banner', 'contract.id_banner', '=', 'banner.id_banner')
             ->join('customer', 'contract.id_customer', '=', 'customer.customer_id')
-            ->select('banner.id_banner', 'contract.id_contract', 'customer.name_customer')->groupBy('contract.id')->orderBy('contract.id','DESC')->get();
+            ->select('banner.id_banner', 'contract.id_contract', 'customer.name_customer')->groupBy('contract.id')->orderBy('contract.id', 'DESC')->get();
         return view('pages.product.index', [
             'banners' => $banners,
-            'status_banners' =>$status_banner
+            'status_banners' => $status_banner
         ]);
     }
+
     public function apiProduct()
     {
         $banners = DB::table('banner')
             ->join('status_banner', 'banner.name_status', '=', 'status_banner.id_status')
-            ->select('banner.id','status_banner.id_status', 'banner.id_banner','status_banner.name_status', 'banner.banner_adress',
+            ->select('banner.id', 'status_banner.id_status', 'banner.id_banner', 'status_banner.name_status', 'banner.banner_adress',
                 'banner.thumb_banner', 'banner.light_system', 'banner.content', 'banner.size_banner', 'banner.height_banner')
             ->groupBy('id')->orderBy('id', 'DESC')->paginate();
         $status_banner = DB::table('status_banner')->select('*')->get();
         $contract = DB::table('contract')
             ->join('banner', 'contract.id_banner', '=', 'banner.id_banner')
             ->join('customer', 'contract.id_customer', '=', 'customer.customer_id')
-            ->select('banner.id_banner', 'contract.id_contract', 'customer.name_customer')->groupBy('contract.id')->orderBy('contract.id','DESC')->first();
+            ->select('banner.id_banner', 'contract.id_contract', 'customer.name_customer')->groupBy('contract.id')->orderBy('contract.id', 'DESC')->first();
         return json_encode($banners);
 
     }
@@ -74,7 +81,6 @@ class ProductController extends Controller
     public function createProduct(Request $request)
     {
         $product = new ProductModel();
-//        $file = $request->file('thumb_banner');
         $product->id_banner = $request->id_banner;
         $product->location = $request->location;
         $product->banner_adress = $request->banner_adress;
@@ -84,16 +90,31 @@ class ProductController extends Controller
         $product->id_system = $request->id_system;
         $product->size_banner = $request->size_banner;
         $product->height_banner = $request->height_banner;
-        $product->thumb_banner = basename($request->thumb_banner->getClientOriginalName());
-        $file = $request->file('thumb_banner');
-        $fileName = $request->file('thumb_banner')->getClientOriginalName();
+
         $product->light_system = $request->light_system;
         $product->dac_diem = $request->dac_diem;
         $product->flow = $request->flow;
         $product->escom = $request->escom;
         $product->note_banner = $request->note_banner;
-        $storage = Storage::putFileAs('content', $file, $fileName);
+
         $product->save();
+
+        $files =array($request->file('files'));
+        if(!empty($files)){
+            for($index = 0;$index < count($files);$index++){
+                $photo = new PhotoModel();
+                $file = $files[$index];
+                $photo->id_banner = $request->id_banner;
+                $fileName =$request->file('files')[$index]->getClientOriginalName();
+                $photo->_name_photo = $fileName;
+                $storage= Storage::putFileAs('content', $request->file('files')[$index], $fileName);
+                $photo->save();
+            }
+        }
+
+
+
+
         return redirect()->action('ProductController@getIndex');
     }
 
@@ -102,10 +123,14 @@ class ProductController extends Controller
         $type_banners = DB::table('type_banner')->select('*')->get();
         $product = DB::table('banner')->select('*')->get();
         $status = DB::table('status_banner')->select('*')->get();
+        $province = DB::table('province')
+            ->select('*')
+            ->get();
         return view('pages.product.add', [
             'type_banners' => $type_banners,
             'products' => $product,
-            'statuss' => $status
+            'statuss' => $status,
+            'provinces' => $province
         ]);
     }
 
@@ -132,7 +157,7 @@ class ProductController extends Controller
 
 
         if (!empty($data)) {
-            if (!empty($data['thumb_banner'])){
+            if (!empty($data['thumb_banner'])) {
                 $data['thumb_banner'] = basename($request->thumb_banner->getClientOriginalName());
                 $file = $request->file('thumb_banner');
                 $fileName = $request->file('thumb_banner')->getClientOriginalName();
@@ -145,11 +170,26 @@ class ProductController extends Controller
         $banners = $this->productRepository->find($id);
         $statuss = DB::table('status_banner')->select('*')->get();
         $type_banner = DB::table('type_banner')->select('*')->get();
+        $province = DB::table('province') ->select('*')->get();
+        $district = DB::table('district') ->select('*')->get();
         return view('pages.product.update', [
             'banners' => $banners,
             'statuss' => $statuss,
-            'type_banners' => $type_banner
+            'type_banners' => $type_banner,
+            'provinces' => $province,
+            'districts'=>$district
         ]);
+    }
+
+    public function province(Request $request)
+    {
+        $request->all();
+        $districts = DB::table('district')
+            ->join('province', 'district._province_id', '=', 'province.id')
+            ->select('*')
+            ->where('district._province_id', '=', $request->id)->get();
+        return json_encode(['district' => $districts], 200);
+
     }
 
     public function destroy($id)
@@ -181,23 +221,29 @@ class ProductController extends Controller
     {
         return redirect('public/storage/contract/ExmpleProduct.xlsx');
     }
-    public function pickupBanner1($id){
-       $product = ProductModel::find($id);
-       if($product){
-           $product->name_status = 1;
-           $result = $product->update();
-       }
+
+    public function pickupBanner1($id)
+    {
+        $product = ProductModel::find($id);
+        if ($product) {
+            $product->name_status = 1;
+            $result = $product->update();
+        }
         return redirect()->action('ProductController@getIndex');
     }
-    public function pickupBanner2($id){
+
+    public function pickupBanner2($id)
+    {
         $product = ProductModel::find($id);
-        if($product){
+        if ($product) {
             $product->name_status = 2;
             $result = $product->update();
         }
         return redirect()->action('ProductController@getIndex');
     }
-    public function generateppt(){
+
+    public function generateppt()
+    {
 
         $objPHPPowerPoint = new PhpPresentation();
         $objPHPPowerPoint->getProperties()->setCreator('Sketch Presentation')
@@ -207,13 +253,16 @@ class ProductController extends Controller
             ->setDescription('Sketch Presentation')
             ->setKeywords('office 2007 openxml libreoffice odt php')
             ->setCategory('Sample Category');
-        $objPHPPowerPoint->removeSlideByIndex(0);dd($objPHPPowerPoint);
+        $objPHPPowerPoint->removeSlideByIndex(0);
+        dd($objPHPPowerPoint);
         $this->slide1($objPHPPowerPoint);
         $this->slide2($objPHPPowerPoint);
         $oWriterPPTX = IOFactory::createWriter($objPHPPowerPoint, 'PowerPoint2007');
         return $oWriterPPTX->save(__DIR__ . "/sample.pptx");
     }
-    public function slide1(&$objPHPPowerPoint){
+
+    public function slide1(&$objPHPPowerPoint)
+    {
         // Create slide
         $currentSlide = $objPHPPowerPoint->createSlide();
         // Create a shape (drawing)
@@ -230,13 +279,15 @@ class ProductController extends Controller
             ->setWidth(600)
             ->setOffsetX(170)
             ->setOffsetY(180);
-        $shape->getActiveParagraph()->getAlignment()->setHorizontal( Alignment::HORIZONTAL_CENTER );
+        $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $textRun = $shape->createTextRun('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ');
         $textRun->getFont()->setBold(true)
             ->setSize(16)
-            ->setColor( new Color( 'FFE06B20' ) );
+            ->setColor(new Color('FFE06B20'));
     }
-    public function slide2(&$objPHPPowerPoint){
+
+    public function slide2(&$objPHPPowerPoint)
+    {
         // Create slide
         $currentSlide = $objPHPPowerPoint->createSlide();
         // Create a shape (drawing)
@@ -253,13 +304,46 @@ class ProductController extends Controller
             ->setWidth(600)
             ->setOffsetX(170)
             ->setOffsetY(180);
-        $shape->getActiveParagraph()->getAlignment()->setHorizontal( Alignment::HORIZONTAL_CENTER );
+        $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $textRun = $shape->createTextRun('Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
         $textRun->getFont()->setBold(true)
             ->setSize(16)
-            ->setColor( new Color( 'FFE06B20' ) );
+            ->setColor(new Color('FFE06B20'));
     }
 
+    function upload(Request $request)
+    {
+        $image = $request->file('file');
+
+        $imageName = time() . '.' . $image->extension();
+
+        $image->move(public_path('content'), $imageName);
+
+        return response()->json(['success' => $imageName]);
+    }
+
+    function fetch()
+    {
+        $images = File::allFiles(public_path('images'));
+        $output = '<div class="row">';
+        foreach ($images as $image) {
+            $output .= '
+      <div class="col-md-2" style="margin-bottom:16px;" align="center">
+                <img src="' . asset('images/' . $image->getFilename()) . '" class="img-thumbnail" width="175" height="175" style="height:175px;" />
+                <button type="button" class="btn btn-link remove_image" id="' . $image->getFilename() . '">Remove</button>
+            </div>
+      ';
+        }
+        $output .= '</div>';
+        echo $output;
+    }
+
+    function delete(Request $request)
+    {
+        if ($request->get('name')) {
+            File::delete(public_path('images/' . $request->get('name')));
+        }
+    }
 
 
 }

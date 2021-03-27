@@ -1798,34 +1798,15 @@ function checkAll() {
     }
 }
 
-getCountries()
-
-function getCountries() {
-    $.ajax({
-        url: "https://api.mysupership.vn/v1/partner/areas/province",
-        async: false,
-        success: function (result) {
-            var cities = result.results;
-
-            $.each(cities, function (index, ele) {
-                if ($('#tinh')[0].getAttribute('data-target') == ele.code) {
-                    $('#tinh').append(`<option value='${ele.code}' selected>${ele.name}</option>`);
-                } else {
-                    $('#tinh').append(`<option value='${ele.code}' >${ele.name}</option>`);
-                }
-            });
-
-        }
-    });
-}
 
 function getQuan(element) {
+    var url = $('#domain').attr('href');
     var id = $(element).find(":selected").val();
     $.ajax({
-        url: "https://api.mysupership.vn/v1/partner/areas/district?province=" + id,
+        url: url + "/api/product/province/" + id,
         async: false,
         success: function (result) {
-            var quan = result.results;
+            var quan = JSON.parse(result).district;
 
             var select = document.getElementById("quan");
             var length = select.options.length;
@@ -1834,16 +1815,22 @@ function getQuan(element) {
             }
             $.each(quan, function (index, ele) {
 
-                if ($('#quan')[0].getAttribute('data-target') == ele.code) {
-                    $('#quan').append(`<option value='${ele.code}' selected>${ele.name}</option>`);
+                if ($('#quan')[0].getAttribute('data-target') == ele.id) {
+                    $('#quan').append(`<option value='${ele.id_district}' selected>${ele._name_district}</option>`);
                 } else {
 
-                    $('#quan').append(`<option value='${ele.code}' >${ele.name}</option>`);
+                    $('#quan').append(`<option value='${ele.id_district}' >${ele._name_district}</option>`);
                 }
 
             });
         }
     });
+}
+
+function removevalue() {
+
+    console.log($('#tinh').attr('name'))
+
 }
 
 function addPayment() {
@@ -1972,6 +1959,7 @@ function getProduct() {
 }
 
 function product() {
+    var url = $('#domain').attr('href');
     var data = $('#id_banner').val();
     $.ajax({
         url: 'http://192.168.1.38:8888/haivanad/api/contract/product/' + data,
@@ -2003,11 +1991,24 @@ function product() {
                             })
                         }
                     })
+                    $.ajax({
+                        url: url+'/api/contract/photo/' + data,
+                        async: false,
+                        method: "POST",
+                        success: function (result) {
+                            var photo = result.photo;
+                            $.each(photo, function (index, element) {
+                                if (id_quan == element.code) {
+                                    $('#quan').append(`<option value='${element.code}' selected>${element.name}</option>`);
+                                }
+                            })
+                        }
+                    })
+
 
 
                 })
-            }
-            else if (datas.length == 0) {
+            } else if (datas.length == 0) {
                 $('#id_nguoncustomer').val('');
                 $('#adress_customer').val('');
                 $('#phone_customer').val('');
@@ -2019,7 +2020,9 @@ function product() {
 
         }
     })
-    }
+}
+
+$('.input-images').imageUploader();
 
 
 

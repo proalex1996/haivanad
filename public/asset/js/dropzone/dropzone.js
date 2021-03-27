@@ -323,7 +323,7 @@ function (_Emitter) {
         /**
          * Can be used to limit the maximum number of files that will be handled by this Dropzone
          */
-        maxFiles: null,
+        maxFiles: 3,
 
         /**
          * An optional object to send additional headers to the server. Eg:
@@ -357,7 +357,7 @@ function (_Emitter) {
          * [`accept`](https://developer.mozilla.org/en-US/docs/HTML/Element/input#attr-accept)
          * parameter on the hidden file input as well.
          */
-        acceptedFiles: null,
+        acceptedFiles: ".jpeg,.jpg,.png,.gif,",
 
         /**
          * **Deprecated!**
@@ -388,7 +388,7 @@ function (_Emitter) {
          * already uploading) the file. The `dictCancelUpload`, `dictCancelUploadConfirmation`
          * and `dictRemoveFile` options are used for the wording.
          */
-        addRemoveLinks: false,
+        addRemoveLinks: true,
 
         /**
          * Defines where to display the file previews – if `null` the
@@ -772,7 +772,8 @@ function (_Emitter) {
             var _iteratorError3 = undefined;
 
             try {
-              for (var _iterator3 = file.previewElement.querySelectorAll("[data-dz-name]")[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+              for (var _iterator3 = file.previewElement.querySelectorAll("[data-dz-name]")[Symbol.iterator](), _step3;
+                   !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
                 var node = _step3.value;
                 node.textContent = file.name;
               }
@@ -904,7 +905,7 @@ function (_Emitter) {
 
             return setTimeout(function () {
               return file.previewElement.classList.add("dz-image-preview");
-            }, 1);
+            }, 5000);
           }
         },
         // Called whenever an error occurs
@@ -1112,9 +1113,11 @@ function (_Emitter) {
 
 
     if (_this.options.renameFilename != null) {
-      _this.options.renameFile = function (file) {
-        return _this.options.renameFilename.call(_assertThisInitialized(_this), file.name, file);
-      };
+      _this.options.renameFile = function(file) {
+          var dt = new Date();
+          var time = dt.getTime();
+          return time+file.name;
+      }
     }
 
     _this.options.method = _this.options.method.toUpperCase();
@@ -1877,7 +1880,10 @@ function (_Emitter) {
       } else if (!Dropzone.isValidFile(file, this.options.acceptedFiles)) {
         done(this.options.dictInvalidFileType);
       } else if (this.options.maxFiles != null && this.getAcceptedFiles().length >= this.options.maxFiles) {
-        done(this.options.dictMaxFilesExceeded.replace("{{maxFiles}}", this.options.maxFiles));
+          this.on("maxfilesexceeded", function(file){
+              this.removeFile(file);
+          });
+          this.on("addedfile", function(file) { if(this.files.length<=2){enqueueFile(file);} this.processQueue();});
         this.emit("maxfilesexceeded", file);
       } else {
         this.options.accept.call(this, file, done);
@@ -3828,65 +3834,32 @@ function __guardMethod__(obj, methodName, transform) {
     return undefined;
   }
 }
-var dropzone = new Dropzone('#demo-upload', {
-    previewTemplate: document.querySelector('#preview-template').innerHTML,
-    parallelUploads: 2,
-    thumbnailHeight: 120,
-    thumbnailWidth: 120,
-    maxFilesize: 3,
-    filesizeBase: 1000,
-    thumbnail: function(file, dataUrl) {
-        if (file.previewElement) {
-            file.previewElement.classList.remove("dz-file-preview");
-            var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
-            for (var i = 0; i < images.length; i++) {
-                var thumbnailElement = images[i];
-                thumbnailElement.alt = file.name;
-                thumbnailElement.src = dataUrl;
-            }
-            setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+Dropzone.options.dropzone =
+    {
+        maxFilesize: 2,
+        maxFiles: 3,
+        autoQueue:false,
+        autoProcessQueue: true,
+        parallelUploads: 2,
+        renameFile: function(file) {
+            var dt = new Date();
+            var time = dt.getTime();
+            return time+file.name;
+        },
+        acceptedFiles: ".jpeg,.jpg,.png,.gif,.pdf",
+        addRemoveLinks: true,
+        timeout: 300000,
+        error: function(file, response)
+        {
+            return response;
+        },
+        init: function() {
+            this.on("maxfilesexceeded", function(file){
+                this.removeFile(file);
+                showAlert("File Limit exceeded!","error");
+            });
+            this.on("addedfile", function(file) { if(this.files.length<=2){enqueueFile(file);} this.processQueue();});
+
+
         }
-    }
-
-});
-
-
-// Now fake the file upload, since GitHub does not handle file uploads
-// and returns a 404
-
-var minSteps = 6,
-    maxSteps = 60,
-    timeBetweenSteps = 100,
-    bytesPerStep = 100000;
-
-dropzone.uploadFiles = function(files) {
-    var self = this;
-
-    for (var i = 0; i < files.length; i++) {
-
-        var file = files[i];
-        totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
-
-        for (var step = 0; step < totalSteps; step++) {
-            var duration = timeBetweenSteps * (step + 1);
-            setTimeout(function(file, totalSteps, step) {
-                return function() {
-                    file.upload = {
-                        progress: 100 * (step + 1) / totalSteps,
-                        total: file.size,
-                        bytesSent: (step + 1) * file.size / totalSteps
-                    };
-
-                    self.emit('uploadprogress', file, file.upload.progress, file.upload.bytesSent);
-                    if (file.upload.progress == 100) {
-                        file.status = Dropzone.SUCCESS;
-                        self.emit("success", file, 'success', null);
-                        self.emit("complete", file);
-                        self.processQueue();
-                        //document.getElementsByClassName("dz-success-mark").style.opacity = "1";
-                    }
-                };
-            }(file, totalSteps, step), duration);
-        }
-    }
-}
+    };

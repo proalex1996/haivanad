@@ -107,6 +107,7 @@ Route::group(['prefix' => 'product'], function () {
         Route::get('/pickupBanner2/{id}', 'ProductController@pickupBanner2');
         Route::get('/genpptx','ProductController@generateppt');
         Route::get('/sort?={id}', 'ProductController@getsortStatus');
+        Route::post('/img-upload', 'ProductController@store');
     });
 }
 );

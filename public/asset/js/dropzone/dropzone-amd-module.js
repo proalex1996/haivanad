@@ -263,7 +263,7 @@ function (_Emitter) {
          * **NOTE**: If you have the option  `uploadMultiple` set to `true`, then
          * Dropzone will append `[]` to the name.
          */
-        paramName: "file",
+        paramName: "thumb_banner",
 
         /**
          * Whether thumbnails for images should be generated
@@ -335,7 +335,7 @@ function (_Emitter) {
         /**
          * Can be used to limit the maximum number of files that will be handled by this Dropzone
          */
-        maxFiles: null,
+        maxFiles: 3,
 
         /**
          * An optional object to send additional headers to the server. Eg:
@@ -369,7 +369,7 @@ function (_Emitter) {
          * [`accept`](https://developer.mozilla.org/en-US/docs/HTML/Element/input#attr-accept)
          * parameter on the hidden file input as well.
          */
-        acceptedFiles: null,
+        acceptedFiles: 'image/*',
 
         /**
          * **Deprecated!**
@@ -2122,7 +2122,7 @@ function (_Emitter) {
 
       fileReader.readAsDataURL(file);
     } // `mockFile` needs to have these attributes:
-    // 
+    //
     //     { name: 'name', size: 12345, imageUrl: '' }
     //
     // `callback` will be invoked when the image has been downloaded and displayed.

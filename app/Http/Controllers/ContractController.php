@@ -13,11 +13,14 @@ use http\Message;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Validator;
 use MongoDB\Driver\Session;
 use phpDocumentor\Reflection\Project;
 use PhpOffice\PhpWord\Shared\ZipArchive;
+use Symfony\Component\Console\Input\Input;
 
 class ContractController extends Controller
 {
@@ -97,6 +100,8 @@ class ContractController extends Controller
         $nguon = DB::table('nguon_customer')->select('*')->get();
         $type_banners = DB::table('type_banner')->select('*')->get();
         $position = DB::table('positions')->select('*')->get();
+        $provinces = DB::table('province')->select('*')->get();
+        $photo = DB::table('photo')->select('*')->get();
         return view('pages.contract.add', [
             'banners' => $banner,
             'kind_contract' => $kind_contract,
@@ -106,7 +111,9 @@ class ContractController extends Controller
             'detail_payments' => $detail_payment,
             'nguons' => $nguon,
             'type_banners' => $type_banners,
-            'positions' => $position
+            'positions' => $position,
+            'provinces' => $provinces,
+            'photos' =>$photo
         ]);
     }
 
@@ -255,5 +262,13 @@ class ContractController extends Controller
            ->where('id_banner','=',$request->id_banner)->get();
        return json_encode(['banner'=>$data],200);
    }
+    public function getphoto(Request $request){
+        $request->all();
+        $data = DB::table('photo')
+            ->join('banner','banner.id_banner','=','photo.id_banner')
+            ->select('photo.id','photo._name_photo','photo.id_banner')->groupBy('photo.id_banner')
+            ->where('photo.id_banner','=',$request->id_banner)->groupBy('photo.id_banner')->get();
+        return json_encode(['photo'=>$data],200);
+    }
 
 }

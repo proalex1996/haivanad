@@ -1,5 +1,6 @@
 <?php
 $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC')->get();
+header('Access-Control-Allow-Origin: *');
 ?><!doctype html>
 <html lang="en">
 <meta charset="UTF-8">
@@ -26,17 +27,18 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
 <link href="{{asset('vendor/slick/slick.css')}}" rel="stylesheet" media="all">
 <link href="{{asset('vendor/select2/select2.min.css')}}" rel="stylesheet" media="all">
 <link href="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet" media="all">
+<link href="{{asset('public/asset/css/image-uploader.min.css')}}" rel="stylesheet" media="all">
 <script href="{{asset('public/asset/js/fontawesome.js')}}"></script>
 <link href="{{asset('public/asset/css/theme.css')}}" rel="stylesheet" media="all">
 </head>
 
-<body class="animsition">
+<body class="animsition" >
 <div class="page-wrapper">
     <header class="header-mobile d-block d-lg-none">
         <div class="header-mobile__bar">
             <div class="container-fluid">
                 <div class="header-mobile-inner">
-                    <a class="logo" href="{{'/'}}">
+                    <a class="logo" id="domain" href="{{config('config_app.domain.method').config('config_app.domain.url').config('config_app.domain.port').config('config_app.domain.name')}}">
                         <img src="{{asset('public/asset/images/logo.png')}}" alt="HaiVan"/>
                     </a>
                     <button class="hamburger hamburger--slider" type="button">
@@ -226,6 +228,7 @@ $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC'
     <script src="{{asset('vendor/select2/select2.min.js')}}"></script>
     <script src="{{asset('public/asset/js/jquery-ui.js')}}"></script>
     <script src="{{asset('vendor/animsition/animsition.min.js')}}"></script>
+    <script src="{{asset('public/asset/js/image-uploader.min.js')}}"></script>
     <script src="{{asset('public/asset/js/main.js')}}"></script>
     <script src="{{asset('public/asset/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('public/asset/js/dropzone/dropzone.js')}}"></script>
