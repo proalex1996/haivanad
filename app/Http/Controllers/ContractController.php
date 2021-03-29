@@ -129,7 +129,7 @@ class ContractController extends Controller
 
         if(!empty($payment_period)){
             for($i = 0 ; $i < count($payment_period);$i++){
-                $detail = DetailModel::find($request->id_contract);
+                $detail = new DetailModel();
                 $detail->id_contract = $request->id_contract;
                 $detail->payment_period = $payment_period[$i];
                 $detail->ratio = $ratio[$i];
@@ -137,7 +137,7 @@ class ContractController extends Controller
                 $detail->id_vat = $id_vat[$i];
                 $detail->total_value = $total_value[$i];
                 $detail->_pay_due = $_pay_due[$i];
-                $detail->update();
+                $detail->save();
             }
         }
 
@@ -186,20 +186,24 @@ class ContractController extends Controller
                 $fileName = $request->file('content')->getClientOriginalName();
                 $storage = Storage::putFileAs('contract', $file, $fileName);
             }
+            $payment_period = array($data['payment_period']);
+                    $ratio = array($data['ratio']);
+                    $id_value_contract = $data['id_value_contract'];
+                    $id_vat = array($data['id_vat']);
+                    $total_value = array($data['total_value']);
+                    $_pay_due = array($data['_pay_due']);
 
-
-
-            if(!empty(array($data['payment_period']))){
-                for($i = 0 ; $i < count(array($data['payment_period']));$i++){
-                    DetailModel::updated(
-                    $payment_period = array($data['payment_period']),
-                    $ratio = array($data['ratio']),
-                    $id_value_contract = $data['id_value_contract'],
-                    $id_vat = array($data['id_vat']),
-                    $total_value = array($data['total_value']),
-                    $_pay_due = array($data['_pay_due'])
-                    );
-
+            if(!empty($payment_period)){
+                for($i = 0 ; $i < count($payment_period);$i++){
+                    $detail = DetailModel::find($request->id_contract);
+                    $detail->id_contract = $request->id_contract;
+                    $detail->payment_period = $payment_period[$i];
+                    $detail->ratio = $ratio[$i];
+                    $detail->id_value_contract = $id_value_contract[$i];
+                    $detail->id_vat = $id_vat[$i];
+                    $detail->total_value = $total_value[$i];
+                    $detail->_pay_due = $_pay_due[$i];
+                    $detail->update();
                 }
             }
 

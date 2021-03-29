@@ -38,7 +38,7 @@ header('Access-Control-Allow-Origin: *');
         <div class="header-mobile__bar">
             <div class="container-fluid">
                 <div class="header-mobile-inner">
-                    <a class="logo" id="domain" href="{{config('config_app.domain.domain')}}">
+                    <a class="logo" id="domain" href="{{config('config_app.domain.method').config('config_app.domain.url').config('config_app.domain.port').config('config_app.domain.name')}}">
                         <img src="{{asset('public/asset/images/logo.png')}}" alt="HaiVan"/>
                     </a>
                     <button class="hamburger hamburger--slider" type="button">
