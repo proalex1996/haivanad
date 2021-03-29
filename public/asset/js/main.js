@@ -1852,12 +1852,18 @@ $('#addrowPayment').on('click',function () {
 
 function deleteRowPayment() {
     var arrId = [];
+    var url = $('#domain').attr('href');
     var checked = $("#check-box:checked");
 
     $.each(checked, function (index, element) {
         var td = element.closest("td");
-        td.closest("tr").remove();
-    });
+        var tr = td.closest("tr")
+
+        tr.remove();
+
+    })
+
+
 
 }
 getCustomer()
@@ -2076,6 +2082,7 @@ function Ratio() {
         }
     })
 }
+
 
 
 

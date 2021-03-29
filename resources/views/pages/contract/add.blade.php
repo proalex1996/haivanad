@@ -294,7 +294,7 @@
                                         <label for="exampleFormControlInput1">Giá trị hợp đồng</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="number" class="form-control" id="value_contract"
+                                        <input type="number" class="form-control" onchange="getTong()" id="value_contract"
                                                name="value_contract"
                                                placeholder="Giá trị hợp đồng" value="" required>
                                         <div class="invalid-feedback m-l-20">Vui lòng nhập giá trị hợp đồng</div>
@@ -310,7 +310,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <input type="number" class="form-control" onchange="getTong()" id="thue"
                                                name="thue"
-                                               placeholder="Giá trị hợp đồng" value="" required>
+                                               placeholder="Thuế (%)" value="" required>
                                     </div>
 
                                 </div>
@@ -391,7 +391,7 @@
                                     <td><input type="text" class="form-control display-input" id="ratio" name="ratio" required></td>
                                     <td><input type="text" class="form-control display-input" onchange="getRatio()" id="id_value_contract"
                                                name="id_value_contract[]" required></td>
-                                    <td><input type="text" class="form-control display-input" id="id_vat" onchange="getRatio()" name="id_vat" required></td>
+                                    <td><input type="text" class="form-control display-input" placeholder="Thuế (%)" id="id_vat" onchange="getRatio()" name="id_vat" required></td>
                                     <td><input type="text" class="form-control display-input" id="total" name="total_value" required></td>
                                     <td><input type="date" class="form-control display-input" name="pay_due" id="_pay_due" required>
                                     </td>

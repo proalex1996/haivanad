@@ -35,6 +35,7 @@ Route::group(['prefix' => 'contract'], function () {
     Route::get('/photo', 'ContractController@getphoto');
     Route::post('/ratio/{id_contract}', 'ContractController@getRatio');
 
+    Route::post('/deletepay/{payment_period}', 'ContractController@delete_payment');
 
 
 

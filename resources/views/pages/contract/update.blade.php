@@ -397,7 +397,7 @@
                                 </thead>
                                 <tbody id="idBodyPayment">
                                 <tr class="idTrPayment">
-                                    <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
+                                    <td><input type="checkbox" id="check-box1" name="check_box[]" value="1"
                                                class="display-input m-r-5"></td>
                                     <td><input type="text" class="display-input form-control" id="payment_period" name="payment_period"
                                                required>

@@ -55,7 +55,8 @@ class ContractController extends Controller
             ->join('detail_payment','contract.id_contract','=','detail_payment.id_contract')
             ->select('contract.id', 'contract.id_contract', 'customer.name_customer','detail_payment._pay_due',
                 'banner.id_banner', 'kind_contract.name_kind',
-                'contract.date_start', 'contract.date_end', 'contract.content','contract_status.name_status','value_contract')->groupBy('contract.id')->orderBy('contract.id','DESC')->get();
+                'contract.date_start', 'contract.date_end', 'contract.content','contract_status.name_status','value_contract')
+            ->groupBy('contract.id')->orderBy('contract.id','DESC')->get();
 
         return view('pages.contract.contract', ['contracts' => $contracts]);
 
@@ -250,11 +251,10 @@ class ContractController extends Controller
         $del->delete();
         return redirect('/contract');
     }
-    public function delete_payment($id)
+    public function delete_payment(Request $request)
     {
-
-        if(!empty($id)){
-            DetailModel::find($id)
+        if(!empty($request->payment_period)){
+            DetailModel::where('payment_period',$request->payment_period)
                 ->delete();
         }
     }
