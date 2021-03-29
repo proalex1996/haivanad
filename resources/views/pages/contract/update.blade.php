@@ -196,7 +196,7 @@
                                         <select class="form-control" id="id_banner" name="id_banner"
                                                 onchange="product()">
                                             @foreach($banners as $banner)
-                                                  @if ($banner->id == $contract->id_banner)
+                                                  @if ($banner->id_banner == $contract->id_banner)
                                                         <option value="{{$banner->id_banner}}" selected>{{$banner->id_banner}}</option>
                                                     @else
                                                         <option value="{{$banner->id_banner}}">{{$banner->id_banner}}</option>

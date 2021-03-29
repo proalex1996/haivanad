@@ -186,23 +186,26 @@ class ContractController extends Controller
                 $fileName = $request->file('content')->getClientOriginalName();
                 $storage = Storage::putFileAs('contract', $file, $fileName);
             }
-            $payment_period = array($data['payment_period']);
-                    $ratio = array($data['ratio']);
+//            $detail = DB::table('detail_payment')->update([
+//                ''
+//            ]);
+            $payment_period = $data['payment_period'];
+                    $ratio = $data['ratio'];
                     $id_value_contract = $data['id_value_contract'];
-                    $id_vat = array($data['id_vat']);
-                    $total_value = array($data['total_value']);
-                    $_pay_due = array($data['_pay_due']);
+                    $id_vat = $data['id_vat'];
+                    $total_value =$data['total_value'];
+                    $_pay_due = $data['_pay_due'];
             if(!empty($payment_period)){
-                for($i = 0 ; $i < count($payment_period);$i++){
-                    $detail = DetailModel::where(['id_contract' => $data['id_contract']])->first();
-                    $detail->id_contract = $data['id_contract'];
-                    $detail->payment_period = $payment_period[$i];
-                    $detail->ratio = $ratio[$i];
-                    $detail->id_value_contract = $id_value_contract[$i];
-                    $detail->id_vat = $id_vat[$i];
-                    $detail->total_value = $total_value[$i];
-                    $detail->_pay_due = $_pay_due[$i];
+                for($i = 0 ; $i < count(array($payment_period));$i++) {
+                    $detail = DetailModel::find($data['id_contract']);
+                    $detail->payment_period = $data['payment_period'];
+                    $detail->ratio = $data['ratio'];
+                    $detail->id_value_contract = $data['id_value_contract'];
+                    $detail->id_vat = $data['id_vat'];
+                    $detail->total_value = $data['total_value'];
+                    $detail->_pay_due = $data['_pay_due'];
                     $detail->save();
+
                 }
             }
 
@@ -233,6 +236,7 @@ class ContractController extends Controller
         ]);
 
     }
+
 
     /**
      * Remove the specified resource from storage.
