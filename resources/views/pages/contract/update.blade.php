@@ -4,13 +4,13 @@
     <div class="container-fluid">
         <div class="col-md-12 m-b-40">
             <div class="overview-wrap">
-                <h2 class="title-1">Thêm Mới Hợp đồng</h2>
+                <h2 class="title-1">Chi Tiết Hợp đồng</h2>
                 <button class="au-btn au-btn-icon au-btn--blue">
                     <i class="zmdi zmdi-plus"></i>Nhập file Excel
                 </button>
             </div>
         </div>
-        <form action="upload" enctype="multipart/form-data" class="needs-validation" method="post">
+        <form action="{{url('contract/update/'.$contract->id)}}" enctype="multipart/form-data" class="needs-validation" method="post">
             @csrf
             <div class="container-fluid">
                 <div class="form-staff">

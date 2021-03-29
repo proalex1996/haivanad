@@ -192,10 +192,9 @@ class ContractController extends Controller
                     $id_vat = array($data['id_vat']);
                     $total_value = array($data['total_value']);
                     $_pay_due = array($data['_pay_due']);
-
             if(!empty($payment_period)){
                 for($i = 0 ; $i < count($payment_period);$i++){
-                    $detail = DetailModel::find($data['id_contract']);
+                    $detail = DetailModel::where(['id_contract' => $data['id_contract']])->first();
                     $detail->id_contract = $data['id_contract'];
                     $detail->payment_period = $payment_period[$i];
                     $detail->ratio = $ratio[$i];
@@ -203,7 +202,7 @@ class ContractController extends Controller
                     $detail->id_vat = $id_vat[$i];
                     $detail->total_value = $total_value[$i];
                     $detail->_pay_due = $_pay_due[$i];
-                    $detail->update();
+                    $detail->save();
                 }
             }
 
