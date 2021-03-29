@@ -196,7 +196,7 @@ class ContractController extends Controller
             if(!empty($payment_period)){
                 for($i = 0 ; $i < count($payment_period);$i++){
                     $detail = DetailModel::find($data['id_contract']);
-                    $detail->id_contract = $request->id_contract;
+                    $detail->id_contract = $data['id_contract'];
                     $detail->payment_period = $payment_period[$i];
                     $detail->ratio = $ratio[$i];
                     $detail->id_value_contract = $id_value_contract[$i];
