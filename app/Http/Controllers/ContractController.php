@@ -51,12 +51,11 @@ class ContractController extends Controller
             ->join('staff', 'id_staff', '=', 'staff.id')
             ->join('banner', 'contract.id_banner', '=', 'banner.id_banner')
             ->join('kind_contract', 'kind', '=', 'kind_contract.id_contract')
-            ->join('contract_status', 'status_contract','=','contract_status.id_contract')
             ->join('detail_payment','contract.id_contract','=','detail_payment.id_contract')
             ->select('contract.id', 'contract.id_contract', 'customer.name_customer','detail_payment._pay_due',
                 'banner.id_banner', 'kind_contract.name_kind',
-                'contract.date_start', 'contract.date_end', 'contract.content','contract_status.name_status','value_contract')
-            ->groupBy('contract.id')->orderBy('contract.id','DESC')->get();
+                'contract.date_start', 'contract.date_end', 'contract.content','value_contract')
+           ->orderBy('contract.id','DESC')->get();
 
         return view('pages.contract.contract', ['contracts' => $contracts]);
 
@@ -129,7 +128,7 @@ class ContractController extends Controller
         $_pay_due = $request->_pay_due;
 
         if(!empty($payment_period)){
-            for($i = 0 ; $i < count($payment_period);$i++){
+            for($i = 0 ; $i < count(array($payment_period));$i++){
                 $detail = new DetailModel();
                 $detail->id_contract = $request->id_contract;
                 $detail->payment_period = $payment_period[$i];

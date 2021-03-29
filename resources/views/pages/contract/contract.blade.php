@@ -64,16 +64,14 @@
                                             về</a>
                                     </td>
                                     <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}} Ngày</td>
-                                    <td>{{$contract->name_status}}</td>
                                     <td>{{$contract->name_kind}}</td>
-
-                                    <td>{{$contract->pay_due}}</td>
+                                    <td>{{$contract->_pay_due}}</td>
                                     <td class="value_contract"><span>{{$contract->value_contract}}</span>
                                         VND
                                     </td>
                                 </tr>
-                            @elseif('60' > \App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString()) &&
-                                    \App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString()) > '0.0')
+                            @elseif('60' > \App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()) &&
+                                    \App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString()) > '0')
                                 <tr class="status--warn dropdown">
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$contract->id}}</a>
@@ -98,10 +96,8 @@
                                             về</a>
                                     </td>
                                     <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}} Ngày</td>
-                                    <td>{{$contract->name_status}}</td>
                                     <td>{{$contract->name_kind}}</td>
-
-                                    <td>{{$contract->pay_due}}</td>
+                                    <td>{{$contract->_pay_due}}</td>
                                     <td class="value_contract"><span>{{$contract->value_contract}}</span>
                                         VND
                                     </td>
