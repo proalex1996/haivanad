@@ -1797,8 +1797,7 @@ function checkAll() {
         }
     }
 }
-
-
+$('.input-images').imageUploader();
 function getQuan(element) {
     var url = $('#domain').attr('href');
     var id = $(element).find(":selected").val();
@@ -1827,52 +1826,33 @@ function getQuan(element) {
     });
 }
 
-function removevalue() {
+checkAll();
+$('#addrowPayment').on('click',function () {
 
-    console.log($('#tinh').attr('name'))
-
-}
-
-function addPayment() {
     $('#idBodyPayment').append(
-        `  <tr>
-                                <td><input type="checkbox" id="check-box" name="check-box[]" class="m-r-10"></td>
-                                <td><input type="text" class="form-control" id="mst" name="mst" required></td>
-                                <td><input type="text" class="form-control" id="mst" name="mst" required></td>
-                                <td><input type="text" class="form-control" id="mst" name="mst" required></td>
-                                <td><input type="text" class="form-control" id="mst" name="mst" required></td>
-                                <td><input type="text" class="form-control" id="mst" name="mst" required></td>
-                                <td><input type="date" class="form-control" name="pay_due" id="pay_due" required>
-                                </td>
-                            </tr>
+        `<tr class="idTrPayment">
+            <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
+                       class="display-input m-r-5"></td>
+            <td><input type="text" class="display-input form-control" id="payment_period" name="payment_period"
+                       required>
+            </td>
+            <td><input type="text" class="form-control display-input" id="ratio" name="ratio" required></td>
+            <td><input type="text" class="form-control display-input" id="id_value_contract" onchange="getRatio()"
+                       name="id_value_contract[]" required></td>
+            <td><input type="text" class="form-control display-input" id="id_vat" onchange="getRatio()" name="id_vat" required></td>
+            <td><input type="text" class="form-control display-input" id="total" name="total_value" required></td>
+            <td><input type="date" class="form-control display-input" name="pay_due" id="_pay_due" required>
+            </td>
+        </tr>
 `
     )
+})
 
-}
 
-function deletePayment() {
-    var arrIds = [];
-    var checked = $("input[name *='check-box[]' ]:checked");
-
-    $.each(checked, function (index, element) {
-        arrIds.push($(element).val());
-    });
-
-    $.ajax({
-        url: "https://192.168.1.8/haivanad/api/contract/delete",
-        method: "POST",
-        data: {ids: arrIds},
-        async: false,
-        success: function (result) {
-
-            console.log('123123');
-        }
-    });
-}
 
 function deleteRowPayment() {
     var arrId = [];
-    var checked = $("input[name *='check-box[]' ]:checked");
+    var checked = $("#check-box:checked");
 
     $.each(checked, function (index, element) {
         var td = element.closest("td");
@@ -1880,11 +1860,12 @@ function deleteRowPayment() {
     });
 
 }
-
+getCustomer()
 function getCustomer() {
+    var url = $('#domain').attr('href');
     var data = $('#name_customer').val();
     $.ajax({
-        url: "http://192.168.1.38:8888/haivanad/api/contract/getCustomer/" + data,
+        url: url+"/api/contract/getCustomer/" + data,
         async: false,
         method: "POST",
         success: function (result) {
@@ -1933,21 +1914,31 @@ $(document).ready(function () {
         'hideMethod': 'fadeOut',
     }
 });
-
+getTong();
+getRatio();
 function getTong() {
     var gia = $('#value_contract').val();
-    var thue = $('#thue').val();
-    var tonggia = (gia + thue) / 100
-    $('#tong').val(tonggia);
+    var thue = (($('#thue').val()* gia)/100);
+    $('#tong').val(parseInt(gia) + parseInt(thue));
+}
+
+function getRatio() {
+    var gia = $('#id_value_contract').val();
+    var thue = (($('#id_vat').val()* gia)/100);
+    $('#total').val(parseInt(gia) + parseInt(thue));
 
 
 }
 
 function getProduct() {
+    var url = $('#domain').attr('href');
     var data = $('#id_banner').val();
     $.ajax({
-        url: 'http://192.168.1.38:8888/haivanad/api/contract/getProduct/' + data,
+        url: url+'/api/contract/getProduct/' + data,
         async: false,
+        headers: {'Access-Control-Allow-Origin':'*',
+
+        },
         method: 'POST',
         success: function (result) {
             var datas = JSON.parse(result).banner[0].total_id;
@@ -1957,13 +1948,17 @@ function getProduct() {
         }
     });
 }
-
+product()
 function product() {
     var url = $('#domain').attr('href');
     var data = $('#id_banner').val();
+    $('#image-input').children().remove();
     $.ajax({
-        url: 'http://192.168.1.38:8888/haivanad/api/contract/product/' + data,
+        url: url+'/api/contract/product/' + data,
         async: false,
+        headers: {'Access-Control-Allow-Origin':'*',
+                    'Access-Control-Allow-Headers': '*'
+        },
         method: 'POST',
         success: function (result) {
             var datas = JSON.parse(result).banner;
@@ -1976,37 +1971,44 @@ function product() {
                     $('#tinh').val(ele.tinh);
                     getQuan($('#tinh'))
                     $('#quan').val(ele.quan);
+
                     $('#banner_adress').val(ele.banner_adress);
-                    $.ajax({
-                        url: 'https://api.mysupership.vn/v1/partner/areas/district?province=' + $('#tinh').val(),
-                        async: false,
-                        success: function (result) {
-                            var quan = result.results;
-                            var id_quan = $('#quan').val()
-                            $.each(quan, function (index, element) {
-                                if (id_quan == element.code) {
-                                    $('#quan').append(`<option value='${element.code}' selected>${element.name}</option>`);
-                                    return false;
-                                }
-                            })
-                        }
-                    })
+                    // $.ajax({
+                    //     url: 'https://api.mysupership.vn/v1/partner/areas/district?province=' + $('#tinh').val(),
+                    //     async: false,
+                    //     success: function (result) {
+                    //         var quan = result.results;
+                    //         var id_quan = $('#quan').val()
+                    //         $.each(quan, function (index, element) {
+                    //             if (id_quan == element.code) {
+                    //                 $('#quan').append(`<option value='${element.code}' selected>${element.name}</option>`);
+                    //                 return false;
+                    //             }
+                    //         })
+                    //     }
+                    // })
                     $.ajax({
                         url: url+'/api/contract/photo/' + data,
                         async: false,
                         method: "POST",
                         success: function (result) {
-                            var photo = result.photo;
-                            $.each(photo, function (index, element) {
-                                if (id_quan == element.code) {
-                                    $('#quan').append(`<option value='${element.code}' selected>${element.name}</option>`);
-                                }
-                            })
+                            var photo = JSON.parse(result).photo;
+                            if (photo !== ""){
+                                $.each(photo, function (index, element) {
+                                    $('#image-input').append(`
+                                                    <div class="polaroid">
+                                                        <img src="${url}/public/storage/content/${element._name_photo}" id="img-check" alt="${element._name_photo}" style="width:100%">
+                                                        <div class="container container-image-text">
+                                                        <p>1-10.jpg</p></div>
+                                                    </div>
+
+                                                </div>`);
+
+                                })
+                            }
+
                         }
                     })
-
-
-
                 })
             } else if (datas.length == 0) {
                 $('#id_nguoncustomer').val('');
@@ -2022,7 +2024,60 @@ function product() {
     })
 }
 
-$('.input-images').imageUploader();
+
+
+Ratio();
+function Ratio() {
+    var url = $('#domain').attr('href');
+    var data = $('#id_contract').val();
+    $.ajax({
+        url: url+'/api/contract/ratio/' + data,
+        async: false,
+        headers: {'Access-Control-Allow-Origin':'*',
+            'Access-Control-Allow-Headers': '*'
+        },
+        method: 'POST',
+        success: function (result) {
+            var datas = JSON.parse(result).detail
+            if (datas.length > 0) {
+                if(datas.length == 1){ $.each(datas, function (index, ele) {
+                    $('#payment_period').val(ele.payment_period)
+                    $('#ratio').val(ele.ratio)
+                    $('#id_value_contract').val(ele.id_value_contract)
+                    $('#id_vat').val(ele.id_vat)
+                    $('#total').val(ele.total_value)
+                    $('#_pay_due').val(ele._pay_due)
+                })}
+
+                 else if(datas.length >1){
+                    $('.idTrPayment').remove();
+                    $.each(datas, function (index, ele) {
+                        $('#idBodyPayment').append(
+                            `<tr class="idTrPayment">
+            <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
+                       class="display-input m-r-5"></td>
+            <td><input type="text" class="display-input form-control" value="${ele.payment_period}" id="payment_period" name="payment_period"
+                       required>
+            </td>
+            <td><input type="text" class="form-control display-input" value="${ele.ratio}" id="ratio" name="ratio" required></td>
+            <td><input type="text" class="form-control display-input" value="${ele.id_value_contract}" onchange="getRatio()" id="id_value_contract"
+                       name="id_value_contract" required></td>
+            <td><input type="text" class="form-control display-input" value="${ele.id_vat}" onchange="getRatio()" id="id_vat" name="id_vat" required></td>
+            <td><input type="text" class="form-control display-input" value="${ele.total_value}" id="total" name="total_value" required></td>
+            <td><input type="date" class="form-control display-input" value="${ele._pay_due}" name="_pay_due" id="_pay_due" required>
+            </td>
+        </tr>
+`
+                        )
+                    })
+                }
+
+            }
+        }
+    })
+}
+
+
 
 
 

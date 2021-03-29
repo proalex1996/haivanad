@@ -30,7 +30,9 @@
                             <th>Mã Hợp Đồng</th>
                             <th>Tên Khách Hàng</th>
                             <th>Mã Pano</th>
+                            <th>Nội Dung</th>
                             <th>Thời Hạn Còn Lại</th>
+                            <th>Loại Hợp Đông</th>
                             <th>Lịch Thanh Toán</th>
                             <th>Giá trị hợp đồng</th>
                         </tr>
@@ -61,9 +63,10 @@
                                             href="{{URL::to('/public/storage/contract') . '/' . $contract->content}}">Tải
                                             về</a>
                                     </td>
+                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}} Ngày</td>
                                     <td>{{$contract->name_status}}</td>
                                     <td>{{$contract->name_kind}}</td>
-                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}} Ngày</td>
+
                                     <td>{{$contract->pay_due}}</td>
                                     <td class="value_contract"><span>{{$contract->value_contract}}</span>
                                         VND
@@ -94,9 +97,10 @@
                                             href="{{URL::to('/public/storage/contract') . '/' . $contract->content}}">Tải
                                             về</a>
                                     </td>
+                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}} Ngày</td>
                                     <td>{{$contract->name_status}}</td>
                                     <td>{{$contract->name_kind}}</td>
-                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}} Ngày</td>
+
                                     <td>{{$contract->pay_due}}</td>
                                     <td class="value_contract"><span>{{$contract->value_contract}}</span>
                                         VND
@@ -126,10 +130,9 @@
                                             href="{{URL::to('/public/storage/contract') . '/' . $contract->content}}">Tải
                                             về</a>
                                     </td>
-                                    <td>{{$contract->name_status}}</td>
-                                    <td>{{$contract->name_kind}}</td>
                                     <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}} Ngày</td>
-                                    <td>{{$contract->pay_due}}</td>
+                                    <td>{{$contract->name_kind}}</td>
+                                    <td>{{$contract->_pay_due}}</td>
                                     <td class="value_contract"><span>{{$contract->value_contract}}</span>
                                         VND
                                     </td>

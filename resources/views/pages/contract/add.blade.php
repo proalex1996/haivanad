@@ -1,15 +1,6 @@
 @extends('pages.top-page.master')
 @section('title','Thêm Hợp Đồng')
 @section('content')
-    <script>
-        var myDropzone = new Dropzone("div#myId", {
-            url: "/file/post"
-        });
-        $("div#myId").dropzone({
-            url: "/file/post"
-        });
-
-    </script>
     <div class="container-fluid">
         <div class="col-md-12 m-b-40">
             <div class="overview-wrap">
@@ -23,27 +14,47 @@
             @csrf
             <div class="container-fluid">
                 <div class="form-staff">
-                    <div class="form-customer">
-                        <label for="exampleFormControlInput1 uname">Mã Hợp đồng</label>
-                        <input type="text" class="form-control" id="id_contract" name="id_contract"
-                               placeholder="Tên Hợp đồng" required>
-                        <div class="invalid-feedback">Tên Hợp đồng không được để trống</div>
-                    </div>
-                    <div class="form-customer">
-                        <label for="exampleFormControlSelect2">Nhân Viên Phụ Trách</label>
-                        <select class="form-control " id="exampleFormControlSelect2" name="name_staff" required>
-                            @foreach($staffs as $staff)
-                                <option value="{{$staff->id}}">{{$staff->name_staff}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-customer">
-                        <label for="exampleFormControlSelect1">Loại hợp đồng</label>
-                        <select class="form-control" id="kind_name" name="kind_name">
-                            @foreach($kind_contract as $kind)
-                                <option value="{{$kind->id_contract}}">{{$kind->name_kind}}</option>
-                            @endforeach
-                        </select>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-12">
+                                    <label for="exampleFormControlInput1 uname">Mã Hợp đồng</label>
+                                </div>
+                                <div class="col-xl-6 col-sm-12">
+                                    <input type="text" class="form-control" id="id_contract" name="id_contract"
+                                           placeholder="Tên Hợp đồng" required>
+                                    <div class="invalid-feedback">Tên Hợp đồng không được để trống</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-xl-7 col-sm-12">
+                                    <label for="exampleFormControlSelect2">Nhân Viên Phụ Trách</label>
+                                </div>
+                                <div class="col-xl-5 col-sm-12">
+                                    <select class="form-control " id="exampleFormControlSelect2" name="name_staff" required>
+                                        @foreach($staffs as $staff)
+                                            <option value="{{$staff->id}}">{{$staff->name_staff}}</option>
+                                    @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-xl-6 col-sm-12">
+                                    <label for="exampleFormControlSelect1">Loại hợp đồng</label>
+                                </div>
+                                <div class="col-xl-6 col-sm-12">
+                                    <select class="form-control" id="kind_name" name="kind_name">
+                                        @foreach($kind_contract as $kind)
+                                            <option value="{{$kind->id_contract}}">{{$kind->name_kind}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <fieldset class="border-text">
@@ -207,7 +218,6 @@
                                         <input type="text" class="form-control" value="" id="id_system" name="id_system"
                                                placeholder="Kết Cấu" required>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -265,13 +275,10 @@
 
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Hình Ảnh:</label>
-                            <div class="polaroid">
-                                <img src="{{config('config_app.domain.method').config('config_app.domain.url')
-                            .config('config_app.domain.port').config('config_app.domain.name').'/public/storage/content/1-10.jpg'}}" alt="1-10.jpg" style="width:100%">
-                                <div class="container container-image-text">
-                                    <p>1-10.jpg</p>
+                                <div class="row" id="image-input">
+
+
                                 </div>
-                            </div>
 
                         </div>
                     </div>
@@ -281,22 +288,7 @@
                     <legend class='text-left'>Hợp Đồng</legend>
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-5">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Loại hợp đồng</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="kind_name" name="kind_name">
-                                            @foreach($kind_contract as $kind)
-                                                <option value="{{$kind->id_contract}}">{{$kind->name_kind}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1">Giá trị hợp đồng</label>
@@ -309,11 +301,8 @@
                                     </div>
 
                                 </div>
-
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1">Thuế VAT</label>
@@ -325,23 +314,12 @@
                                     </div>
 
                                 </div>
-                            </div>
-                            <div class="col-md-7">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Tổng</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input type="number" class="form-control" value="" id="tong" name="tong"
-                                               placeholder="Tổng Giá Trị hợp Đồng">
-                                    </div>
-
-                                </div>
 
                             </div>
                         </div>
+
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="dateofbirth">Ngày bắt đầu:</label>
@@ -354,7 +332,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="dateofbirth">Ngày kết thúc</label>
@@ -369,52 +347,68 @@
 
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Tổng</label>
+                                    </div>
+                                    <div class="col-md-9 col-sm-12">
+                                        <input type="number" class="form-control" value="" step="0.01" id="tong" name="tong"
+                                               placeholder="Tổng Giá Trị hợp Đồng">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </fieldset>
 
                 <form>
                     <fieldset class="border-text">
                         <legend class='text-left'>Thanh Toán</legend>
-                        <div class="container">
+                        <div class="container-set">
                             <table id="example" class="display table-borderless table-responsive" style="width:100%">
                                 <thead>
                                 <tr>
                                     <th><input type="checkbox" id="check-all" name="title" onclick="checkAll()"></th>
-                                    <th>Kỳ</th>
-                                    <th>Tỷ Lệ</th>
-                                    <th>Số Tiền</th>
-                                    <th>VAT</th>
-                                    <th>Tổng</th>
-                                    <th>Ngày Thanh Toán</th>
+                                    <th class="text-center">Kỳ</th>
+                                    <th class="text-center">Tỷ Lệ</th>
+                                    <th class="text-center">Số Tiền</th>
+                                    <th class="text-center">VAT</th>
+                                    <th class="text-center">Tổng</th>
+                                    <th class="text-center">Ngày Thanh Toán</th>
                                 </tr>
                                 </thead>
                                 <tbody id="idBodyPayment">
                                 <tr class="idTrPayment">
-                                    <td><input type="checkbox" id="check-box" name="check-box[]" value="1"
-                                               class="m-r-10"></td>
-                                    <td><input type="text" class="form-control" id="slovency" name="slovency" required>
+                                    <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
+                                               class="display-input m-r-5"></td>
+                                    <td><input type="text" class="display-input form-control" id="payment_period" name="payment_period"
+                                               required>
                                     </td>
-                                    <td><input type="text" class="form-control" id="ratio" name="ratio" required></td>
-                                    <td><input type="text" class="form-control" id="id_value_contract"
-                                               name="id_value_contract" required></td>
-                                    <td><input type="text" class="form-control" id="id_vat" name="id_vat" required></td>
-                                    <td><input type="text" class="form-control" id="total" name="total" required></td>
-                                    <td><input type="date" class="form-control" name="pay_due" id="pay_due" required>
+                                    <td><input type="text" class="form-control display-input" id="ratio" name="ratio" required></td>
+                                    <td><input type="text" class="form-control display-input" onchange="getRatio()" id="id_value_contract"
+                                               name="id_value_contract[]" required></td>
+                                    <td><input type="text" class="form-control display-input" id="id_vat" onchange="getRatio()" name="id_vat" required></td>
+                                    <td><input type="text" class="form-control display-input" id="total" name="total_value" required></td>
+                                    <td><input type="date" class="form-control display-input" name="pay_due" id="_pay_due" required>
                                     </td>
                                 </tr>
                                 </tbody>
 
                             </table>
                             <div class="form-group">
-                                <a type="button" onclick="deleteRowPayment()" id="addPayment"
+                                <button type="button"  onclick="deleteRowPayment()" id="addPayment"
                                    class="au-btn au-btn-icon au-btn--blue float-right m-b-20" style="color: #ffff;">
                                     <i class="zmdi zmdi-plus"></i>Xóa Kỳ Thanh Toán
-                                </a>
-                                <a type="button" onclick="addPayment()"
+                                </button>
+                                <button type="button" id="addrowPayment"
                                    class="au-btn au-btn-icon au-btn--blue float-right m-b-20 m-r-20"
                                    style="color: #ffff;">
                                     <i class="zmdi zmdi-plus"></i>Thêm Kỳ Thanh Toán
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </fieldset>

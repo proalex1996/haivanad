@@ -27,6 +27,7 @@ class ProductModel extends Model
         'escom',
         'dac_diem',
         'note_banner',
-        'thumb_banner'
+        'thumb_banner',
+        'gianam'
     ];
 }

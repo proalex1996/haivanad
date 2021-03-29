@@ -33,6 +33,8 @@ Route::group(['prefix' => 'contract'], function () {
     Route::get('/product', 'ContractController@getProduct');
     Route::post('/photo/{id_banner}', 'ContractController@getphoto');
     Route::get('/photo', 'ContractController@getphoto');
+    Route::post('/ratio/{id_contract}', 'ContractController@getRatio');
+
 
 
 

@@ -51,6 +51,7 @@ Route::group(['prefix' => 'contract'], function () {
         Route::post('/add', 'ContractController@createContract');
         Route::get('/download', 'ContractController@getDownload');
         Route::get('/destroy/{id}', 'ContractController@destroy');
+        Route::post('/deletepay/{payment_period}', 'ContractController@delete_payment');
     });
 });
 Route::group(['prefix' => 'users'], function () {

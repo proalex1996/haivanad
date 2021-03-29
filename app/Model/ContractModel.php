@@ -25,7 +25,7 @@ class ContractModel extends Model
         'date_end',
         'kind',
         'value_contract',
-        'thue'
+        'vat'
 
     ];
 

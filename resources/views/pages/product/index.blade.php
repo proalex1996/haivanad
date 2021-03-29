@@ -2,7 +2,7 @@
 @section('title','Sản Phẩm')
 @section('content')
     <div class="container-fluid">
-        <div class="row">
+        <div class="row ">
             <div class="col-md-12">
                 <div class="overview-wrap">
                     <h2 class="title-1">Quản Lý Sản Phẩm</h2>

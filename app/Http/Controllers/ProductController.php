@@ -90,15 +90,13 @@ class ProductController extends Controller
         $product->id_system = $request->id_system;
         $product->size_banner = $request->size_banner;
         $product->height_banner = $request->height_banner;
-
+        $product->gianam = $request->gianam;
         $product->light_system = $request->light_system;
         $product->dac_diem = $request->dac_diem;
         $product->flow = $request->flow;
         $product->escom = $request->escom;
         $product->note_banner = $request->note_banner;
-
         $product->save();
-
         $files =array($request->file('files'));
         if(!empty($files)){
             for($index = 0;$index < count($files);$index++){

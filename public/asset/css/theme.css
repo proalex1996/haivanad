@@ -14995,6 +14995,7 @@ section {
 .display{
     margin-bottom: 5rem;
     max-width: 100%;
+
 }
 fieldset {
 
@@ -15033,8 +15034,8 @@ legend {
     width: 150px;
     margin-left: 10px;
 }
-.display{
-
+.table-responsive>td{
+    width: 100px;!important;
     overflow-x: auto; !important;
 
 }
@@ -15055,14 +15056,48 @@ legend {
     border-width: 1.5px;
 }
 div.polaroid {
-    width: 30%;
+    width: 25%;
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin-left: auto;
-    margin-right: auto;
-    position: center;
+    margin-left: 6.5%;
 }
-div.container-image-text> {
+
+.polaroid>img{
+    max-width: 100%;
+    height: auto;
+    max-height: 380px;
+}
+div.container-image-text {
     text-align: center;
     padding: 10px 20px;
+}
+@media screen and (max-width: 600px) {
+    div.polaroid {
+        width: unset; !important;
+        background-color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        margin: 1rem;
+    }
+    .display-input{
+        width: auto;
+}
+    .au-btn{
+        font-size: 14px; !important;
+        margin-right: unset;!important;
+    }
+
+
+}
+@media screen and (max-width: 1200px){
+    .au-btn{
+       padding: 0px 24px;
+        width: 246px;
+    }
+    .title-1{
+        font-size: 20px;!important;
+    }
+}
+.container-set{
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
 }

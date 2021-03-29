@@ -49,30 +49,14 @@ class ContractController extends Controller
         $contracts = DB::table('contract')
             ->join('customer', 'id_customer', '=', 'customer.customer_id')
             ->join('staff', 'id_staff', '=', 'staff.id')
-            ->join('banner', 'contract.id_banner', '=', 'banner.id')
+            ->join('banner', 'contract.id_banner', '=', 'banner.id_banner')
             ->join('kind_contract', 'kind', '=', 'kind_contract.id_contract')
             ->join('contract_status', 'status_contract','=','contract_status.id_contract')
-            ->select('contract.id', 'contract.id_contract', 'name_customer','customer.contact_name', 'contract.note_contract','contract.pay_due',
+            ->join('detail_payment','contract.id_contract','=','detail_payment.id_contract')
+            ->select('contract.id', 'contract.id_contract', 'customer.name_customer','detail_payment._pay_due',
+                'banner.id_banner', 'kind_contract.name_kind',
+                'contract.date_start', 'contract.date_end', 'contract.content','contract_status.name_status','value_contract')->groupBy('contract.id')->orderBy('contract.id','DESC')->get();
 
-                'contract.gianam','banner.id_banner', 'contract.tonggia','contract.content','contract_status.name_status','kind_contract.name_kind',
-
-
-                'date_start', 'date_end', 'name_staff','contract.now_content', 'value_contract','contract.gia9thang','contract.gia3thang','contract.gia6thang');
-
-
-
-        if(!empty($request->id_contract))
-        {
-            $contracts = $contracts ->where('id_contract' ,'LIKE','%'.$request->id_contract.'%');
-
-        }
-        if(!empty($request->id_banner))
-        {
-            $contracts = $contracts ->where('id_contract' ,'LIKE','%'.$request->id_banner.'%');
-
-        }
-
-            $contracts = $contracts->groupBy('contract.id')->orderBy('contract.id','DESC')->get();
         return view('pages.contract.contract', ['contracts' => $contracts]);
 
 
@@ -85,6 +69,7 @@ class ContractController extends Controller
             ->join('banner', 'id_banner', '=', 'banner.id')
             ->join('kind_contract', 'kind', '=', 'kind_contract.id_contract')
             ->join('contract_status', 'status_contract','=','contract_status.id_contract')
+
             ->select(DB::raw('Count(contract.id) as total'))->where('contract.date_start','Like','%-12-%')->orderBy('contract.id')->first();
         return json_encode($contracts);
     }
@@ -122,7 +107,6 @@ class ContractController extends Controller
         $contract = new ContractModel();
         $contract->id_contract = $request->id_contract;
         $contract->id_customer = $request->name_customer;
-        $contract->thue = $request->thue;
         $contract->id_staff = $request->name_staff;
         $contract->id_banner = $request->id_banner;
         $contract->content = basename($request->content_contract->getClientOriginalName());
@@ -133,15 +117,31 @@ class ContractController extends Controller
         $contract->kind = $request->kind_name;
         $contract->value_contract = $request->value_contract;
         $contract->status_contract = $request->status;
-        $contract->gianam = $request->gianam;
-        $contract->gia9thang = $request->gia9thang;
-        $contract->gia6thang = $request->gia6thang;
-        $contract->gia3thang = $request->gia3thang;
-        $contract->pay_due = $request->pay_due;
-        $contract->now_content = $request->now_content;
         //$pdf = PDF::loadview('contract.blade.php',$file);
         $storage = Storage::putFileAs('contract', $file, $fileName);
         $contract->save();
+        $payment_period = $request->payment_period;
+        $ratio = $request->ratio;
+        $id_value_contract = $request->id_value_contract;
+        $id_vat = $request->id_vat;
+        $total_value = $request->total_value;
+        $_pay_due = $request->_pay_due;
+
+        if(!empty($payment_period)){
+            for($i = 0 ; $i < count($payment_period);$i++){
+                $detail = DetailModel::find($request->id_contract);
+                $detail->id_contract = $request->id_contract;
+                $detail->payment_period = $payment_period[$i];
+                $detail->ratio = $ratio[$i];
+                $detail->id_value_contract = $id_value_contract[$i];
+                $detail->id_vat = $id_vat[$i];
+                $detail->total_value = $total_value[$i];
+                $detail->_pay_due = $_pay_due[$i];
+                $detail->update();
+            }
+        }
+
+
         return redirect()->action('ContractController@getContract');
     }
 
@@ -187,6 +187,22 @@ class ContractController extends Controller
                 $storage = Storage::putFileAs('contract', $file, $fileName);
             }
 
+
+
+            if(!empty(array($data['payment_period']))){
+                for($i = 0 ; $i < count(array($data['payment_period']));$i++){
+                    DetailModel::updated(
+                    $payment_period = array($data['payment_period']),
+                    $ratio = array($data['ratio']),
+                    $id_value_contract = $data['id_value_contract'],
+                    $id_vat = array($data['id_vat']),
+                    $total_value = array($data['total_value']),
+                    $_pay_due = array($data['_pay_due'])
+                    );
+
+                }
+            }
+
             $up = $this->contractRepository->update($id, $data);
             return redirect()->action('ContractController@getContract');
         }
@@ -196,13 +212,21 @@ class ContractController extends Controller
         $customer = DB::table('customer')->select('*')->get();
         $banner = DB::table('banner')->select('*')->get();
         $status = DB::table('contract_status')->select('*')->get();
+        $provinces = DB::table('province')->select('*')->get();
+        $nguon = DB::table('nguon_customer')->select('*')->get();
+        $detail = DB::table('detail_payment')
+            ->join('contract','detail_payment.id_contract','=','contract.id_contract')
+            ->select('*')->get();
         return view('pages.contract.update', [
             'contract' => $contract,
             'banners' => $banner,
             'kind_contract' => $kind_contract,
             'staffs' => $staff,
             'customers' => $customer,
-            'status' => $status
+            'status' => $status,
+            'provinces' => $provinces,
+            'nguons' => $nguon,
+            'details' => $detail
         ]);
 
     }
@@ -219,20 +243,13 @@ class ContractController extends Controller
         $del->delete();
         return redirect('/contract');
     }
-    public function delete_payment(Request $request)
+    public function delete_payment($id)
     {
-        $data = $request->all();
-        $ids = $request->ids;
-        $del = DetailModel::find($ids);
-        try{
-            $del->where('id',$ids)->delele();
-        }
-        catch (\Exception $e)
-        {
-           return $e;
-        }
 
-
+        if(!empty($id)){
+            DetailModel::find($id)
+                ->delete();
+        }
     }
    public function ApiCustomer(Request $request){
         $request->all();
@@ -259,15 +276,24 @@ class ContractController extends Controller
            ->join('type_banner','banner.id_typebanner','=','type_banner.id_typebanner')
            ->select('*')
 
-           ->where('id_banner','=',$request->id_banner)->get();
+           ->where('banner.id_banner','=',$request->id_banner)->get();
        return json_encode(['banner'=>$data],200);
    }
+    public function getRatio(Request $request){
+        $request->all();
+        $data = DB::table('detail_payment')
+            ->join('contract','detail_payment.id_contract','=','contract.id_contract')
+            ->select('detail_payment.*')
+
+            ->where('detail_payment.id_contract','=',$request->id_contract)->get();
+        return json_encode(['detail'=>$data],200);
+    }
     public function getphoto(Request $request){
         $request->all();
         $data = DB::table('photo')
             ->join('banner','banner.id_banner','=','photo.id_banner')
-            ->select('photo.id','photo._name_photo','photo.id_banner')->groupBy('photo.id_banner')
-            ->where('photo.id_banner','=',$request->id_banner)->groupBy('photo.id_banner')->get();
+            ->select('photo.id','photo._name_photo','photo.id_banner')
+            ->where('photo.id_banner','=',$request->id_banner)->get();
         return json_encode(['photo'=>$data],200);
     }
 
