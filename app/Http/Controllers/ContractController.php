@@ -61,7 +61,7 @@ class ContractController extends Controller
             ->select('contract.id', 'contract.id_contract', 'customer.name_customer','detail_payment._pay_due',
                 'banner.id_banner', 'kind_contract.name_kind',
                 'contract.date_start', 'contract.date_end', 'contract.content','value_contract')
-           ->orderBy('contract.id','DESC')->get();
+           ->orderBy('contract.id','DESC')->groupBy('contract.id')->get();
 
         return view('pages.contract.contract', ['contracts' => $contracts]);
 

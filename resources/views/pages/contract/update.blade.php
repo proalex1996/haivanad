@@ -439,13 +439,13 @@
                 <div class="form-group m-t-20">
                     <label for="exampleFormControlSelect1">Ghi Chú</label>
                     <div class="custom-file">
-                        <input type="text" class="custom-file-input" value="{{$contract->note_contract}}" id="note_contract"
-                               name="note_contract">
+                        <input class="form-control" value="{{$contract->note_contract}}" type="text" name="note_contract"
+                              >
                     </div>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">
-                        <i class="zmdi zmdi-plus"></i>Thêm
+                        <i class="zmdi zmdi-plus"></i>Lưu
                     </button>
                 </div>
             </div>

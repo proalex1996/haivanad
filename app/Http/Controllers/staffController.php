@@ -45,7 +45,7 @@ class staffController extends Controller
         if (!empty($request->id_staff)) {
             $users = $users->where('users.id', 'LIKE', '%'.$request->id_staff.'%');
         }
-        $users = $users->get();
+        $users = $users->orderBy('users.id','DESC')->get();
         $statuss = DB::table('status')->select('*')->get();
         $pq = DB::table('phan_quyen')->select('*')->get();
         return view('pages.users.index', [
