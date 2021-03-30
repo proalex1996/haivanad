@@ -5,9 +5,9 @@
         <div class="col-md-12 m-b-40">
             <div class="overview-wrap">
                 <h2 class="title-1">Thêm Mới Nhân Viên</h2>
-                <a type="button" class="au-btn au-btn-icon au-btn--blue" href="import-staff">
-                    <i class="zmdi zmdi-plus"></i>Nhập file Excel
-                </a>
+{{--                <a type="button" class="au-btn au-btn-icon au-btn--blue" href="import-staff">--}}
+{{--                    <i class="zmdi zmdi-plus"></i>Nhập file Excel--}}
+{{--                </a>--}}
             </div>
         </div>
         <form action="add" enctype="multipart/form-data" class="needs-validation" method="post">

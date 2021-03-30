@@ -1,6 +1,5 @@
 <?php
 $request = request()->user();
-
 if($request['id_phan_quyen'] == 1){
     $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC')->get();
 
@@ -135,7 +134,7 @@ header('Access-Control-Allow-Origin: *');
                             <div class="account-wrap">
                                 <div class="account-item clearfix js-item-menu">
                                     <div class="image">
-                                        <img src="{{asset('public/asset/images/account.png')}}" alt="Bản demo"/>
+                                        <img src="{{asset('public/asset/images/account.png')}}"/>
                                     </div>
                                     <div class="content">
                                         <a class="js-acc-btn" href="#">
@@ -145,26 +144,26 @@ header('Access-Control-Allow-Origin: *');
                                         <div class="info clearfix">
                                             <div class="image">
                                                 <a href="#">
-                                                    <img src="{{asset('public/asset/images/account.png')}}" alt="Bản demo"/>
+                                                    <img src="{{asset('public/asset/images/account.png')}}"/>
                                                 </a>
                                             </div>
                                             <div class="content">
                                                 <h5 class="name">
-                                                    <a href="#">Bản demo</a>
+                                                    <a href="#">{{$request->name}}</a>
                                                 </h5>
-                                                <span class="email">Bản demo</span>
+                                                <span class="email">{{$request->email}}</span>
                                             </div>
                                         </div>
-                                        <div class="account-dropdown__body">
-                                            <div class="account-dropdown__item">
-                                                <a href="{{url('/home/user')}}">
-                                                    <i class="zmdi icon-account"></i>Tài Khoản</a>
-                                            </div>
-                                            <div class="account-dropdown__item">
-                                                <a href="#">
-                                                    <i class="zmdi icon-set-up"></i>Cài Đặt</a>
-                                            </div>
-                                        </div>
+{{--                                        <div class="account-dropdown__body">--}}
+{{--                                            <div class="account-dropdown__item">--}}
+{{--                                                <a href="{{url('/home/user')}}">--}}
+{{--                                                    <i class="zmdi icon-account"></i>Tài Khoản</a>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="account-dropdown__item">--}}
+{{--                                                <a href="#">--}}
+{{--                                                    <i class="zmdi icon-set-up"></i>Cài Đặt</a>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
                                         <div class="account-dropdown__footer">
                                             <a href="{{url('/auth/logout')}}">
                                                 <i class="zmdi icon-logout"></i>Đăng Xuất</a>

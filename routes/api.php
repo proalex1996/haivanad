@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::middleware('auth:api')->get('/contract', function (Request $request) {
+    Route::post('reset-password', 'ResetPasswordController@sendMail');
+    Route::put('reset-password/{token}', 'ResetPasswordController@reset');
 
 });
 
@@ -34,7 +36,6 @@ Route::group(['prefix' => 'contract'], function () {
     Route::post('/photo/{id_banner}', 'ContractController@getphoto');
     Route::get('/photo', 'ContractController@getphoto');
     Route::post('/ratio/{id_contract}', 'ContractController@getRatio');
-
     Route::post('/deletepay/{payment_period}', 'ContractController@delete_payment');
 
 

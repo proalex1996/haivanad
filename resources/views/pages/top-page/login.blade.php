@@ -29,9 +29,9 @@
                                     <label>
                                         <input type="checkbox" name="remember">Nhớ tài khoản
                                     </label>
-                                    <label>
-                                        <a href="#">Quên mật khẩu</a>
-                                    </label>
+{{--                                    <label>--}}
+{{--                                        <a href="#">Quên mật khẩu</a>--}}
+{{--                                    </label>--}}
                                 </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Đăng Nhập</button>
                             </form>
