@@ -19,10 +19,11 @@
         "laravel/tinker": "^2.5",
         "maatwebsite/excel": "^3.1",
         "paragonie/random_compat": "2.*",
+        "phpoffice/phppresentation": "dev-master",
         "phpoffice/phpspreadsheet": "^1.16",
         "phpoffice/phpword": "^0.17.0",
-        "twbs/bootstrap": "4.0.0",
-        "phpoffice/phppresentation": "dev-master"
+        "predis/predis": "^1.1",
+        "twbs/bootstrap": "4.0.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
