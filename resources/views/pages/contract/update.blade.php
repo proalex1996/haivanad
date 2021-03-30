@@ -439,7 +439,7 @@
                 <div class="form-group m-t-20">
                     <label for="exampleFormControlSelect1">Ghi Chú</label>
                     <div class="custom-file">
-                        <input type="text" class="custom-file-input" value="{{$contracts->note_contract}}" id="note_contract"
+                        <input type="text" class="custom-file-input" value="{{$contract->note_contract}}" id="note_contract"
                                name="note_contract">
                     </div>
                 </div>

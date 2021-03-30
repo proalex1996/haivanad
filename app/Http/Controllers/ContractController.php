@@ -54,7 +54,7 @@ class ContractController extends Controller
     {
         $contracts = DB::table('contract')
             ->join('customer', 'id_customer', '=', 'customer.customer_id')
-            ->join('staff', 'id_staff', '=', 'staff.id')
+            ->join('users', 'contract.id_staff', '=', 'users.id_staff')
             ->join('banner', 'contract.id_banner', '=', 'banner.id_banner')
             ->join('kind_contract', 'kind', '=', 'kind_contract.id_contract')
             ->join('detail_payment','contract.id_contract','=','detail_payment.id_contract')
@@ -122,7 +122,6 @@ class ContractController extends Controller
         $contract->date_end = $request->date_end;
         $contract->kind = $request->kind_name;
         $contract->value_contract = $request->value_contract;
-        $contract->status_contract = $request->status;
         $contract->note_contract = $request->note_contract;
         //$pdf = PDF::loadview('contract.blade.php',$file);
         $storage = Storage::putFileAs('contract', $file, $fileName);
