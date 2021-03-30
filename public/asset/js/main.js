@@ -2009,7 +2009,7 @@ function product() {
                                 $.each(photo, function (index, element) {
                                     $('#image-input').append(`
                                                     <div class="polaroid">
-                                                        <img src="${url}/public/storage/content/${element._name_photo}" id="img-check" alt="${element._name_photo}" style="width:100%">
+                                                        <img src="${url}/public/asset/storage/content/${element._name_photo}" id="img-check" alt="${element._name_photo}" style="width:100%">
                                                         <div class="container container-image-text">
                                                         <p>1-10.jpg</p></div>
                                                     </div>
