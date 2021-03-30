@@ -84,7 +84,7 @@ class ContractController extends Controller
     {
         $banner = DB::table('banner')->select('*')->get();
         $kind_contract = DB::table('kind_contract')->select('*')->get();
-        $staff = DB::table('staff')->select('*')->get();
+        $staff = DB::table('users')->select('*')->get();
         $customer = DB::table('customer')->select('*')->get();
         $status = DB::table('contract_status')->select('*')->get();
         $detail_payment = DB::table('detail_payment')->select('*')->get();
@@ -220,7 +220,7 @@ class ContractController extends Controller
         }
         $contract = $this->contractRepository->find($id);
         $kind_contract = DB::table('kind_contract')->select('*')->get();
-        $staff = DB::table('staff')->select('*')->get();
+        $staff = DB::table('users')->select('*')->get();
         $customer = DB::table('customer')->select('*')->get();
         $banner = DB::table('banner')->select('*')->get();
         $status = DB::table('contract_status')->select('*')->get();

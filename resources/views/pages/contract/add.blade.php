@@ -33,9 +33,9 @@
                                     <label for="exampleFormControlSelect2">Nhân Viên Phụ Trách</label>
                                 </div>
                                 <div class="col-xl-5 col-sm-12">
-                                    <select class="form-control " id="exampleFormControlSelect2" name="name_staff" required>
+                                    <select class="form-control " id="exampleFormControlSelect2" name="id_staff" required>
                                         @foreach($staffs as $staff)
-                                            <option value="{{$staff->id}}">{{$staff->name_staff}}</option>
+                                            <option value="{{$staff->id_staff}}">{{$staff->name}}</option>
                                     @endforeach
                                     </select>
                                 </div>
@@ -428,7 +428,7 @@
                 <div class="form-group m-t-20">
                     <label for="exampleFormControlSelect1">Ghi Chú</label>
                     <div class="custom-file">
-                        <input type="number" class="form-control" value=""  id="note_contract" name="note_contract"
+                        <input type="text" class="form-control" value=""  id="note_contract" name="note_contract"
                                placeholder="Ghi Chú">
                     </div>
                 </div>

@@ -30,12 +30,12 @@
                                     <label for="exampleFormControlSelect2">Nhân Viên Phụ Trách</label>
                                 </div>
                                 <div class="col-xl-5 col-sm-12">
-                                    <select class="form-control " id="exampleFormControlSelect2" name="name_staff" required>
+                                    <select class="form-control " id="exampleFormControlSelect2" name="id_staff" required>
                                         @foreach($staffs as $staff)
-                                            @if ($staff->id == $contract ->id_staff)
-                                                <option value="{{$staff->id}}" selected>{{$staff->name_staff}}</option>
+                                            @if ($staff->id_staff == $contract ->id_staff)
+                                                <option value="{{$staff->id_staff}}" selected>{{$staff->name}}</option>
                                             @else
-                                                <option value="{{$staff->id}}">{{$staff->name_staff}}</option>
+                                                <option value="{{$staff->id_staff}}">{{$staff->name}}</option>
                                             @endif
                                         @endforeach
                                     </select>
