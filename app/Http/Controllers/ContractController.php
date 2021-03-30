@@ -319,39 +319,42 @@ class ContractController extends Controller
     }
     public function addSetting(Request $request){
         try {
-            $salary = new Salary();
-            $salary->id_salary = $request->id_salary;
-            $salary->bassic_salary = $request->bassic_salary;
-            $salary->save();
-            return redirect('/home');
-        }catch(\Exception $e){
-            \session()->flash('luong','Bị Trùng Với Dữ Liệu Cũ');
-            return redirect('/setting');
-        }
-        try {
-            $branch = new Branch();
-            $branch->id_branch = $request->id_branch;
-            $branch->name_branch = $request->name_branch;
-            $branch->adress_branch = $request->adress_branch;
-            $branch->save();
-            return redirect('/home');
-        }catch (\Exception $e){
-            \session()->flash('chi-nhanh','Bị Trùng Với Dữ Liệu Cũ');
-            return redirect('/setting');
-        }
+            try {
+                $salary = new Salary();
+                $salary->id_salary = $request->id_salary;
+                $salary->bassic_salary = $request->bassic_salary;
+                $salary->save();
+            }catch(\Exception $e){
+                \session()->flash('luong','Bị Trùng Với Dữ Liệu Cũ');
+                return redirect('/setting');
+            }
+            try {
+                $branch = new Branch();
+                $branch->id_branch = $request->id_branch;
+                $branch->name_branch = $request->name_branch;
+                $branch->adress_branch = $request->adress_branch;
+                $branch->save();
+            }catch (\Exception $e){
+                \session()->flash('chi-nhanh','Bị Trùng Với Dữ Liệu Cũ');
+                return redirect('/setting');
+            }
 
-        try {
-            $setting = new Position();
-            $setting->id_position = $request->id_position;
-            $setting->name_position = $request->name_position;
-            $setting->save();
-            return redirect('/home');
+            try {
+                $setting = new Position();
+                $setting->id_position = $request->id_position;
+                $setting->name_position = $request->name_position;
+                $setting->save();
 
 
-        }catch (\Exception $e){
+            }catch (\Exception $e){
                 \session()->flash('pos','Bị Trùng Với Dữ Liệu Cũ');
+                return redirect('/setting');
+            }
+            return redirect('/home');
+        }catch (\Exception $e){
             return redirect('/setting');
         }
+
 
 
 
