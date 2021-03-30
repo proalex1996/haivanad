@@ -165,7 +165,7 @@
                                                             selected>{{$salary->bassic_salary}}</option>
                                                 @else
                                                     <option
-                                                        value="{{$salary->id_status}}">{{$salary->bassic_salary}}</option>
+                                                        value="{{$salary->id_salary}}">{{$salary->bassic_salary}}</option>
                                                 @endif
                                             @endforeach
                                         </select>

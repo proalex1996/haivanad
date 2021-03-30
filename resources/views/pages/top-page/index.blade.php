@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\DB;
             <div class="col-md-12">
                 <div class="overview-wrap">
                     <h2 class="title-1">Tổng Quan</h2>
-                    <button class="au-btn au-btn-icon au-btn--blue">
-                        <i class="zmdi zmdi-plus"></i>In Báo Cáo
-                    </button>
+{{--                    <button class="au-btn au-btn-icon au-btn--blue">--}}
+{{--                        <i class="zmdi zmdi-plus"></i>In Báo Cáo--}}
+{{--                    </button>--}}
                 </div>
             </div>
         </div>
