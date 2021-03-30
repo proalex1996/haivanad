@@ -21,10 +21,8 @@ class ImportProduct implements ToModel, WithStartRow
             'dac_diem' => $row[5],
             'light_system' => $row[6],
             'id_system' => $row[7],
-            $id =DB::table('province')->select('id')->where('_name','=',$row[8])->get(),
-            dd($id->id),
-            'tinh' => $id,
-
+            $id1 =DB::table('province')->select('province.id')->where('_name','=',$row[8])->first(),
+            'tinh' => $id1['id'],
             $ids =DB::table('district')->select('id_district')->where('_name_district','=',$row[9])->get(),
             'quan' => $ids,
             $idss =DB::table('type_banner')->select('id_typebanner')->where('name_type','=',$row[10])->get(),

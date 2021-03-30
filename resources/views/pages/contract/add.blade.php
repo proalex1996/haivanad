@@ -428,8 +428,8 @@
                 <div class="form-group m-t-20">
                     <label for="exampleFormControlSelect1">Ghi Chú</label>
                     <div class="custom-file">
-                        <input type="text" class="custom-file-input" id="note_contract"
-                               name="note_contract">
+                        <input type="number" class="form-control" value=""  id="note_contract" name="note_contract"
+                               placeholder="Ghi Chú">
                     </div>
                 </div>
                 <div class="form-group">
