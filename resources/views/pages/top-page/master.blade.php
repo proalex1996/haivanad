@@ -1,5 +1,14 @@
 <?php
-$menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC')->get();
+$request = request()->user();
+
+if($request['id_phan_quyen'] == 1){
+    $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC')->get();
+
+
+}elseif ($request['id_phan_quyen'] == 2){
+    $menus = \App\Model\MenuModel::where('id_parent', 'parent')->where('id_permission','=',2)->orderBy('id', 'ASC')->get();
+
+}
 header('Access-Control-Allow-Origin: *');
 ?><!doctype html>
 <html lang="en">

@@ -393,7 +393,7 @@
                                                name="id_value_contract[]" required></td>
                                     <td><input type="text" class="form-control display-input" placeholder="Thuế (%)" id="id_vat" onchange="getRatio()" name="id_vat" required></td>
                                     <td><input type="text" class="form-control display-input" id="total" name="total_value" required></td>
-                                    <td><input type="date" class="form-control display-input" name="pay_due" id="_pay_due" required>
+                                    <td><input type="date" class="form-control display-input" name="_pay_due" id="_pay_due" required>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -423,6 +423,13 @@
                         <input type="file" class="custom-file-input" accept=".doc,.docx,.pdf" id="content_contract"
                                name="content_contract" required>
                         <div class="invalid-feedback">Định dạng file phải là .doc, .docx, .pdf</div>
+                    </div>
+                </div>
+                <div class="form-group m-t-20">
+                    <label for="exampleFormControlSelect1">Ghi Chú</label>
+                    <div class="custom-file">
+                        <input type="text" class="custom-file-input" id="note_contract"
+                               name="note_contract">
                     </div>
                 </div>
                 <div class="form-group">

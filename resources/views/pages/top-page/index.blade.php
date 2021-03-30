@@ -173,21 +173,19 @@ use Illuminate\Support\Facades\DB;
                         <thead>
                         <tr>
                             <th>STT</th>
-                            <th>Tên Hợp Đồng</th>
+                            <th>Mã Hợp Đồng</th>
                             <th>Tên Khách Hàng</th>
-                            <th>Tên Banner</th>
+                            <th>Mã Pano</th>
                             <th>Nội Dung</th>
-                            <th>Trạng Thái</th>
-                            <th>Loại Hợp Đồng</th>
-                            <th>Ngày Bắt Đầu</th>
-                            <th>Ngày Kết Thúc</th>
-                            <th>Nhân Viên Phụ Trách</th>
+                            <th>Thời Hạn Còn Lại</th>
+                            <th>Loại Hợp Đông</th>
+                            <th>Lịch Thanh Toán</th>
                             <th>Giá trị hợp đồng</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($contracts as $contract)
-                            @if (\App\Utilili\DateTimeFormat::getDate($contract->date_end) < '0')
+                            @if ( (\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())) < '0')
                                 <tr class="status--denied dropdown">
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$contract->id}}</a>
@@ -196,12 +194,12 @@ use Illuminate\Support\Facades\DB;
                                                href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">Sửa
                                                 thông tin hợp đồng</a>
                                             <a id="open-deleteContract" class="dropdown-item"
-                                               data-contract_id="{{$contract->id}}" data-toggle="modal"
-                                               data-target="#detroy">Xóa hợp đồng</a>
+                                               data-id_data="{{$contract->id}}" data-toggle="modal"
+                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa hợp đồng</a>
                                             <hr>
                                             <a id="open-dueContract" class="dropdown-item"
                                                data-contract_id="{{$contract->id}}" data-toggle="modal"
-                                               data-target="#due">Gia hạn hợp đồng</a>
+                                               data-target="#due" onclick="openDueContract(this)">Gia hạn hợp đồng</a>
                                         </div>
                                     </td>
                                     <td>{{$contract->id_contract}}</td>
@@ -211,16 +209,15 @@ use Illuminate\Support\Facades\DB;
                                             href="{{URL::to('/public/storage/contract') . '/' . $contract->content}}">Tải
                                             về</a>
                                     </td>
-                                    <td>{{$contract->name_status}}</td>
+                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}} Ngày</td>
                                     <td>{{$contract->name_kind}}</td>
-                                    <td>{{$contract->date_start}}</td>
-                                    <td>{{$contract->date_end}}</td>
-                                    <td>{{$contract->name_staff}}</td>
-                                    <td>{{$contract->value_contract}}
+                                    <td>{{$contract->_pay_due}}</td>
+                                    <td class="value_contract"><span>{{$contract->value_contract}}</span>
                                         VND
                                     </td>
                                 </tr>
-                            @elseif('60' > \App\Utilili\DateTimeFormat::getDate($contract->date_end) && \App\Utilili\DateTimeFormat::getDate($contract->date_end) > '0.0')
+                            @elseif('60' > \App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()) &&
+                                    \App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString()) > '0')
                                 <tr class="status--warn dropdown">
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$contract->id}}</a>
@@ -229,12 +226,12 @@ use Illuminate\Support\Facades\DB;
                                                href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">Sửa
                                                 thông tin hợp đồng</a>
                                             <a id="open-deleteContract" class="dropdown-item"
-                                               data-contract_id="{{$contract->id}}" data-toggle="modal"
-                                               data-target="#detroy">Xóa hợp đồng</a>
+                                               data-id_data="{{$contract->id}}" data-toggle="modal"
+                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa hợp đồng</a>
                                             <hr>
                                             <a id="open-dueContract" class="dropdown-item"
                                                data-contract_id="{{$contract->id}}" data-toggle="modal"
-                                               data-target="#due">Gia hạn hợp đồng</a>
+                                               data-target="#due" onclick="openDueContract(this)">Gia hạn hợp đồng</a>
                                         </div>
                                     </td>
                                     <td>{{$contract->id_contract}}</td>
@@ -244,32 +241,28 @@ use Illuminate\Support\Facades\DB;
                                             href="{{URL::to('/public/storage/contract') . '/' . $contract->content}}">Tải
                                             về</a>
                                     </td>
-                                    <td>{{$contract->name_status}}</td>
+                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}} Ngày</td>
                                     <td>{{$contract->name_kind}}</td>
-                                    <td>{{$contract->date_start}}</td>
-                                    <td>{{$contract->date_end}}</td>
-                                    <td>{{$contract->name_staff}}</td>
-                                    <td>{{$contract->value_contract}}
+                                    <td>{{$contract->_pay_due}}</td>
+                                    <td class="value_contract"><span>{{$contract->value_contract}}</span>
                                         VND
                                     </td>
                                 </tr>
-                            @elseif(\App\Utilili\DateTimeFormat::getDate($contract->date_end) > '60')
+                            @elseif((\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())) > '60')
                                 <tr class="dropdown status--process">
-                                    <td class=" contract_id"><a class="dropdown-toggle" data-toggle="dropdown"
-                                                                aria-haspopup="true"
-                                                                aria-expanded="false"
-                                                                id="dropdownMenuLink"> {{$contract->id}}</a>
+                                    <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                           aria-expanded="false" id="dropdownMenuLink"> {{$contract->id}}</a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item"
                                                href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">Sửa
                                                 thông tin hợp đồng</a>
                                             <a id="open-deleteContract" class="dropdown-item"
-                                               data-contract_id="{{$contract->id}}" data-toggle="modal"
-                                               data-target="#detroy">Xóa hợp đồng</a>
+                                               data-id_data="{{$contract->id}}" data-toggle="modal"
+                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa hợp đồng</a>
                                             <hr>
                                             <a id="open-dueContract" class="dropdown-item"
                                                data-contract_id="{{$contract->id}}" data-toggle="modal"
-                                               data-target="#due">Gia hạn hợp đồng</a>
+                                               data-target="#due" onclick="openDueContract(this)">Gia hạn hợp đồng</a>
                                         </div>
                                     </td>
                                     <td>{{$contract->id_contract}}</td>
@@ -279,12 +272,10 @@ use Illuminate\Support\Facades\DB;
                                             href="{{URL::to('/public/storage/contract') . '/' . $contract->content}}">Tải
                                             về</a>
                                     </td>
-                                    <td>{{$contract->name_status}}</td>
+                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}} Ngày</td>
                                     <td>{{$contract->name_kind}}</td>
-                                    <td>{{$contract->date_start}}</td>
-                                    <td>{{$contract->date_end}}</td>
-                                    <td>{{$contract->name_staff}}</td>
-                                    <td>{{$contract->value_contract}}
+                                    <td>{{$contract->_pay_due}}</td>
+                                    <td class="value_contract"><span>{{$contract->value_contract}}</span>
                                         VND
                                     </td>
                                 </tr>

@@ -39,7 +39,7 @@
                         </a>
                     </div>
                     <div class="login-form">
-                        <form action="postlogin" method="post">
+                        <form action="postlogin" enctype="multipart/form-data" class="needs-validation" method="post">
                             @csrf
                             <div class="form-group">
                                 <label>Tên Đăng Nhập</label>
@@ -57,7 +57,7 @@
                             @endif
                             <div class="login-checkbox">
                                 <label>
-                                    <input type="checkbox" name="remember">Nhớ tài khoản
+                                    <input type="checkbox" name="remember" value="1">Nhớ tài khoản
                                 </label>
                             </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-5" type="submit">Đăng Nhập</button>

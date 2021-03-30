@@ -126,7 +126,7 @@ class CustomerController extends Controller
     }
     public function export()
     {
-        return Excel::download(new ExportCustomer, 'customer.xlsx');
+        return Excel::download(new ExportCustomer, 'Danh Sách Khách Hàng.xlsx');
     }
     public function dowloadExample(){
         return redirect('public/storage/contract/ExmpleImport.xlsx');

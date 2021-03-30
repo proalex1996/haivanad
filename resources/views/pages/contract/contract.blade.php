@@ -8,7 +8,7 @@
                 <div class="overview-wrap">
                     <h2 class="title-1">Quản lý Hợp đồng</h2>
                     <div class="exp-excel">
-                        <a class="au-btn au-btn-icon au-btn--blue" href="contract/add">
+                        <a class="au-btn au-btn-icon au-btn--blue" href="{{url('contract/export')}}">
                             <i class="zmdi zmdi-plus"></i>Xuất file Excel
                         </a>
                     </div>

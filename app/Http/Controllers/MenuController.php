@@ -4,13 +4,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Model\MenuModel;
+use App\Model\UserModel;
 use Illuminate\Support\Facades\DB;
 
 class MenuController extends Controller
 {
-    public function index()
+    public function index($index)
     {
-        $menu = DB :: table('parent_menu')->get();
-        return view('layouts.master',['menu'=>$menu]);
+        $menu = $index;dd($menu);
+
+        return view('pages.top-page.master',
+            [
+                'menus'=>$menu
+
+            ]);
     }
 }

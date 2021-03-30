@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Maatwebsite\Excel\Facades\Excel;
+use MongoDB\Driver\Session;
 use phpseclib3\Crypt\Hash;
 
 class staffController extends Controller
@@ -68,45 +69,59 @@ class staffController extends Controller
         ]);
     }
     public function addStaff(Request $request){
-        $users = new staffModel();
-        $users->id_branch = $request->staff_branch;
-        $users->name = $request->name_staff;
-        $users->email = $request->staff_email;
-        $users->password = \Illuminate\Support\Facades\Hash::make($request->password);
-        $users->non_password = $request->password;
-        $users->staff_phone = $request->staff_phone;
-        $users->staff_adress = $request->staff_adress;
-        $users->id_CMND = $request->id_cmnd;
-        $users->born = $request->date_start;
-        $users->id_position = $request->id_position;
-        $users->id_salary = $request->bassic_salary;
-        $users->id_status = $request->staff_status;
-        $users->id_phan_quyen = $request->id_pq;
-        $users->save();
-        return redirect()->action('staffController@getIndex');
+        $check = DB::table('users')->select(DB::raw('count(*)'))->where('email','=',$request->staff_email)->get();
+        if(!empty($check) ){
+            \session()->flash('warn','Email đã tồn tại');
+            return redirect(\url('/users/add'));
+        }else{
+            $users = new staffModel();
+            $users->id_branch = $request->staff_branch;
+            $users->name = $request->name_staff;
+            $users->email = $request->staff_email;
+            $users->password = \Illuminate\Support\Facades\Hash::make($request->password);
+            $users->non_password = $request->password;
+            $users->staff_phone = $request->staff_phone;
+            $users->staff_adress = $request->staff_adress;
+            $users->id_CMND = $request->id_cmnd;
+            $users->born = $request->date_start;
+            $users->id_position = $request->id_position;
+            $users->id_salary = $request->bassic_salary;
+            $users->id_status = $request->staff_status;
+            $users->id_phan_quyen = $request->id_pq;
+            $users->save();
+            return redirect()->action('staffController@getIndex');
+        }
+
     }
     public function update(Request $request, $id)
     {
         $data = $request->all();
+
         if (!empty($data)) {
-            $data['non_password'] = $data['password'];
-            $data['password'] = \Illuminate\Support\Facades\Hash::make($data['password']);
-            $up = $this->staffRepository->update($id, $data);
-            return redirect()->action('staffController@getIndex');
+                $data['non_password'] = $data['password'];
+                $data['password'] = \Illuminate\Support\Facades\Hash::make($data['password']);
+                $up = $this->staffRepository->update($id, $data);
+                return redirect()->action('staffController@getIndex');
+            }
+            $staffs = $this->staffRepository->find($id);
+            $statuss = DB::table('status')->select('*')->get();
+            $branchs = DB::table('branch')->select('*')->get();
+            $salarys = DB::table('salary')->select('*')->get();
+            $pq = DB::table('phan_quyen')->select('*')->get();
+            $position = DB::table('positions')->select('*')->get();
+            return view('pages.users.update', [
+                'staffs' => $staffs,
+                'statuss' => $statuss,
+                'branchs' => $branchs,
+                'salarys' => $salarys,
+                'pqs' => $pq,
+                'positions' => $position
+            ]);
         }
-        $staffs = $this->staffRepository->find($id);
-        $statuss = DB::table('status')->select('*')->get();
-        $branchs = DB::table('branch')->select('*')->get();
-        $salarys = DB::table('salary') ->select('*')->get();
-        $pq = DB::table('phan_quyen')->select('*')->get();
-        return view('pages.users.update', [
-            'staffs' => $staffs,
-            'statuss' => $statuss,
-            'branchs' => $branchs,
-            'salarys' => $salarys,
-            'pqs' => $pq
-        ]);
-    }
+
+
+
+
     public function destroy($id)
     {
         try {

@@ -3,9 +3,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportContract;
+use App\Model\Branch;
 use App\Model\ContractModel;
 
 use App\Model\DetailModel;
+use App\Model\Position;
+use App\Model\Salary;
 use App\Repositories\Contract\ContractRepositoryEloquent;
 use Barryvdh\DomPDF\Facade as PDF;
 use FontLib\Table\Type\name;
@@ -17,7 +21,9 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 use MongoDB\Driver\Session;
+use mysql_xdevapi\Exception;
 use phpDocumentor\Reflection\Project;
 use PhpOffice\PhpWord\Shared\ZipArchive;
 use Symfony\Component\Console\Input\Input;
@@ -117,6 +123,7 @@ class ContractController extends Controller
         $contract->kind = $request->kind_name;
         $contract->value_contract = $request->value_contract;
         $contract->status_contract = $request->status;
+        $contract->note_contract = $request->note_contract;
         //$pdf = PDF::loadview('contract.blade.php',$file);
         $storage = Storage::putFileAs('contract', $file, $fileName);
         $contract->save();
@@ -302,5 +309,50 @@ class ContractController extends Controller
             ->where('photo.id_banner','=',$request->id_banner)->get();
         return json_encode(['photo'=>$data],200);
     }
+    public function export()
+    {
+        $excel = new ExportContract();
+        return Excel::download($excel, 'Thống Kê Hợp Đồng.xlsx');
+    }
+    public function getSetting(){
+        return view('pages.users.setting');
+    }
+    public function addSetting(Request $request){
+        try {
+            $salary = new Salary();
+            $salary->id_salary = $request->id_salary;
+            $salary->bassic_salary = $request->bassic_salary;
+            $salary->save();
+            return redirect('/home');
+        }catch(\Exception $e){
+            \session()->flash('luong','Bị Trùng Với Dữ Liệu Cũ');
+            return redirect('/setting');
+        }
+        try {
+            $branch = new Branch();
+            $branch->id_branch = $request->id_branch;
+            $branch->name_branch = $request->name_branch;
+            $branch->adress_branch = $request->adress_branch;
+            $branch->save();
+            return redirect('/home');
+        }catch (\Exception $e){
+            \session()->flash('chi-nhanh','Bị Trùng Với Dữ Liệu Cũ');
+            return redirect('/setting');
+        }
 
-}
+        try {
+            $setting = new Position();
+            $setting->id_position = $request->id_position;
+            $setting->name_position = $request->name_position;
+            $setting->save();
+            return redirect('/home');
+
+
+        }catch (\Exception $e){
+                \session()->flash('pos','Bị Trùng Với Dữ Liệu Cũ');
+            return redirect('/setting');
+        }
+
+
+
+}}

@@ -6,9 +6,6 @@
         <div class="col-md-12 m-b-40">
             <div class="overview-wrap">
                 <h2 class="title-1">Chi Tiết Pano</h2>
-                <a type="button" class="au-btn au-btn-icon au-btn--blue" href="import-product">
-                    <i class="zmdi zmdi-plus"></i>Nhập file Excel
-                </a>
             </div>
         </div>
         <form action="{{\Illuminate\Support\Facades\URL::to('/product/update/' . $banners->id)}}"
@@ -171,7 +168,7 @@
                                         <label for="exampleFormControlSelect1">Tỉnh/Thành Phố</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)" onclick="removevalue()">
+                                        <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
                                             <option value="">--Tỉnh/Thành Phố--</option>
                                             @foreach($provinces as $province)
                                                 @if ($banners->tinh == $province->id)
@@ -246,6 +243,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group"> <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="exampleFormControlInput1 uname">Giá Năm: </label>
+                                </div>
+                                <div class="col-md-9 col-sm-12">
+                                    <input class="form-customer-input" value="{{$banners->gianam}}" type="number" id="gianam" name="gianam"
+                                           placeholder="Giá Năm" required>
+                                    <div class="invalid-feedback">Giá Năm không được để trống</div>
+                                </div>
+                            </div>
+                        </div></div>
 
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Hình Ảnh</label>
@@ -255,7 +264,7 @@
 
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Đặc Điểm</label>
-                        <textarea class="form-control" id="dac_diem" name="dac_diem" rows="5"></textarea>
+                        <textarea class="form-control" id="dac_diem" name="dac_diem"  rows="5">{{$banners->dac_diem}}</textarea>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">

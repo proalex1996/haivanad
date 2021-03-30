@@ -14836,6 +14836,26 @@ section {
     margin: unset;
     background-image: url(../images/product.png);
 }
+.icon-users{
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: unset;
+    background-image: url(../images/users.png);
+}
+.icon-door{
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: unset;
+    background-image: url(../images/door.png);
+}
 .icon-dashbroad{
     display: inline-flex;
     width: 40px;

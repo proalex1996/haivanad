@@ -51,6 +51,7 @@ Route::group(['prefix' => 'contract'], function () {
         Route::post('/add', 'ContractController@createContract');
         Route::get('/download', 'ContractController@getDownload');
         Route::get('/destroy/{id}', 'ContractController@destroy');
+        Route::get('/export', 'ContractController@export');
     });
 });
 Route::group(['prefix' => 'users'], function () {
@@ -73,6 +74,14 @@ Route::group(['prefix' => 'users'], function () {
 
     });
 });
+Route::group(['prefix' => 'setting'], function () {
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('/', 'ContractController@getSetting');
+
+        Route::post('/add', 'ContractController@addSetting');
+    });
+});
+
 Route::group(['prefix' => 'customer'], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/', 'CustomerController@getIndex');

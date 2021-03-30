@@ -55,7 +55,6 @@
                     <table class="table table-borderless table-data3 table-test-responsive">
                         <thead>
                         <tr>
-                            <th><input type="checkbox" id="check-all" name="title"></th>
                             <th>STT</th>
                             <th>Mã Nhân Viên</th>
                             <th>Họ Và Tên</th>
@@ -74,7 +73,6 @@
                         <tbody>
                         @foreach($users as $user)
                             <tr>
-                                <td><input type="checkbox" id="check-box" name="check-box"></td>
                                 <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                        aria-expanded="false" id="dropdownMenuLink"> {{$user->id}}</a>
                                     <div class="dropdown-menu">

@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="overview-wrap">
-                    <h2 class="title-1">Quản lý Khách hàng</h2>
+                    <h2 class="title-1">Quản lý Khách Hàng</h2>
                     <div class="exp-excel">
                         <a class="au-btn au-btn-icon au-btn--blue" href="customer/export">
                             <i class="zmdi zmdi-plus"></i>Xuất file Excel
@@ -21,7 +21,6 @@
             </div>
         </div>
         <div class="row m-t-30">
-
             <div class="col-md-12">
                 <div class="fixed_header">
                     <table id="table-data_reponse" class="table table-borderless table-data3">

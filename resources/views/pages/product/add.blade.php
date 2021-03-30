@@ -26,7 +26,6 @@
                                                placeholder="Mã Pano" size="20" onchange="getProduct()" required>
                                         <div class="invalid-feedback">Mã Pano không được để trống</div>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -222,6 +221,19 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group"> <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="exampleFormControlInput1 uname">Giá Năm: </label>
+                                </div>
+                                <div class="col-md-9 col-sm-12">
+                                    <input class="form-customer-input" type="number" id="gianam" name="gianam"
+                                           placeholder="Giá Năm" required>
+                                    <div class="invalid-feedback">Giá Năm không được để trống</div>
+                                </div>
+                            </div>
+                        </div></div>
+
 
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Hình Ảnh:</label>
@@ -233,18 +245,7 @@
                         <label for="exampleFormControlTextarea1">Đặc Điểm:</label>
                         <textarea class="form-control" id="dac_diem" name="dac_diem" rows="5"></textarea>
                     </div>
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                                <label for="exampleFormControlInput1 uname">Giá Năm: </label>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <input class="form-customer-input" type="number" id="gianam" name="gianam"
-                                       placeholder="Giá Năm" required>
-                                <div class="invalid-feedback">Giá Năm không được để trống</div>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="form-group">
                         <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">
                             <i class="zmdi zmdi-plus"></i>Thêm

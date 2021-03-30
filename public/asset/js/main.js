@@ -1797,7 +1797,9 @@ function checkAll() {
         }
     }
 }
+
 $('.input-images').imageUploader();
+
 function getQuan(element) {
     var url = $('#domain').attr('href');
     var id = $(element).find(":selected").val();
@@ -1827,7 +1829,7 @@ function getQuan(element) {
 }
 
 checkAll();
-$('#addrowPayment').on('click',function () {
+$('#addrowPayment').on('click', function () {
 
     $('#idBodyPayment').append(
         `<tr class="idTrPayment">
@@ -1841,13 +1843,12 @@ $('#addrowPayment').on('click',function () {
                        name="id_value_contract[]" required></td>
             <td><input type="text" class="form-control display-input" id="id_vat" onchange="getRatio()" name="id_vat" required></td>
             <td><input type="text" class="form-control display-input" id="total" name="total_value" required></td>
-            <td><input type="date" class="form-control display-input" name="pay_due" id="_pay_due" required>
+            <td><input type="date" class="form-control display-input" name="_pay_due" id="_pay_due" required>
             </td>
         </tr>
 `
     )
 })
-
 
 
 function deleteRowPayment() {
@@ -1860,18 +1861,18 @@ function deleteRowPayment() {
         var tr = td.closest("tr")
 
         tr.remove();
-
     })
 
 
-
 }
+
 getCustomer()
+
 function getCustomer() {
     var url = $('#domain').attr('href');
     var data = $('#name_customer').val();
     $.ajax({
-        url: url+"/api/contract/getCustomer/" + data,
+        url: url + "/api/contract/getCustomer/" + data,
         async: false,
         method: "POST",
         success: function (result) {
@@ -1922,15 +1923,16 @@ $(document).ready(function () {
 });
 getTong();
 getRatio();
+
 function getTong() {
     var gia = $('#value_contract').val();
-    var thue = (($('#thue').val()* gia)/100);
+    var thue = (($('#thue').val() * gia) / 100);
     $('#tong').val(parseInt(gia) + parseInt(thue));
 }
 
 function getRatio() {
     var gia = $('#id_value_contract').val();
-    var thue = (($('#id_vat').val()* gia)/100);
+    var thue = (($('#id_vat').val() * gia) / 100);
     $('#total').val(parseInt(gia) + parseInt(thue));
 
 
@@ -1940,9 +1942,10 @@ function getProduct() {
     var url = $('#domain').attr('href');
     var data = $('#id_banner').val();
     $.ajax({
-        url: url+'/api/contract/getProduct/' + data,
+        url: url + '/api/contract/getProduct/' + data,
         async: false,
-        headers: {'Access-Control-Allow-Origin':'*',
+        headers: {
+            'Access-Control-Allow-Origin': '*',
 
         },
         method: 'POST',
@@ -1954,16 +1957,19 @@ function getProduct() {
         }
     });
 }
+
 product()
+
 function product() {
     var url = $('#domain').attr('href');
     var data = $('#id_banner').val();
     $('#image-input').children().remove();
     $.ajax({
-        url: url+'/api/contract/product/' + data,
+        url: url + '/api/contract/product/' + data,
         async: false,
-        headers: {'Access-Control-Allow-Origin':'*',
-                    'Access-Control-Allow-Headers': '*'
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*'
         },
         method: 'POST',
         success: function (result) {
@@ -1994,12 +2000,12 @@ function product() {
                     //     }
                     // })
                     $.ajax({
-                        url: url+'/api/contract/photo/' + data,
+                        url: url + '/api/contract/photo/' + data,
                         async: false,
                         method: "POST",
                         success: function (result) {
                             var photo = JSON.parse(result).photo;
-                            if (photo !== ""){
+                            if (photo !== "") {
                                 $.each(photo, function (index, element) {
                                     $('#image-input').append(`
                                                     <div class="polaroid">
@@ -2031,31 +2037,32 @@ function product() {
 }
 
 
-
 Ratio();
+
 function Ratio() {
     var url = $('#domain').attr('href');
     var data = $('#id_contract').val();
     $.ajax({
-        url: url+'/api/contract/ratio/' + data,
+        url: url + '/api/contract/ratio/' + data,
         async: false,
-        headers: {'Access-Control-Allow-Origin':'*',
+        headers: {
+            'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Headers': '*'
         },
         method: 'POST',
         success: function (result) {
             var datas = JSON.parse(result).detail
             if (datas.length > 0) {
-                if(datas.length == 1){ $.each(datas, function (index, ele) {
-                    $('#payment_period').val(ele.payment_period)
-                    $('#ratio').val(ele.ratio)
-                    $('#id_value_contract').val(ele.id_value_contract)
-                    $('#id_vat').val(ele.id_vat)
-                    $('#total').val(ele.total_value)
-                    $('#_pay_due').val(ele._pay_due)
-                })}
-
-                 else if(datas.length >1){
+                if (datas.length == 1) {
+                    $.each(datas, function (index, ele) {
+                        $('#payment_period').val(ele.payment_period)
+                        $('#ratio').val(ele.ratio)
+                        $('#id_value_contract').val(ele.id_value_contract)
+                        $('#id_vat').val(ele.id_vat)
+                        $('#total').val(ele.total_value)
+                        $('#_pay_due').val(ele._pay_due)
+                    })
+                } else if (datas.length > 1) {
                     $('.idTrPayment').remove();
                     $.each(datas, function (index, ele) {
                         $('#idBodyPayment').append(

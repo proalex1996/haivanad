@@ -27,6 +27,13 @@ class HomeController extends Controller
     {
         return view('pages.top-page.index');
     }
+    public function check_menu($index)
+    {
+        $menu = $index;
+
+
+    }
+
     public function user(Request $request)
     {
         return view('auth.user');
