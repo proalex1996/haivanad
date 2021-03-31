@@ -15054,7 +15054,7 @@ legend {
     width: 150px;
     margin-left: 10px;
 }
-.table-responsive>td{
+.table-responsive{
     width: 100px;!important;
     overflow-x: auto; !important;
 

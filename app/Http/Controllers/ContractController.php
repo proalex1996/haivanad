@@ -113,7 +113,7 @@ class ContractController extends Controller
         $contract = new ContractModel();
         $contract->id_contract = $request->id_contract;
         $contract->id_customer = $request->name_customer;
-        $contract->id_staff = $request->name_staff;
+        $contract->id_staff = $request->id_staff;
         $contract->id_banner = $request->id_banner;
         $contract->content = basename($request->content_contract->getClientOriginalName());
         $file = $request->file('content_contract');

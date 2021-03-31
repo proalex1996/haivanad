@@ -53,11 +53,16 @@ class CustomerController extends Controller
         $type_customer = DB::table('type_customer')->select('*')->get();
         $customer = DB::table('customer')->select('*')->get();
         $solvency = DB::table('solvency')->select('*')->get();
+        $nguon  = DB::table('nguon_customer')->select('*')->get();
+        $positions = DB::table('positions')->select('*')->get();
         return view('pages.customer.add', [
             'statuss' => $status,
             'type_customers' => $type_customer,
             'customers' => $customer,
-            'solvencys'=>$solvency
+            'solvencys'=>$solvency,
+            'nguons' => $nguon,
+            'positions' => $positions
+
         ]);
 
     }
@@ -74,6 +79,9 @@ class CustomerController extends Controller
         $customer->solvency = $request->solvency;
         $customer->mass = $request->mass;
         $customer->status_customer = $request->status_customer;
+        $customer->adress_customer = $request->adress_customer;
+        $customer->position_customer  = $request->position_customer;
+        $customer->id_nguon =   $request->id_nguon;
         $customer->save();
         return redirect()->action('CustomerController@getIndex');
     }

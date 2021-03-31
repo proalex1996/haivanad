@@ -19,7 +19,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname" style="width: 340px;">Mã Khách Hàng:</label>
+                                        <label for="exampleFormControlInput1 uname">Mã Khách Hàng:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-customer-input" id="customer_id" name="customer_id"
@@ -32,7 +32,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname" style="width: 340px;">Tên Khách Hàng:</label>
+                                        <label for="exampleFormControlInput1 uname">Tên Khách Hàng:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-customer-input" id="name_customer" name="name_customer"
@@ -48,7 +48,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname" style="width: 340px;">Mã Số Thuế:</label>
+                                        <label for="exampleFormControlInput1 uname">Mã Số Thuế:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-customer-input" id="mst" name="mst"
@@ -61,7 +61,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname" style="width: 340px;">Tên Liên Hệ: </label>
+                                        <label for="exampleFormControlInput1 uname" >Tên Liên Hệ: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-customer-input" id="contact_name" name="contact_name"
@@ -77,7 +77,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname" style="width: 340px">Số Điện Thoại:</label>
+                                        <label for="exampleFormControlInput1 uname">Số Điện Thoại:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input class="form-customer-input" type="number" id="phone_customer" name="phone_customer" size="20" maxlength="10" placeholder="Số Điện Thoại" required>
@@ -89,7 +89,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname" style="width: 100px">Email:</label>
+                                        <label for="exampleFormControlInput1 uname" >Email:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input class="form-customer-input" type="email" id="email" name="email_customer" size="20" placeholder="example@mail.com" required>
@@ -104,7 +104,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1" style="width: 340px;">Loại Khách Hàng</label>
+                                        <label for="exampleFormControlSelect1" >Loại Khách Hàng</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <select class="form-customer-input" id="type_customer" name="type_customer">
@@ -119,7 +119,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1" style="width: 340px;">Khả năng thanh toán</label>
+                                        <label for="exampleFormControlSelect1" >Khả năng thanh toán</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <select class="form-control" id="kind_name" name="solvency">
@@ -156,6 +156,54 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input class="form-customer-input" type="text" id="mass" name="mass" size="20" placeholder="Khối lượng" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Nguồn Khách Hàng</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="id_nguon" name="id_nguon">
+                                            @foreach($nguons as $nguon)
+                                                <option value="{{$nguon->id_nguon}}">{{$nguon->name_nguon}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Chức Vụ</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="position_customer" name="position_customer">
+                                            @foreach($positions as $postion)
+                                                <option value="{{$postion->id_position}}">{{$postion->name_position}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="exampleFormControlInput1">Đia Chỉ</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input class="form-customer-input" type="text" id="adress_customer" name="adress_customer" placeholder="Địa Chỉ" required>
                                     </div>
                                 </div>
                             </div>
