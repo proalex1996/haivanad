@@ -14799,7 +14799,7 @@ section {
     display: inline-flex;
     margin-left: 20px;
     padding-top: 10px ;
-    position: fixed;
+    position: absolute;
 }
 .item-menu-mobile{
     display: inline-flex;
