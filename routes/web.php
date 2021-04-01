@@ -86,6 +86,7 @@ Route::group(['prefix' => 'setting'], function () {
 Route::group(['prefix' => 'customer'], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/', 'CustomerController@getIndex');
+        Route::post('/', 'CustomerController@getIndex');
         Route::post('/add', 'CustomerController@createCustomer');
         Route::get('/add', 'CustomerController@addCustomer');
         Route::get('/update/{id}', 'CustomerController@update');

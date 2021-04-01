@@ -10,18 +10,18 @@ use Illuminate\Support\Facades\DB;
         ->join('staff', 'id_staff', '=', 'staff.id')
         ->join('banner', 'contract.id_banner', '=', 'banner.id')
         ->join('kind_contract', 'kind', '=', 'kind_contract.id_contract')
-        ->join('contract_status', 'status_contract','=','contract_status.id_contract')
-        ->select('contract.id', 'contract.id_contract', 'name_customer', 'banner.id_banner', 'contract.content','contract_status.name_status','kind_contract.name_kind',
-            'date_start', 'date_end', 'name_staff', 'value_contract')->groupBy('contract.id')->orderBy('contract.id','DESC')->get();
+        ->join('contract_status', 'status_contract', '=', 'contract_status.id_contract')
+        ->select('contract.id', 'contract.id_contract', 'name_customer', 'banner.id_banner', 'contract.content', 'contract_status.name_status', 'kind_contract.name_kind',
+            'date_start', 'date_end', 'name_staff', 'value_contract')->groupBy('contract.id')->orderBy('contract.id', 'DESC')->get();
     ?>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="overview-wrap">
                     <h2 class="title-1">Tổng Quan</h2>
-{{--                    <button class="au-btn au-btn-icon au-btn--blue">--}}
-{{--                        <i class="zmdi zmdi-plus"></i>In Báo Cáo--}}
-{{--                    </button>--}}
+                    {{--                    <button class="au-btn au-btn-icon au-btn--blue">--}}
+                    {{--                        <i class="zmdi zmdi-plus"></i>In Báo Cáo--}}
+                    {{--                    </button>--}}
                 </div>
             </div>
         </div>
@@ -53,7 +53,9 @@ use Illuminate\Support\Facades\DB;
                             </div>
                             <div class="text">
                                 <h2>388,688</h2>
-                                <span>Tổng Số hợp đồng</span>
+                                <marquee behavior="none" direction="right" style="color: #ffff;">
+                                    Tổng Số hợp đồng
+                                </marquee>
                             </div>
                         </div>
                         <div class="overview-chart">
@@ -65,13 +67,15 @@ use Illuminate\Support\Facades\DB;
             <div class="col-sm-6 col-lg-3">
                 <div class="overview-item overview-item--c3">
                     <div class="overview__inner">
-                        <div class="overview-box clearfix">
+                        <div class="overview-box clearfix" style="display: flex">
                             <div class="icon">
                                 <i class="zmdi zmdi-calendar-note"></i>
                             </div>
                             <div class="text">
                                 <h2>1,086</h2>
-                                <span>Tổng số hợp đồng đã thanh toán</span>
+                                <marquee behavior="none" direction="right" style="color: #ffff;">
+                                    Tổng Số Hợp Đồng Đã Thanh Toán
+                                </marquee>
                             </div>
                         </div>
                         <div class="overview-chart">
@@ -89,6 +93,7 @@ use Illuminate\Support\Facades\DB;
                             </div>
                             <div class="text">
                                 <h2>$1,060,386</h2>
+
                                 <span>Tổng danh thu</span>
                             </div>
                         </div>
@@ -195,7 +200,8 @@ use Illuminate\Support\Facades\DB;
                                                 thông tin hợp đồng</a>
                                             <a id="open-deleteContract" class="dropdown-item"
                                                data-id_data="{{$contract->id}}" data-toggle="modal"
-                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa hợp đồng</a>
+                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa
+                                                hợp đồng</a>
                                             <hr>
                                             <a id="open-dueContract" class="dropdown-item"
                                                data-contract_id="{{$contract->id}}" data-toggle="modal"
@@ -209,7 +215,9 @@ use Illuminate\Support\Facades\DB;
                                             href="{{URL::to('/public/storage/contract') . '/' . $contract->content}}">Tải
                                             về</a>
                                     </td>
-                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}} Ngày</td>
+                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}}
+                                        Ngày
+                                    </td>
                                     <td>{{$contract->name_kind}}</td>
                                     <td>{{$contract->_pay_due}}</td>
                                     <td class="value_contract"><span>{{$contract->value_contract}}</span>
@@ -227,7 +235,8 @@ use Illuminate\Support\Facades\DB;
                                                 thông tin hợp đồng</a>
                                             <a id="open-deleteContract" class="dropdown-item"
                                                data-id_data="{{$contract->id}}" data-toggle="modal"
-                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa hợp đồng</a>
+                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa
+                                                hợp đồng</a>
                                             <hr>
                                             <a id="open-dueContract" class="dropdown-item"
                                                data-contract_id="{{$contract->id}}" data-toggle="modal"
@@ -241,7 +250,9 @@ use Illuminate\Support\Facades\DB;
                                             href="{{URL::to('/public/storage/contract') . '/' . $contract->content}}">Tải
                                             về</a>
                                     </td>
-                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}} Ngày</td>
+                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}}
+                                        Ngày
+                                    </td>
                                     <td>{{$contract->name_kind}}</td>
                                     <td>{{$contract->_pay_due}}</td>
                                     <td class="value_contract"><span>{{$contract->value_contract}}</span>
@@ -258,7 +269,8 @@ use Illuminate\Support\Facades\DB;
                                                 thông tin hợp đồng</a>
                                             <a id="open-deleteContract" class="dropdown-item"
                                                data-id_data="{{$contract->id}}" data-toggle="modal"
-                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa hợp đồng</a>
+                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa
+                                                hợp đồng</a>
                                             <hr>
                                             <a id="open-dueContract" class="dropdown-item"
                                                data-contract_id="{{$contract->id}}" data-toggle="modal"
@@ -272,7 +284,9 @@ use Illuminate\Support\Facades\DB;
                                             href="{{URL::to('/public/storage/contract') . '/' . $contract->content}}">Tải
                                             về</a>
                                     </td>
-                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}} Ngày</td>
+                                    <td>{{\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())}}
+                                        Ngày
+                                    </td>
                                     <td>{{$contract->name_kind}}</td>
                                     <td>{{$contract->_pay_due}}</td>
                                     <td class="value_contract"><span>{{$contract->value_contract}}</span>

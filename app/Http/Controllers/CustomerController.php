@@ -38,13 +38,45 @@ class CustomerController extends Controller
 
         ];
     }
-    public function getIndex(){
+    public function getIndex(Request $request){
+        $status = DB::table('status')->select('*')->get();
+        $type_customer = DB::table('type_customer')->select('*')->get();
         $customers = DB::table('customer')
             ->join('type_customer','type_customer','=','type_customer.id')
             ->join('status','status_customer','=','status.id_status')
             ->join('solvency','solvency','=','solvency.id')
-            ->select('customer.id','customer.customer_id','customer.name_customer','customer.adress_customer','contact_name','mst','phone_customer','email_customer','type_customer.name_type','solvency.name_solvency','mass','status')->paginate(20);
-        return view('pages.customer.index',['customers' => $customers]);
+            ->select('customer.id','customer.customer_id','customer.name_customer','customer.adress_customer',
+                'contact_name','mst','phone_customer','email_customer','type_customer.name_type','solvency.name_solvency','mass','status');
+       if(!empty($request->customer_id)){
+           $customers = $customers ->where('customer_id','=',$request->customer_id);
+       }
+        if(!empty($request->name_customer)){
+            $customers = $customers ->where('name_customer','=',$request->name_customer);
+        }
+        if(!empty($request->mst)){
+            $customers = $customers ->where('customer.mst','=',$request->mst);
+        }
+        if(!empty($request->adress_customer)){
+            $customers = $customers ->where('customer.adress_customer','=',$request->adress_customer);
+        }
+        if(!empty($request->contact_name)){
+            $customers = $customers ->where('customer.contact_name','=',$request->contact_name);
+        }
+        if(!empty($request->type_customer)){
+            $customers = $customers ->where('customer.type_customer','=',$request->type_customer);
+        }
+        if(!empty($request->status_customer)){
+            $customers = $customers ->where('customer.status_customer','=',$request->status_customer);
+        }
+        if(!empty($request->_cmnd)){
+            $customers = $customers ->where('customer._cmnd','=',$request->_cmnd);
+        }
+        $customers= $customers->get();
+        return view('pages.customer.index',
+            ['customers' => $customers,
+                'type_customers' => $type_customer,
+                'status_customers' => $status
+            ]);
     }
 
     public function addCustomer(Request $request)
@@ -73,6 +105,8 @@ class CustomerController extends Controller
         $customer->name_customer = $request->name_customer;
         $customer->mst = $request->mst;
         $customer->contact_name = $request->contact_name;
+        $customer->_bank = $request->_bank;
+        $customer->_cmnd = $request->_cmnd;
         $customer->phone_customer = $request->phone_customer;
         $customer->email_customer = $request->email_customer;
         $customer->type_customer = $request->type_customer;
@@ -81,7 +115,7 @@ class CustomerController extends Controller
         $customer->status_customer = $request->status_customer;
         $customer->adress_customer = $request->adress_customer;
         $customer->position_customer  = $request->position_customer;
-        $customer->id_nguon =   $request->id_nguon;
+        $customer->id_nguon = $request->id_nguon;
         $customer->save();
         return redirect()->action('CustomerController@getIndex');
     }

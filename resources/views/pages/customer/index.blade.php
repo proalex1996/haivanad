@@ -22,8 +22,73 @@
         </div>
         <div class="row m-t-30">
             <div class="col-md-12">
+                <form class="post-form-sort" action="{{url('/customer')}}" method="post" style="margin-bottom: 3em">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12 m-t-10">
+                            <label for="exampleFormControlInput1 ">Mã Khách Hàng:</label>
+                            <input type="text" class="form-control" id="customer_id" name="customer_id"
+                                   placeholder="Mã Khách Hàng">
+                        </div>
+                        <div class="col-md-3 col-sm-12 m-t-10">
+                            <label for="exampleFormControlSelect1">Tên Khách Hàng:</label>
+                             <input type="text" class="form-control" id="name_customer" name="name_customer"
+                                   placeholder="Tên Khách Hàng">
+                        </div>
+                        <div class="col-md-3 col-sm-12 m-t-10">
+                            <label for="exampleFormControlInput1 ">Mã Số Thuế</label>
+                               <input type="text" class="form-control" id="mst" name="mst"
+                                   placeholder="Mã Số Thuế">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12 m-t-10">
+                            <label for="exampleFormControlSelect1">Địa Chỉ:</label>
+                            <input type="text" class="form-control" id="adress_customer" name="adress_customer"
+                                   placeholder="Địa Chỉ">
+                        </div>
+                        <div class="col-md-3 col-sm-12 m-t-10">
+                            <label for="exampleFormControlSelect1">Người Liên Hệ</label>
+                            <input type="text" class="form-control" id="contact_name" name="contact_name"
+                                   placeholder="Người Liên Hệ">
+                        </div>
+                        <div class="col-md-3 col-sm-12 m-t-10">
+                            <label for="exampleFormControlSelect1">Loại Khách Hàng</label>
+                            <select class="form-control" id="type_customer" name="type_customer">
+                                <option value="">--Loại Khách Hàng--</option>
+                                @foreach($type_customers as $type_customer)
+                                    <option value="{{$type_customer->id}}">{{$type_customer->name_type}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12 m-t-10">
+                            <label for="exampleFormControlSelect1">CMND</label>
+                            <input type="text" class="form-control" id="_cmnd" name="_cmnd"
+                                   placeholder="Chứng Minh Nhân Dân">
+                        </div>
+                        <div class="col-md-3 col-sm-12 m-t-10">
+                            <label for="exampleFormControlSelect1">Trạng Thái</label>
+                            <select class="form-control" id="status_customer" name="status_customer">
+                                <option value="">--Loại Khách Hàng--</option>
+                                @foreach($status_customers as $status_customer)
+                                    <option value="{{$status_customer->id_status}}">{{$status_customer->status}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-2 col-sm-12 m-t-30">
+                            <label for="exampleFormControlInput1 "></label>
+                            <button class="btn btn-primary btn-block" type="submit" aria-expanded="false">Tìm
+                            </button>
+                        </div>
+                    </div>
+
+
+                </form>
                 <div class="fixed_header">
-                    <table id="table-data_reponse" class="table table-borderless table-data3">
+                    <table id="" class="table table-borderless table-data3">
                         <thead>
                         <tr>
                             <th>STT</th>
@@ -42,8 +107,8 @@
                         </thead>
                         <tbody>
                         @foreach($customers as $customer)
-                                <tr>
-                                    <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                <tr id = "redirect">
+                                    <td><a class="dropdown-toggle" data-target="{{$customer->id}}" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$customer->id}}</a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item"

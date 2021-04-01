@@ -21,7 +21,7 @@
                                     <label for="exampleFormControlInput1 uname">Mã Hợp đồng</label>
                                 </div>
                                 <div class="col-xl-6 col-sm-12">
-                                    <input type="text" class="form-control" id="id_contract" name="id_contract"
+                                    <input type="text" class="form-control" value="<?=uniqid()?>" id="id_contract" name="id_contract"
                                            placeholder="Tên Hợp đồng" required>
                                     <div class="invalid-feedback">Tên Hợp đồng không được để trống</div>
                                 </div>

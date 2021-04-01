@@ -22,7 +22,7 @@
                                         <label for="exampleFormControlInput1 uname">Mã Khách Hàng:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input" id="customer_id" name="customer_id"
+                                        <input type="text" class="form-customer-input" value="<?=uniqid()?>" id="customer_id" name="customer_id"
                                                placeholder="Mã Khách Hàng" size="20" required>
                                         <div class="invalid-feedback">Mã khách hàng không được để trống</div>
                                     </div>
@@ -80,7 +80,7 @@
                                         <label for="exampleFormControlInput1 uname">Số Điện Thoại:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="number" id="phone_customer" name="phone_customer" size="20" maxlength="10" placeholder="Số Điện Thoại" required>
+                                        <input class="form-customer-input" type="tel" id="phone_customer" name="phone_customer" size="20" maxlength="10" placeholder="Số Điện Thoại" required>
                                         <div class="invalid-feedback">Số điện thoại không được để trống</div>
                                     </div>
 
@@ -185,12 +185,42 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <select class="form-control" id="position_customer" name="position_customer">
+                                            <option value="">--Chức Vụ--</option>
                                             @foreach($positions as $postion)
                                                 <option value="{{$postion->id_position}}">{{$postion->name_position}}</option>
                                             @endforeach
                                         </select>
                                     </div>
 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1" >Tài Khoản Ngân Hàng</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" class="form-customer-input" oninput="addCommas(this)" maxlength="20" id="_bank" name="_bank"
+                                               placeholder="1111-2222-3333-4444" required>
+                                        <div class="invalid-feedback">Tên liên hệ không được để trống</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Chứng Minh Nhân Dân</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" class="form-customer-input" id="_cmnd" name="_cmnd"
+                                               placeholder="Chứng Minh Nhân Dân" required>
+                                        <div class="invalid-feedback">Tên liên hệ không được để trống</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

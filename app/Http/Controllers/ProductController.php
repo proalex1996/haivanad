@@ -39,25 +39,35 @@ class ProductController extends Controller
     {
         $banners = DB::table('banner')
             ->join('status_banner', 'banner.name_status', '=', 'status_banner.id_status')
-            ->select('banner.id', 'status_banner.name_status', 'status_banner.id_status', 'banner.id_banner');
+            ->join('type_banner','banner.id_typebanner','=','type_banner.id_typebanner')
+            ->join('province','banner.tinh','=','province._code')
+            ->select('banner.id', 'status_banner.name_status','province._name', 'type_banner.name_type','banner.banner_adress','status_banner.id_status', 'banner.id_banner');
         if (!empty($request->id_banner)) {
-            $banners = $banners->where('banner.id_banner', 'LIKE', '%' . $request->id_banner . '%');
+            $banners = $banners->where('banner.id_banner', '=',  $request->id_banner );
         }
         if (!empty($request->id_status)) {
             $banners = $banners->where('banner.name_status', '=', $request->id_status);
         }
-        if (!empty($request->system_banner)) {
-            $banners = $banners->where('banner.system_banner', 'LIKE', '%' . $request->system_banner . '%');
-        };
+        if (!empty($request->tinh)) {
+            $banners = $banners->where('banner.tinh', '=', $request->tinh);
+        }
+        if (!empty($request->id_typebanner)) {
+            $banners = $banners->where('banner.id_typebanner', '=', $request->id_typebanner);
+        }
+
         $banners = $banners->groupBy('banner.id')->orderBy('banner.id', 'DESC')->get();
         $status_banner = DB::table('status_banner')->select('*')->get();
+        $province = DB::table('province')->select('*')->get();
+        $type_banner = DB::table('type_banner')->select('*')->get();
         $contract = DB::table('contract')
             ->join('banner', 'contract.id_banner', '=', 'banner.id_banner')
             ->join('customer', 'contract.id_customer', '=', 'customer.customer_id')
             ->select('banner.id_banner', 'contract.id_contract', 'customer.name_customer')->groupBy('contract.id')->orderBy('contract.id', 'DESC')->get();
         return view('pages.product.index', [
             'banners' => $banners,
-            'status_banners' => $status_banner
+            'status_banners' => $status_banner,
+            'provinces' => $province,
+            'type_banners' => $type_banner
         ]);
     }
 
@@ -98,7 +108,7 @@ class ProductController extends Controller
         $product->note_banner = $request->note_banner;
         $product->save();
         $files =array($request->file('files'));
-        if(!empty($files)){
+        if(!empty($files[0]) || !is_null($files[0])){
             for($index = 0;$index < count($files);$index++){
                 $photo = new PhotoModel();
                 $file = $files[$index];
@@ -183,7 +193,7 @@ class ProductController extends Controller
     {
         $request->all();
         $districts = DB::table('district')
-            ->join('province', 'district._province_id', '=', 'province.id')
+            ->join('province', 'district._province_id', '=', 'province._code')
             ->select('*')
             ->where('district._province_id', '=', $request->id)->get();
         return json_encode(['district' => $districts], 200);

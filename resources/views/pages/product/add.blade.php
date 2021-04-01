@@ -5,9 +5,9 @@
         <div class="col-md-12 m-b-40">
             <div class="overview-wrap">
                 <h2 class="title-1">Thêm Mới Pano</h2>
-{{--                <a type="button" class="au-btn au-btn-icon au-btn--blue" href="import-product">--}}
-{{--                    <i class="zmdi zmdi-plus"></i>Nhập file Excel--}}
-{{--                </a>--}}
+                <a type="button" class="au-btn au-btn-icon au-btn--blue" href="import-product">
+                    <i class="zmdi zmdi-plus"></i>Nhập file Excel
+                </a>
             </div>
         </div>
         <form action="add" enctype="multipart/form-data" class="needs-validation" method="post">
@@ -22,7 +22,7 @@
                                         <label for="exampleFormControlInput1">Mã Pano: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input" id="id_banner" name="id_banner"
+                                        <input type="text" class="form-customer-input" value="<?=uniqid(5)?>" id="id_banner" name="id_banner"
                                                placeholder="Mã Pano" size="20" onchange="getProduct()" required>
                                         <div class="invalid-feedback">Mã Pano không được để trống</div>
                                     </div>
@@ -166,7 +166,7 @@
                                         <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
                                             <option value="">--Tỉnh/Thành Phố--</option>
                                             @foreach($provinces as $province)
-                                                <option value="{{$province -> id}}">{{$province -> _name}}</option>
+                                                <option value="{{$province -> _code}}">{{$province -> _name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -236,11 +236,12 @@
 
 
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Hình Ảnh:</label>
+                        <label for="exampleFormControlSelect1" >Hình Ảnh:</label>
                         <div class="input-images">
                         </div>
                     </div>
-
+                        <div class="m-l-95 color-session">
+                        </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Đặc Điểm:</label>
                         <textarea class="form-control" id="dac_diem" name="dac_diem" rows="5"></textarea>

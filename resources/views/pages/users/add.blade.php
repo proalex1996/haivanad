@@ -19,9 +19,10 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Tên Nhân Viên:</label>                                    </div>
+                                        <label for="exampleFormControlInput1 uname">Tên Nhân Viên:</label>
+                                    </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input" id="id_staff"
+                                        <input type="text" class="form-customer-input" value="<?=uniqid()?>" id="id_staff"
                                                name="name_staff"
                                                placeholder="Tên nhân viên" required>
                                         <div class="invalid-feedback">Tên nhân viên không được để trống</div>
@@ -32,7 +33,8 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Số Điện Thoại: </label>                                    </div>
+                                        <label for="exampleFormControlInput1 uname">Số Điện Thoại: </label>
+                                    </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-customer-input" id="staff_phone"
                                                name="staff_phone"
@@ -48,7 +50,8 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">CMND: </label>                                    </div>
+                                        <label for="exampleFormControlInput1 uname">CMND: </label>
+                                    </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-customer-input" id="id_cmnd"
                                                name="id_cmnd"
@@ -61,7 +64,8 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Email: </label>                                    </div>
+                                        <label for="exampleFormControlInput1 uname">Email: </label>
+                                    </div>
                                     <div class="col-md-6 col-sm-12">
                                             <input type="text" class="form-customer-input" id="staff_email"
                                                    name="staff_email"
@@ -83,7 +87,8 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Mật Khẩu: </label>                                    </div>
+                                        <label for="exampleFormControlInput1 uname">Mật Khẩu: </label>
+                                    </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-customer-input" id="password"
                                                name="password"

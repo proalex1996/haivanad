@@ -1790,12 +1790,15 @@ $("#riverroad-tb").tooltip({content: '<img src="' + $("#riverroad-tb").attr("dat
 
 
 function checkAll() {
-    document.getElementById('check-all').onclick = function () {
-        var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        for (var checkbox of checkboxes) {
-            checkbox.checked = this.checked;
+    if(document.getElementById('check-all') !== null){
+        document.getElementById('check-all').onclick = function () {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            for (var checkbox of checkboxes) {
+                checkbox.checked = this.checked;
+            }
         }
     }
+
 }
 
 $('.input-images').imageUploader();
@@ -2089,9 +2092,88 @@ function Ratio() {
         }
     })
 }
+RamdomID();
+
+function RamdomID() {
+    function IDGenerator() {
+
+        this.length = 8;
+        this.timestamp = +new Date;
+
+        var _getRandomInt = function( min, max ) {
+            return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
+        }
+
+        this.generate = function() {
+            var ts = this.timestamp.toString();
+            var parts = ts.split( "" ).reverse();
+            var id = "";
+
+            for( var i = 0; i < this.length; ++i ) {
+                var index = _getRandomInt( 0, parts.length - 1 );
+                id += parts[index];
+            }
+
+            return id;
+        }
 
 
+    }
+        var generator = new IDGenerator();
+        $('#id_banner').val(generator.generate())
+}
+countSearch()
+function countSearch() {
+    $('#count').append(`<label> Tìm Thấy Được ${$('.id_banner').length} Sản Phẩm</label>`)
+}
 
+function fomatBank(elements) {
+    var num = $(elements).val();
+    var number = num.replace(/\s/g, '');
+    var result = "";
+    var gap_size = 4; //Desired distance between spaces
+
+    while ((number.length%4) == 0) // Loop through string
+    {
+        result = result  + number.substring(0,number.length % gap_size)+" "; // Insert space character
+        number = number.substring(gap_size);
+        return $(elements).val(number+result);
+
+    }
+
+
+}
+// $('#_bank').change(function () {
+//     var num =$('#_bank').val();
+//     var result = "";
+//     var gap_size = 4; //Desired distance between spaces
+//
+//     while (num.length > 0) // Loop through string
+//     {
+//         result = result + " " + num.substring(0,gap_size); // Insert space character
+//         num = num.substring(gap_size);  // Trim String
+//         $('#_bank').val(result)
+//     }
+//
+// })
+
+function addCommas(elements) {
+    var nStr = $(elements).val().toString().replace(/\s/g, '');
+    var x = nStr.split('.');
+    var x1 = x[0];
+    var x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{4})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ' ' + '$2');
+    } nStr = x1 + x2
+    $(elements).val(nStr);
+}
+
+$('#redirect').dblclick(function () {
+    var url = $('#domain').attr('href');
+    var data = $('#dropdownMenuLink').attr('data-target')
+    location.replace(url+"/customer/update/"+data)
+})
 
 
 

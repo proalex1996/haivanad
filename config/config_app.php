@@ -7,6 +7,7 @@ return array(
         'name' => 'haivanad',
         'url_api' => 'http://localhost/haivanad/api',
         'port' => ':8888/',
-        'domain' => 'http://haivan.kaviet.vn'
+        'domain' => 'http://haivan.kaviet.vn',
+        'local' => 'http://localhost:8888/haivanad'
     )
 );
