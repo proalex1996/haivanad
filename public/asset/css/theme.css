@@ -15121,3 +15121,14 @@ div.container-image-text {
     margin-left: 1.5rem;
     margin-right: 1.5rem;
 }
+.chosen-single{
+    padding: 1%;
+    height: 30px; !important;
+    border-radius: unset;
+    font-size: 17px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+.chosen-results{
+
+    font-size: 17px; !important;
+}

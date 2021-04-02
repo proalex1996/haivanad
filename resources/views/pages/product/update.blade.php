@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-customer-input" data-target="{{$banners->id_banner}}"
-                                               value="{{$banners->id_banner}}" id="id_banners" name="id_banner"
+                                               value="{{$banners->id_banner}}" id="id_banner" name="id_banner"
                                                placeholder="Mã Pano" size="20" onchange="getProduct()" required>
                                         <div class="invalid-feedback">Mã Pano không được để trống</div>
                                     </div>
@@ -36,7 +36,7 @@
                                         <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_typebanner" name="id_typebanner">
+                                        <select class="form-control" name="id_typebanner">
                                             @foreach($type_banners as $type_banner)
                                                 @if($banners->id_typebanner == $type_banner->id_typebanner)
                                                     <option value="{{$type_banner->id_typebanner}}" selected>{{$type_banner->name_type}}</option>
@@ -59,7 +59,7 @@
                                         <label for="exampleFormControlInput1">Kết Cấu: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input" id="id_system" value="{{$banners -> id_system}}" name="id_system"
+                                        <input type="text" class="form-customer-input"  value="{{$banners -> id_system}}" name="id_system"
                                                placeholder="Kết Cấu" required>
                                     </div>
                                 </div>
@@ -70,7 +70,7 @@
                                         <label for="exampleFormControlInput1 uname">Vị Trí(Tên Pano):</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input" id="_name_banner" value="{{$banners -> _name_banner}}" name="_name_banner"
+                                        <input type="text" class="form-customer-input"  value="{{$banners -> _name_banner}}" name="_name_banner"
                                                placeholder="Tên Vị Trí" required>
                                     </div>
 
@@ -86,7 +86,7 @@
                                         <label for="exampleFormControlSelect1">Trạng Thái:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="status_banner" name="status_banner">
+                                        <select class="form-control"  name="status_banner">
                                             @foreach($statuss as $status)
                                                 @if($banners->name_banner == $status->id_status)
                                                     <option value="{{$status->id_status}}" selected>{{$status->name_status}}</option>
@@ -108,7 +108,7 @@
                                         <label for="exampleFormControlInput1 uname">Địa Chỉ: </label>
                                     </div>
                                     <div class="col-md-9 col-sm-12">
-                                        <input type="text" class="form-customer-input" id="banner_adress" value="{{$banners -> banner_adress}}" name="banner_adress"
+                                        <input type="text" class="form-customer-input"  value="{{$banners -> banner_adress}}" name="banner_adress"
                                                placeholder="Địa chỉ" required>
                                         <div class="invalid-feedback">Địa chỉ không được để trống</div>
                                     </div>
@@ -124,7 +124,7 @@
                                         <label for="exampleFormControlSelect1">Tỉnh/Thành Phố:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
+                                        <select class="form-control" name="tinh" onchange="getQuan(this)">
                                             <option value="">--Tỉnh/Thành Phố--</option>
                                             @foreach($provinces as $province)
                                                 @if ($banners->tinh == $province->_code)
@@ -166,7 +166,7 @@
                                         <label for="exampleFormControlInput1 uname">Kích Thước:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="number" value="{{$banners->size_banner}}" id="size_banner" name="size_banner"
+                                        <input class="form-customer-input" type="number" value="{{$banners->size_banner}}" name="size_banner"
                                                placeholder="Kích thước" required>
                                         <div class="invalid-feedback">Kích thước không được để trống</div>
                                     </div>
@@ -179,7 +179,7 @@
                                         <label for="exampleFormControlInput1 uname">Diện Tích: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="text" value="{{$banners->dien_tich}}" id="dien_tich" name="dien_tich"
+                                        <input class="form-customer-input" type="text" value="{{$banners->dien_tich}}" name="dien_tich"
                                                placeholder="Diện Tích" required>
                                         <div class="invalid-feedback">Email không được để trống</div>
                                     </div>
@@ -196,7 +196,7 @@
                                         <label for="exampleFormControlInput1 uname">Tổng Chiều Cao: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="text" value="{{$banners->height_banner}}" id="height_banner" name="height_banner"
+                                        <input class="form-customer-input" type="text" value="{{$banners->height_banner}}"  name="height_banner"
                                                placeholder="Tổng chiều cao" required>
                                         <div class="invalid-feedback">Email không được để trống</div>
                                     </div>
@@ -208,7 +208,7 @@
                                         <label for="exampleFormControlInput1 uname">Hệ Thống Đèn: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="light_system" value="{{$banners->light_system}}" name="light_system"
+                                        <input class="form-customer-input" type="text" value="{{$banners->light_system}}" name="light_system"
                                                placeholder="Hệ thống đèn" required>
                                         <div class="invalid-feedback">Hệ thống đèn không được để trống</div>
                                     </div>
@@ -226,7 +226,7 @@
                                         <label for="exampleFormControlInput1 uname">Lưu Lượng Người: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="number" id="flow" name="flow"
+                                        <input class="form-customer-input" type="number" name="flow"
                                                placeholder="Lưu Lượng Người" value="{{$banners->flow}}" required>
                                         <div class="invalid-feedback">Lưu Lượng Người không được để trống</div>
                                     </div>
@@ -238,7 +238,7 @@
                                         <label for="exampleFormControlInput1 uname">Điểm Escom: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="escom" name="escom"
+                                        <input class="form-customer-input" type="text" name="escom"
                                                placeholder="Điểm Escom" value="{{$banners->escom}}" required>
                                         <div class="invalid-feedback">Điểm Escom không được để trống</div>
                                     </div>
@@ -256,7 +256,7 @@
                                         <label for="exampleFormControlInput1 uname">Ghi Chú: </label>
                                     </div>
                                     <div class="col-md-9 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="note_banner" value="{{$banners->note_banner}}" name="note_banner"
+                                        <input class="form-customer-input" type="text" value="{{$banners->note_banner}}" name="note_banner"
                                                placeholder="Ghi Chú">
                                     </div>
                                 </div>
@@ -273,7 +273,7 @@
                                         <label for="exampleFormControlInput1 uname">Giá Năm: </label>
                                     </div>
                                     <div class="col-md-9 col-sm-12">
-                                        <input class="form-customer-input" type="number" value="{{$banners->gianam}}" id="gianam" name="gianam"
+                                        <input class="form-customer-input" type="number" value="{{$banners->gianam}}" name="gianam"
                                                placeholder="Giá Năm" required>
                                         <div class="invalid-feedback">Giá Năm không được để trống</div>
                                     </div>
@@ -283,7 +283,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Đặc Điểm:</label>
-                        <textarea class="form-control" id="dac_diem" name="dac_diem" rows="5">{{$banners->dac_diem}}</textarea>
+                        <textarea class="form-control" name="dac_diem" rows="5">{{$banners->dac_diem}}</textarea>
                     </div>
 
                     <div class="form-group">
@@ -291,9 +291,6 @@
                         <div class="input-images-2">
                         </div>
                     </div>
-                    <div class="m-l-95 color-session">
-                    </div>
-
 
                     <div class="form-group">
                         <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">

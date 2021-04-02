@@ -1873,7 +1873,7 @@ getCustomer()
 
 function getCustomer() {
     var url = $('#domain').attr('href');
-    var data = $('#name_customer').val();
+    var data = $('#id_customer').val();
     $.ajax({
         url: url + "/api/contract/getCustomer/" + data,
         async: false,
@@ -1981,7 +1981,7 @@ function product() {
                 $.each(datas, function (index, ele) {
                     $('#id_typebanner').append(`<option value='${ele.id_typebanner}' selected>${ele.name_type}</option>`);
                     $('#id_system').val(ele.id_system)
-                    $('#location').val(ele.location);
+                    $('#location').val(ele._name_banner);
                     $('#dien_tích').val(ele.dien_tich);
                     $('#tinh').val(ele.tinh);
                     getQuan($('#tinh'))
@@ -2097,7 +2097,7 @@ RamdomID();
 function RamdomID() {
     function IDGenerator() {
 
-        this.length = 8;
+        this.length = 4;
         this.timestamp = +new Date;
 
         var _getRandomInt = function( min, max ) {
@@ -2116,11 +2116,14 @@ function RamdomID() {
 
             return id;
         }
-
-
     }
+    var currentYear = (new Date).getFullYear();
         var generator = new IDGenerator();
-        $('#id_banner').val(generator.generate())
+        $('#id_banners').val(currentYear+'HV'+generator.generate())
+        $('#id_customers').val(currentYear+'HV'+generator.generate())
+        $('#id_staffs').val(currentYear+'HV'+generator.generate())
+        $('#id_contracts').val(currentYear+'HV'+generator.generate())
+
 }
 countSearch()
 function countSearch() {
@@ -2169,11 +2172,43 @@ function addCommas(elements) {
     $(elements).val(nStr);
 }
 
-$('#redirect').dblclick(function () {
+$('[id^="redirect"]').dblclick(function () {
     var url = $('#domain').attr('href');
-    var data = $('#dropdownMenuLink').attr('data-target')
-    location.replace(url+"/customer/update/"+data)
+    var data = $(this).find('td:first').find('a:first').attr('data-target');
+    location.assign(url+"/customer/update/"+data)
 })
+getPhoto()
+function getPhoto() {
+    var url = $('#domain').attr('href');
+    var data = $('#id_banner').val();
+    $.ajax({
+        url: url + '/api/product/photo/'+ data,
+        async: false,
+        method: 'POST',
+        success: function (result) {
+            var datas = JSON.parse(result).photo
+
+            let preloaded = [];
+            $.each(datas,function (index,elements) {
+                preloaded.push(
+                    {id: elements.id , src: url+'/public/storage/content/'+elements._name_photo}
+                );
+            })
+            $('.input-images-2').imageUploader({
+                preloaded: preloaded,
+                imagesInputName: 'photos',
+                preloadedInputName: 'old',
+                maxSize: 2 * 1024 * 1024,
+                maxFiles: 10
+            });
+
+        }
+    });
+
+}
+$(document).ready(function(){
+    $(".chosen-select").chosen({no_results_text: "Không có kết quả nào!"+" "})
+});
 
 
 

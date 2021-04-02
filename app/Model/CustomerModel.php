@@ -22,6 +22,7 @@ class CustomerModel extends Model
         'solvency',
         'mass',
         'status_customer',
-        'id_nguon'
+        'id_nguon',
+        'adress_customer'
     ];
 }

@@ -22,7 +22,7 @@
                                         <label for="exampleFormControlInput1">Mã Pano: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input" value="<?=uniqid(5)?>" id="id_banner" name="id_banner"
+                                        <input type="text" class="form-customer-input"  id="id_banners" name="id_banner"
                                                placeholder="Mã Pano" size="20" onchange="getProduct()" required>
                                         <div class="invalid-feedback">Mã Pano không được để trống</div>
                                     </div>

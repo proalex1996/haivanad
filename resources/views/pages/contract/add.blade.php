@@ -21,7 +21,7 @@
                                     <label for="exampleFormControlInput1 uname">Mã Hợp đồng</label>
                                 </div>
                                 <div class="col-xl-6 col-sm-12">
-                                    <input type="text" class="form-control" value="<?=uniqid()?>" id="id_contract" name="id_contract"
+                                    <input type="text" class="form-control" id="id_contracts" name="id_contract"
                                            placeholder="Tên Hợp đồng" required>
                                     <div class="invalid-feedback">Tên Hợp đồng không được để trống</div>
                                 </div>
@@ -33,7 +33,8 @@
                                     <label for="exampleFormControlSelect2">Nhân Viên Phụ Trách</label>
                                 </div>
                                 <div class="col-xl-5 col-sm-12">
-                                    <select class="form-control " id="exampleFormControlSelect2" name="id_staff" required>
+                                    <select class="form-control chosen-select" id="exampleFormControlSelect2" name="id_staff" required>
+                                        <option value="">--Nhân Viên--</option>
                                         @foreach($staffs as $staff)
                                             <option value="{{$staff->id_staff}}">{{$staff->name}}</option>
                                     @endforeach
@@ -67,14 +68,16 @@
                                         <label for="exampleFormControlSelect1">Tên khách hàng</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="name_customer" name="name_customer"
-                                                onchange="getCustomer()">
-                                            <option value="">--Chọn Khách Hàng--</option>
-                                            @foreach($customers as $customer)
-                                                <option
-                                                    value="{{$customer->customer_id}}">{{$customer->name_customer}}</option>
-                                            @endforeach
-                                        </select>
+                                        <div class="form-group">
+                                            <select class="form-control chosen-select custom-chosen" id="id_customer" name="name_customer"
+                                                    onchange="getCustomer()">
+                                                <option value="">--Chọn Khách Hàng--</option>
+                                                @foreach($customers as $customer)
+                                                    <option
+                                                        value="{{$customer->customer_id}}">{{$customer->name_customer}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -113,7 +116,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname" style="width: 284px;">Số Điện
+                                        <label for="exampleFormControlInput1 uname">Số Điện
                                             Thoại</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
@@ -131,7 +134,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname" style="width: 100px;">Đại
+                                        <label for="exampleFormControlInput1 uname">Đại
                                             Diện</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
@@ -146,7 +149,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1" style="width: 116px;">Chức Vụ</label>
+                                        <label for="exampleFormControlSelect1">Chức Vụ</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <select class="form-control" id="position_customer" name="position_customer">
@@ -179,11 +182,10 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1" style="width: 150px;">Mã Sản Phẩm</label>
+                                        <label for="exampleFormControlSelect1">Mã Sản Phẩm</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_banner" name="id_banner"
-                                                onchange="product()">
+                                        <select class="form-control chosen-select" id="id_banner" name="id_banner" onchange="product()">
                                             <option value="">--Chọn Mã Pano--</option>
                                             @foreach($banners as $banner)
                                                 <option value="{{$banner->id_banner}}">{{$banner->id_banner}}</option>
@@ -242,7 +244,7 @@
                                         <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
                                             <option value="">--Tỉnh/Thành Phố--</option>
                                             @foreach($provinces as $province)
-                                                <option value="{{$province -> id}}">{{$province -> _name}}</option>
+                                                <option value="{{$province -> _code}}">{{$province -> _name}}</option>
                                             @endforeach
                                         </select>
                                     </div>

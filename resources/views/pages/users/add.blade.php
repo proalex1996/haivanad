@@ -22,7 +22,7 @@
                                         <label for="exampleFormControlInput1 uname">Tên Nhân Viên:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input" value="<?=uniqid()?>" id="id_staff"
+                                        <input type="text" class="form-customer-input" id="id_staffs"
                                                name="name_staff"
                                                placeholder="Tên nhân viên" required>
                                         <div class="invalid-feedback">Tên nhân viên không được để trống</div>

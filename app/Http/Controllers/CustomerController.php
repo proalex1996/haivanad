@@ -71,7 +71,8 @@ class CustomerController extends Controller
         if(!empty($request->_cmnd)){
             $customers = $customers ->where('customer._cmnd','=',$request->_cmnd);
         }
-        $customers= $customers->get();
+
+        $customers= $customers->groupBy('customer.id')->orderBy('customer.id','DESC')->get();
         return view('pages.customer.index',
             ['customers' => $customers,
                 'type_customers' => $type_customer,
@@ -133,11 +134,15 @@ class CustomerController extends Controller
         $status = DB::table('status')->select('*')->get();
         $type_customer = DB::table('type_customer')->select('*')->get();
         $solvency = DB::table('solvency')->select('*')->get();
+        $nguon  = DB::table('nguon_customer')->select('*')->get();
+        $positions = DB::table('positions')->select('*')->get();
         return view('pages.customer.update', [
             'statuss' => $status,
             'type_customers' => $type_customer,
             'customers' => $customer,
-            'solvencys'=>$solvency
+            'solvencys'=>$solvency,
+            'nguons' => $nguon,
+            'positions' => $positions
         ]);
     }
     public function destroy($id)

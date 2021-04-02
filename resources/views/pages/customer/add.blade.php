@@ -22,7 +22,7 @@
                                         <label for="exampleFormControlInput1 uname">Mã Khách Hàng:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input" value="<?=uniqid()?>" id="customer_id" name="customer_id"
+                                        <input type="text" class="form-customer-input" value="" id="id_customers" name="customer_id"
                                                placeholder="Mã Khách Hàng" size="20" required>
                                         <div class="invalid-feedback">Mã khách hàng không được để trống</div>
                                     </div>

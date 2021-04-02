@@ -1,11 +1,11 @@
 <?php
 $request = request()->user();
-if($request['id_phan_quyen'] == 1){
+if ($request['id_phan_quyen'] == 1) {
     $menus = \App\Model\MenuModel::where('id_parent', 'parent')->orderBy('id', 'ASC')->get();
 
 
-}elseif ($request['id_phan_quyen'] == 2){
-    $menus = \App\Model\MenuModel::where('id_parent', 'parent')->where('id_permission','=',2)->orderBy('id', 'ASC')->get();
+} elseif ($request['id_phan_quyen'] == 2) {
+    $menus = \App\Model\MenuModel::where('id_parent', 'parent')->where('id_permission', '=', 2)->orderBy('id', 'ASC')->get();
 
 }
 header('Access-Control-Allow-Origin: *');
@@ -21,13 +21,14 @@ header('Access-Control-Allow-Origin: *');
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="au theme template">
 <link href="{{asset('public/asset/css/font-face.css')}}" rel="stylesheet" media="all">
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+<link rel="stylesheet" type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 {{--<link href="{{asset('vendor/font-awesome-4.7/css/font-awesome.min.css')}}" rel="stylesheet" media="all">--}}
 {{--<link href="{{asset('vendor/font-awesome-5/css/fontawesome-all.min.css')}}" rel="stylesheet" media="all">--}}
 <link href="{{asset('vendor/mdi-font/css/material-design-iconic-font.min.css')}}" rel="stylesheet" media="all">
 <link href="{{asset('vendor/bootstrap-4.1/bootstrap.min.css')}}" rel="stylesheet" media="all">
-<link href="{{asset('public/asset/js/dropzone/basic.css')}}"   rel="stylesheet" media="all">
-<link href="{{asset('public/asset/js/dropzone/dropzone.css')}}"    rel="stylesheet" media="all">
+<link href="{{asset('public/asset/js/dropzone/basic.css')}}" rel="stylesheet" media="all">
+<link href="{{asset('public/asset/js/dropzone/dropzone.css')}}" rel="stylesheet" media="all">
 <link href="{{asset('vendor/animsition/animsition.min.css')}}" rel="stylesheet" media="all">
 <link href="{{asset('vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css')}}" rel="stylesheet" media="all">
 <link href="{{asset('vendor/wow/animate.css')}}" rel="stylesheet" media="all">
@@ -37,45 +38,57 @@ header('Access-Control-Allow-Origin: *');
 <link href="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.css')}}" rel="stylesheet" media="all">
 <link href="{{asset('public/asset/css/image-uploader.min.css')}}" rel="stylesheet" media="all">
 <script href="{{asset('public/asset/js/fontawesome.js')}}"></script>
+<link href="{{asset('public/asset/css/chosen.css')}}" rel="stylesheet" media="all">
 <link href="{{asset('public/asset/css/theme.css')}}" rel="stylesheet" media="all">
 </head>
 
-<body class="animsition" >
+<body class="animsition">
 <div class="page-wrapper">
     <header class="header-mobile d-block d-lg-none">
         <div class="header-mobile__bar">
             <div class="container-fluid">
                 <div class="header-mobile-inner">
-                    <a class="logo" id="domain" href="{{config('config_app.domain.domain')}}">
+                    <a class="logo" id="domain" href="{{config('config_app.domain.local')}}">
                         <img src="{{asset('public/asset/images/logo.png')}}" alt="HaiVan"/>
                     </a>
                     <button class="hamburger hamburger--slider" type="button">
-                                <span class="hamburger-box" >
+                                <span class="hamburger-box">
                                     <span class="hamburger-inner"></span>
                                 </span>
                     </button>
                 </div>
             </div>
         </div>
-        <nav class="navbar-mobile">
-            <ul class="navbar-mobile__list list-unstyled">
-                @foreach ($menus as $menu)
-                    <li class="has-sub">
-                        <a class="js-arrow" href="{{url($menu->link)}}">
-                            <div class="{{$menu->icoin}} m-r-10"></div><div class="item-menu">{{$menu->item_menu}}</div></a>
-                        <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                            @foreach (\App\Model\MenuModel::where('id_parent',$menu->id)->get() as $item)
-                                <li>
-                                    <a href="{{url($item->link)}}"><div
-                                            class="{{$item->icoin}} m-r-10"></div><div class="item-menu">{{$item->item_menu}}</div></a>
-                                </li>
+
+            <nav class="navbar-mobile">
+                <div class="container-fluid">
+                    <ul class="navbar-mobile__list list-unstyled">
+                        @foreach ($menus as $menu)
+                            <li class="has-sub">
+                                <a class="js-arrow" href="{{url($menu->link)}}">
+                                    <div class="form-group">
+                                        <div class="{{$menu->icoin}} m-r-10"></div>
+                                        <div class="item-menu">{{$menu->item_menu}}</div>
+                                    </div>
+
+                                </a>
+                                <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                    @foreach (\App\Model\MenuModel::where('id_parent',$menu->id)->get() as $item)
+                                        <li>
+                                            <a href="{{url($item->link)}}">
+                                                <div
+                                                    class="{{$item->icoin}} m-r-10"></div>
+                                                <div class="item-menu">{{$item->item_menu}}</div>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
                             @endforeach
-                        </ul>
-                    </li>
-                    @endforeach
-                    </li>
-            </ul>
-        </nav>
+                    </ul>
+                </div>
+
+            </nav>
     </header>
     {{--End Header Mobile--}}
 
@@ -92,12 +105,17 @@ header('Access-Control-Allow-Origin: *');
                     @foreach ($menus as $menu)
                         <li class="has-sub">
                             <a class="js-arrow" href="{{url($menu->link)}}">
-                                <div class="{{$menu->icoin}} m-r-10"></div><div class="item-menu">{{$menu->item_menu}}</div></a>
+                                <div class="{{$menu->icoin}} m-r-10"></div>
+                                <div class="item-menu">{{$menu->item_menu}}</div>
+                            </a>
                             <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                                 @foreach (\App\Model\MenuModel::where('id_parent',$menu->id)->get() as $item)
                                     <li>
-                                        <a href="{{url($item->link)}}"><div
-                                                class="{{$item->icoin}} m-r-10"></div><div class="item-menu">{{$item->item_menu}}</div></a>
+                                        <a href="{{url($item->link)}}">
+                                            <div
+                                                class="{{$item->icoin}} m-r-10"></div>
+                                            <div class="item-menu">{{$item->item_menu}}</div>
+                                        </a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -128,7 +146,7 @@ header('Access-Control-Allow-Origin: *');
                         <div class="header-button">
                             <div class="noti-wrap js-aroww">
                                 <a class="noti__item " href="https://id.zalo.me/"><i class="zmdi zmdi-email"></i>
-                                      </a>
+                                </a>
 
                             </div>
                             <div class="account-wrap">
@@ -154,16 +172,16 @@ header('Access-Control-Allow-Origin: *');
                                                 <span class="email">{{$request->email}}</span>
                                             </div>
                                         </div>
-{{--                                        <div class="account-dropdown__body">--}}
-{{--                                            <div class="account-dropdown__item">--}}
-{{--                                                <a href="{{url('/home/user')}}">--}}
-{{--                                                    <i class="zmdi icon-account"></i>Tài Khoản</a>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="account-dropdown__item">--}}
-{{--                                                <a href="#">--}}
-{{--                                                    <i class="zmdi icon-set-up"></i>Cài Đặt</a>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
+                                        {{--                                        <div class="account-dropdown__body">--}}
+                                        {{--                                            <div class="account-dropdown__item">--}}
+                                        {{--                                                <a href="{{url('/home/user')}}">--}}
+                                        {{--                                                    <i class="zmdi icon-account"></i>Tài Khoản</a>--}}
+                                        {{--                                            </div>--}}
+                                        {{--                                            <div class="account-dropdown__item">--}}
+                                        {{--                                                <a href="#">--}}
+                                        {{--                                                    <i class="zmdi icon-set-up"></i>Cài Đặt</a>--}}
+                                        {{--                                            </div>--}}
+                                        {{--                                        </div>--}}
                                         <div class="account-dropdown__footer">
                                             <a href="{{url('/auth/logout')}}">
                                                 <i class="zmdi icon-logout"></i>Đăng Xuất</a>
@@ -203,26 +221,28 @@ header('Access-Control-Allow-Origin: *');
 
             </div>
         </div>
-{{--        <div class="col-md-12">--}}
-{{--            <ul class="social-network social-circle">--}}
-{{--                <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>--}}
-{{--                <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>--}}
-{{--                <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>--}}
-{{--                <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>--}}
-{{--            </ul>--}}
-{{--        </div>--}}
+        {{--        <div class="col-md-12">--}}
+        {{--            <ul class="social-network social-circle">--}}
+        {{--                <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>--}}
+        {{--                <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>--}}
+        {{--                <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>--}}
+        {{--                <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>--}}
+        {{--            </ul>--}}
+        {{--        </div>--}}
         <div class="col-sm-12 m-t-100">
             <hr>
             <div class="copyright">
                 <p>Copyright © 2021 KATEC. All rights reserved. Template by <a href="https://katec.vn">KATEC</a>.
                 </p>
             </div>
-        </div></div>
+        </div>
+    </div>
 </body>
 <footer>
     <script src="{{asset('vendor/jquery-3.2.1.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="{{asset('vendor/bootstrap-4.1/popper.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap-4.1/bootstrap.min.js')}}"></script>
     <script src="{{asset('vendor/slick/slick.min.js')}}"></script>
@@ -231,6 +251,7 @@ header('Access-Control-Allow-Origin: *');
     <script src="{{asset('vendor/counter-up/jquery.waypoints.min.js')}}"></script>
     <script src="{{asset('vendor/counter-up/jquery.counterup.min.js')}}"></script>
     <script src="{{asset('vendor/circle-progress/circle-progress.min.js')}}"></script>
+    <script src="{{asset('public/asset/js/chosen.jquery.min.js')}}"></script>
     <script src="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.js')}}"></script>
     <script src="{{asset('vendor/chartjs/Chart.bundle.min.js')}}"></script>
     <script src="{{asset('vendor/select2/select2.min.js')}}"></script>
