@@ -108,6 +108,7 @@ class ProductController extends Controller
         $product->flow = $request->flow;
         $product->escom = $request->escom;
         $product->note_banner = $request->note_banner;
+        $product->dien_tich = $request->dien_tich;
         $product->save();
         $files =array($request->file('files'));
         if(!empty($files[0]) || !is_null($files[0])){
@@ -353,6 +354,12 @@ class ProductController extends Controller
         if ($request->get('name')) {
             File::delete(public_path('images/' . $request->get('name')));
         }
+    }
+    public function getPhoto(Request $request){
+        $photo = DB::table('photo')->select('*')
+            ->where('id_banner','=',$request->id)
+            ->get();
+        return json_encode(['photo' => $photo], 200);
     }
 
 

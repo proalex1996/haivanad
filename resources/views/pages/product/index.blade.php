@@ -21,7 +21,7 @@
         </div>
         <div class="row m-t-30">
             <div class="col-md-12">
-                <form class="post-form-sort" action="{{url('/product')}}" method="post" style="margin-bottom: 3em">
+                <form class="post-form-sort" action="{{url('/product')}}" method="post">
                     @csrf
                         <div class="row">
                             <div class="col-md-3 col-sm-12 m-t-10">

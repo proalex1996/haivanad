@@ -31,6 +31,26 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm:</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="id_typebanner" name="id_typebanner">
+                                            @foreach($type_banners as $type_banner)
+                                                <option
+                                                    value="{{$type_banner->id_typebanner}}">{{$type_banner->name_type}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1">Kết Cấu: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
@@ -39,10 +59,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
@@ -55,101 +71,38 @@
 
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Địa Chỉ: </label>
+                                        <label for="exampleFormControlSelect1">Trạng Thái:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="status_banner" name="status_banner">
+                                            @foreach($statuss as $status)
+                                                <option value="{{$status->id_status}}">{{$status->name_status}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Địa Chỉ: </label>
+                                    </div>
+                                    <div class="col-md-9 col-sm-12">
                                         <input type="text" class="form-customer-input" id="banner_adress" name="banner_adress"
                                                placeholder="Địa chỉ" required>
                                         <div class="invalid-feedback">Địa chỉ không được để trống</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Kích Thước:</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="number" id="size_banner" name="size_banner"
-                                               placeholder="Kích thước" required>
-                                        <div class="invalid-feedback">Kích thước không được để trống</div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Tổng Chiều Cao: </label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="height_banner" name="height_banner"
-                                               placeholder="Tổng chiều cao" required>
-                                        <div class="invalid-feedback">Email không được để trống</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Hệ Thống Đèn: </label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="light_system" name="light_system"
-                                               placeholder="Hệ thống đèn" required>
-                                        <div class="invalid-feedback">Hệ thống đèn không được để trống</div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Lưu Lượng Người: </label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="number" id="flow" name="flow"
-                                               placeholder="Lưu Lượng Người" required>
-                                        <div class="invalid-feedback">Lưu Lượng Người không được để trống</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Điểm Escom: </label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="escom" name="escom"
-                                               placeholder="Điểm Escom" required>
-                                        <div class="invalid-feedback">Điểm Escom không được để trống</div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Ghi Chú: </label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="note_banner" name="note_banner"
-                                               placeholder="Ghi Chú">
                                     </div>
                                 </div>
                             </div>
@@ -192,15 +145,12 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm:</label>
+                                        <label for="exampleFormControlInput1 uname">Kích Thước:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_typebanner" name="id_typebanner">
-                                            @foreach($type_banners as $type_banner)
-                                                <option
-                                                    value="{{$type_banner->id_typebanner}}">{{$type_banner->name_type}}</option>
-                                            @endforeach
-                                        </select>
+                                        <input class="form-customer-input" type="number" id="size_banner" name="size_banner"
+                                               placeholder="Kích thước" required>
+                                        <div class="invalid-feedback">Kích thước không được để trống</div>
                                     </div>
 
                                 </div>
@@ -208,32 +158,115 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Trạng Thái:</label>
+                                        <label for="exampleFormControlInput1 uname">Diện Tích: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="status_banner" name="status_banner">
-                                            @foreach($statuss as $status)
-                                                <option value="{{$status->id_status}}">{{$status->name_status}}</option>
-                                            @endforeach
-                                        </select>
+                                        <input class="form-customer-input" type="text" id="dien_tich" name="dien_tich"
+                                               placeholder="Diện Tích" required>
+                                        <div class="invalid-feedback">Email không được để trống</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Tổng Chiều Cao: </label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-customer-input" type="text" id="height_banner" name="height_banner"
+                                               placeholder="Tổng chiều cao" required>
+                                        <div class="invalid-feedback">Email không được để trống</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Hệ Thống Đèn: </label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-customer-input" type="text" id="light_system" name="light_system"
+                                               placeholder="Hệ thống đèn" required>
+                                        <div class="invalid-feedback">Hệ thống đèn không được để trống</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Lưu Lượng Người: </label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-customer-input" type="number" id="flow" name="flow"
+                                               placeholder="Lưu Lượng Người" required>
+                                        <div class="invalid-feedback">Lưu Lượng Người không được để trống</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Điểm Escom: </label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-customer-input" type="text" id="escom" name="escom"
+                                               placeholder="Điểm Escom" required>
+                                        <div class="invalid-feedback">Điểm Escom không được để trống</div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Ghi Chú: </label>
+                                    </div>
+                                    <div class="col-md-9 col-sm-12">
+                                        <input class="form-customer-input" type="text" id="note_banner" name="note_banner"
+                                               placeholder="Ghi Chú">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group"> <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-12">
-                                    <label for="exampleFormControlInput1 uname">Giá Năm: </label>
-                                </div>
-                                <div class="col-md-9 col-sm-12">
-                                    <input class="form-customer-input" type="number" id="gianam" name="gianam"
-                                           placeholder="Giá Năm" required>
-                                    <div class="invalid-feedback">Giá Năm không được để trống</div>
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Giá Năm: </label>
+                                    </div>
+                                    <div class="col-md-9 col-sm-12">
+                                        <input class="form-customer-input" type="number" id="gianam" name="gianam"
+                                               placeholder="Giá Năm" required>
+                                        <div class="invalid-feedback">Giá Năm không được để trống</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div></div>
-
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Đặc Điểm:</label>
+                        <textarea class="form-control" id="dac_diem" name="dac_diem" rows="5"></textarea>
+                    </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlSelect1" >Hình Ảnh:</label>
@@ -242,10 +275,7 @@
                     </div>
                         <div class="m-l-95 color-session">
                         </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Đặc Điểm:</label>
-                        <textarea class="form-control" id="dac_diem" name="dac_diem" rows="5"></textarea>
-                    </div>
+
 
                     <div class="form-group">
                         <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">
