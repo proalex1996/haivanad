@@ -30,6 +30,31 @@
                                        placeholder="Mã Pano">
                             </div>
                             <div class="col-md-3 col-sm-12 m-t-10">
+                                <label for="exampleFormControlInput1 ">Tên Pano</label>
+                                <input type="text" class="form-control" id="_name_banner" name="_name_banner"
+                                       placeholder="Mã Pano">
+                            </div>
+                        </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12 m-t-10">
+                            <label for="exampleFormControlSelect1">Tỉnh/Thành Phố:</label>
+                            <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
+                                <option value="">--Tỉnh/Thành Phố--</option>
+                                @foreach($provinces as $province)
+                                    <option value="{{$province -> _code}}">{{$province -> _name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3 col-sm-12 m-t-10">
+                            <label for="exampleFormControlSelect1">Quận/Huyện:</label>
+                            <select class="form-control" id="quan" name="quan">
+                                <option value="">--Quận/Huyện--</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                            <div class="col-md-3 col-sm-12 m-t-10">
                                 <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm:</label>
                                 <select class="form-control" id="id_typebanner" name="id_typebanner">
                                     <option value="">Tất Cả</option>
@@ -47,29 +72,13 @@
                                     @endforeach
                                 </select>
                             </div>
+                        <div class="col-md-2 col-sm-12 m-t-30">
+                            <label for="exampleFormControlInput1 "></label>
+                            <button class="btn btn-primary btn-block" type="submit" aria-expanded="false">Tìm
+                            </button>
                         </div>
-                        <div class="row">
-                            <div class="col-md-3 col-sm-12 m-t-10">
-                                <label for="exampleFormControlSelect1">Tỉnh/Thành Phố:</label>
-                                <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
-                                    <option value="">--Tỉnh/Thành Phố--</option>
-                                    @foreach($provinces as $province)
-                                        <option value="{{$province -> _code}}">{{$province -> _name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-3 col-sm-12 m-t-10">
-                                <label for="exampleFormControlSelect1">Quận/Huyện:</label>
-                                <select class="form-control" id="quan" name="quan">
-                                    <option value="">--Quận/Huyện--</option>
-                                </select>
-                            </div>
-                            <div class="col-md-2 col-sm-12 m-t-30">
-                                <label for="exampleFormControlInput1 "></label>
-                                <button class="btn btn-primary btn-block" type="submit" aria-expanded="false">Tìm
-                                </button>
-                            </div>
                         </div>
+
 
 
                 </form>
@@ -81,7 +90,7 @@
                             <th width="20%">STT</th>
                             <th width="20%">Mã Pano</th>
                             <th width="20%">Loại Hình</th>
-                            <th width="20%">Vị Trí</th>
+                            <th width="20%">Vị Trí(Tên Sản Phẩm)</th>
                             <th width="20%">Tỉnh/Thành Phố</th>
                             <th width="10%">Trạng thái</th>
                             <th></th>
@@ -107,7 +116,7 @@
                                     </td>
                                     <td class="id_banner">2021+{{$banner->id_banner}}</td>
                                     <td>2021+{{$banner->name_type}}</td>
-                                    <td>{{$banner->banner_adress}}</td>
+                                    <td>{{$banner->_name_banner}}</td>
                                     <td>{{$banner->_name}}</td>
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->name_status}}</a>
@@ -138,7 +147,7 @@
                                     </td>
                                     <td class="id_banner">2021+{{$banner->id_banner}}</td>
                                     <td>{{$banner->name_type}}</td>
-                                    <td>{{$banner->banner_adress}}</td>
+                                    <td>{{$banner->_name_banner}}</td>
                                     <td>{{$banner->_name}}</td>
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->name_status}}</a>

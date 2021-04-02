@@ -41,7 +41,7 @@ class ProductController extends Controller
             ->join('status_banner', 'banner.name_status', '=', 'status_banner.id_status')
             ->join('type_banner','banner.id_typebanner','=','type_banner.id_typebanner')
             ->join('province','banner.tinh','=','province._code')
-            ->select('banner.id', 'status_banner.name_status','province._name', 'type_banner.name_type','banner.banner_adress','status_banner.id_status', 'banner.id_banner');
+            ->select('banner.id', 'status_banner.name_status','province._name', 'type_banner.name_type','banner._name_banner','status_banner.id_status', 'banner.id_banner');
         if (!empty($request->id_banner)) {
             $banners = $banners->where('banner.id_banner', '=',  $request->id_banner );
         }
@@ -53,7 +53,9 @@ class ProductController extends Controller
         }
         if (!empty($request->id_typebanner)) {
             $banners = $banners->where('banner.id_typebanner', '=', $request->id_typebanner);
-        }
+        }if(!empty($request->_name_banner)){
+        $banners = $banners ->where('banner._name_banner','=',$request->_name_banner);
+    }
 
         $banners = $banners->groupBy('banner.id')->orderBy('banner.id', 'DESC')->get();
         $status_banner = DB::table('status_banner')->select('*')->get();
@@ -75,7 +77,7 @@ class ProductController extends Controller
     {
         $banners = DB::table('banner')
             ->join('status_banner', 'banner.name_status', '=', 'status_banner.id_status')
-            ->select('banner.id', 'status_banner.id_status', 'banner.id_banner', 'status_banner.name_status', 'banner.banner_adress',
+            ->select('banner.id', 'status_banner.id_status', 'banner.id_banner', 'status_banner.name_status', 'banner._name_banner',
                 'banner.thumb_banner', 'banner.light_system', 'banner.content', 'banner.size_banner', 'banner.height_banner')
             ->groupBy('id')->orderBy('id', 'DESC')->paginate();
         $status_banner = DB::table('status_banner')->select('*')->get();
@@ -93,7 +95,7 @@ class ProductController extends Controller
         $product = new ProductModel();
         $product->id_banner = $request->id_banner;
         $product->location = $request->location;
-        $product->banner_adress = $request->banner_adress;
+        $product->_name_banner = $request->_name_banner;
         $product->quan = $request->quan;
         $product->tinh = $request->tinh;
         $product->id_typebanner = $request->id_typebanner;
