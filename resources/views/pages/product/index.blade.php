@@ -32,7 +32,7 @@
                             <div class="col-md-3 col-sm-12 m-t-10">
                                 <label for="exampleFormControlInput1 ">Tên Pano</label>
                                 <input type="text" class="form-control" id="_name_banner" name="_name_banner"
-                                       placeholder="Mã Pano">
+                                       placeholder="Tên Pano">
                             </div>
                         </div>
                     <div class="row">
