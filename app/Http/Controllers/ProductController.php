@@ -77,7 +77,7 @@ class ProductController extends Controller
     {
         $banners = DB::table('banner')
             ->join('status_banner', 'banner.name_status', '=', 'status_banner.id_status')
-            ->select('banner.id', 'status_banner.id_status', 'banner.id_banner', 'status_banner.name_status', 'banner._name_banner',
+            ->select('banner.id', 'status_banner.id_status', 'banner.id_banner', 'status_banner.name_status', 'banner.banner_adress',
                 'banner.thumb_banner', 'banner.light_system', 'banner.content', 'banner.size_banner', 'banner.height_banner')
             ->groupBy('id')->orderBy('id', 'DESC')->paginate();
         $status_banner = DB::table('status_banner')->select('*')->get();
@@ -94,8 +94,8 @@ class ProductController extends Controller
     {
         $product = new ProductModel();
         $product->id_banner = $request->id_banner;
-        $product->location = $request->location;
         $product->_name_banner = $request->_name_banner;
+        $product->banner_adress = $request->banner_adress;
         $product->quan = $request->quan;
         $product->tinh = $request->tinh;
         $product->id_typebanner = $request->id_typebanner;
