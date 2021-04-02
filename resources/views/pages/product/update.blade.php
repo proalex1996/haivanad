@@ -46,10 +46,10 @@
                             <div class="col-md-5">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Vị Trí:</label>
+                                        <label for="exampleFormControlInput1 uname">Vị Trí(Tên Pano):</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input" value="{{$banners -> location}}" id="location" name="location"
+                                        <input type="text" class="form-customer-input" value="{{$banners -> _name_banner}}" id="_name_banner" name="_name_banner"
                                                placeholder="Tên Vị Trí" required>
                                     </div>
 
@@ -171,10 +171,10 @@
                                         <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
                                             <option value="">--Tỉnh/Thành Phố--</option>
                                             @foreach($provinces as $province)
-                                                @if ($banners->tinh == $province->id)
-                                                <option value="{{$province->id}}" selected>{{$province -> _name}}</option>
+                                                @if ($banners->tinh == $province->_code)
+                                                <option value="{{$province->_code}}" selected>{{$province -> _name}}</option>
                                                 @endif
-                                                    <option value="{{$province->id}}">{{$province -> _name}}</option>
+                                                    <option value="{{$province->_code}}">{{$province -> _name}}</option>
                                             @endforeach
                                         </select>
                                     </div>

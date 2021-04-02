@@ -46,10 +46,10 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Vị Trí:</label>
+                                        <label for="exampleFormControlInput1 uname">Vị Trí(Tên Pano):</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input" id="location" name="location"
+                                        <input type="text" class="form-customer-input" id="_name_banner" name="_name_banner"
                                                placeholder="Tên Vị Trí" required>
                                     </div>
 
