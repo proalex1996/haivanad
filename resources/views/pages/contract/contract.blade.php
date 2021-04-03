@@ -33,29 +33,64 @@
                     <input type="text" class="form-control" id="name_customer" name="name_customer"
                            placeholder="Tên Pano">
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-md-3 col-sm-12 m-t-10">
                     <label for="exampleFormControlSelect1">Nguồn:</label>
-                    <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
-                        <option value="">--Tỉnh/Thành Phố--</option>
+                    <select class="form-control" name="nguon">
+                        <option value="">--Nguồn Khách Hàng--</option>
                         @foreach($nguons as $nguon)
-                            <option value="{{$province -> _code}}">{{$province -> _name}}</option>
+                            <option value="{{$nguon -> id_nguon}}">{{$nguon -> name_nguon}}</option>
                         @endforeach
                     </select>
                 </div>
+            </div>
+{{--            <div class="row">--}}
+{{--                --}}
+{{--                --}}
+{{--            </div>--}}
+            <div class="row">
                 <div class="col-md-3 col-sm-12 m-t-10">
                     <label for="exampleFormControlSelect1">Nhân Viên Phụ Trách:</label>
                     <select class="form-control"  name="id_staff">
-                      @foreach($users as $user)
+                        <option value="">--Nhân Viên--</option>
+                        @foreach($users as $user)
                             <option value="{{$user->id_staff}}">{{$user->name}}</option>
                         @endforeach
                     </select>
                 </div>
-
-
+                <div class="col-md-3 col-sm-12 m-t-10">
+                    <label for="exampleFormControlSelect1">Loại Hợp Đồng:</label>
+                    <select class="form-control" name="kind" >
+                        <option value="">--Loại Hợp Đồng--</option>
+                        @foreach($kinds as $kind)
+                            <option value="{{$kind -> id_contract}}">{{$kind -> name_kind}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3 col-sm-12 m-t-10">
+                    <label for="exampleFormControlSelect1">Loại hình sản phẩm:</label>
+                    <select class="form-control"  name="type_banner">
+                        <option value="">--Loại hình sản phẩm--</option>
+                        @foreach($type_banners as $type_banner)
+                            <option value="{{$type_banner->id_typebanner}}">{{$type_banner->name_type}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="row">
-
+                <div class="col-md-3 col-sm-12 m-t-10">
+                    <label for="exampleFormControlSelect1">Tên Vị Trí:</label>
+                    <input type="text" class="form-control display-input" name="_name_banner" >
+                </div>
+                <div class="col-md-3 col-sm-12 m-t-10">
+                    <label for="exampleFormControlSelect1">Từ Ngày:</label>
+                    <input type="date" class="form-control display-input" name="date_start" >
+                </div>
+                <div class="col-md-3 col-sm-12 m-t-10">
+                    <label for="exampleFormControlSelect1">Đến Ngày:</label>
+                    <input type="date" class="form-control display-input" name="date_end">
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-3 col-sm-12 m-t-10">
                     <label for="exampleFormControlInput1 ">Trạng thái</label>
                     <select type="text" class="form-control" id="id_status" name="id_status">
@@ -97,7 +132,6 @@
                         </thead>
                         <tbody>
                         @foreach($contracts as $contract)
-
                             @if ((\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())) > '60')
                                 <tr class="status--process dropdown">
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
@@ -172,7 +206,6 @@
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$contract->id}}</a>
                                         <div class="dropdown-menu">
-                                            c
                                             <a id="open-deleteContract" class="dropdown-item"
                                                data-id_data="{{$contract->id}}" data-toggle="modal"
                                                data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa hợp đồng</a>

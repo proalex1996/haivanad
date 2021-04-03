@@ -52,32 +52,45 @@ class ContractController extends Controller
 
     public function getContract(Request $request)
     {
-
+        $data = $request->all();
         $id_contract = $request->id_contract;
         $name_customer = $request->name_customer;
+        $_nguon = $request->nguon;
+        $_kind = $request->kind;
+        $typebanner = $request->type_banner;
+        $id_staff = $request->id_staff;
+        $_name_banner = $request->_name_banner;
+        $date_start = $request->date_start;
+        $date_end = $request->date_end;
+        $id_status  = $request->id_status;
         $staff = DB::table('users')->select('*')->get();
         $status_contracts = DB::table('contract_status')->select('*')->get();
-        $contracts = DB::select("
-        SELECT contract.id,contract.id_contract, customer.name_customer,
-        kind_contract.name_kind, type_banner.name_type,banner._name_banner,contract.date_end,
-        contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
-        (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
-        ,contract_status.name_status
-        FROM contract
-        JOIN customer
-        ON customer.customer_id = contract.id_customer
-        JOIN kind_contract
-        ON contract.kind = kind_contract.id_contract
-        JOIN type_banner
-        ON contract.id_banner = (SELECT  contract.id_banner FROM banner
-            JOIN contract ON contract.id_banner = banner.id_banner
-            JOIN type_banner ON banner.id_typebanner = type_banner.id_typebanner
-             GROUP BY banner.id_typebanner)
-        JOIN banner ON contract.id_banner = banner.id_banner
-        JOIN detail_payment ON detail_payment.id_contract = contract.id_contract
-        JOIN contract_status ON contract.`status_contract` = contract_status.id_contract
-        GROUP BY contract.id_contract order by contract.id DESC
+        $nguon = DB::table('nguon_customer')->select('*')->get();
+        $kinds = DB::table('kind_contract')->select('*')->get();
+        $type_banner = DB::table('type_banner')->select('*')->get();
+        if (empty($data)) {
+            $contracts = DB::select("
+                SELECT contract.id,contract.id_contract, customer.name_customer,
+                kind_contract.name_kind, type_banner.name_type,banner._name_banner,contract.date_end,
+                contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
+                (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
+                ,contract_status.name_status
+                FROM contract
+                JOIN customer
+                ON customer.customer_id = contract.id_customer
+                JOIN kind_contract
+                ON contract.kind = kind_contract.id_contract
+                JOIN type_banner
+                ON contract.id_banner = (SELECT  contract.id_banner FROM banner
+                    JOIN contract ON contract.id_banner = banner.id_banner
+                    JOIN type_banner ON banner.id_typebanner = type_banner.id_typebanner
+                     GROUP BY banner.id_typebanner)
+                JOIN banner ON contract.id_banner = banner.id_banner
+                JOIN detail_payment ON detail_payment.id_contract = contract.id_contract
+                JOIN contract_status ON contract.`status_contract` = contract_status.id_contract
+                GROUP BY contract.id_contract order by contract.id DESC
         ");
+        }
         if(!empty($id_contract) ){
             $contracts = DB::select("
         SELECT contract.id,contract.id_contract, customer.name_customer,
@@ -126,13 +139,255 @@ class ContractController extends Controller
         GROUP BY contract.id_contract order by contract.id DESC
         ");
         }
+        if(!empty($_nguon)){
+            $contracts = DB::select("
+            SELECT contract.id,contract.id_contract, customer.name_customer,
+        kind_contract.name_kind, type_banner.name_type,banner._name_banner,contract.date_end,
+        contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
+        (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
+        ,contract_status.name_status,nguon_customer.name_nguon
+
+        FROM contract
+        JOIN customer
+        ON customer.customer_id = contract.id_customer
+        JOIN kind_contract
+        ON contract.kind = kind_contract.id_contract
+        JOIN type_banner
+        ON contract.id_banner = (SELECT  contract.id_banner FROM banner
+            JOIN contract ON contract.id_banner = banner.id_banner
+            JOIN type_banner ON banner.id_typebanner = type_banner.id_typebanner
+             GROUP BY banner.id_typebanner)
+        JOIN banner ON contract.id_banner = banner.id_banner
+        JOIN detail_payment ON detail_payment.id_contract = contract.id_contract
+        JOIN contract_status ON contract.status_contract = contract_status.id_contract
+        JOIN nguon_customer ON nguon_customer.id_nguon = (SELECT nguon_customer.id_nguon FROM  nguon_customer, customer
+            JOIN contract  ON contract.id_customer = customer.customer_id
+           WHERE customer.id_nguon = nguon_customer.id_nguon
+            GROUP BY  nguon_customer.id_nguon)
+        where nguon_customer.id_nguon = '{$_nguon}'
+        GROUP BY contract.id_contract ORDER BY contract.id DESC
+            ");
+        }
+        if(!empty($id_staff)){
+            $contracts = DB::select("
+            SELECT contract.id,contract.id_contract, customer.name_customer,
+        kind_contract.name_kind, type_banner.name_type,banner._name_banner,contract.date_end,
+        contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
+        (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
+        ,contract_status.name_status,nguon_customer.name_nguon,users.name
+
+        FROM contract
+        JOIN customer
+        ON customer.customer_id = contract.id_customer
+        JOIN kind_contract
+        ON contract.kind = kind_contract.id_contract
+        JOIN type_banner
+        ON contract.id_banner = (SELECT  contract.id_banner FROM banner
+            JOIN contract ON contract.id_banner = banner.id_banner
+            JOIN type_banner ON banner.id_typebanner = type_banner.id_typebanner
+             GROUP BY banner.id_typebanner)
+        JOIN banner ON contract.id_banner = banner.id_banner
+        JOIN detail_payment ON detail_payment.id_contract = contract.id_contract
+        JOIN contract_status ON contract.status_contract = contract_status.id_contract
+        JOIN nguon_customer ON nguon_customer.id_nguon = (SELECT nguon_customer.id_nguon FROM  nguon_customer, customer
+            JOIN contract  ON contract.id_customer = customer.customer_id
+           WHERE customer.id_nguon = nguon_customer.id_nguon
+            GROUP BY  nguon_customer.id_nguon)
+          JOIN users ON users.id_staff = contract.id_staff
+          where users.id_staff = '{$id_staff}'
+         GROUP BY contract.id_contract ORDER BY contract.id DESC
+            ");
+        }
+        if(!empty($_kind)){
+            $contracts = DB::select("
+            SELECT contract.id,contract.id_contract, customer.name_customer,
+        kind_contract.name_kind, type_banner.name_type,banner._name_banner,contract.date_end,
+        contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
+        (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
+        ,contract_status.name_status,nguon_customer.name_nguon,users.name
+
+        FROM contract
+        JOIN customer
+        ON customer.customer_id = contract.id_customer
+        JOIN kind_contract
+        ON contract.kind = kind_contract.id_contract
+        JOIN type_banner
+        ON contract.id_banner = (SELECT  contract.id_banner FROM banner
+            JOIN contract ON contract.id_banner = banner.id_banner
+            JOIN type_banner ON banner.id_typebanner = type_banner.id_typebanner
+             GROUP BY banner.id_typebanner)
+        JOIN banner ON contract.id_banner = banner.id_banner
+        JOIN detail_payment ON detail_payment.id_contract = contract.id_contract
+        JOIN contract_status ON contract.status_contract = contract_status.id_contract
+        JOIN nguon_customer ON nguon_customer.id_nguon = (SELECT nguon_customer.id_nguon FROM  nguon_customer, customer
+            JOIN contract  ON contract.id_customer = customer.customer_id
+           WHERE customer.id_nguon = nguon_customer.id_nguon
+            GROUP BY  nguon_customer.id_nguon)
+          JOIN users ON users.id_staff = contract.id_staff
+          where kind-contract.id_contract = '{$_kind}'
+         GROUP BY contract.id_contract ORDER BY contract.id DESC
+            ");
+        }
+        if(!empty($typebanner)){
+            $contracts = DB::select("
+            SELECT contract.id,contract.id_contract, customer.name_customer,
+        kind_contract.name_kind, type_banner.name_type,banner._name_banner,contract.date_end,
+        contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
+        (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
+        ,contract_status.name_status,nguon_customer.name_nguon,users.name
+
+        FROM contract
+        JOIN customer
+        ON customer.customer_id = contract.id_customer
+        JOIN kind_contract
+        ON contract.kind = kind_contract.id_contract
+        JOIN type_banner
+        ON contract.id_banner = (SELECT  contract.id_banner FROM banner
+            JOIN contract ON contract.id_banner = banner.id_banner
+            JOIN type_banner ON banner.id_typebanner = type_banner.id_typebanner
+             GROUP BY banner.id_typebanner)
+        JOIN banner ON contract.id_banner = banner.id_banner
+        JOIN detail_payment ON detail_payment.id_contract = contract.id_contract
+        JOIN contract_status ON contract.status_contract = contract_status.id_contract
+        JOIN nguon_customer ON nguon_customer.id_nguon = (SELECT nguon_customer.id_nguon FROM  nguon_customer, customer
+            JOIN contract  ON contract.id_customer = customer.customer_id
+           WHERE customer.id_nguon = nguon_customer.id_nguon
+            GROUP BY  nguon_customer.id_nguon)
+          JOIN users ON users.id_staff = contract.id_staff
+          where type_banner.id_typebanner = '{$typebanner}'
+         GROUP BY contract.id_contract ORDER BY contract.id DESC
+            ");
+        }
+        if(!empty($_name_banner)){
+            $contracts = DB::select("
+            SELECT contract.id,contract.id_contract, customer.name_customer,
+        kind_contract.name_kind, type_banner.name_type,banner._name_banner,contract.date_end,
+        contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
+        (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
+        ,contract_status.name_status,nguon_customer.name_nguon,users.name
+
+        FROM contract
+        JOIN customer
+        ON customer.customer_id = contract.id_customer
+        JOIN kind_contract
+        ON contract.kind = kind_contract.id_contract
+        JOIN type_banner
+        ON contract.id_banner = (SELECT  contract.id_banner FROM banner
+            JOIN contract ON contract.id_banner = banner.id_banner
+            JOIN type_banner ON banner.id_typebanner = type_banner.id_typebanner
+             GROUP BY banner.id_typebanner)
+        JOIN banner ON contract.id_banner = banner.id_banner
+        JOIN detail_payment ON detail_payment.id_contract = contract.id_contract
+        JOIN contract_status ON contract.status_contract = contract_status.id_contract
+        JOIN nguon_customer ON nguon_customer.id_nguon = (SELECT nguon_customer.id_nguon FROM  nguon_customer, customer
+            JOIN contract  ON contract.id_customer = customer.customer_id
+           WHERE customer.id_nguon = nguon_customer.id_nguon
+            GROUP BY  nguon_customer.id_nguon)
+          JOIN users ON users.id_staff = contract.id_staff
+          where banner._name_banner = '{$_name_banner}'
+         GROUP BY contract.id_contract ORDER BY contract.id DESC
+            ");
+        }
+        if(!empty($date_start)){
+            $contracts = DB::select("
+            SELECT contract.id,contract.id_contract, customer.name_customer,
+        kind_contract.name_kind, type_banner.name_type,banner._name_banner,contract.date_end,
+        contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
+        (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
+        ,contract_status.name_status,nguon_customer.name_nguon,users.name
+
+        FROM contract
+        JOIN customer
+        ON customer.customer_id = contract.id_customer
+        JOIN kind_contract
+        ON contract.kind = kind_contract.id_contract
+        JOIN type_banner
+        ON contract.id_banner = (SELECT  contract.id_banner FROM banner
+            JOIN contract ON contract.id_banner = banner.id_banner
+            JOIN type_banner ON banner.id_typebanner = type_banner.id_typebanner
+             GROUP BY banner.id_typebanner)
+        JOIN banner ON contract.id_banner = banner.id_banner
+        JOIN detail_payment ON detail_payment.id_contract = contract.id_contract
+        JOIN contract_status ON contract.status_contract = contract_status.id_contract
+        JOIN nguon_customer ON nguon_customer.id_nguon = (SELECT nguon_customer.id_nguon FROM  nguon_customer, customer
+            JOIN contract  ON contract.id_customer = customer.customer_id
+           WHERE customer.id_nguon = nguon_customer.id_nguon
+            GROUP BY  nguon_customer.id_nguon)
+          JOIN users ON users.id_staff = contract.id_staff
+          where contract.date_start = '{$date_start}'
+         GROUP BY contract.id_contract ORDER BY contract.id DESC
+            ");
+        }
+        if(!empty($date_end)){
+            $contracts = DB::select("
+            SELECT contract.id,contract.id_contract, customer.name_customer,
+        kind_contract.name_kind, type_banner.name_type,banner._name_banner,contract.date_end,
+        contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
+        (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
+        ,contract_status.name_status,nguon_customer.name_nguon,users.name
+
+        FROM contract
+        JOIN customer
+        ON customer.customer_id = contract.id_customer
+        JOIN kind_contract
+        ON contract.kind = kind_contract.id_contract
+        JOIN type_banner
+        ON contract.id_banner = (SELECT  contract.id_banner FROM banner
+            JOIN contract ON contract.id_banner = banner.id_banner
+            JOIN type_banner ON banner.id_typebanner = type_banner.id_typebanner
+             GROUP BY banner.id_typebanner)
+        JOIN banner ON contract.id_banner = banner.id_banner
+        JOIN detail_payment ON detail_payment.id_contract = contract.id_contract
+        JOIN contract_status ON contract.status_contract = contract_status.id_contract
+        JOIN nguon_customer ON nguon_customer.id_nguon = (SELECT nguon_customer.id_nguon FROM  nguon_customer, customer
+            JOIN contract  ON contract.id_customer = customer.customer_id
+           WHERE customer.id_nguon = nguon_customer.id_nguon
+            GROUP BY  nguon_customer.id_nguon)
+          JOIN users ON users.id_staff = contract.id_staff
+          where contract.date_end = '{$date_end}'
+         GROUP BY contract.id_contract ORDER BY contract.id DESC
+            ");
+        }
+        if(!empty($id_status)){
+            $contracts = DB::select("
+            SELECT contract.id,contract.id_contract, customer.name_customer,
+        kind_contract.name_kind, type_banner.name_type,banner._name_banner,contract.date_end,
+        contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
+        (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
+        ,contract_status.name_status,nguon_customer.name_nguon,users.name
+
+        FROM contract
+        JOIN customer
+        ON customer.customer_id = contract.id_customer
+        JOIN kind_contract
+        ON contract.kind = kind_contract.id_contract
+        JOIN type_banner
+        ON contract.id_banner = (SELECT  contract.id_banner FROM banner
+            JOIN contract ON contract.id_banner = banner.id_banner
+            JOIN type_banner ON banner.id_typebanner = type_banner.id_typebanner
+             GROUP BY banner.id_typebanner)
+        JOIN banner ON contract.id_banner = banner.id_banner
+        JOIN detail_payment ON detail_payment.id_contract = contract.id_contract
+        JOIN contract_status ON contract.status_contract = contract_status.id_contract
+        JOIN nguon_customer ON nguon_customer.id_nguon = (SELECT nguon_customer.id_nguon FROM  nguon_customer, customer
+            JOIN contract  ON contract.id_customer = customer.customer_id
+           WHERE customer.id_nguon = nguon_customer.id_nguon
+            GROUP BY  nguon_customer.id_nguon)
+          JOIN users ON users.id_staff = contract.id_staff
+          where contract_status.id_contract = '{$id_status}'
+         GROUP BY contract.id_contract ORDER BY contract.id DESC
+            ");
+
+        }
 
 
         return view('pages.contract.contract', [
             'contracts' => $contracts,
             'users' => $staff,
-            'status_contracts' => $status_contracts
-
+            'status_contracts' => $status_contracts,
+            'nguons' =>$nguon,
+            'kinds' => $kinds,
+            'type_banners' => $type_banner
         ]);
 
 
