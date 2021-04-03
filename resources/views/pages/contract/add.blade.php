@@ -34,7 +34,6 @@
                                 </div>
                                 <div class="col-xl-5 col-sm-12">
                                     <select class="form-control chosen-select" id="exampleFormControlSelect2" name="id_staff" required>
-                                        <option value="">--Nhân Viên--</option>
                                         @foreach($staffs as $staff)
                                             <option value="{{$staff->id_staff}}">{{$staff->name}}</option>
                                     @endforeach
