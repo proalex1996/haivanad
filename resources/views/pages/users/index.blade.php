@@ -85,7 +85,7 @@
                                         </a>
                                     </div>
                                 </td>
-                                <td class="id_banner">{{$user->id}}</td>
+                                <td>{{$user->id_staff}}</td>
                                 <td>{{$user->name}}</td>
 
                                 <td>{{$user->born}}</td>

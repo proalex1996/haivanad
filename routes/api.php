@@ -36,7 +36,7 @@ Route::group(['prefix' => 'contract'], function () {
     Route::post('/photo/{id_banner}', 'ContractController@getphoto');
     Route::get('/photo', 'ContractController@getphoto');
     Route::post('/ratio/{id_contract}', 'ContractController@getRatio');
-    Route::post('/deletepay/{payment_period}', 'ContractController@delete_payment');
+    Route::post('/deletepay/{id_contract}/{payment_period}', 'ContractController@delete_payment');
 
 
 
@@ -48,6 +48,7 @@ Route::group(['prefix' => 'product'], function () {
     Route::post('/province/{id}','ProductController@province');
     Route::get('/province/{id}','ProductController@province');
     Route::post('/photo/{id}','ProductController@getPhoto');
+    Route::get('/photo/','ProductController@getPhoto');
 
 
 });

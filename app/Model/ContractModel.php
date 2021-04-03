@@ -16,7 +16,7 @@ class ContractModel extends Model
     public $timestamps = false;
     protected $dateFormat = 'dd-mm-YYYY';
     protected $fillable = [
-       'id_contract',
+        'id_contract',
         'id_customer',
         'id_banner',
         'content',

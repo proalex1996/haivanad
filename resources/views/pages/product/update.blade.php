@@ -124,13 +124,14 @@
                                         <label for="exampleFormControlSelect1">Tỉnh/Thành Phố:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" name="tinh" onchange="getQuan(this)">
+                                        <select class="form-control" name="tinh" id="tinh" onchange="getQuan(this)">
                                             <option value="">--Tỉnh/Thành Phố--</option>
                                             @foreach($provinces as $province)
                                                 @if ($banners->tinh == $province->_code)
                                                     <option value="{{$province->_code}}" selected>{{$province -> _name}}</option>
-                                                @endif
+                                                @else
                                                 <option value="{{$province->_code}}">{{$province -> _name}}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -149,8 +150,9 @@
                                                 @if ($banners->quan == $district->id_district)
                                                     <option value="{{$district->id_district}}" selected>{{$district ->_name_district}}</option>
 
-                                                @endif
+                                                @else
                                                 <option value="{{$district->id_district}}">{{$district ->_name_district}}</option>
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>

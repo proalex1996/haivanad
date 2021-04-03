@@ -19,10 +19,23 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Tên Nhân Viên:</label>
+                                        <label for="exampleFormControlInput1 uname">Mã Nhân Viên: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-customer-input" id="id_staffs"
+                                               name="id_staff"
+                                               placeholder="Địa chỉ" required>
+                                        <div class="invalid-feedback">Địa chỉ không được để trống</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Tên Nhân Viên:</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" class="form-customer-input"
                                                name="name_staff"
                                                placeholder="Tên nhân viên" required>
                                         <div class="invalid-feedback">Tên nhân viên không được để trống</div>
@@ -30,19 +43,8 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Số Điện Thoại: </label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input" id="staff_phone"
-                                               name="staff_phone"
-                                               placeholder="Số điện thoại" required>
-                                        <div class="invalid-feedback">Số điện thoại không được để trống</div>
-                                    </div>
-                                </div>
-                            </div>
+
+
                         </div>
                     </div>
                     <div class="form-group">
@@ -101,9 +103,26 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Địa Chỉ: </label>
+                                        <label for="exampleFormControlInput1 uname">Số Điện Thoại: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
+                                        <input type="text" class="form-customer-input" id="staff_phone"
+                                               name="staff_phone"
+                                               placeholder="Số điện thoại" required>
+                                        <div class="invalid-feedback">Số điện thoại không được để trống</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Địa Chỉ: </label>
+                                    </div>
+                                    <div class="col-md-9 col-sm-12">
                                         <input type="text" class="form-customer-input" id="staff_adress"
                                                name="staff_adress"
                                                placeholder="Địa chỉ" required>

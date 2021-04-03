@@ -45,14 +45,16 @@ Route::group(['prefix' => 'contract'], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/', 'ContractController@getContract');
         Route::post('/', 'ContractController@getContract');
-
         Route::get('/add', 'ContractController@addContract');
+        Route::post('/add', 'ContractController@addContract');
         Route::get('/update/{id}', 'ContractController@update');
         Route::post('/update/{id}', 'ContractController@update');
         Route::post('/add', 'ContractController@createContract');
         Route::get('/download', 'ContractController@getDownload');
         Route::get('/destroy/{id}', 'ContractController@destroy');
         Route::get('/export', 'ContractController@export');
+        Route::get('/setpay1/{id}', 'ContractController@setPay1');
+        Route::get('/setpay2/{id}', 'ContractController@setPay2');
     });
 });
 Route::group(['prefix' => 'users'], function () {

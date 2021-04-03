@@ -26,7 +26,7 @@
                         <div class="row">
                             <div class="col-md-3 col-sm-12 m-t-10">
                                 <label for="exampleFormControlInput1 ">Mã Pano</label>
-                                <input type="text" class="form-control" id="id_banners" name="id_banner"
+                                <input type="text" class="form-control" id="id_banner" name="id_banner"
                                        placeholder="Mã Pano">
                             </div>
                             <div class="col-md-3 col-sm-12 m-t-10">

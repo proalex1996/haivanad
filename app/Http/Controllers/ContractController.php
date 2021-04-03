@@ -52,31 +52,101 @@ class ContractController extends Controller
 
     public function getContract(Request $request)
     {
-        $contracts = DB::table('contract')
-            ->join('customer', 'id_customer', '=', 'customer.customer_id')
-            ->join('users', 'contract.id_staff', '=', 'users.id_staff')
-            ->join('banner', 'contract.id_banner', '=', 'banner.id_banner')
-            ->join('kind_contract', 'kind', '=', 'kind_contract.id_contract')
-            ->join('detail_payment','contract.id_contract','=','detail_payment.id_contract')
-            ->select('contract.id', 'contract.id_contract', 'customer.name_customer','detail_payment._pay_due',
-                'banner.id_banner', 'kind_contract.name_kind',
-                'contract.date_start', 'contract.date_end', 'contract.content','value_contract')
-           ->orderBy('contract.id','DESC')->groupBy('contract.id')->get();
 
-        return view('pages.contract.contract', ['contracts' => $contracts]);
+        $id_contract = $request->id_contract;
+        $name_customer = $request->name_customer;
+        $staff = DB::table('users')->select('*')->get();
+        $status_contracts = DB::table('contract_status')->select('*')->get();
+        $contracts = DB::select("
+        SELECT contract.id,contract.id_contract, customer.name_customer,
+        kind_contract.name_kind, type_banner.name_type,banner._name_banner,contract.date_end,
+        contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
+        (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
+        ,contract_status.name_status
+        FROM contract
+        JOIN customer
+        ON customer.customer_id = contract.id_customer
+        JOIN kind_contract
+        ON contract.kind = kind_contract.id_contract
+        JOIN type_banner
+        ON contract.id_banner = (SELECT  contract.id_banner FROM banner
+            JOIN contract ON contract.id_banner = banner.id_banner
+            JOIN type_banner ON banner.id_typebanner = type_banner.id_typebanner
+             GROUP BY banner.id_typebanner)
+        JOIN banner ON contract.id_banner = banner.id_banner
+        JOIN detail_payment ON detail_payment.id_contract = contract.id_contract
+        JOIN contract_status ON contract.`status_contract` = contract_status.id_contract
+        GROUP BY contract.id_contract order by contract.id DESC
+        ");
+        if(!empty($id_contract) ){
+            $contracts = DB::select("
+        SELECT contract.id,contract.id_contract, customer.name_customer,
+        kind_contract.name_kind, type_banner.name_type,banner._name_banner,contract.date_end,
+        contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
+        (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
+        ,contract_status.name_status
+        FROM contract
+        JOIN customer
+        ON customer.customer_id = contract.id_customer
+        JOIN kind_contract
+        ON contract.kind = kind_contract.id_contract
+        JOIN type_banner
+        ON contract.id_banner = (SELECT  contract.id_banner FROM banner
+            JOIN contract ON contract.id_banner = banner.id_banner
+            JOIN type_banner ON banner.id_typebanner = type_banner.id_typebanner
+             GROUP BY banner.id_typebanner)
+        JOIN banner ON contract.id_banner = banner.id_banner
+        JOIN detail_payment ON detail_payment.id_contract = contract.id_contract
+        JOIN contract_status ON contract.`status_contract` = contract_status.id_contract
+        where contract.id_contract = '{$id_contract}'
+        GROUP BY contract.id_contract order by contract.id DESC
+        ");
+        }
+        if(!empty($name_customer) ){
+            $contracts = DB::select("
+        SELECT contract.id,contract.id_contract, customer.name_customer,
+        kind_contract.name_kind, type_banner.name_type,banner._name_banner,contract.date_end,
+        contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
+        (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
+        ,contract_status.name_status
+        FROM contract
+        JOIN customer
+        ON customer.customer_id = contract.id_customer
+        JOIN kind_contract
+        ON contract.kind = kind_contract.id_contract
+        JOIN type_banner
+        ON contract.id_banner = (SELECT  contract.id_banner FROM banner
+            JOIN contract ON contract.id_banner = banner.id_banner
+            JOIN type_banner ON banner.id_typebanner = type_banner.id_typebanner
+             GROUP BY banner.id_typebanner)
+        JOIN banner ON contract.id_banner = banner.id_banner
+        JOIN detail_payment ON detail_payment.id_contract = contract.id_contract
+        JOIN contract_status ON contract.`status_contract` = contract_status.id_contract
+        where customer.name_customer = '{$id_contract}'
+        GROUP BY contract.id_contract order by contract.id DESC
+        ");
+        }
+
+
+        return view('pages.contract.contract', [
+            'contracts' => $contracts,
+            'users' => $staff,
+            'status_contracts' => $status_contracts
+
+        ]);
 
 
     }
 
-    public function postDec(){
+    public function postDec()
+    {
         $contracts = DB::table('contract')
             ->join('customer', 'id_customer', '=', 'customer.id')
             ->join('staff', 'id_staff', '=', 'staff.id')
             ->join('banner', 'id_banner', '=', 'banner.id')
             ->join('kind_contract', 'kind', '=', 'kind_contract.id_contract')
-            ->join('contract_status', 'status_contract','=','contract_status.id_contract')
-
-            ->select(DB::raw('Count(contract.id) as total'))->where('contract.date_start','Like','%-12-%')->orderBy('contract.id')->first();
+            ->join('contract_status', 'status_contract', '=', 'contract_status.id_contract')
+            ->select(DB::raw('Count(contract.id) as total'))->where('contract.date_start', 'Like', '%-12-%')->orderBy('contract.id')->first();
         return json_encode($contracts);
     }
 
@@ -104,12 +174,13 @@ class ContractController extends Controller
             'type_banners' => $type_banners,
             'positions' => $position,
             'provinces' => $provinces,
-            'photos' =>$photo
+            'photos' => $photo
         ]);
     }
 
     public function createContract(Request $request)
     {
+
         $contract = new ContractModel();
         $contract->id_contract = $request->id_contract;
         $contract->id_customer = $request->name_customer;
@@ -133,8 +204,8 @@ class ContractController extends Controller
         $total_value = $request->total_value;
         $_pay_due = $request->_pay_due;
 
-        if(!empty($payment_period)){
-            for($i = 0 ; $i < count(array($payment_period));$i++){
+        if (!empty($payment_period)) {
+            for ($i = 0; $i < sizeof($payment_period); $i++) {
                 $detail = new DetailModel();
                 $detail->id_contract = $request->id_contract;
                 $detail->payment_period = $payment_period[$i];
@@ -154,7 +225,7 @@ class ContractController extends Controller
     public function getDownload()
     {
         $filePath = public_path("storage/contract");
-            return response()->download($filePath);
+        return response()->download($filePath);
 
     }
 
@@ -186,8 +257,9 @@ class ContractController extends Controller
         $data = $request->all();
 
         if (!empty($data)) {
+
             if (!empty($data['content'])) {
-                $data['content'] = basename($request->content->getClientOriginalName());
+                $data['content'] = basename($request->content_contract->getClientOriginalName());
                 $file = $request->file('content');
                 $fileName = $request->file('content')->getClientOriginalName();
                 $storage = Storage::putFileAs('contract', $file, $fileName);
@@ -195,25 +267,23 @@ class ContractController extends Controller
 //            $detail = DB::table('detail_payment')->update([
 //                ''
 //            ]);
+            DB::table('detail_payment')->where('id_contract', '=', $data['id_contract'])->delete();
             $payment_period = $data['payment_period'];
-                    $ratio = $data['ratio'];
-                    $id_value_contract = $data['id_value_contract'];
-                    $id_vat = $data['id_vat'];
-                    $total_value =$data['total_value'];
-                    $_pay_due = $data['_pay_due'];
-            if(!empty($payment_period)){
-                for($i = 0 ; $i < count(array($payment_period));$i++) {
-                    $detail = DetailModel::find($data['id_contract']);
-                    $detail->payment_period = $data['payment_period'];
-                    $detail->ratio = $data['ratio'];
-                    $detail->id_value_contract = $data['id_value_contract'];
-                    $detail->id_vat = $data['id_vat'];
-                    $detail->total_value = $data['total_value'];
-                    $detail->_pay_due = $data['_pay_due'];
+            for ($i = 0; $i < sizeof($payment_period); $i++) {
+                    $detail = new DetailModel();
+                    $detail->id_contract = $data['id_contract'];
+                    $detail->payment_period = $data['payment_period'][$i];
+                    $detail->ratio = $data['ratio'][$i];
+                    $detail->id_value_contract = $data['id_value_contract'][$i];
+                    $detail->id_vat = $data['id_vat'][$i];
+                    $detail->total_value = $data['total_value'][$i];
+                    $detail->_pay_due = $data['_pay_due'][$i];
                     $detail->save();
 
-                }
+
+
             }
+
 
             $up = $this->contractRepository->update($id, $data);
             return redirect()->action('ContractController@getContract');
@@ -227,7 +297,7 @@ class ContractController extends Controller
         $provinces = DB::table('province')->select('*')->get();
         $nguon = DB::table('nguon_customer')->select('*')->get();
         $detail = DB::table('detail_payment')
-            ->join('contract','detail_payment.id_contract','=','contract.id_contract')
+            ->join('contract', 'detail_payment.id_contract', '=', 'contract.id_contract')
             ->select('*')->get();
         return view('pages.contract.update', [
             'contract' => $contract,
@@ -256,75 +326,90 @@ class ContractController extends Controller
         $del->delete();
         return redirect('/contract');
     }
+
     public function delete_payment(Request $request)
     {
-        if(!empty($request->payment_period)){
-            DetailModel::where('payment_period',$request->payment_period)
+
+        if (!empty($request->payment_period)) {
+            $delect = DB::table('detail_payment')
+                ->select('*')->where('detail_payment.payment_period', '=', $request->payment_period)
+                ->where('id_contract', '=', $request->id_contract)
                 ->delete();
         }
     }
-   public function ApiCustomer(Request $request){
+
+    public function ApiCustomer(Request $request)
+    {
         $request->all();
         $data = DB::table('customer')
-           ->join('positions','customer.position_customer','=','positions.id_position')
-            ->join('nguon_customer','customer.id_nguon','=','nguon_customer.id_nguon')
-
+            ->join('positions', 'customer.position_customer', '=', 'positions.id_position')
+            ->join('nguon_customer', 'customer.id_nguon', '=', 'nguon_customer.id_nguon')
             ->select('*')
-            ->where('customer.customer_id','=',$request ->id)
+            ->where('customer.customer_id', '=', $request->id)
             ->get();
-         return json_encode(['customer'=>$data],200);
+        return json_encode(['customer' => $data], 200);
     }
-   public function APIProduct(Request $request){
+
+    public function APIProduct(Request $request)
+    {
         $request->all();
         $data = DB::table('banner')
             ->select(DB::raw('COUNT(id_banner) as total_id'))
+            ->where('id_banner', '=', $request->id_banner)->get();
+        return json_encode(['banner' => $data], 200);
+    }
 
-            ->where('id_banner','=',$request->id_banner)->get();
-       return json_encode(['banner'=>$data],200);
-   }
-   public function getProduct(Request $request){
-       $request->all();
-       $data = DB::table('banner')
-           ->join('type_banner','banner.id_typebanner','=','type_banner.id_typebanner')
-           ->select('*')
+    public function getProduct(Request $request)
+    {
+        $request->all();
+        $data = DB::table('banner')
+            ->join('type_banner', 'banner.id_typebanner', '=', 'type_banner.id_typebanner')
+            ->select('*')
+            ->where('banner.id_banner', '=', $request->id_banner)->get();
+        return json_encode(['banner' => $data], 200);
+    }
 
-           ->where('banner.id_banner','=',$request->id_banner)->get();
-       return json_encode(['banner'=>$data],200);
-   }
-    public function getRatio(Request $request){
+    public function getRatio(Request $request)
+    {
         $request->all();
         $data = DB::table('detail_payment')
-            ->join('contract','detail_payment.id_contract','=','contract.id_contract')
+            ->join('contract', 'detail_payment.id_contract', '=', 'contract.id_contract')
             ->select('detail_payment.*')
-
-            ->where('detail_payment.id_contract','=',$request->id_contract)->get();
-        return json_encode(['detail'=>$data],200);
+            ->where('detail_payment.id_contract', '=', $request->id_contract)->get();
+        return json_encode(['detail' => $data], 200);
     }
-    public function getphoto(Request $request){
+
+    public function getphoto(Request $request)
+    {
         $request->all();
         $data = DB::table('photo')
-            ->join('banner','banner.id_banner','=','photo.id_banner')
-            ->select('photo.id','photo._name_photo','photo.id_banner')
-            ->where('photo.id_banner','=',$request->id_banner)->get();
-        return json_encode(['photo'=>$data],200);
+            ->join('banner', 'banner.id_banner', '=', 'photo.id_banner')
+            ->select('photo.id', 'photo._name_photo', 'photo.id_banner')
+            ->where('photo.id_banner', '=', $request->id_banner)->get();
+        return json_encode(['photo' => $data], 200);
     }
+
     public function export()
     {
         $excel = new ExportContract();
         return Excel::download($excel, 'Thống Kê Hợp Đồng.xlsx');
     }
-    public function getSetting(){
+
+    public function getSetting()
+    {
         return view('pages.users.setting');
     }
-    public function addSetting(Request $request){
+
+    public function addSetting(Request $request)
+    {
         try {
             try {
                 $salary = new Salary();
                 $salary->id_salary = $request->id_salary;
                 $salary->bassic_salary = $request->bassic_salary;
                 $salary->save();
-            }catch(\Exception $e){
-                \session()->flash('luong','Bị Trùng Với Dữ Liệu Cũ');
+            } catch (\Exception $e) {
+                \session()->flash('luong', 'Bị Trùng Với Dữ Liệu Cũ');
                 return redirect('/setting');
             }
             try {
@@ -333,8 +418,8 @@ class ContractController extends Controller
                 $branch->name_branch = $request->name_branch;
                 $branch->adress_branch = $request->adress_branch;
                 $branch->save();
-            }catch (\Exception $e){
-                \session()->flash('chi-nhanh','Bị Trùng Với Dữ Liệu Cũ');
+            } catch (\Exception $e) {
+                \session()->flash('chi-nhanh', 'Bị Trùng Với Dữ Liệu Cũ');
                 return redirect('/setting');
             }
 
@@ -345,16 +430,35 @@ class ContractController extends Controller
                 $setting->save();
 
 
-            }catch (\Exception $e){
-                \session()->flash('pos','Bị Trùng Với Dữ Liệu Cũ');
+            } catch (\Exception $e) {
+                \session()->flash('pos', 'Bị Trùng Với Dữ Liệu Cũ');
                 return redirect('/setting');
             }
             return redirect('/home');
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return redirect('/setting');
         }
 
 
+    }
 
+    public function setPay1($id)
+    {
+        $product = DetailModel::find($id);
+        if ($product) {
+            $product->id_status = 1;
+            $result = $product->update();
+        }
+        return redirect()->back();
+    }
 
-}}
+    function setPay2($id)
+    {
+        $product = DetailModel::find($id);
+        if ($product) {
+            $product->id_status = 3;
+            $result = $product->update();
+        }
+        return redirect()->back();
+    }
+}

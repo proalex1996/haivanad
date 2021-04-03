@@ -27,7 +27,7 @@ class staffModel extends Model
         'id_CMND',
         'id_phan_quyen',
         'born',
-        'io_position'
+        'id_position'
 
     ];
 }

@@ -33,7 +33,7 @@ class staffController extends Controller
             ->join('status', 'users.id_status', '=', 'status.id_status')
             ->join('phan_quyen', 'id_phan_quyen', '=', 'phan_quyen.id_pq')
             ->join('positions','users.id_position','=','positions.id_position')
-            ->select('users.id', 'phan_quyen.name_pq','users.id_branch', 'users.name', 'email', 'created_at', 'staff_adress', 'staff_phone', 'id_CMND',
+            ->select('users.id','users.id_staff', 'phan_quyen.name_pq','users.id_branch', 'users.name', 'email', 'created_at', 'staff_adress', 'staff_phone', 'id_CMND',
                 'branch.name_branch', 'status.status','positions.name_position', 'bassic_salary', 'users.born',
                 'phan_quyen.name_pq', 'phan_quyen.id_pq', 'status.id_status');
         if (!empty($request->staff_phone)) {
@@ -43,9 +43,9 @@ class staffController extends Controller
             $users = $users->where('status.id_status', '=', $request->id_status);
         }
         if (!empty($request->id_staff)) {
-            $users = $users->where('users.id', 'LIKE', '%'.$request->id_staff.'%');
+            $users = $users->where('users.id_staff', 'LIKE', '%'.$request->id_staff.'%');
         }
-        $users = $users->orderBy('users.id','DESC')->get();
+        $users = $users->orderBy('users.id_staff','DESC')->get();
         $statuss = DB::table('status')->select('*')->get();
         $pq = DB::table('phan_quyen')->select('*')->get();
         return view('pages.users.index', [
@@ -69,10 +69,11 @@ class staffController extends Controller
         ]);
     }
     public function addStaff(Request $request){
-        $check = DB::table('users')->select(DB::raw('count(*)'))->where('email','=',$request->staff_email)->get();
-        if(!empty($check) ){
+        $check = DB::table('users')->select(DB::raw('count(*) as count'))->where('email','=',$request->staff_email)->get();
+        $check1 = json_decode($check);
+        if($check1[0]->count != 0 ){
             \session()->flash('warn','Email đã tồn tại');
-            return redirect(\url('/users/add'));
+            return back();
         }else{
             $users = new staffModel();
             $users->id_branch = $request->staff_branch;
@@ -88,6 +89,7 @@ class staffController extends Controller
             $users->id_salary = $request->bassic_salary;
             $users->id_status = $request->staff_status;
             $users->id_phan_quyen = $request->id_pq;
+            $users->id_staff = $request->id_staff;
             $users->save();
             return redirect()->action('staffController@getIndex');
         }
@@ -117,7 +119,7 @@ class staffController extends Controller
                 'pqs' => $pq,
                 'positions' => $position
             ]);
-        }
+    }
 
 
 

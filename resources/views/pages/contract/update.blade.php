@@ -72,7 +72,7 @@
                                         <label for="exampleFormControlSelect1">Tên khách hàng</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="name_customer" name="name_customer"
+                                        <select class="form-control" id="id_customer" name="name_customer"
                                                 onchange="getCustomer()">
                                             @foreach($customers as $customer)
                                                 @if($customer->customer_id == $contract->id_customer)
@@ -253,7 +253,7 @@
                                         <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
                                             <option value="">--Tỉnh/Thành Phố--</option>
                                             @foreach($provinces as $province)
-                                                <option value="{{$province -> id}}">{{$province -> _name}}</option>
+                                                <option value="{{$province -> _code}}">{{$province -> _name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -390,21 +390,29 @@
                                     <th class="text-center">VAT</th>
                                     <th class="text-center">Tổng</th>
                                     <th class="text-center">Ngày Thanh Toán</th>
+                                    <th class="text-center"width="20%">Trạng Thái</th>
                                 </tr>
                                 </thead>
                                 <tbody id="idBodyPayment">
-                                <tr class="idTrPayment">
-                                    <td><input type="checkbox" id="check-box1" name="check_box[]" value="1"
+                                    <tr class="idTrPayment">
+                                    <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
                                                class="display-input m-r-5"></td>
-                                    <td><input type="text" class="display-input form-control" id="payment_period" name="payment_period"
-                                               required>
+                                    <td><input type="text" class="display-input form-control payment_period" data-target="{{$contract->id_contract}}" id="payment_period" name="payment_period[]" required>
                                     </td>
-                                    <td><input type="text" class="form-control display-input" id="ratio" name="ratio" required></td>
-                                    <td><input type="text" class="form-control display-input" id="id_value_contract" onchange="getRatio()"
-                                               name="id_value_contract" required></td>
-                                    <td><input type="text" class="form-control display-input" id="id_vat" onchange="getRatio()" name="id_vat" required></td>
-                                    <td><input type="text" class="form-control display-input" id="total" name="total_value" required></td>
-                                    <td><input type="date" class="form-control display-input" name="_pay_due" id="_pay_due" required>
+                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onblur="setRatio(this)" name="ratio[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_value_contract" onblur="getRatio(this)" id="id_value_contract"
+                                               name="id_value_contract[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat" onblur="getRatio(this)" name="id_vat[]" required></td>
+                                    <td><input type="text" class="form-control display-input total" id="total" name="total_value[]" required></td>
+                                    <td><input type="date" class="form-control display-input" id="_pay_due" name="_pay_due[]" required> </td>
+                                    <td><a class="dropdown-toggle form-control display-input" data-toggle="dropdown" aria-haspopup="true"
+                                           aria-expanded="false" id="dropdownMenuLink"> Trạng Thái</a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item"
+                                               href="{{url('/contract/setpay1/'.$contract->id_contract)}}">Đã Thanh Toán</a>
+                                            <a  class="dropdown-item"
+                                               href="{{url('/contract/setpay2/'.$contract->id_contract)}}">Công Nợ</a>
+                                        </div>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -430,7 +438,7 @@
                 <div class="form-group m-t-20">
                     <label for="exampleFormControlSelect1">Nội dung hợp đồng</label>
                     <div class="custom-file">
-                        <label class="custom-file-label" for="validatedCustomFile">Chọn file...</label>
+                        <label class="custom-file-label" for="validatedCustomFile">{{$contract->content}}</label>
                         <input type="file" class="custom-file-input" accept=".doc,.docx,.pdf" id="content_contract"
                                name="content_contract" required>
                         <div class="invalid-feedback">Định dạng file phải là .doc, .docx, .pdf</div>

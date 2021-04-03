@@ -1832,23 +1832,61 @@ function getQuan(element) {
 }
 
 checkAll();
+var i = 2
 $('#addrowPayment').on('click', function () {
 
+    var j = i + 1
+    i++;
     $('#idBodyPayment').append(
-        `<tr class="idTrPayment">
-            <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
-                       class="display-input m-r-5"></td>
-            <td><input type="text" class="display-input form-control" id="payment_period" name="payment_period"
-                       required>
-            </td>
-            <td><input type="text" class="form-control display-input" id="ratio" name="ratio" required></td>
-            <td><input type="text" class="form-control display-input" id="id_value_contract" onchange="getRatio()"
-                       name="id_value_contract[]" required></td>
-            <td><input type="text" class="form-control display-input" id="id_vat" onchange="getRatio()" name="id_vat" required></td>
-            <td><input type="text" class="form-control display-input" id="total" name="total_value" required></td>
-            <td><input type="date" class="form-control display-input" name="_pay_due" id="_pay_due" required>
-            </td>
-        </tr>
+        `
+                                <tr class="idTrPayment">
+                                    <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
+                                               class="display-input m-r-5"></td>
+                                    <td><input type="text" class="display-input form-control payment_period" data-target="{{$contract->id_contract}}" id="payment_period" name="payment_period[]"
+                                               required>
+                                    </td>
+                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onblur="setRatio(this)" name="ratio[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_value_contract" onblur="getRatio(this)" id="id_value_contract"
+                                               name="id_value_contract[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat" onblur="getRatio(this)" name="id_vat[]" required></td>
+                                    <td><input type="text" class="form-control display-input total" id="total" name="total_value[]" required></td>
+                                    <td><input type="date" class="form-control display-input" name="_pay_due[]" required>
+                                    </td>
+                                    <td><a class="dropdown-toggle form-control display-input" data-toggle="dropdown" aria-haspopup="true"
+                                           aria-expanded="false" id="dropdownMenuLink"> Trạng Thái</a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item"
+                                               href="{{url('/contract/setpay1/'.$contract->id_contract)}}">Đã Thanh Toán</a>
+                                            <a  class="dropdown-item"
+                                               href="{{url('/contract/setpay2/'.$contract->id_contract)}}">Công Nợ</a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+`
+    )
+})
+$('#addrowPayment1').on('click', function () {
+
+    var j = i + 1
+    i++;
+    $('#idBodyPayment').append(
+        `
+                                <tr class="idTrPayment">
+                                    <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
+                                               class="display-input m-r-5"></td>
+                                    <td><input type="text" class="display-input form-control payment_period" id="payment_period" name="payment_period[]"
+                                               required>
+                                    </td>
+                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onblur="setRatio(this)" name="ratio[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_value_contract" onblur="getRatio(this)" id="id_value_contract"
+                                               name="id_value_contract[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat" onblur="getRatio(this)" name="id_vat[]" required></td>
+                                    <td><input type="text" class="form-control display-input total" id="total" name="total_value[]" required></td>
+                                    <td><input type="date" class="form-control display-input" name="_pay_due[]" required>
+
+                                </tr>
+
 `
     )
 })
@@ -1857,15 +1895,26 @@ $('#addrowPayment').on('click', function () {
 function deleteRowPayment() {
     var arrId = [];
     var url = $('#domain').attr('href');
-    var checked = $("#check-box:checked");
-
-    $.each(checked, function (index, element) {
-        var td = element.closest("td");
-        var tr = td.closest("tr")
-
-        tr.remove();
+    var checked = $("#check-box:checked").closest('tr');
+    var chill = checked.children('td').find('.payment_period');
+    var data = $('#id_contract').val();
+    var data1 = $(chill).val()
+    $.ajax({
+        url: url +'/api/contract/deletepay/'+data+'/'+data1,
+        async: false,
+        method: "POST",
+        success: function () {
+            $.each(parent, function (index, element) {
+                checked.remove();
+            })
+        }
     })
 
+
+}
+function deleteRowPayment1() {
+    var checked = $("#check-box:checked").closest('tr');
+    checked.remove();
 
 }
 
@@ -1925,7 +1974,6 @@ $(document).ready(function () {
     }
 });
 getTong();
-getRatio();
 
 function getTong() {
     var gia = $('#value_contract').val();
@@ -1933,13 +1981,27 @@ function getTong() {
     $('#tong').val(parseInt(gia) + parseInt(thue));
 }
 
-function getRatio() {
-    var gia = $('#id_value_contract').val();
-    var thue = (($('#id_vat').val() * gia) / 100);
-    $('#total').val(parseInt(gia) + parseInt(thue));
-
-
+function setRatio(elements) {
+    var parent = $(elements).closest('tr');
+    var gia = parent.children('td').find('.ratio');
+    var value = $('#value_contract').val()
+    var id_value = parent.children('td').find('.id_value_contract');
+    $(id_value).val((value * $(gia).val())/100)
 }
+function getRatio(element) {
+    var parent = $(element).closest('tr');
+    var gia = parent.children('td').find('.id_value_contract');
+    var thue = parent.children('td').find('.id_vat');
+    var total = parent.children('td').find('.total');
+    var vat = ($(thue).val() * $(gia).val())/ 100
+    $(total).val(parseInt($(gia).val()) + parseInt(vat));
+
+    // var gia = $('#id_value_contract').val();
+    // var thue = (($('#id_vat').val() * gia) / 100);
+    // $('[id^="total"]').val(parseInt(gia) + parseInt(thue));
+}
+
+
 
 function getProduct() {
     var url = $('#domain').attr('href');
@@ -2069,22 +2131,29 @@ function Ratio() {
                     $('.idTrPayment').remove();
                     $.each(datas, function (index, ele) {
                         $('#idBodyPayment').append(
-                            `<tr class="idTrPayment">
-            <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
-                       class="display-input m-r-5"></td>
-            <td><input type="text" class="display-input form-control" value="${ele.payment_period}" id="payment_period" name="payment_period"
-                       required>
-            </td>
-            <td><input type="text" class="form-control display-input" value="${ele.ratio}" id="ratio" name="ratio" required></td>
-            <td><input type="text" class="form-control display-input" value="${ele.id_value_contract}" onchange="getRatio()" id="id_value_contract"
-                       name="id_value_contract" required></td>
-            <td><input type="text" class="form-control display-input" value="${ele.id_vat}" onchange="getRatio()" id="id_vat" name="id_vat" required></td>
-            <td><input type="text" class="form-control display-input" value="${ele.total_value}" id="total" name="total_value" required></td>
-            <td><input type="date" class="form-control display-input" value="${ele._pay_due}" name="_pay_due" id="_pay_due" required>
-            </td>
-        </tr>
-`
-                        )
+                            ` <tr class="idTrPayment">
+                                    <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
+                                               class="display-input m-r-5"></td>
+                                    <td><input type="text" class="display-input form-control payment_period" id="payment_period" value="${ele.payment_period}" name="payment_period[]"
+                                               required>
+                                    </td>
+                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" value="${ele.ratio}" id="ratio" onblur="setRatio(this)" name="ratio[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_value_contract" value="${ele.id_value_contract}" onblur="getRatio(this)" id="id_value_contract"
+                                               name="id_value_contract[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat" value="${ele.id_vat}" onblur="getRatio(this)" name="id_vat[]" required></td>
+                                    <td><input type="text" class="form-control display-input total" value="${ele.total_value}" id="total" name="total_value[]" required></td>
+                                    <td><input type="date" class="form-control display-input" value="${ele._pay_due}" name="_pay_due[]" required>
+                                    </td>
+                                    <td><a class="dropdown-toggle form-control display-input" data-toggle="dropdown" aria-haspopup="true"
+                                           aria-expanded="false" id="dropdownMenuLink"> Trạng Thái</a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item"
+                                               href="{{url('/contract/setpay1/'.$contract->id_contract)}}">Đã Thanh Toán</a>
+                                            <a  class="dropdown-item"
+                                               href="{{url('/contract/setpay2/'.$contract->id_contract)}}">Công Nợ</a>
+                                        </div>
+                                    </td>
+                                </tr>` )
                     })
                 }
 

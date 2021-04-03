@@ -293,6 +293,35 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
+                                        <label for="dateofbirth">Ngày bắt đầu:</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-control" type="date" name="date_start" id="dateofbirth"
+                                               required>
+                                        <div class="invalid-feedback m-l-20">Vui lòng nhập ngày bắt đầu hợp đồng</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="dateofbirth">Ngày kết thúc</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-control" type="date" name="date_end" id="dateofbirth"
+                                               required>
+                                        <div class="invalid-feedback m-l-20">Vui lòng nhập ngày kết thúc hợp đồng</div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1">Giá trị hợp đồng</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
@@ -313,36 +342,6 @@
                                         <input type="number" class="form-control" onchange="getTong()" id="thue"
                                                name="thue"
                                                placeholder="Thuế (%)" value="" required>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="dateofbirth">Ngày bắt đầu:</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input class="form-control" type="date" name="date_start" id="dateofbirth"
-                                               required>
-                                        <div class="invalid-feedback m-l-20">Vui lòng nhập ngày bắt đầu hợp đồng</div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="dateofbirth">Ngày kết thúc</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input class="form-control" type="date" name="date_end" id="dateofbirth"
-                                               required>
-                                        <div class="invalid-feedback m-l-20">Vui lòng nhập ngày kết thúc hợp đồng</div>
                                     </div>
 
                                 </div>
@@ -387,28 +386,29 @@
                                 <tr class="idTrPayment">
                                     <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
                                                class="display-input m-r-5"></td>
-                                    <td><input type="text" class="display-input form-control" id="payment_period" name="payment_period"
+                                    <td><input type="text" class="display-input form-control payment_period" id="payment_period" name="payment_period[]"
                                                required>
                                     </td>
-                                    <td><input type="text" class="form-control display-input" id="ratio" name="ratio" required></td>
-                                    <td><input type="text" class="form-control display-input" onchange="getRatio()" id="id_value_contract"
+                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onblur="setRatio(this)" name="ratio[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_value_contract" onblur="getRatio(this)" id="id_value_contract"
                                                name="id_value_contract[]" required></td>
-                                    <td><input type="text" class="form-control display-input" placeholder="Thuế (%)" id="id_vat" onchange="getRatio()" name="id_vat" required></td>
-                                    <td><input type="text" class="form-control display-input" id="total" name="total_value" required></td>
-                                    <td><input type="date" class="form-control display-input" name="_pay_due" required>
-                                    </td>
-                                </tr>
+                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat" onblur="getRatio(this)" name="id_vat[]" required></td>
+                                    <td><input type="text" class="form-control display-input total" id="total" name="total_value[]" required></td>
+                                    <td><input type="date" class="form-control display-input" name="_pay_due[]" required>
+
+
+
                                 </tbody>
 
                             </table>
                             <div class="form-group">
-                                <button type="button"  onclick="deleteRowPayment()" id="addPayment"
+                                <button type="button"  onclick="deleteRowPayment1()" id="addPayment"
                                    class="au-btn au-btn-icon au-btn--blue float-right m-b-20" style="color: #ffff;">
                                     <i class="zmdi zmdi-plus"></i>Xóa Kỳ Thanh Toán
                                 </button>
-                                <button type="button" id="addrowPayment"
+                                <button type="button" id="addrowPayment1"
                                    class="au-btn au-btn-icon au-btn--blue float-right m-b-20 m-r-20"
-                                   style="color: #ffff;">
+                                   >
                                     <i class="zmdi zmdi-plus"></i>Thêm Kỳ Thanh Toán
                                 </button>
                             </div>

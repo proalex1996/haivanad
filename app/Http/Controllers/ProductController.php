@@ -84,7 +84,7 @@ class ProductController extends Controller
         $contract = DB::table('contract')
             ->join('banner', 'contract.id_banner', '=', 'banner.id_banner')
             ->join('customer', 'contract.id_customer', '=', 'customer.customer_id')
-            ->select('banner.id_banner', 'contract.id_contract', 'customer.name_customer')->groupBy('contract.id')->orderBy('contract.id', 'DESC')->first();
+            ->select('banner.id_banner', 'contract.id_contract', 'customer.name_customer')->groupBy('contract.id_product')->orderBy('contract.id', 'DESC')->first();
         return json_encode($banners);
 
     }
@@ -165,16 +165,18 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-
-
         if (!empty($data)) {
-            if (!empty($data['thumb_banner'])) {
-                $data['thumb_banner'] = basename($request->thumb_banner->getClientOriginalName());
-                $file = $request->file('thumb_banner');
-                $fileName = $request->file('thumb_banner')->getClientOriginalName();
-                $storage = Storage::putFileAs('content', $file, $fileName);
+            if (!empty($data['photos'])) {
+                foreach ($data['photos'] as $photo){
+                    $fileName = $photo->getClientOriginalName();
+                    $storage = Storage::putFileAs('content', $photo, $fileName);
+                    $photoModel = PhotoModel::where(['id_banner' => $data['id_banner']])->first();
+                    $photoModel->_name_photo = basename($photo->getClientOriginalName());
+                    $photoModel->save();
+                }
             }
-            $up = $this->productRepository->update($id, $data);
+            $dataBanner = $request->except('photos');
+            $up = $this->productRepository->update($id, $dataBanner);
             return redirect()->action('ProductController@getIndex');
         }
 

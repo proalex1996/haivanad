@@ -40,7 +40,6 @@ abstract class RepositoryEloquent implements RepositoryInterface
     public function update($id, array $attributes)
     {
         $result = $this->_model->find($id);
-
         if($result)
         {
             $result->update($attributes);
