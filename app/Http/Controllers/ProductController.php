@@ -232,7 +232,7 @@ class ProductController extends Controller
 
     public function dowloadExample()
     {
-        return redirect('public/storage/contract/ExmpleProduct.xlsx');
+        return redirect('public/storage/contract/ImportProduct.xlsx');
     }
 
     public function pickupBanner1($id)

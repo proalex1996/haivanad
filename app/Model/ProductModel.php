@@ -28,6 +28,7 @@ class ProductModel extends Model
         'dac_diem',
         'note_banner',
         'thumb_banner',
-        'gianam'
+        'gianam',
+        'dien_tich'
     ];
 }

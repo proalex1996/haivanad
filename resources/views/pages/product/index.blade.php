@@ -114,7 +114,7 @@
                                             </a>
                                         </div>
                                     </td>
-                                    <td class="id_banner">2021+{{$banner->id_banner}}</td>
+                                    <td class="id_banner">{{$banner->id_banner}}</td>
                                     <td>2021+{{$banner->name_type}}</td>
                                     <td>{{$banner->_name_banner}}</td>
                                     <td>{{$banner->_name}}</td>
@@ -145,7 +145,7 @@
                                             </a>
                                         </div>
                                     </td>
-                                    <td class="id_banner">2021+{{$banner->id_banner}}</td>
+                                    <td class="id_banner">{{$banner->id_banner}}</td>
                                     <td>{{$banner->name_type}}</td>
                                     <td>{{$banner->_name_banner}}</td>
                                     <td>{{$banner->_name}}</td>
