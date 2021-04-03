@@ -15,7 +15,7 @@ class ProductModel extends Model
         'id_banner',
         'flow',
         'tinh',
-        'location',
+        '_name_banner',
         'banner_adress',
         'quan',
         'id_system',
