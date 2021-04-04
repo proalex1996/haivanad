@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ExportContract;
+use App\Imports\ImportsContract;
 use App\Model\Branch;
 use App\Model\ContractModel;
 
@@ -52,7 +53,6 @@ class ContractController extends Controller
 
     public function getContract(Request $request)
     {
-        $data = $request->all();
         $id_contract = $request->id_contract;
         $name_customer = $request->name_customer;
         $_nguon = $request->nguon;
@@ -68,7 +68,9 @@ class ContractController extends Controller
         $nguon = DB::table('nguon_customer')->select('*')->get();
         $kinds = DB::table('kind_contract')->select('*')->get();
         $type_banner = DB::table('type_banner')->select('*')->get();
-        if (empty($data)) {
+        if (is_null($id_contract) && is_null($name_customer) && is_null($_nguon) && is_null($_kind) &&
+            is_null($typebanner) && is_null($id_staff) && is_null($_name_banner) && is_null($date_start) &&
+            is_null($date_end) && is_null($id_status))  {
             $contracts = DB::select("
                 SELECT contract.id,contract.id_contract, customer.name_customer,
                 kind_contract.name_kind, type_banner.name_type,banner._name_banner,contract.date_end,
@@ -649,6 +651,19 @@ class ContractController extends Controller
         $excel = new ExportContract();
         return Excel::download($excel, 'Thống Kê Hợp Đồng.xlsx');
     }
+    public function importContract(){
+        return view('pages.contract.import');
+    }
+    public function import(Request $request){
+        $file = $request->file('file');
+        if(!empty($file)){
+            Excel::import(new ImportsContract(),$file);
+            return redirect()->action('ContractController@getContract');
+        }else {
+            return redirect()->back();
+        }
+
+    }
 
     public function getSetting()
     {
@@ -715,5 +730,8 @@ class ContractController extends Controller
             $result = $product->update();
         }
         return redirect()->back();
+    }
+    public function dowloadExample(){
+        return redirect('public/storage/contract/Import_Contract.xlsx');
     }
 }

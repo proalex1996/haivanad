@@ -23,6 +23,9 @@ class CustomerModel extends Model
         'mass',
         'status_customer',
         'id_nguon',
-        'adress_customer'
+        'adress_customer',
+        '_cmnd',
+        '_bank',
+        'position_customer'
     ];
 }

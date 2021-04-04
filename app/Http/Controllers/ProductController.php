@@ -255,74 +255,9 @@ class ProductController extends Controller
         return redirect()->action('ProductController@getIndex');
     }
 
-    public function generateppt()
-    {
 
-        $objPHPPowerPoint = new PhpPresentation();
-        $objPHPPowerPoint->getProperties()->setCreator('Sketch Presentation')
-            ->setLastModifiedBy('Sketch Team')
-            ->setTitle('Sketch Presentation')
-            ->setSubject('Sketch Presentation')
-            ->setDescription('Sketch Presentation')
-            ->setKeywords('office 2007 openxml libreoffice odt php')
-            ->setCategory('Sample Category');
-        $objPHPPowerPoint->removeSlideByIndex(0);
-        dd($objPHPPowerPoint);
-        $this->slide1($objPHPPowerPoint);
-        $this->slide2($objPHPPowerPoint);
-        $oWriterPPTX = IOFactory::createWriter($objPHPPowerPoint, 'PowerPoint2007');
-        return $oWriterPPTX->save(__DIR__ . "/sample.pptx");
-    }
 
-    public function slide1(&$objPHPPowerPoint)
-    {
-        // Create slide
-        $currentSlide = $objPHPPowerPoint->createSlide();
-        // Create a shape (drawing)
-        $shape = $currentSlide->createDrawingShape();
-//        $shape->setName('image')
-//            ->setDescription('image')
-//            ->setPath(public_path().'/phppowerpoint_logo.gif')
-//            ->setHeight(300)
-//            ->setOffsetX(10)
-//            ->setOffsetY(10);
-        // Create a shape (text)
-        $shape = $currentSlide->createRichTextShape()
-            ->setHeight(300)
-            ->setWidth(600)
-            ->setOffsetX(170)
-            ->setOffsetY(180);
-        $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $textRun = $shape->createTextRun('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ');
-        $textRun->getFont()->setBold(true)
-            ->setSize(16)
-            ->setColor(new Color('FFE06B20'));
-    }
 
-    public function slide2(&$objPHPPowerPoint)
-    {
-        // Create slide
-        $currentSlide = $objPHPPowerPoint->createSlide();
-        // Create a shape (drawing)
-        $shape = $currentSlide->createDrawingShape();
-//        $shape->setName('image')
-//            ->setDescription('image')
-//            ->setPath(public_path().'/phppowerpoint_logo.gif')
-//            ->setHeight(300)
-//            ->setOffsetX(10)
-//            ->setOffsetY(10);
-        // Create a shape (text)
-        $shape = $currentSlide->createRichTextShape()
-            ->setHeight(300)
-            ->setWidth(600)
-            ->setOffsetX(170)
-            ->setOffsetY(180);
-        $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $textRun = $shape->createTextRun('Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
-        $textRun->getFont()->setBold(true)
-            ->setSize(16)
-            ->setColor(new Color('FFE06B20'));
-    }
 
     function upload(Request $request)
     {
@@ -334,7 +269,6 @@ class ProductController extends Controller
 
         return response()->json(['success' => $imageName]);
     }
-
     function fetch()
     {
         $images = File::allFiles(public_path('images'));
@@ -350,7 +284,6 @@ class ProductController extends Controller
         $output .= '</div>';
         echo $output;
     }
-
     function delete(Request $request)
     {
         if ($request->get('name')) {

@@ -5,9 +5,9 @@
         <div class="col-md-12 m-b-40">
             <div class="overview-wrap">
                 <h2 class="title-1">Thêm Mới Hợp đồng</h2>
-{{--                <button class="au-btn au-btn-icon au-btn--blue">--}}
-{{--                    <i class="zmdi zmdi-plus"></i>Nhập file Excel--}}
-{{--                </button>--}}
+                <a type="button" class="au-btn au-btn-icon au-btn--blue" href="{{url('contract/import-contract')}}">
+                    <i class="zmdi zmdi-plus" ></i>Nhập file Excel
+                </a>
             </div>
         </div>
         <form action="add" enctype="multipart/form-data" class="needs-validation" method="post">

@@ -51,6 +51,7 @@ Route::group(['prefix' => 'product'], function () {
     Route::get('/photo/','ProductController@getPhoto');
 
 
+
 });
 
 

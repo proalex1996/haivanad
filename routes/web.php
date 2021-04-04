@@ -53,6 +53,9 @@ Route::group(['prefix' => 'contract'], function () {
         Route::get('/download', 'ContractController@getDownload');
         Route::get('/destroy/{id}', 'ContractController@destroy');
         Route::get('/export', 'ContractController@export');
+        Route::get('/import-contract', 'ContractController@importContract');
+        Route::post('/import-contract', 'ContractController@import');
+        Route::get('/download-exmple', 'ContractController@dowloadExample');
         Route::get('/setpay1/{id}', 'ContractController@setPay1');
         Route::get('/setpay2/{id}', 'ContractController@setPay2');
     });
@@ -73,6 +76,7 @@ Route::group(['prefix' => 'users'], function () {
         Route::get('/status2/{id}', 'staffController@status2');
         Route::get('/import-staff', 'staffController@importStaff');
         Route::post('/import-staff', 'staffController@import');
+
         Route::get('/export', 'staffController@export');
 
     });

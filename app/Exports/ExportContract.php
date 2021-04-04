@@ -23,7 +23,7 @@ class ExportContract implements FromQuery, WithHeadings
            ->join('kind_contract','contract.kind','=','kind_contract.id_contract')
            ->join('type_banner','banner.id_typebanner','=','type_banner.id_typebanner')
            ->join('detail_payment','contract.id_contract','=','detail_payment.id_contract')
-           ->select('banner.id_banner','kind_contract.name_kind','users.name','banner.location'
+           ->select('banner.id_banner','kind_contract.name_kind','users.name','banner._name_banner'
                ,'banner.banner_adress','district._name_district','province._name','banner.id_system','banner.size_banner',
                'customer.name_customer',
                'customer.adress_customer','contract.content','value_contract','detail_payment._pay_due',
