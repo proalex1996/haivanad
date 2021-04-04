@@ -29,12 +29,11 @@ class staffController extends Controller
     {
         $users = DB::table('users')
             ->join('branch', 'users.id_branch', '=', 'branch.id_branch')
-            ->join('salary', 'users.id_salary', '=', 'salary.id_salary')
             ->join('status', 'users.id_status', '=', 'status.id_status')
             ->join('phan_quyen', 'id_phan_quyen', '=', 'phan_quyen.id_pq')
             ->join('positions','users.id_position','=','positions.id_position')
             ->select('users.id','users.id_staff', 'phan_quyen.name_pq','users.id_branch', 'users.name', 'email', 'created_at', 'staff_adress', 'staff_phone', 'id_CMND',
-                'branch.name_branch', 'status.status','positions.name_position', 'bassic_salary', 'users.born',
+                'branch.name_branch', 'status.status','positions.name_position', 'id_salary', 'users.born',
                 'phan_quyen.name_pq', 'phan_quyen.id_pq', 'status.id_status');
         if (!empty($request->staff_phone)) {
             $users = $users->where('users.staff_phone', 'LiKE', '%'.$request->staff_phone.'%');

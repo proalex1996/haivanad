@@ -5,9 +5,9 @@
         <div class="col-md-12 m-b-40">
             <div class="overview-wrap">
                 <h2 class="title-1">Thêm Mới Nhân Viên</h2>
-{{--                <a type="button" class="au-btn au-btn-icon au-btn--blue" href="import-staff">--}}
-{{--                    <i class="zmdi zmdi-plus"></i>Nhập file Excel--}}
-{{--                </a>--}}
+                <a type="button" class="au-btn au-btn-icon au-btn--blue" href="import-staff">
+                    <i class="zmdi zmdi-plus"></i>Nhập file Excel
+                </a>
             </div>
         </div>
         <form action="add" enctype="multipart/form-data" class="needs-validation" method="post">
@@ -171,16 +171,11 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Lương Cơ Bản</label>
+                                        <label for="exampleFormControlSelect1">Lương</label>
                                     </div>
-                                    <div class="col-md-4 col-sm-12">
-                                        <select class="form-control form_select" id="bassic_salary"
-                                                name="bassic_salary">
-                                            @foreach($salarys as $salary)
-                                                <option
-                                                    value="{{$salary->id_salary}}">{{$salary->bassic_salary}}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-customer-input" type="text" name="bassic_salary"
+                                               id="bassic_salary" placeholder="Lương" required>
                                     </div>
 
                                 </div>

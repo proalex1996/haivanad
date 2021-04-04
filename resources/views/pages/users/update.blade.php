@@ -160,19 +160,12 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Lương Cơ Bản</label>
+                                        <label for="exampleFormControlSelect1">Lương</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" name="id_salary">
-                                            @foreach($salarys as $salary)
-                                                @if ($salary->id_salary == $staffs->id_salary)
-                                                    <option value="{{$salary->id_salary}}" selected>{{$salary->bassic_salary}}</option>
-                                                @else
-                                                    <option
-                                                        value="{{$salary->id_salary}}">{{$salary->bassic_salary}}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
+                                        <input class="form-customer-input" type="text" value="{{$staffs->id_salary}}" name="bassic_salary"
+                                               id="bassic_salary" required>
+                                        <div class="invalid-feedback m-l-20">Vui lòng nhập ngày sinh</div>
                                     </div>
 
                                 </div>

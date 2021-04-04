@@ -65,7 +65,7 @@
                             <th>Email</th>
                             <th>Chi Nhánh</th>
                             <th>Chức Vụ</th>
-                            <th>Lương Cơ Bản</th>
+                            <th>Lương</th>
                             <th>Trạng thái</th>
                             <th>Phân Quyền</th>
                         </tr>
@@ -97,7 +97,7 @@
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->name_branch}}</td>
                                 <td>{{$user->name_position}}</td>
-                                <td>{{$user->bassic_salary}}</td>
+                                <td>{{$user->id_salary}}</td>
                                 @if($user->id_status == 1)
                                     <td class="status--process">
                                         <a type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"

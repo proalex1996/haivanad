@@ -1206,9 +1206,6 @@ section {
 }
 .form-control  {
    display: inline-flex;
-    margin: -3px;
-    margin-left: 5px;
-    margin-right: 5px;
     margin-bottom: 1rem;
 }
 .form-customer {
@@ -1216,7 +1213,7 @@ section {
     -moz-border-radius: 2px;
     border-radius: 2px;
     margin-bottom: 1rem;
-    width: 320px;
+    width: 100%;
     display: inline-flex;
 }
 .form-customer-input {
@@ -14985,7 +14982,7 @@ section {
     width: 160%; !important;
 }
 .date_picker{
-    width: 168px;
+    width: 100%;
     height: 42px;
     padding-left: 8px;
     display: inline-flex;
