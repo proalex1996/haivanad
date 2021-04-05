@@ -48,7 +48,7 @@ header('Access-Control-Allow-Origin: *');
         <div class="header-mobile__bar">
             <div class="container-fluid">
                 <div class="header-mobile-inner">
-                    <a class="logo" id="domain" href="{{config('config_app.domain.local')}}">
+                    <a class="logo" id="domain" href="{{config('config_app.domain.domain')}}">
                         <img src="{{asset('public/asset/images/logo.png')}}" alt="HaiVan"/>
                     </a>
                     <button class="hamburger hamburger--slider" type="button">
@@ -95,7 +95,7 @@ header('Access-Control-Allow-Origin: *');
     {{--Star Sidebar--}}
     <aside class="menu-sidebar d-none d-lg-block">
         <div class="logo">
-            <a href="{{'/haivanad'}}">
+            <a href="{{'/'}}">
                 <img src="{{asset('public/asset/images/logo.png')}}" alt="HaiVan"/>
             </a>
         </div>
