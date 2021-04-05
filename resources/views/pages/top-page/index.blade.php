@@ -13,6 +13,17 @@ use Illuminate\Support\Facades\DB;
         ->join('contract_status', 'status_contract', '=', 'contract_status.id_contract')
         ->select('contract.id', 'contract.id_contract', 'name_customer', 'banner.id_banner', 'contract.content', 'contract_status.name_status', 'kind_contract.name_kind',
             'date_start', 'date_end', 'name_staff', 'value_contract')->groupBy('contract.id')->orderBy('contract.id', 'DESC')->get();
+    $staff = DB::table('users')->select(DB::raw('COUNT(*) as users'))
+        ->get();
+    $contract2 = DB::table('contract')->join('detail_payment','contract.id_contract','=','detail_payment.id_contract')
+                                        ->select(DB::raw('COUNT(*) as contract'))
+                                       -> where('contract.id_contract','=',2)->get();
+    $contract1 = DB::table('contract')->join('detail_payment','contract.id_contract','=','detail_payment.id_contract')
+        ->select('value_contract')->sum('value_contract');
+    $contract = DB::table('contract')->join('detail_payment','contract.id_contract','=','detail_payment.id_contract')
+        ->select(DB::raw('COUNT(*) as contract'),'value_contract')->get();
+
+
     ?>
     <div class="container-fluid">
         <div class="row">
@@ -34,7 +45,7 @@ use Illuminate\Support\Facades\DB;
                                 <i class="zmdi zmdi-account-o"></i>
                             </div>
                             <div class="text">
-                                <h2>10368</h2>
+                                <h2>{{$staff[0]->users}}</h2>
                                 <span>Nhân Viên</span>
                             </div>
                         </div>
@@ -52,7 +63,7 @@ use Illuminate\Support\Facades\DB;
                                 <i class="zmdi zmdi-shopping-cart"></i>
                             </div>
                             <div class="text">
-                                <h2>388,688</h2>
+                                <h2>{{$contract[0]->contract}}</h2>
                                 <marquee behavior="none" direction="right" style="color: #ffff;">
                                     Tổng Số hợp đồng
                                 </marquee>
@@ -72,7 +83,7 @@ use Illuminate\Support\Facades\DB;
                                 <i class="zmdi zmdi-calendar-note"></i>
                             </div>
                             <div class="text">
-                                <h2>1,086</h2>
+                                <h2>{{$contract2[0]->contract}}</h2>
                                 <marquee behavior="none" direction="right" style="color: #ffff;">
                                     Tổng Số Hợp Đồng Đã Thanh Toán
                                 </marquee>
@@ -92,7 +103,9 @@ use Illuminate\Support\Facades\DB;
                                 <i class="zmdi zmdi-money"></i>
                             </div>
                             <div class="text">
-                                <h2>$1,060,386</h2>
+                                <h2>{{$contract1}}
+
+                                </h2>
 
                                 <span>Tổng danh thu</span>
                             </div>

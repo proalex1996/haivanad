@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\ContractModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+
         return view('pages.top-page.index');
     }
     public function check_menu($index)

@@ -192,8 +192,7 @@
                                         <label for="exampleFormControlSelect1">Trạng Thái</label>
                                     </div>
                                     <div class="col-md-4 col-sm-12">
-                                        <select class="form-control form_select" id="staff_status"
-                                                name="id_status">
+                                        <select class="form-control form_select" id="staff_status" name="id_status">
                                             @foreach($statuss as $status)
                                                 @if ($status->id_status == $staffs->id_status)
                                                     <option
