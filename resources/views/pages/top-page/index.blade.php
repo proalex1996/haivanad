@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\DB;
         ->get();
     $contract2 = DB::table('contract')->join('detail_payment','contract.id_contract','=','detail_payment.id_contract')
                                         ->select(DB::raw('COUNT(*) as contract'))
-                                       -> where('contract.id_contract','=',2)->get();
+                                       -> where('contract.id_contract','=',1)->get();
     $contract1 = DB::table('contract')->join('detail_payment','contract.id_contract','=','detail_payment.id_contract')
         ->select('value_contract')->sum('value_contract');
     $contract = DB::table('contract')->join('detail_payment','contract.id_contract','=','detail_payment.id_contract')
@@ -64,7 +64,7 @@ use Illuminate\Support\Facades\DB;
                             </div>
                             <div class="text">
                                 <h2>{{$contract[0]->contract}}</h2>
-                                <marquee behavior="none" direction="right" style="color: #ffff;">
+                                <marquee behavior="none" direction="left" style="color: #ffff;">
                                     Tổng Số hợp đồng
                                 </marquee>
                             </div>
@@ -84,7 +84,7 @@ use Illuminate\Support\Facades\DB;
                             </div>
                             <div class="text">
                                 <h2>{{$contract2[0]->contract}}</h2>
-                                <marquee behavior="none" direction="right" style="color: #ffff;">
+                                <marquee behavior="none" direction="left" style="color: #ffff;">
                                     Tổng Số Hợp Đồng Đã Thanh Toán
                                 </marquee>
                             </div>

@@ -10,7 +10,7 @@ class PhotoModel extends Model
 {
     protected $table ='photo';
     public $timestamps = false;
-    protected $fillabled = [
+    protected $fillable = [
         'id',
         '_name_photo',
         'id_banner'
