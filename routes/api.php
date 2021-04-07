@@ -47,8 +47,10 @@ Route::group(['prefix' => 'product'], function () {
     Route::post('/pickupBanner/{id}', 'ContractController@pickupBanner');
     Route::post('/province/{id}','ProductController@province');
     Route::get('/province/{id}','ProductController@province');
-    Route::post('/photo/{id}','ProductController@getPhoto');
+    Route::post('/photo/{id_banner}','ProductController@getPhoto');
     Route::get('/photo/','ProductController@getPhoto');
+
+
 
 
 

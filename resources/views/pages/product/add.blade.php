@@ -273,10 +273,11 @@
                         <div class="input-images">
                         </div>
                     </div>
-                        <div class="m-l-95 color-session">
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1" >Sơ Đồ:</label>
+                        <div class="input-images-map">
                         </div>
-
-
+                    </div>
                     <div class="form-group">
                         <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">
                             <i class="zmdi zmdi-plus"></i>Thêm

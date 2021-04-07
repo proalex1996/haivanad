@@ -53,11 +53,13 @@ Route::group(['prefix' => 'contract'], function () {
         Route::get('/download', 'ContractController@getDownload');
         Route::get('/destroy/{id}', 'ContractController@destroy');
         Route::get('/export', 'ContractController@export');
+        Route::get('/rpmat-bang', 'ContractController@rpMatBang');
         Route::get('/import-contract', 'ContractController@importContract');
         Route::post('/import-contract', 'ContractController@import');
         Route::get('/download-exmple', 'ContractController@dowloadExample');
-        Route::get('/setpay1/{id}', 'ContractController@setPay1');
-        Route::get('/setpay2/{id}', 'ContractController@setPay2');
+        Route::get('/setpay1/{id_contract}', 'ContractController@setPay1');
+        Route::get('/setpay2/{id_contract}', 'ContractController@setPay2');
+
     });
 });
 Route::group(['prefix' => 'users'], function () {
@@ -125,6 +127,8 @@ Route::group(['prefix' => 'product'], function () {
         Route::get('/genpptx','ProductController@generateppt');
         Route::get('/sort?={id}', 'ProductController@getsortStatus');
         Route::post('/img-upload', 'ProductController@store');
+        Route::post('/pptx','ProductController@getPptx');
+
     });
 }
 );

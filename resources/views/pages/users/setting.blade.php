@@ -44,18 +44,18 @@
                 </div>
             @endif
             <fieldset class="border-text">
-                <legend class='text-left'>Lương</legend>
+                <legend class='text-left'>Loại Hợp Đồng</legend>
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 col-sm-12 m-t-10">
-                            <label for="exampleFormControlInput1 ">Lương</label>
-                            <input type="text" class="form-control" id="bassic_salary" name="bassic_salary"
-                                   placeholder="Lương">
+                            <label for="exampleFormControlInput1 ">Loại Hợp Đồng</label>
+                            <input type="text" class="form-control" id="name_kind" name="name_kind"
+                                   placeholder="Loại Hợp Đồng">
                         </div>
                         <div class="col-md-6 col-sm-12 m-t-10">
-                            <label for="exampleFormControlInput1 ">Mã Lương</label>
-                            <input type="text" class="form-control" id="id_salary" name="id_salary"
-                                   placeholder="Mã Lương">
+                            <label for="exampleFormControlInput1 ">Mã Loại Hợp Đồng</label>
+                            <input type="text" class="form-control" id="id_contract" name="id_contract"
+                                   placeholder="Mã Loại Hợp Đồng">
                         </div>
 
 

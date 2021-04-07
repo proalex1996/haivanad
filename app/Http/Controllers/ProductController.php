@@ -7,13 +7,17 @@ namespace App\Http\Controllers;
 use App\Exports\ExportProduct;
 use App\Imports\ImportProduct;
 use App\Imports\TestSheetImport;
+use App\Model\MapModel;
 use App\Model\PhotoModel;
 use App\Model\PickupModel;
 use App\Model\ProductModel;
 use App\Repositories\Product\ProductRepositoryEloquent;
+use App\Utilili\PptxFomat;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Maatwebsite\Excel\Facades\Excel;
@@ -21,6 +25,8 @@ use PhpOffice\PhpPresentation\PhpPresentation;
 use PhpOffice\PhpPresentation\IOFactory;
 use PhpOffice\PhpPresentation\Style\Color;
 use PhpOffice\PhpPresentation\Style\Alignment;
+use PhpOffice\PhpWord\Shared\ZipArchive;
+use ZipStream\Option\Archive;
 
 class ProductController extends Controller
 {
@@ -110,9 +116,10 @@ class ProductController extends Controller
         $product->note_banner = $request->note_banner;
         $product->dien_tich = $request->dien_tich;
         $product->save();
-        $files =array($request->file('files'));
+        $files =$request->file('files');
+        $maps = array($request->file('maps'));
         if(!empty($files[0]) || !is_null($files[0])){
-            for($index = 0;$index < count($files);$index++){
+            for($index = 0;$index < sizeof($files);$index++){
                 $photo = new PhotoModel();
                 $file = $files[$index];
                 $photo->id_banner = $request->id_banner;
@@ -122,7 +129,18 @@ class ProductController extends Controller
                 $photo->save();
             }
         }
-
+        if(!empty($maps[0]) || !is_null($maps[0]))
+        {
+            for ($index = 0; $index< sizeof($maps); $index++){
+                $map = new MapModel();
+                $mapFile = $maps[$index];
+                $map->id_banner  = $request->id_banner;
+                $mapName = $request->file('maps')[$index]->getClientOriginalName();
+                $map->_name_map = $mapName;
+                $storage= Storage::putFileAs('content', $request->file('maps')[$index], $mapName);
+                $map->save();
+            }
+        }
 
 
 
@@ -166,17 +184,18 @@ class ProductController extends Controller
     {
         $data = $request->all();
         if (!empty($data)) {
+            $dataBanner = $request->except('photos');
+            $up = $this->productRepository->update($id, $dataBanner);
             if (!empty($data['photos'])) {
                 foreach ($data['photos'] as $photo){
                     $fileName = $photo->getClientOriginalName();
                     $storage = Storage::putFileAs('content', $photo, $fileName);
-                    $photoModel = PhotoModel::where(['id_banner' => $data['id_banner']])->first();
-                    $photoModel->_name_photo = basename($photo->getClientOriginalName());
+                    $photoModel =  PhotoModel::where(['id_banner' => $data['id_banner']])->first();
+                    $photoModel->_name_photo = $fileName;
                     $photoModel->save();
                 }
             }
-            $dataBanner = $request->except('photos');
-            $up = $this->productRepository->update($id, $dataBanner);
+
             return redirect()->action('ProductController@getIndex');
         }
 
@@ -291,10 +310,57 @@ class ProductController extends Controller
         }
     }
     public function getPhoto(Request $request){
-        $photo = DB::table('photo')->select('*')
-            ->where('id_banner','=',$request->id)
+        $photo = DB::table('photo')
+            ->join('map','photo.id_banner','=','map.id_banner')
+            ->select('_name_photo','map._name_map')
+            ->where('photo.id_banner','=',$request->id_banner)->groupBy('photo.id_banner')
             ->get();
         return json_encode(['photo' => $photo], 200);
+    }
+    public function getPptx(Request $request){
+        $datas = explode(",",$request->checkbox_hidden);
+
+        $myzip = new ZipArchive;
+        if(!empty($datas[0])){
+            if ($myzip->open(public_path('storage/PPTX/'.$datas[0].'.zip'),  ZipArchive::CREATE || ZipArchive::OVERWRITE) === TRUE)
+            {
+            foreach ($datas as $data) {
+                $banners = DB::table('banner')
+                    ->join('photo', 'banner.id_banner', '=', 'photo.id_banner')
+                    ->join('map', 'banner.id_banner', '=', 'map.id_banner')
+                    ->select('banner.id_system', 'banner.gianam', 'banner._name_banner', 'banner.dac_diem',
+                        'banner.light_system', 'banner.id_banner', 'photo._name_photo', 'banner.size_banner', 'map._name_map')
+                    ->where('banner.id_banner', '=', $data)
+                    ->get();
+
+
+                $image1 = $banners[0]->_name_photo;
+                $image2 = $banners[1]->_name_photo;
+                $image3 = $banners[2]->_name_photo;
+                $image4 = $banners[3]->_name_photo;
+                $name_banner = $banners[0]->_name_banner;
+                $map = $banners[0]->_name_map;
+                $size = $banners[0]->size_banner;
+                $dac_diem = $banners[0]->dac_diem;
+                $system = $banners[0]->id_system;
+                $id_banner = $banners[0]->id_banner;
+                $light_system = $banners[0]->light_system;
+                $gianam = $banners[0]->gianam;
+                $pptx = new PptxFomat();
+
+                $pptx->CreatePpt($image1, $image2, $image3, $image4, $name_banner, $map, $size,
+                    $dac_diem, $system, $id_banner, $light_system, $gianam);
+
+                $myzip->addFile(public_path('storage/PPTX/'.$id_banner.'.pptx'),$id_banner.'.pptx');
+
+
+            }
+                $myzip->close();
+
+            }
+            return Response::download(public_path('storage/PPTX/'.$datas[0].'.zip'));
+        }
+        return redirect()->back();
     }
 
 

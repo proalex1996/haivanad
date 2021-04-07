@@ -16,6 +16,15 @@
                             <i class="zmdi zmdi-plus"></i>Thêm mới Pano
                         </a>
                     </div>
+                    <form action="{{url('product/pptx')}}" method="post" id="export_ppt_form">
+                        @csrf
+                        <div class="add-contract">
+                            <input type="hidden" id="checkbox_hidden" name="checkbox_hidden" value="">
+                            <button id="button_1" name="form1" onclick="disableButton()" class="au-btn au-btn-icon au-btn--blue">
+                                <i class="zmdi zmdi-plus"></i>Xuất File PPT
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -78,16 +87,13 @@
                             </button>
                         </div>
                         </div>
-
-
-
                 </form>
 
                 <div class="table-container fixed_header ">
                     <table class="table table-borderless table-data3 table-test-responsive">
                         <thead>
                         <tr>
-                            <th><input type="checkbox" id="check-all" name="title" onclick="checkAll()"></th>
+                            <th><input type="checkbox" id="check-all" name="title" onchange="getCheckedBox()" onclick="checkAll()"></th>
 
                             <th width="20%">STT</th>
                             <th width="20%">Mã Pano</th>
@@ -104,8 +110,9 @@
                         @foreach($banners as $banner)
                             @if ($banner->id_status == 2)
                                 <tr class="status--process">
-                                    <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
+                                    <td><input type="checkbox" id="check-box" onchange="getCheckedBox()" name="check_box[]" value="{{$banner->id_banner}}"
                                                class="display-input m-r-5"></td>
+
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->id}}</a>
                                         <div class="dropdown-menu">
@@ -137,7 +144,7 @@
 
                             @elseif($banner->id_status==1)
                                 <tr>
-                                    <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
+                                    <td><input type="checkbox" id="check-box" name="check_box[]" onchange="getCheckedBox()" value="{{$banner->id_banner}}"
                                                class="display-input m-r-5"></td>
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->id}}</a>

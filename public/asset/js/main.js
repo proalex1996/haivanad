@@ -2148,9 +2148,9 @@ function Ratio() {
                                            aria-expanded="false" id="dropdownMenuLink"> Trạng Thái</a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item"
-                                               href="{{url('/contract/setpay1/'.$contract->id_contract)}}">Đã Thanh Toán</a>
+                                               href="{{url('/contract/setpay1/'${$('#id_banner').val()}')}}">Đã Thanh Toán</a>
                                             <a  class="dropdown-item"
-                                               href="{{url('/contract/setpay2/'.$contract->id_contract)}}">Công Nợ</a>
+                                               href="{{url('/contract/setpay2/'${$('#id_banner').val()}')}}">Công Nợ</a>
                                         </div>
                                     </td>
                                 </tr>` )
@@ -2256,28 +2256,68 @@ function getPhoto() {
         method: 'POST',
         success: function (result) {
             var datas = JSON.parse(result).photo
-
-            let preloaded = [];
+            let preloaded1 = [];
+            let preloaded2 =[];
             $.each(datas,function (index,elements) {
-                preloaded.push(
+                preloaded1.push(
                     {id: elements.id , src: url+'/public/storage/content/'+elements._name_photo}
                 );
+                preloaded2.push(
+                    {id: elements.id , src: url+'/public/storage/content/'+elements._name_map}
+                );
+
             })
             $('.input-images-2').imageUploader({
-                preloaded: preloaded,
-                imagesInputName: 'photos',
+                preloaded: preloaded1,
+                imagesInputName: 'files',
                 preloadedInputName: 'old',
                 maxSize: 2 * 1024 * 1024,
                 maxFiles: 10
             });
-
+            $('.input-images-map-2').imageUploader({
+                preloaded: preloaded2,
+                imagesInputName: 'maps',
+                preloadedInputName: 'old',
+                maxSize: 2 * 1024 * 1024,
+                maxFiles: 1
+            });
         }
     });
-
 }
 $(document).ready(function(){
     $(".chosen-select").chosen({no_results_text: "Không có kết quả nào!"+" "})
 });
 
+$('.input-images-map').imageUploader({
+    imagesInputName: 'maps',
+    maxFiles: 1
+})
+
+function getCheckedBox() {
+    var checkbox = $("input[name='check_box[]']:checked");
+    var name = []
+    $.each(checkbox,function (index,ele) {
+        name.push(ele.value)
+
+    })
+    $('#checkbox_hidden').val(name)
+
+
+
+}
+function disableButton() {
+    if ($('#checkbox_hidden').val() == ""){
+           alert("Vui lòng chọn sản phẩm xuất file lời chào");
+        // $('.button_1').attr('disabled',true);
+
+    }else {
+        document.getElementById("export_ppt_form").submit();
+    }
+
+}
+
+$('#export_ppt_form').submit(function(e){
+    e.preventDefault();
+});
 
 

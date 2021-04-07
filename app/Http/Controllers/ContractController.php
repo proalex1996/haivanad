@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ExportContract;
+use App\Exports\ExportReport;
 use App\Imports\ImportsContract;
 use App\Model\Branch;
 use App\Model\ContractModel;
@@ -651,6 +652,11 @@ class ContractController extends Controller
         $excel = new ExportContract();
         return Excel::download($excel, 'Thống Kê Hợp Đồng.xlsx');
     }
+    public function rpMatBang()
+    {
+        $excel = new ExportReport();
+        return Excel::download($excel, 'Thống Kê Hợp Đồng Mặt Bằng.xlsx');
+    }
     public function importContract(){
         return view('pages.contract.import');
     }
@@ -673,36 +679,26 @@ class ContractController extends Controller
     public function addSetting(Request $request)
     {
         try {
-            try {
-                $salary = new Salary();
-                $salary->id_salary = $request->id_salary;
-                $salary->bassic_salary = $request->bassic_salary;
-                $salary->save();
-            } catch (\Exception $e) {
-                \session()->flash('luong', 'Bị Trùng Với Dữ Liệu Cũ');
-                return redirect('/setting');
-            }
-            try {
+                if(!empty($request->id_contract)){
+                    $salary = new Salary();
+                    $salary->id_contract = $request->id_contract;
+                    $salary->name_kind = $request->name_kind;
+                    $salary->save();
+                }
+
+           if(!empty($request->id_branch)){
                 $branch = new Branch();
                 $branch->id_branch = $request->id_branch;
                 $branch->name_branch = $request->name_branch;
                 $branch->adress_branch = $request->adress_branch;
                 $branch->save();
-            } catch (\Exception $e) {
-                \session()->flash('chi-nhanh', 'Bị Trùng Với Dữ Liệu Cũ');
-                return redirect('/setting');
             }
 
-            try {
-                $setting = new Position();
-                $setting->id_position = $request->id_position;
-                $setting->name_position = $request->name_position;
-                $setting->save();
-
-
-            } catch (\Exception $e) {
-                \session()->flash('pos', 'Bị Trùng Với Dữ Liệu Cũ');
-                return redirect('/setting');
+         if (!empty($request->id_position)) {
+             $setting = new Position();
+             $setting->id_position = $request->id_position;
+             $setting->name_position = $request->name_position;
+             $setting->save();
             }
             return redirect('/home');
         } catch (\Exception $e) {
@@ -714,7 +710,7 @@ class ContractController extends Controller
 
     public function setPay1($id)
     {
-        $product = DetailModel::find($id);
+        $product = DetailModel::where('id_contract',$id)->first();
         if ($product) {
             $product->id_status = 1;
             $result = $product->update();
@@ -724,7 +720,7 @@ class ContractController extends Controller
 
     function setPay2($id)
     {
-        $product = DetailModel::find($id);
+        $product = DetailModel::where('id_contract',$id)->first();
         if ($product) {
             $product->id_status = 3;
             $result = $product->update();

@@ -15072,6 +15072,11 @@ legend {
     border-color: #5a6268;
     border-width: 1.5px;
 }
+.input-images-map{
+    border-style: dashed;
+    border-color: #5a6268;
+    border-width: 1.5px;
+}
 div.polaroid {
     width: 25%;
     background-color: white;
@@ -15102,6 +15107,9 @@ div.container-image-text {
         font-size: 14px; !important;
         margin-right: unset;!important;
     }
+    .btn{
+        margin-bottom: 1rem; !important;
+    }
 
 
 }
@@ -15112,6 +15120,12 @@ div.container-image-text {
     }
     .title-1{
         font-size: 20px;!important;
+    }
+
+}
+@media screen and (max-width: 1330px) {
+    .overview-box .text h2{
+        font-size: 25px; !important;
     }
 }
 .container-set{
@@ -15128,4 +15142,7 @@ div.container-image-text {
 .chosen-results{
 
     font-size: 17px; !important;
+}
+.clearfix{
+    display: inline-flex; !important;
 }

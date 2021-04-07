@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Salary extends Model
 {
-    protected $table = 'salary';
+    protected $table = 'kind_contract';
     public $timestamps = false;
     protected $dateFormat = 'dd-mm-YYYY';
     protected $fillable = [
-        'id_salary',
-        'bassic_salary',
+        'id_contract',
+        'name_kind',
 
     ];
 }

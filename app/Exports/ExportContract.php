@@ -12,12 +12,14 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 class ExportContract implements FromQuery, WithHeadings
 {
     use Exportable;
+
     public function query()
     {
+
        return ContractModel::query()
-           ->join('customer','contract.id_customer','=','customer.customer_id')
+           ->join('customers','contract.id_customer','=','customer.customer_id')
            ->join('banner','contract.id_banner','=','banner.id_banner')
-           ->join('province','banner.tinh','=','province.id')
+           ->join('province','banner.tinh','=','province._code')
            ->join('district','banner.quan','=','district.id_district')
            ->join('users','contract.id_staff','=','users.id_staff')
            ->join('kind_contract','contract.kind','=','kind_contract.id_contract')
