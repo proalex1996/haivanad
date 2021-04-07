@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ExportContract;
+use App\Exports\ExportPayment;
 use App\Exports\ExportReport;
 use App\Imports\ImportsContract;
 use App\Model\Branch;
@@ -656,6 +657,11 @@ class ContractController extends Controller
     {
         $excel = new ExportReport();
         return Excel::download($excel, 'Thống Kê Hợp Đồng Mặt Bằng.xlsx');
+    }
+    public function rpkihan()
+    {
+        $excel = new ExportPayment();
+        return Excel::download($excel, 'BÁO CÁO THANH TOÁN TiỀN MẶT BẰNG.xlsx');
     }
     public function importContract(){
         return view('pages.contract.import');

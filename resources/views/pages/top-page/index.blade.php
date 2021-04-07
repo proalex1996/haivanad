@@ -36,6 +36,7 @@ use Illuminate\Support\Facades\DB;
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="{{url('/contract/rpmat-bang')}}">Chi Tiết Hợp Đồng Mặt Bằng</a>
+                            <a class="dropdown-item" href="{{url('/contract/rpki-han')}}">Chi Tiết Kì Hạn HĐ</a>
                         </div>
                     </div>
                 </div>

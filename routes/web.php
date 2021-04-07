@@ -54,6 +54,7 @@ Route::group(['prefix' => 'contract'], function () {
         Route::get('/destroy/{id}', 'ContractController@destroy');
         Route::get('/export', 'ContractController@export');
         Route::get('/rpmat-bang', 'ContractController@rpMatBang');
+        Route::get('/rpki-han', 'ContractController@rpkihan');
         Route::get('/import-contract', 'ContractController@importContract');
         Route::post('/import-contract', 'ContractController@import');
         Route::get('/download-exmple', 'ContractController@dowloadExample');
