@@ -43,6 +43,11 @@
                                 <input type="text" class="form-control" id="_name_banner" name="_name_banner"
                                        placeholder="Tên Pano">
                             </div>
+                            <div class="col-md-3 col-sm-12 m-t-10">
+                                <label for="exampleFormControlInput1 ">Vị Trí</label>
+                                <input type="text" class="form-control" id="location" name="location"
+                                       placeholder="Vị Trí">
+                            </div>
                         </div>
                     <div class="row">
                         <div class="col-md-3 col-sm-12 m-t-10">
@@ -98,7 +103,7 @@
                             <th width="20%">STT</th>
                             <th width="20%">Mã Pano</th>
                             <th width="20%">Loại Hình</th>
-                            <th width="20%">Vị Trí(Tên Sản Phẩm)</th>
+                            <th width="20%">Vị Trí</th>
                             <th width="20%">Tỉnh/Thành Phố</th>
                             <th width="10%">Trạng thái</th>
                             <th></th>

@@ -31,6 +31,22 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Tên Pano:</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" class="form-customer-input" id="_name_banner" name="_name_banner"
+                                               placeholder="Tên Pano" required>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
@@ -44,10 +60,6 @@
                                 </div>
 
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
@@ -59,22 +71,23 @@
                                     </div>
                                 </div>
                             </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Vị Trí(Tên Pano):</label>
+                                        <label for="exampleFormControlInput1 uname">Vị Trí:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input" id="_name_banner" name="_name_banner"
+                                        <input type="text" class="form-customer-input" id="location" name="location"
                                                placeholder="Tên Vị Trí" required>
                                     </div>
 
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">

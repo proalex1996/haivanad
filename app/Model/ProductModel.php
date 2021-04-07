@@ -29,6 +29,7 @@ class ProductModel extends Model
         'note_banner',
         'thumb_banner',
         'gianam',
-        'dien_tich'
+        'dien_tich',
+        'location'
     ];
 }

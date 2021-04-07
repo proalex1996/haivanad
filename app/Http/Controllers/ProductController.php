@@ -104,6 +104,7 @@ class ProductController extends Controller
         $product->banner_adress = $request->banner_adress;
         $product->quan = $request->quan;
         $product->tinh = $request->tinh;
+        $product->location = $request->location;
         $product->id_typebanner = $request->id_typebanner;
         $product->id_system = $request->id_system;
         $product->size_banner = $request->size_banner;
@@ -319,6 +320,9 @@ class ProductController extends Controller
     }
     public function getPptx(Request $request){
         $datas = explode(",",$request->checkbox_hidden);
+        $image2 ="";
+        $image3 ="";
+        $image4 ="";
 
         $myzip = new ZipArchive;
         if(!empty($datas[0])){
@@ -335,9 +339,16 @@ class ProductController extends Controller
 
 
                 $image1 = $banners[0]->_name_photo;
-                $image2 = $banners[1]->_name_photo;
-                $image3 = $banners[2]->_name_photo;
-                $image4 = $banners[3]->_name_photo;
+                if(!empty($banners[1]->_name_photo)){
+                    $image2 = $banners[1]->_name_photo;
+                }
+                if(!empty($banners[2]->_name_photo)){
+                    $image3 = $banners[2]->_name_photo;
+                }
+                if(!empty($banners[3]->_name_photo)){
+                    $image4 = $banners[3]->_name_photo;
+                }
+
                 $name_banner = $banners[0]->_name_banner;
                 $map = $banners[0]->_name_map;
                 $size = $banners[0]->size_banner;
