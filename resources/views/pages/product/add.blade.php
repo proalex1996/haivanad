@@ -16,28 +16,35 @@
                 <div class="container-fluid">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-6">
+                            <input type="hidden" class="form-customer-input" id="id_banners" name="id_banner"
+                                   placeholder="Mã Pano" size="20" onchange="getProduct()">
+                            <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1">Mã Pano: </label>
+                                    <div class="col-md-3 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Tên Pano:</label>
                                     </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input"  id="id_banners" name="id_banner"
-                                               placeholder="Mã Pano" size="20" onchange="getProduct()" required>
-                                        <div class="invalid-feedback">Mã Pano không được để trống</div>
+                                    <div class="col-md-9 col-sm-12">
+                                        <input type="text" class="form-customer-input" id="_name_banner"
+                                               name="_name_banner"
+                                               placeholder="Tên Pano" required>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Tên Pano:</label>
+                                    <div class="col-md-3 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Địa Chỉ: </label>
                                     </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input" id="_name_banner" name="_name_banner"
-                                               placeholder="Tên Pano" required>
+                                    <div class="col-md-9 col-sm-12">
+                                        <input type="text" class="form-customer-input" id="banner_adress"
+                                               name="banner_adress"
+                                               placeholder="Địa chỉ" required>
+                                        <div class="invalid-feedback">Địa chỉ không được để trống</div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -79,18 +86,6 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Vị Trí:</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input" id="location" name="location"
-                                               placeholder="Tên Vị Trí" required>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlSelect1">Trạng Thái:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
@@ -102,25 +97,23 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="row">
-                                    <div class="col-md-3 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Địa Chỉ: </label>
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Giá Năm(USD): </label>
                                     </div>
-                                    <div class="col-md-9 col-sm-12">
-                                        <input type="text" class="form-customer-input" id="banner_adress" name="banner_adress"
-                                               placeholder="Địa chỉ" required>
-                                        <div class="invalid-feedback">Địa chỉ không được để trống</div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-customer-input" type="text" id="gianam" data-type="currency"
+                                               pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" name="gianam"
+                                               placeholder="Giá Năm">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6">
@@ -161,7 +154,8 @@
                                         <label for="exampleFormControlInput1 uname">Kích Thước:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="number" id="size_banner" name="size_banner"
+                                        <input class="form-customer-input" type="number" id="size_banner"
+                                               name="size_banner"
                                                placeholder="Kích thước" required>
                                         <div class="invalid-feedback">Kích thước không được để trống</div>
                                     </div>
@@ -191,7 +185,8 @@
                                         <label for="exampleFormControlInput1 uname">Tổng Chiều Cao: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="height_banner" name="height_banner"
+                                        <input class="form-customer-input" type="text" id="height_banner"
+                                               name="height_banner"
                                                placeholder="Tổng chiều cao" required>
                                         <div class="invalid-feedback">Email không được để trống</div>
                                     </div>
@@ -203,14 +198,14 @@
                                         <label for="exampleFormControlInput1 uname">Hệ Thống Đèn: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="light_system" name="light_system"
+                                        <input class="form-customer-input" type="text" id="light_system"
+                                               name="light_system"
                                                placeholder="Hệ thống đèn" required>
                                         <div class="invalid-feedback">Hệ thống đèn không được để trống</div>
                                     </div>
 
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="form-group">
@@ -251,26 +246,9 @@
                                         <label for="exampleFormControlInput1 uname">Ghi Chú: </label>
                                     </div>
                                     <div class="col-md-9 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="note_banner" name="note_banner"
+                                        <input class="form-customer-input" type="text" id="note_banner"
+                                               name="note_banner"
                                                placeholder="Ghi Chú">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Giá Năm: </label>
-                                    </div>
-                                    <div class="col-md-9 col-sm-12">
-                                        <input class="form-customer-input" type="number" id="gianam" name="gianam"
-                                               placeholder="Giá Năm" required>
-                                        <div class="invalid-feedback">Giá Năm không được để trống</div>
                                     </div>
                                 </div>
                             </div>
@@ -282,23 +260,57 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1" >Hình Ảnh:</label>
-                        <div class="input-images">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1" >Sơ Đồ:</label>
-                        <div class="input-images-map">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">
-                            <i class="zmdi zmdi-plus"></i>Thêm
-                        </button>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12 label-views">
+                                <label for="exampleFormControlInput1 uname">Hướng Nhìn 1: </label>
+                            </div>
+                            <div class="col-md-3 col-sm-12 label-views">
+                                <label for="exampleFormControlInput1 uname">Hướng Nhìn 2: </label>
+                            </div>
+                            <div class="col-md-3 col-sm-12 label-views">
+                                <label for="exampleFormControlInput1 uname">Hướng Nhìn 3: </label>
+                            </div>
+                            <div class="col-md-3 col-sm-12 label-views">
+                                <label for="exampleFormControlInput1 uname">Hướng Nhìn 4: </label>
+                            </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <input class="form-customer-input" type="text" name="views[]"
+                                           placeholder="Hướng Nhìn 1">
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <input class="form-customer-input" type="text" name="views[]"
+                                           placeholder="Hướng Nhìn 2">
+                                </div>
+                            <div class="col-md-3 col-sm-12">
+                                <input class="form-customer-input" type="text" name="views[]"
+                                       placeholder="Hướng Nhìn 3">
+                            </div>
+                            <div class="col-md-3 col-sm-12">
+                                <input class="form-customer-input" type="text" name="views[]"
+                                       placeholder="Hướng Nhìn 4">
+                            </div>
+
                     </div>
                 </div>
             </div>
-        </form>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Hình Ảnh:</label>
+                <div class="input-images">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Sơ Đồ:</label>
+                <div class="input-images-map">
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">
+                    <i class="zmdi zmdi-plus"></i>Thêm
+                </button>
+            </div>
+            </div>
+    </div>
+    </form>
     </div>
 @endsection
 

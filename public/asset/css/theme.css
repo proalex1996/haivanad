@@ -15146,3 +15146,6 @@ div.container-image-text {
 .clearfix{
     display: inline-flex; !important;
 }
+.label-views{
+    padding-left: unset;!important;
+}

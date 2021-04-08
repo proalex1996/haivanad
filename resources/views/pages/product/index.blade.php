@@ -11,11 +11,6 @@
                             <i class="zmdi zmdi-plus"></i>Xuất file Excel
                         </a>
                     </div>
-                    <div class="add-contract">
-                        <a class="au-btn au-btn-icon au-btn--blue" href="product/add">
-                            <i class="zmdi zmdi-plus"></i>Thêm mới Pano
-                        </a>
-                    </div>
                     <form action="{{url('product/pptx')}}" method="post" id="export_ppt_form">
                         @csrf
                         <div class="add-contract">
@@ -25,6 +20,11 @@
                             </button>
                         </div>
                     </form>
+                    <div class="add-contract">
+                        <a class="au-btn au-btn-icon au-btn--blue" href="product/add">
+                            <i class="zmdi zmdi-plus"></i>Thêm mới Pano
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -42,11 +42,6 @@
                                 <label for="exampleFormControlInput1 ">Tên Pano</label>
                                 <input type="text" class="form-control" id="_name_banner" name="_name_banner"
                                        placeholder="Tên Pano">
-                            </div>
-                            <div class="col-md-3 col-sm-12 m-t-10">
-                                <label for="exampleFormControlInput1 ">Vị Trí</label>
-                                <input type="text" class="form-control" id="location" name="location"
-                                       placeholder="Vị Trí">
                             </div>
                         </div>
                     <div class="row">

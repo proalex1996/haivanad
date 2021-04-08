@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6bf3f40dfe150514bcdfed019631d313",
+    "content-hash": "7527bc28a99ecd9cf24708fbca18c5fb",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1082,6 +1082,58 @@
                 "source": "https://github.com/guzzle/psr7/tree/1.7.0"
             },
             "time": "2020-09-30T07:37:11+00:00"
+        },
+        {
+            "name": "harvesthq/chosen",
+            "version": "v1.8.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/harvesthq/chosen-package.git",
+                "reference": "ad86732b668627c131e61ee8f0e6e9ed52e4db8d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/harvesthq/chosen-package/zipball/ad86732b668627c131e61ee8f0e6e9ed52e4db8d",
+                "reference": "ad86732b668627c131e61ee8f0e6e9ed52e4db8d",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Koen Punt",
+                    "homepage": "https://github.com/koenpunt"
+                },
+                {
+                    "name": "Patrick Filler",
+                    "homepage": "https://github.com/pfiller"
+                },
+                {
+                    "name": "Christophe Coevoet",
+                    "homepage": "https://github.com/stof"
+                },
+                {
+                    "name": "Ken Earley",
+                    "homepage": "https://github.com/kenearley"
+                }
+            ],
+            "description": "Chosen is a JavaScript plugin that makes select boxes user-friendly. It is currently available in both jQuery and Prototype flavors.",
+            "homepage": "https://harvesthq.github.io/chosen/",
+            "keywords": [
+                "dropdown",
+                "form",
+                "input",
+                "multiselect",
+                "select",
+                "ui"
+            ],
+            "support": {
+                "source": "https://github.com/harvesthq/chosen-package/tree/v1.8.7"
+            },
+            "time": "2018-06-28T20:32:51+00:00"
         },
         {
             "name": "laravel/framework",
@@ -2167,16 +2219,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.45.1",
+            "version": "2.46.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "528783b188bdb853eb21239b1722831e0f000a8d"
+                "reference": "2fd2c4a77d58a4e95234c8a61c5df1f157a91bf4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/528783b188bdb853eb21239b1722831e0f000a8d",
-                "reference": "528783b188bdb853eb21239b1722831e0f000a8d",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/2fd2c4a77d58a4e95234c8a61c5df1f157a91bf4",
+                "reference": "2fd2c4a77d58a4e95234c8a61c5df1f157a91bf4",
                 "shasum": ""
             },
             "require": {
@@ -2256,7 +2308,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-02-11T18:30:17+00:00"
+            "time": "2021-02-24T17:30:44+00:00"
         },
         {
             "name": "nikic/php-parser",

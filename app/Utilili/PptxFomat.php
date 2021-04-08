@@ -13,7 +13,7 @@ use PhpOffice\PhpPresentation\Style\Alignment;
 
 class PptxFomat
 {
- public function CreatePpt($image1,$image2,$image3,$image4,$location,$map,$size,$dac_diem,$system,$id_banner,$light,$gia){
+ public function CreatePpt($image1,$image2,$image3,$image4,$view1,$view2,$view3,$view4,$location,$map,$size,$dac_diem,$system,$id_banner,$light,$gia){
      $objPHPPowerPoint = new PhpPresentation();
      // Create slide
      $currentSlide = $objPHPPowerPoint->getActiveSlide();
@@ -84,20 +84,33 @@ class PptxFomat
      $table_shape->setOffsetY(79.68);
      $row = $table_shape->createRow();
      $cell = $row->getCell(0);
-     //$text = $cell->createTextRun('Hướng nhìn từ  Cần Thơ đi Vĩnh Long');
-//     $text->getFont()->setName('Times New Roman')
-//         ->setItalic(true)
-//         ->setSize(18)
-//         ->setColor( new Color( '#000' ));
+     $text = $cell->createTextRun($view1);
+     $text->getFont()->setName('Times New Roman')
+         ->setItalic(true)
+         ->setSize(18)
+         ->setColor( new Color( '#000' ));
+     $cell = $row->getCell(1);
+     $text = $cell->createTextRun($view2);
+     $text->getFont()->setName('Times New Roman')
+         ->setItalic(true)
+         ->setSize(18)
+         ->setColor( new Color( '#000' ));
      $row = $table_shape->createRow()
          ->setHeight(254.4);
      $row = $table_shape->createRow();
      $cell = $row->getCell(0);
-     //$text = $cell->createTextRun('Hướng nhìn từ  Cần Thơ đi Vĩnh Long');
-//     $text->getFont()->setName('Times New Roman')
-//         ->setItalic(true)
-//         ->setSize(18)
-//         ->setColor( new Color( '#000' ));
+     $text = $cell->createTextRun($view3);
+     $text->getFont()->setName('Times New Roman')
+         ->setItalic(true)
+         ->setSize(18)
+         ->setColor( new Color( '#000' ));
+     $cell = $row->getCell(1);
+     $text = $cell->createTextRun($view4);
+     $text->getFont()->setName('Times New Roman')
+         ->setItalic(true)
+         ->setSize(18)
+         ->setColor( new Color( '#000' ));
+
 
      $shape = $currentSlide->createDrawingShape();
      $shape->setName('PHPPresentation logo')

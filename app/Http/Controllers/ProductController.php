@@ -104,7 +104,6 @@ class ProductController extends Controller
         $product->banner_adress = $request->banner_adress;
         $product->quan = $request->quan;
         $product->tinh = $request->tinh;
-        $product->location = $request->location;
         $product->id_typebanner = $request->id_typebanner;
         $product->id_system = $request->id_system;
         $product->size_banner = $request->size_banner;
@@ -124,6 +123,7 @@ class ProductController extends Controller
                 $photo = new PhotoModel();
                 $file = $files[$index];
                 $photo->id_banner = $request->id_banner;
+                $photo->views = $request->views[$index];
                 $fileName =$request->file('files')[$index]->getClientOriginalName();
                 $photo->_name_photo = $fileName;
                 $storage= Storage::putFileAs('content', $request->file('files')[$index], $fileName);
@@ -313,8 +313,8 @@ class ProductController extends Controller
     public function getPhoto(Request $request){
         $photo = DB::table('photo')
             ->join('map','photo.id_banner','=','map.id_banner')
-            ->select('_name_photo','map._name_map')
-            ->where('photo.id_banner','=',$request->id_banner)->groupBy('photo.id_banner')
+            ->select('_name_photo','map._name_map','views')
+            ->where('photo.id_banner','=',$request->id_banner)
             ->get();
         return json_encode(['photo' => $photo], 200);
     }
@@ -333,21 +333,20 @@ class ProductController extends Controller
                     ->join('photo', 'banner.id_banner', '=', 'photo.id_banner')
                     ->join('map', 'banner.id_banner', '=', 'map.id_banner')
                     ->select('banner.id_system', 'banner.gianam', 'banner._name_banner', 'banner.dac_diem',
-                        'banner.light_system', 'banner.id_banner', 'photo._name_photo', 'banner.size_banner', 'map._name_map')
+                        'banner.light_system', 'banner.id_banner', 'photo._name_photo','photo.views', 'banner.size_banner', 'map._name_map')
                     ->where('banner.id_banner', '=', $data)
                     ->get();
 
 
                 $image1 = $banners[0]->_name_photo;
-                if(!empty($banners[1]->_name_photo)){
-                    $image2 = $banners[1]->_name_photo;
-                }
-                if(!empty($banners[2]->_name_photo)){
-                    $image3 = $banners[2]->_name_photo;
-                }
-                if(!empty($banners[3]->_name_photo)){
-                    $image4 = $banners[3]->_name_photo;
-                }
+                $image2 = $banners[1]->_name_photo;
+                $image3 = $banners[2]->_name_photo;
+                $image4 = $banners[3]->_name_photo;
+                $view1 = $banners[0]->views;
+                $view2 = $banners[1]->views;
+                $view3 = $banners[2]->views;
+                $view4 = $banners[3]->views;
+
 
                 $name_banner = $banners[0]->_name_banner;
                 $map = $banners[0]->_name_map;
@@ -359,7 +358,7 @@ class ProductController extends Controller
                 $gianam = $banners[0]->gianam;
                 $pptx = new PptxFomat();
 
-                $pptx->CreatePpt($image1, $image2, $image3, $image4, $name_banner, $map, $size,
+                $pptx->CreatePpt($image1, $image2, $image3, $image4,$view1,$view2,$view3,$view4,$name_banner, $map, $size,
                     $dac_diem, $system, $id_banner, $light_system, $gianam);
 
                 $myzip->addFile(public_path('storage/PPTX/'.$id_banner.'.pptx'),$id_banner.'.pptx');

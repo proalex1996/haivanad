@@ -258,6 +258,7 @@ header('Access-Control-Allow-Origin: *');
     <script src="{{asset('public/asset/js/jquery-ui.js')}}"></script>
     <script src="{{asset('bootstrap/animsition/animsition.min.js')}}"></script>
     <script src="{{asset('public/asset/js/image-uploader.min.js')}}"></script>
+    <script src="{{asset('public/asset/js/money.js')}}"></script>
     <script src="{{asset('public/asset/js/main.js')}}"></script>
     <script src="{{asset('public/asset/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('public/asset/js/dropzone/dropzone.js')}}"></script>

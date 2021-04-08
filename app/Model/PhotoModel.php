@@ -13,6 +13,7 @@ class PhotoModel extends Model
     protected $fillable = [
         'id',
         '_name_photo',
-        'id_banner'
+        'id_banner',
+        'views'
     ];
 }

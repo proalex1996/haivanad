@@ -16,33 +16,36 @@
                 <div class="container-fluid">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1">Mã Pano: </label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input" data-target="{{$banners->id_banner}}"
-                                               value="{{$banners->id_banner}}" id="id_banner" name="id_banner"
-                                               placeholder="Mã Pano" size="20" onchange="getProduct()" required>
-                                        <div class="invalid-feedback">Mã Pano không được để trống</div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
+                                    <input type="hidden" class="form-customer-input" id="id_banner" value="{{$banners->id_banner}}" name="id_banner"
+                                           placeholder="Mã Pano" size="20">
+                                    <div class="col-md-3 col-sm-12">
                                         <label for="exampleFormControlInput1 uname">Tên Pano:</label>
                                     </div>
-                                    <div class="col-md-6 col-sm-12">
+                                    <div class="col-md-9 col-sm-12">
                                         <input type="text" class="form-customer-input" id="_name_banner" value="{{$banners -> _name_banner}}" name="_name_banner"
                                                placeholder="Tên Pano" required>
                                     </div>
-
                                 </div>
                             </div>
 
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Địa Chỉ: </label>
+                                    </div>
+                                    <div class="col-md-9 col-sm-12">
+                                        <input type="text" class="form-customer-input"  value="{{$banners -> banner_adress}}" name="banner_adress"
+                                               placeholder="Địa chỉ" required>
+                                        <div class="invalid-feedback">Địa chỉ không được để trống</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -69,24 +72,6 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Vị Trí:</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input"  value="{{$banners -> location}}" name="location"
-                                               placeholder="Tên Vị Trí" required>
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1">Kết Cấu: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
@@ -95,6 +80,12 @@
                                     </div>
                                 </div>
                             </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
@@ -113,24 +104,21 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="row">
-                                    <div class="col-md-3 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Địa Chỉ: </label>
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Giá Năm(USD): </label>
                                     </div>
-                                    <div class="col-md-9 col-sm-12">
-                                        <input type="text" class="form-customer-input"  value="{{$banners -> banner_adress}}" name="banner_adress"
-                                               placeholder="Địa chỉ" required>
-                                        <div class="invalid-feedback">Địa chỉ không được để trống</div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-customer-input" data-type="currency" type="text" value="{{$banners->gianam}}"  name="gianam"
+                                               placeholder="Giá Năm" required>
+                                        <div class="invalid-feedback">Giá Năm không được để trống</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6">
@@ -280,29 +268,26 @@
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Giá Năm: </label>
-                                    </div>
-                                    <div class="col-md-9 col-sm-12">
-                                        <input class="form-customer-input" type="number" value="{{$banners->gianam}}" name="gianam"
-                                               placeholder="Giá Năm" required>
-                                        <div class="invalid-feedback">Giá Năm không được để trống</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Đặc Điểm:</label>
                         <textarea class="form-control" name="dac_diem" rows="5">{{$banners->dac_diem}}</textarea>
                     </div>
-
+                <div class="form-group">
+                    <div class="row" id="views-photo">
+                        <div class="col-md-3 col-sm-12 label-views">
+                            <label for="exampleFormControlInput1 uname">Hướng Nhìn 1: </label>
+                        </div>
+                        <div class="col-md-3 col-sm-12 label-views">
+                            <label for="exampleFormControlInput1 uname">Hướng Nhìn 2: </label>
+                        </div>
+                        <div class="col-md-3 col-sm-12 label-views">
+                            <label for="exampleFormControlInput1 uname">Hướng Nhìn 3: </label>
+                        </div>
+                        <div class="col-md-3 col-sm-12 label-views">
+                            <label for="exampleFormControlInput1 uname">Hướng Nhìn 4: </label>
+                        </div>
+                </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1" >Hình Ảnh:</label>
                         <div class="input-images-2">
