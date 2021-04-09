@@ -14780,7 +14780,7 @@ section {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    margin: unset; !important;
+    margin: unset !important;
 }
 .icon-contract{
     display: inline-flex;
@@ -14979,7 +14979,7 @@ section {
     width: 400px;
 }
 .form_select{
-    width: 160%; !important;
+    width: 160% !important;
 }
 .date_picker{
     width: 100%;
@@ -14988,7 +14988,7 @@ section {
     display: inline-flex;
 }
 .form-location{
-    display: flex; !important;
+    display: flex !important;
     width: 500px;
     margin-bottom: 1rem;
 
@@ -15034,12 +15034,12 @@ fieldset {
     margin-left: 10px;
 }
 .border-text .form-customer > label {
-    width: 343px;
+    width: 343px
 !important;
 }
 
 .border-text .form-customer > select {
-    width: 343px;
+    width: 343px
 !important;
 }
 
@@ -15052,8 +15052,8 @@ legend {
     margin-left: 10px;
 }
 .table-responsive{
-    width: 100px;!important;
-    overflow-x: auto; !important;
+    width: 100px!important;
+    overflow-x: auto !important;
 
 }
 .dropzone {
@@ -15095,7 +15095,7 @@ div.container-image-text {
 }
 @media screen and (max-width: 600px) {
     div.polaroid {
-        width: unset; !important;
+        width: unset !important;
         background-color: white;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         margin: 1rem;
@@ -15108,7 +15108,7 @@ div.container-image-text {
         margin-right: unset;!important;
     }
     .btn{
-        margin-bottom: 1rem; !important;
+        margin-bottom: 1rem !important;
     }
 
 
@@ -15117,15 +15117,16 @@ div.container-image-text {
     .au-btn{
        padding: 0px 24px;
         width: 246px;
+        margin-bottom: 1rem;
     }
     .title-1{
-        font-size: 20px;!important;
+        font-size: 20px !important;
     }
 
 }
 @media screen and (max-width: 1330px) {
     .overview-box .text h2{
-        font-size: 25px; !important;
+        font-size: 25px !important;
     }
 }
 .container-set{
@@ -15134,18 +15135,22 @@ div.container-image-text {
 }
 .chosen-single{
     padding: 1%;
-    height: 30px; !important;
+    height: 30px !important;
     border-radius: unset;
     font-size: 17px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 .chosen-results{
 
-    font-size: 17px; !important;
+    font-size: 17px !important;
 }
 .clearfix{
-    display: inline-flex; !important;
+    display: inline-flex !important;
 }
 .label-views{
-    padding-left: unset;!important;
+    padding-left: unset !important;
+}
+.au-btn--red {
+    background: #be2626;
+    color: #ffffff !important;
 }

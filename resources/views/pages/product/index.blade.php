@@ -6,16 +6,20 @@
             <div class="col-md-12">
                 <div class="overview-wrap">
                     <h2 class="title-1">Quản Lý Sản Phẩm</h2>
-                    <div class="exp-excel m-r-10">
-                        <a class="au-btn au-btn-icon au-btn--blue" href="product/export">
-                            <i class="zmdi zmdi-plus"></i>Xuất file Excel
-                        </a>
-                    </div>
+                    <form action="{{url('product/export')}}" method="post" id="export_excel_form">
+                        @csrf
+                        <div class="exp-excel m-r-10">
+                            <input type="hidden" id="export_product" name="export_product" value="">
+                            <button class="au-btn au-btn-icon au-btn--blue" type="submit">
+                                <i class="zmdi zmdi-plus"></i>Xuất file Excel
+                            </button>
+                        </div>
+                    </form>
                     <form action="{{url('product/pptx')}}" method="post" id="export_ppt_form">
                         @csrf
-                        <div class="add-contract">
+                            <div class="add-contract">
                             <input type="hidden" id="checkbox_hidden" name="checkbox_hidden" value="">
-                            <button id="button_1" name="form1" onclick="disableButton()" class="au-btn au-btn-icon au-btn--blue">
+                            <button id="button_1" name="form1" onclick="disableButton(this)" class="au-btn au-btn-icon au-btn--blue">
                                 <i class="zmdi zmdi-plus"></i>Xuất File PPT
                             </button>
                         </div>
@@ -94,37 +98,20 @@
                         <thead>
                         <tr>
                             <th><input type="checkbox" id="check-all" name="title" onchange="getCheckedBox()" onclick="checkAll()"></th>
-
-                            <th width="20%">STT</th>
                             <th width="20%">Mã Pano</th>
                             <th width="20%">Loại Hình</th>
                             <th width="20%">Vị Trí</th>
                             <th width="20%">Tỉnh/Thành Phố</th>
                             <th width="10%">Trạng thái</th>
                             <th></th>
-
-
                         </tr>
                         </thead>
                         <tbody class="overflow-scroll">
                         @foreach($banners as $banner)
                             @if ($banner->id_status == 2)
-                                <tr class="status--process">
+                                <tr class="status--process" id="row_product_{{$banner->id}}" data-target="{{$banner->id}}">
                                     <td><input type="checkbox" id="check-box" onchange="getCheckedBox()" name="check_box[]" value="{{$banner->id_banner}}"
                                                class="display-input m-r-5"></td>
-
-                                    <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                           aria-expanded="false" id="dropdownMenuLink"> {{$banner->id}}</a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item"
-                                               href="{{\Illuminate\Support\Facades\URL::to('product/update')."/".$banner->id}}">Sửa
-                                                thông tin Pano</a>
-                                            <a id="open-deleteProduct" class="dropdown-item"
-                                               data-id_data="{{$banner->id}}" data-toggle="modal"
-                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa
-                                            </a>
-                                        </div>
-                                    </td>
                                     <td class="id_banner">{{$banner->id_banner}}</td>
                                     <td>2021+{{$banner->name_type}}</td>
                                     <td>{{$banner->_name_banner}}</td>
@@ -143,21 +130,9 @@
 
 
                             @elseif($banner->id_status==1)
-                                <tr>
-                                    <td><input type="checkbox" id="check-box" name="check_box[]" onchange="getCheckedBox()" value="{{$banner->id_banner}}"
+                                <tr id="row_product_{{$banner->id}}">
+                                    <td><input type="checkbox" id="check-box" data-target="{{$banner->id}}" name="check_box[]" onchange="getCheckedBox()" value="{{$banner->id_banner}}"
                                                class="display-input m-r-5"></td>
-                                    <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                           aria-expanded="false" id="dropdownMenuLink"> {{$banner->id}}</a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item"
-                                               href="{{\Illuminate\Support\Facades\URL::to('product/update')."/".$banner->id}}">Sửa
-                                                thông tin Pano</a>
-                                            <a id="open-deleteProduct" class="dropdown-item"
-                                               data-id_data="{{$banner->id}}" data-toggle="modal"
-                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa
-                                            </a>
-                                        </div>
-                                    </td>
                                     <td class="id_banner">{{$banner->id_banner}}</td>
                                     <td>{{$banner->name_type}}</td>
                                     <td>{{$banner->_name_banner}}</td>
@@ -186,26 +161,7 @@
         </div>
     </div>
 @endsection
-<div class="modal fade" id="detroy">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Thông Báo</h4>
-                <button type="button" class="close" data-dismiss="modal">×</button>
-            </div>
-            <div class="modal-body">
-                Xác nhận xóa
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <a type="button" id="destroy-value"
-                   data-destroy-link="{{\Illuminate\Support\Facades\URL::to('product/destroy')."/"}}"
-                   class="btn btn-primary">Xác Nhận
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"

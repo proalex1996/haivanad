@@ -119,7 +119,7 @@ Route::group(['prefix' => 'product'], function () {
         Route::get('/import-product', 'ProductController@importProduct');
         Route::post('/import-product', 'ProductController@import');
         Route::get('/download-exmple', 'ProductController@dowloadExample');
-        Route::get('/export', 'productController@export');
+        Route::post('/export', 'productController@export');
         Route::get('/update/{id}', 'ProductController@update');
         Route::post('/update/{id}', 'ProductController@update');
         Route::get('/destroy/{id}', 'ProductController@destroy');

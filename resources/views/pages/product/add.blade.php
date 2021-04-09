@@ -243,6 +243,23 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Giá Đèn: </label>
+                                    </div>
+                                    <div class="col-md-9 col-sm-12">
+                                        <input class="form-customer-input" maxlength="50" data-type="currency" type="text" id="v_light"
+                                               name="v_light"
+                                               placeholder="Giá Đèn">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-12">
                                         <label for="exampleFormControlInput1 uname">Ghi Chú: </label>
                                     </div>
                                     <div class="col-md-9 col-sm-12">
@@ -273,14 +290,14 @@
                             <div class="col-md-3 col-sm-12 label-views">
                                 <label for="exampleFormControlInput1 uname">Hướng Nhìn 4: </label>
                             </div>
-                                <div class="col-md-3 col-sm-12">
-                                    <input class="form-customer-input" type="text" name="views[]"
-                                           placeholder="Hướng Nhìn 1">
-                                </div>
-                                <div class="col-md-3 col-sm-12">
-                                    <input class="form-customer-input" type="text" name="views[]"
-                                           placeholder="Hướng Nhìn 2">
-                                </div>
+                            <div class="col-md-3 col-sm-12">
+                                <input class="form-customer-input" type="text" name="views[]"
+                                       placeholder="Hướng Nhìn 1">
+                            </div>
+                            <div class="col-md-3 col-sm-12">
+                                <input class="form-customer-input" type="text" name="views[]"
+                                       placeholder="Hướng Nhìn 2">
+                            </div>
                             <div class="col-md-3 col-sm-12">
                                 <input class="form-customer-input" type="text" name="views[]"
                                        placeholder="Hướng Nhìn 3">
@@ -290,27 +307,27 @@
                                        placeholder="Hướng Nhìn 4">
                             </div>
 
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Hình Ảnh(4 Ảnh):</label>
+                        <div class="input-images">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Sơ Đồ:</label>
+                        <div class="input-images-map">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">
+                            <i class="zmdi zmdi-plus"></i>Thêm
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Hình Ảnh:</label>
-                <div class="input-images">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">Sơ Đồ:</label>
-                <div class="input-images-map">
-                </div>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">
-                    <i class="zmdi zmdi-plus"></i>Thêm
-                </button>
-            </div>
-            </div>
-    </div>
-    </form>
+        </form>
     </div>
 @endsection
 

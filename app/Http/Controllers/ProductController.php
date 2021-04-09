@@ -102,6 +102,7 @@ class ProductController extends Controller
         $product->id_banner = $request->id_banner;
         $product->_name_banner = $request->_name_banner;
         $product->banner_adress = $request->banner_adress;
+        $product->v_light = $request ->v_light;
         $product->quan = $request->quan;
         $product->tinh = $request->tinh;
         $product->id_typebanner = $request->id_typebanner;
@@ -228,7 +229,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         try {
-            $del = ProductModel::find($id);
+            $del = ProductModel::where('id_banner',$id);
             $del->delete();
             return redirect('/product');
         } catch (\Exception $e) {
@@ -238,9 +239,10 @@ class ProductController extends Controller
         }
     }
 
-    public function export()
+    public function export(Request $request)
     {
-        return Excel::download(new ExportProduct, 'product.xlsx');
+        $id_banner = explode(',',$request->export_product);
+        return Excel::download(new ExportProduct($id_banner), 'Thông Tin Sản Phẩm.xlsx');
     }
 
     public function updateStatus(Request $request, $id)
@@ -320,58 +322,34 @@ class ProductController extends Controller
     }
     public function getPptx(Request $request){
         $datas = explode(",",$request->checkbox_hidden);
-        $image2 ="";
-        $image3 ="";
-        $image4 ="";
 
-        $myzip = new ZipArchive;
-        if(!empty($datas[0])){
+            $myzip = new ZipArchive;
             if ($myzip->open(public_path('storage/PPTX/'.$datas[0].'.zip'),  ZipArchive::CREATE || ZipArchive::OVERWRITE) === TRUE)
             {
-            foreach ($datas as $data) {
                 $banners = DB::table('banner')
                     ->join('photo', 'banner.id_banner', '=', 'photo.id_banner')
                     ->join('map', 'banner.id_banner', '=', 'map.id_banner')
                     ->select('banner.id_system', 'banner.gianam', 'banner._name_banner', 'banner.dac_diem',
-                        'banner.light_system', 'banner.id_banner', 'photo._name_photo','photo.views', 'banner.size_banner', 'map._name_map')
-                    ->where('banner.id_banner', '=', $data)
+                        'banner.light_system', 'banner.id_banner', DB::raw('group_concat(photo._name_photo) as photos '),DB::raw('group_concat(photo.views) as views'), 'banner.size_banner','banner.v_light', 'map._name_map')
+                        ->whereIn('banner.id_banner', $datas)->groupBy('banner.id_banner')
                     ->get();
 
 
-                $image1 = $banners[0]->_name_photo;
-                $image2 = $banners[1]->_name_photo;
-                $image3 = $banners[2]->_name_photo;
-                $image4 = $banners[3]->_name_photo;
-                $view1 = $banners[0]->views;
-                $view2 = $banners[1]->views;
-                $view3 = $banners[2]->views;
-                $view4 = $banners[3]->views;
 
-
-                $name_banner = $banners[0]->_name_banner;
-                $map = $banners[0]->_name_map;
-                $size = $banners[0]->size_banner;
-                $dac_diem = $banners[0]->dac_diem;
-                $system = $banners[0]->id_system;
-                $id_banner = $banners[0]->id_banner;
-                $light_system = $banners[0]->light_system;
-                $gianam = $banners[0]->gianam;
                 $pptx = new PptxFomat();
 
-                $pptx->CreatePpt($image1, $image2, $image3, $image4,$view1,$view2,$view3,$view4,$name_banner, $map, $size,
-                    $dac_diem, $system, $id_banner, $light_system, $gianam);
+                $pptx->CreatePpt($banners);
 
-                $myzip->addFile(public_path('storage/PPTX/'.$id_banner.'.pptx'),$id_banner.'.pptx');
+                $myzip->addFile(public_path('storage/PPTX/Greeting.pptx'),'Greeting.pptx');
 
 
-            }
                 $myzip->close();
 
             }
             return Response::download(public_path('storage/PPTX/'.$datas[0].'.zip'));
         }
-        return redirect()->back();
-    }
+
+
 
 
 }

@@ -2246,6 +2246,11 @@ $('[id^="redirect"]').dblclick(function () {
     var data = $(this).find('td:first').find('a:first').attr('data-target');
     location.assign(url+"/customer/update/"+data)
 })
+$('[id^="row_product"]').dblclick(function () {
+    var url = $('#domain').attr('href');
+    var data = $(this).find('td:first').find('input').attr('data-target')
+    location.assign(url+"/product/update/"+data)
+})
 getPhoto()
 function getPhoto() {
     var url = $('#domain').attr('href');
@@ -2305,20 +2310,28 @@ function getCheckedBox() {
     var name = []
     $.each(checkbox,function (index,ele) {
         name.push(ele.value)
-
     })
-    $('#checkbox_hidden').val(name)
-
-
-
+    $('#checkbox_hidden').val(name);
+    $('#export_product').val(name);
 }
-function disableButton() {
-    if ($('#checkbox_hidden').val() == ""){
-           alert("Vui lòng chọn sản phẩm xuất file lời chào");
-        // $('.button_1').attr('disabled',true);
-
+// function disableButton() {
+//
+//     if ($('#checkbox_hidden').val() == ""){
+//            alert("Vui lòng chọn sản phẩm xuất để file");
+//     }else {
+//         document.getElementById('export_ppt_form').submit();
+//     }
+//
+// }
+function disableButton(elements) {
+    var div  = elements.closest('div');
+    var input = div.children[0];
+    var button = div.children[1];
+    var form = div.closest('form')
+    if (document.getElementById(''+input.id+'').value == ""){
+        alert("Vui lòng chọn sản phẩm xuất để file");
     }else {
-        document.getElementById("export_ppt_form").submit();
+        document.getElementById(''+form.id+'').submit();
     }
 
 }
@@ -2326,6 +2339,9 @@ function disableButton() {
 $('#export_ppt_form').submit(function(e){
     e.preventDefault();
 });
+// $('#export_excel_form').submit(function(e){
+//     e.preventDefault();
+// });
 
 // Jquery Dependency
 

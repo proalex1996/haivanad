@@ -30,5 +30,6 @@ class ProductModel extends Model
         'thumb_banner',
         'gianam',
         'dien_tich',
+        'v_light'
     ];
 }

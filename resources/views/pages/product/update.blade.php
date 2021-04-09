@@ -300,15 +300,41 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">
-                            <i class="zmdi zmdi-plus"></i>Lưu
+                        <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right">
+                            <i class="far fa-edit"></i>Lưu
                         </button>
+
+                        <a data-id_data="{{$banners->id_banner}}" data-toggle="modal"
+                             data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')"
+                             id="open-deleteProduct" type="button" class="au-btn au-btn-icon au-btn--red float-left">
+                            <i class="far fa-trash-alt"></i>Xóa
+                        </a>
                     </div>
                 </div>
             </div>
         </form>
     </div>
 @endsection
+<div class="modal fade" id="detroy">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thông Báo</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+                Xác nhận xóa
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <a type="button" id="destroy-value"
+                   data-destroy-link="{{\Illuminate\Support\Facades\URL::to('product/destroy')."/"}}"
+                   class="btn btn-primary">Xác Nhận
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
