@@ -100,6 +100,7 @@
                                                     <option value="{{$status->id_status}}">{{$status->name_status}}</option>
                                                 @endif
                                             @endforeach
+
                                         </select>
                                     </div>
                                 </div>
@@ -258,11 +259,11 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Giá Năm(USD): </label>
+                                        <label for="exampleFormControlInput1 uname">Giá Đèn(USD): </label>
                                     </div>
                                     <div class="col-md-9 col-sm-12">
                                         <input class="form-customer-input" type="text" value="{{$banners->v_light}}" name="v_light"
-                                               placeholder="Giá Năm(USD)">
+                                               placeholder="Giá Đèn(USD)">
                                     </div>
                                 </div>
                             </div>
@@ -335,21 +336,35 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Thông Báo</h4>
+                @if(auth()->user()->id_phan_quyen == 1)
                 <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
             <div class="modal-body">
                 Xác nhận xóa
             </div>
             <div class="modal-footer">
+
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+
                 <a type="button" id="destroy-value"
                    data-destroy-link="{{\Illuminate\Support\Facades\URL::to('product/destroy')."/"}}"
                    class="btn btn-primary">Xác Nhận
                 </a>
             </div>
+                @else
+
+                    <div class="modal-body m-t-20">
+                        Bạn không được cấp quyền xóa
+                     </div>
+                    <button type="button" class="btn btn-secondary m-t-70" data-dismiss="modal">Đóng</button>
+
+
+               @endif
+            </div>
         </div>
     </div>
-</div>
+</div
+
 
 
 

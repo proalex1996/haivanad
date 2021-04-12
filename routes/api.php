@@ -50,10 +50,11 @@ Route::group(['prefix' => 'product'], function () {
     Route::post('/photo/{id_banner}','ProductController@getPhoto');
     Route::get('/photo/','ProductController@getPhoto');
 
+});
 
-
-
-
+Route::group(['prefix' => 'user'], function (){
+    Route::post('/add-status','AuthController@addstatus_product');
+    Route::post('/add-type','AuthController@addType_product');
 });
 
 

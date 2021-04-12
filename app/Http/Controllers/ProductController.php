@@ -15,6 +15,7 @@ use App\Repositories\Product\ProductRepositoryEloquent;
 use App\Utilili\PptxFomat;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
@@ -226,7 +227,7 @@ class ProductController extends Controller
 
     }
 
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
         try {
             $del = ProductModel::where('id_banner',$id);

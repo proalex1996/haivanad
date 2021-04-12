@@ -63,6 +63,7 @@
                                                     value="{{$type_banner->id_typebanner}}">{{$type_banner->name_type}}</option>
                                             @endforeach
                                         </select>
+                                        <button type="button" class="btn-selected" data-toggle="modal" data-target="#type_banner">Loại hình sp không có sẵn?</button>
                                     </div>
                                 </div>
 
@@ -76,6 +77,7 @@
                                         <input type="text" class="form-customer-input" id="id_system" name="id_system"
                                                placeholder="Kết Cấu" required>
                                     </div>
+
                                 </div>
                             </div>
 
@@ -94,6 +96,7 @@
                                                 <option value="{{$status->id_status}}">{{$status->name_status}}</option>
                                             @endforeach
                                         </select>
+                                        <button type="button" class="btn-selected" data-toggle="modal" data-target="#status_banner">Trạng thái không có sẵn?</button>
                                     </div>
                                 </div>
                             </div>
@@ -331,3 +334,61 @@
     </div>
 @endsection
 
+{{--Modal thêm trạng thái--}}
+<div class="modal fade" id="status_banner" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm Mới Trạng Thái</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Mã Trạng Thái:</label>
+                        <input type="text" class="form-control" id="id_status">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Tên Trạng Thái:</label>
+                        <input type="text" class="form-control" id="name_status">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="submit_product">Xác Nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{--Modal thêm loại hình sản phẩm--}}
+<div class="modal fade" id="type_banner" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thêm Mới Loại Hình Sản Phẩm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Mã Loại Hình:</label>
+                        <input type="text" class="form-control" id="id_typebanner">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Tên Loại Hình:</label>
+                        <input type="text" class="form-control" id="name_type">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="submit_type_product">Xác Nhận</button>
+            </div>
+        </div>
+    </div>
+</div>

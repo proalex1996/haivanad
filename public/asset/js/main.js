@@ -2428,5 +2428,63 @@ function formatCurrency(input, blur) {
     input[0].setSelectionRange(caret_pos, caret_pos);
 }
 
+$('#submit_product').on('click',function () {
+    var id = $('#id_status').val();
+    var name = $('#name_status').val()
+    var data = {id: id,name: name};
+    var url = $('#domain').attr('href');
+    $.ajax({
+        method: 'POST',
+        url: url + '/api/user/add-status',
+        data: data,
+        async: false,
+        success: function(result) {
+            if(result.success){
+                alert(result.message)
+                $('#id_status').val("")
+                $('#name_status').val("")
+                $('#status_banner').modal('hide')
+            }else
+                alert(result.message)
+
+        },
+        error: function () {
+                alert('Đã xãy ra lỗi');
+
+        }
+
+    })
+})
+
+$('#submit_type_product').on('click',function () {
+    var id = $('#id_typebanner').val();
+    var name = $('#name_type').val()
+    var data = {id: id,name: name};
+    var url = $('#domain').attr('href');
+    $.ajax({
+        method: 'POST',
+        url: url + '/api/user/add-type',
+        data: data,
+        async: false,
+        success: function(result) {
+           if(result.success){
+               alert(result.message)
+               $('#id_typebanner').val("")
+               $('#name_type').val("")
+               $('#type_banner').modal('hide')
+           }else {
+               alert(result.message)
+           }
+
+        },
+        error: function () {
+            alert('Đã xãy ra lỗi');
+
+        }
+
+    })
+})
+
+
 
 

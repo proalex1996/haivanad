@@ -28,8 +28,6 @@ Route::group(['prefix' => 'auth'], function () {
     Route::get('/logout','AuthController@logout');
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/', 'HomeController@index');
-
-
     });
 });
 
@@ -79,6 +77,7 @@ Route::group(['prefix' => 'users'], function () {
         Route::get('/status2/{id}', 'staffController@status2');
         Route::get('/import-staff', 'staffController@importStaff');
         Route::post('/import-staff', 'staffController@import');
+        Route::post('/add-status','AuthController@addstatus_product');
 
         Route::get('/export', 'staffController@export');
 
@@ -110,6 +109,7 @@ Route::group(['prefix' => 'customer'], function () {
     });
 
 });
+
 Route::group(['prefix' => 'product'], function () {
     Route::group(['middleware'=>'auth'],function (){
         Route::get('/','ProductController@getIndex');
