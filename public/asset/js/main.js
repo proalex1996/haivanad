@@ -2444,6 +2444,7 @@ $('#submit_product').on('click',function () {
                 $('#id_status').val("")
                 $('#name_status').val("")
                 $('#status_banner').modal('hide')
+
             }else
                 alert(result.message)
 
@@ -2472,6 +2473,7 @@ $('#submit_type_product').on('click',function () {
                $('#id_typebanner').val("")
                $('#name_type').val("")
                $('#type_banner').modal('hide')
+               location.reload();
            }else {
                alert(result.message)
            }

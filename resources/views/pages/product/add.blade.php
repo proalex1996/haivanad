@@ -10,7 +10,7 @@
                 </a>
             </div>
         </div>
-        <form action="add" enctype="multipart/form-data" class="needs-validation" method="post">
+        <form action="add" id="product-add" enctype="multipart/form-data" class="needs-validation" method="post">
             @csrf
             <div class="container">
                 <div class="container-fluid">
@@ -356,6 +356,11 @@
                     </div>
                 </form>
             </div>
+            <div class="container">
+                <p style="color: red !important; width: 100% !important;font-style: italic;font-size: 12px">
+                    Sau khi thêm mới sẽ reload lại trang web để cập nhật dữ liệu mới. Những dữ liệu chưa lưu sẽ bị mất
+                </p>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                 <button type="button" class="btn btn-primary" id="submit_product">Xác Nhận</button>
@@ -385,7 +390,15 @@
                     </div>
                 </form>
             </div>
+            <div class="container">
+                <p style="color: red !important; width: 100% !important;font-style: italic;font-size: 12px">
+                    Sau khi thêm mới sẽ reload lại trang web để cập nhật dữ liệu mới. Những dữ liệu chưa lưu sẽ bị mất
+                </p>
+            </div>
+
+
             <div class="modal-footer">
+
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                 <button type="button" class="btn btn-primary" id="submit_type_product">Xác Nhận</button>
             </div>
