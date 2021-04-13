@@ -104,6 +104,7 @@ class ProductController extends Controller
         $product->_name_banner = $request->_name_banner;
         $product->banner_adress = $request->banner_adress;
         $product->v_light = $request ->v_light;
+        $product->content = $request->content;
         $product->quan = $request->quan;
         $product->tinh = $request->tinh;
         $product->id_typebanner = $request->id_typebanner;

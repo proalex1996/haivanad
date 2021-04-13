@@ -24,7 +24,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-customer-input" onchange="getProduct()" id="id_banners"
                                                name="id_banner" style="background-color: #ffffff"
-                                               disabled>
+                                               readonly>
                                     </div>
                                 </div>
                             </div>
@@ -287,6 +287,22 @@
                                         <input class="form-customer-input" type="text" id="note_banner"
                                                name="note_banner"
                                                placeholder="Ghi Chú">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Nội Dung Quản Cáo Hiện Tại: </label>
+                                    </div>
+                                    <div class="col-md-9 col-sm-12">
+                                        <input class="form-customer-input" type="text" id="content"
+                                               name="content"
+                                               placeholder="Nội Dung Quản Cáo Hiện Tại">
                                     </div>
                                 </div>
                             </div>

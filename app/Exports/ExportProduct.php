@@ -21,14 +21,17 @@ class ExportProduct implements FromQuery,WithHeadings
         { if($this->id_banner[0] != null){
             return ProductModel::query()
                 ->join('status_banner','banner.name_status','=','status_banner.id_status')
-                ->select('banner.id','banner.id_banner','banner.banner_adress','banner.size_banner','banner.height_banner','banner.light_system','status_banner.name_status')
+                ->join('photo','banner.id_banner','=','photo.id_banner')
+                ->select('banner.id','banner.id_banner','banner.banner_adress','banner.size_banner','banner.height_banner','banner.light_system','banner.content','photo._name_photo','status_banner.name_status')
                 ->whereIn('banner.id_banner',$this->id_banner)
                 ->orderBy('id','DESC')->getQuery();
             }
             else{
                 return ProductModel::query()
                     ->join('status_banner','banner.name_status','=','status_banner.id_status')
-                    ->select('banner.id','banner.id_banner','banner.banner_adress','banner.size_banner','banner.height_banner','banner.light_system','status_banner.name_status')
+                    ->join('photo','banner.id_banner','=','photo.id_banner')
+                    ->select('banner.id','banner.id_banner','banner.banner_adress','banner.size_banner','banner.height_banner','banner.light_system','banner.content','photo._name_photo','status_banner.name_status')
+                    
                     ->orderBy('id','DESC')->getQuery();
             }
 
@@ -36,7 +39,7 @@ class ExportProduct implements FromQuery,WithHeadings
 
         public function headings(): array
         {
-            return ['STT','Mã Pano','Địa Chỉ','Kích Thước','Tổng Chiều Cao','Hệ Thống Đèn','Trạng Thái'];
+            return ['STT','Mã Pano','Địa Chỉ','Kích Thước','Tổng Chiều Cao','Hệ Thống Đèn','Nội Dung Quản Cáo Hiện Tại','Hình Ảnh','Trạng Thái'];
         }
 
 }
