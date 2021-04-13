@@ -16,17 +16,36 @@
                 <div class="container-fluid">
                     <div class="form-group">
                         <div class="row">
-                            <input type="hidden" class="form-customer-input" id="id_banners" name="id_banner"
-                                   placeholder="Mã Pano" size="20" onchange="getProduct()">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Mã Sản Phẩm:</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" class="form-customer-input" onchange="getProduct()" id="id_banners"
+                                               name="id_banner" style="background-color: #ffffff"
+                                               disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+{{--                            <input type="hidden" class="form-customer-input" id="id_banners" name="id_banner"--}}
+{{--                                   placeholder="Mã Pano" size="20" >--}}
+
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Tên Pano:</label>
+                                        <label for="exampleFormControlInput1 uname">Tên Sản Phẩm:</label>
                                     </div>
                                     <div class="col-md-9 col-sm-12">
                                         <input type="text" class="form-customer-input" id="_name_banner"
                                                name="_name_banner"
-                                               placeholder="Tên Pano" required>
+                                               placeholder="Tên Sản Phẩm" required>
                                     </div>
                                 </div>
                             </div>
@@ -44,6 +63,38 @@
                                                name="banner_adress"
                                                placeholder="Địa chỉ" required>
                                         <div class="invalid-feedback">Địa chỉ không được để trống</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Tỉnh/Thành Phố:</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
+                                            <option value="">--Tỉnh/Thành Phố--</option>
+                                            @foreach($provinces as $province)
+                                                <option value="{{$province -> _code}}">{{$province -> _name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Quận/Huyện:</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="quan" name="quan">
+                                            <option value="">--Quận/Huyện--</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -100,57 +151,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Giá Năm(USD): </label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="gianam" data-type="currency"
-                                               pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" name="gianam"
-                                               placeholder="Giá Năm">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Tỉnh/Thành Phố:</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
-                                            <option value="">--Tỉnh/Thành Phố--</option>
-                                            @foreach($provinces as $province)
-                                                <option value="{{$province -> _code}}">{{$province -> _name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Quận/Huyện:</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="quan" name="quan">
-                                            <option value="">--Quận/Huyện--</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
@@ -165,6 +165,15 @@
 
                                 </div>
                             </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="row">
+
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
@@ -177,11 +186,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
@@ -195,6 +199,11 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
@@ -209,10 +218,6 @@
 
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
@@ -222,6 +227,22 @@
                                         <input class="form-customer-input" type="number" id="flow" name="flow"
                                                placeholder="Lưu Lượng Người" required>
                                         <div class="invalid-feedback">Lưu Lượng Người không được để trống</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Giá Đèn: </label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-customer-input" maxlength="50" data-type="currency" type="text" id="v_light"
+                                               name="v_light"
+                                               placeholder="Giá Đèn">
                                     </div>
                                 </div>
                             </div>
@@ -243,15 +264,16 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
+
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Giá Đèn: </label>
+                                        <label for="exampleFormControlInput1 uname">Giá Năm(USD): </label>
                                     </div>
                                     <div class="col-md-9 col-sm-12">
-                                        <input class="form-customer-input" maxlength="50" data-type="currency" type="text" id="v_light"
-                                               name="v_light"
-                                               placeholder="Giá Đèn">
+                                        <input class="form-customer-input" type="text" id="gianam" data-type="currency"
+                                               pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" name="gianam"
+                                               placeholder="Giá Năm">
                                     </div>
                                 </div>
                             </div>
