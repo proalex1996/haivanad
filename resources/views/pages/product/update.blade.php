@@ -16,10 +16,25 @@
                 <div class="container-fluid">
                     <div class="form-group">
                         <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Mã Sản Phẩm:</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" class="form-customer-input" value="{{$banners->id_banner}}" onchange="getProduct()" id="id_banner"
+                                               name="id_banner" style="background-color: #ffffff"
+                                               disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <input type="hidden" class="form-customer-input" id="id_banner" value="{{$banners->id_banner}}" name="id_banner"
-                                           placeholder="Mã Pano" size="20">
                                     <div class="col-md-3 col-sm-12">
                                         <label for="exampleFormControlInput1 uname">Tên Pano:</label>
                                     </div>
@@ -43,6 +58,50 @@
                                         <input type="text" class="form-customer-input"  value="{{$banners -> banner_adress}}" name="banner_adress"
                                                placeholder="Địa chỉ" required>
                                         <div class="invalid-feedback">Địa chỉ không được để trống</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Tỉnh/Thành Phố:</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" name="tinh" id="tinh" onchange="getQuan(this)">
+                                            <option value="">--Tỉnh/Thành Phố--</option>
+                                            @foreach($provinces as $province)
+                                                @if ($banners->tinh == $province->_code)
+                                                    <option value="{{$province->_code}}" selected>{{$province -> _name}}</option>
+                                                @else
+                                                    <option value="{{$province->_code}}">{{$province -> _name}}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Quận/Huyện:</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="quan" name="quan">
+                                            <option value="">--Quận/Huyện--</option>
+                                            @foreach($districts as $district)
+                                                @if ($banners->quan == $district->id_district)
+                                                    <option value="{{$district->id_district}}" selected>{{$district ->_name_district}}</option>
+
+                                                @else
+                                                    <option value="{{$district->id_district}}">{{$district ->_name_district}}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -108,67 +167,6 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Giá Năm(USD): </label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" data-type="currency" type="text" value="{{$banners->gianam}}"  name="gianam"
-                                               placeholder="Giá Năm" required>
-                                        <div class="invalid-feedback">Giá Năm không được để trống</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Tỉnh/Thành Phố:</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" name="tinh" id="tinh" onchange="getQuan(this)">
-                                            <option value="">--Tỉnh/Thành Phố--</option>
-                                            @foreach($provinces as $province)
-                                                @if ($banners->tinh == $province->_code)
-                                                    <option value="{{$province->_code}}" selected>{{$province -> _name}}</option>
-                                                @else
-                                                <option value="{{$province->_code}}">{{$province -> _name}}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Quận/Huyện:</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="quan" name="quan">
-                                            <option value="">--Quận/Huyện--</option>
-                                            @foreach($districts as $district)
-                                                @if ($banners->quan == $district->id_district)
-                                                    <option value="{{$district->id_district}}" selected>{{$district ->_name_district}}</option>
-
-                                                @else
-                                                <option value="{{$district->id_district}}">{{$district ->_name_district}}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1 uname">Kích Thước:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
@@ -179,6 +177,13 @@
 
                                 </div>
                             </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
@@ -191,11 +196,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
@@ -208,6 +208,12 @@
                                     </div>
                                 </div>
                             </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
@@ -221,11 +227,6 @@
 
                                 </div>
                             </div>
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
@@ -238,6 +239,12 @@
                                     </div>
                                 </div>
                             </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
@@ -251,22 +258,35 @@
 
                                 </div>
                             </div>
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="row">
-                                    <div class="col-md-3 col-sm-12">
+                                    <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1 uname">Giá Đèn(USD): </label>
                                     </div>
-                                    <div class="col-md-9 col-sm-12">
+                                    <div class="col-md-6 col-sm-12">
                                         <input class="form-customer-input" type="text" value="{{$banners->v_light}}" name="v_light"
                                                placeholder="Giá Đèn(USD)">
                                     </div>
                                 </div>
                             </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Giá Năm(USD): </label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-customer-input" data-type="currency" type="text" value="{{$banners->gianam}}"  name="gianam"
+                                               placeholder="Giá Năm" required>
+                                        <div class="invalid-feedback">Giá Năm không được để trống</div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="form-group">
