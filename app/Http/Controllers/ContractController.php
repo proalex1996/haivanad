@@ -9,16 +9,19 @@ use App\Exports\ExportReport;
 use App\Imports\ImportsContract;
 use App\Model\Branch;
 use App\Model\ContractModel;
-
+use App\Model\Kind;
 use App\Model\DetailModel;
 use App\Model\Position;
-use App\Model\Salary;
+use App\Model\Status_contract;
+use App\Model\Type;
+use App\Model\Type_Customer;
 use App\Repositories\Contract\ContractRepositoryEloquent;
 use Barryvdh\DomPDF\Facade as PDF;
 use FontLib\Table\Type\name;
 use http\Message;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -679,18 +682,154 @@ class ContractController extends Controller
 
     public function getSetting()
     {
-        return view('pages.users.setting');
+        $kinds = DB::table('kind_contract')->select('*')->get();
+        $status_contract = DB::table('contract_status')->select('*')->get();
+        $branch = DB::table('branch')->select('*')->get();
+        $type_banner = DB::table('type_banner')->select('*')->get();
+        $status_banner = DB::table('status_banner')->select()->get();
+        $nguons = DB::table('nguon_customer')->select('*')->get();
+        $type_customers = DB::table('type_customer')->select('*')->get();
+        return view('pages.users.setting',[
+            'kinds' => $kinds,
+            'status_contracts' => $status_contract,
+            'branchs' => $branch,
+            'type_banners' => $type_banner,
+            'status_banners' => $status_banner,
+            'nguons' => $nguons,
+            'type_customers' =>$type_customers
+
+        ]);
+    }
+    public function addKind(Request $request){
+        if(!empty($request->id)){
+            $checks = DB::table('kind_contract')->select(DB::raw('count(id_contract) as id_contract'))->where('id_contract','=',$request->id)->get();
+            foreach ($checks as $check){
+                if($check->id_contract == 0){
+                    $salary = new Kind();
+                    $salary->id_contract = $request->id;
+                    $salary->name_kind = $request->name;
+                    $salary->save();
+                    return array(
+                        'success' => true,
+                        'status' => 200,
+                        'message' => 'Thêm mới thành công'
+                    );
+                }else{
+                    return array(
+                        'success' => false,
+                        'status' => 200,
+                        'message' => 'Mã nhập vào đã tồn tại'
+                    );
+                }
+            }
+
+        }
     }
 
+    public function updateKind(Request $request){
+        if(!empty($request->id)){
+                    $kind = Kind::where('id_contract' ,$request->id)
+                      ->first();
+                    $kind->name_kind = $request->name;
+                    $kind->save();
+
+
+                    return array(
+                        'success' => true,
+                        'status' => 200,
+                        'message' => 'Cập nhận thành công'
+                    );
+        }else{
+            return array(
+                'success' => false,
+                'status' => 200,
+                'message' => 'Vui lòng nhập đầy đủ thông tin'
+            );
+        }
+
+
+
+    }
+    public function deleteKind(Request $request){
+
+
+            $delete = Kind::where('id_contract',$request->id)->first();
+            $delete->delete();
+            return array(
+                'success' => true,
+                'status' => 200,
+                'message' => 'Cập nhận thành công'
+            );
+    }
+    public function addSttContract(Request $request){
+        if(!empty($request->id)){
+            $checks = DB::table('contract_status')->select(DB::raw('count(id_contract) as id_contract'))->where('id_contract','=',$request->id)->get();
+            foreach ($checks as $check){
+                if($check->id_contract == 0){
+                    $salary = new Status_contract();
+                    $salary->id_contract = $request->id;
+                    $salary->name_status = $request->name;
+                    $salary->save();
+                    return array(
+                        'success' => true,
+                        'status' => 200,
+                        'message' => 'Thêm mới thành công'
+                    );
+                }else{
+                    return array(
+                        'success' => false,
+                        'status' => 200,
+                        'message' => 'Mã nhập vào đã tồn tại'
+                    );
+                }
+            }
+
+        }
+    }
+    public function deleteSttContract(Request $request){
+        try{
+            $delete = Status_contract::where('id_contract',$request->id)->first();
+            $delete->delete();
+            return array(
+                'success' => true,
+                'status' => 200,
+                'message' => 'Cập nhận thành công'
+            );
+        }catch (\Exception $e){
+            return array(
+                'success' => false,
+                'status' => 200,
+                'message' => 'Mã trạng thái đã được liên kết với 1 kì thanh toán bạn phải xóa kì thanh toán đó trước'
+            );
+        }
+
+    }
+    public function updateSttContract(Request $request){
+        if(!empty($request->id)){
+            $status_contract = Status_contract::where('id_contract' ,$request->id)
+                ->first();
+            $status_contract->name_status = $request->name;
+            $status_contract->save();
+            return array(
+                'success' => true,
+                'status' => 200,
+                'message' => 'Cập nhận thành công'
+            );
+        }else{
+            return array(
+                'success' => false,
+                'status' => 200,
+                'message' => 'Vui lòng nhập đầy đủ thông tin'
+            );
+        }
+
+
+
+    }
     public function addSetting(Request $request)
     {
         try {
-                if(!empty($request->id_contract)){
-                    $salary = new Salary();
-                    $salary->id_contract = $request->id_contract;
-                    $salary->name_kind = $request->name_kind;
-                    $salary->save();
-                }
+
 
            if(!empty($request->id_branch)){
                 $branch = new Branch();
@@ -713,6 +852,139 @@ class ContractController extends Controller
 
 
     }
+    public function addBranch(Request $request){
+        if(!empty($request->id)){
+            $checks = DB::table('branch')->select(DB::raw('count(id_branch) as id_branch'))->where('id_branch','=',$request->id)->get();
+            foreach ($checks as $check){
+                if($check->id_branch == 0){
+                    $branch = new Branch();
+                    $branch->id_branch = $request->id;
+                    $branch->name_branch = $request->name;
+                    $branch->save();
+                    return array(
+                        'success' => true,
+                        'status' => 200,
+                        'message' => 'Thêm mới thành công'
+                    );
+                }else{
+                    return array(
+                        'success' => false,
+                        'status' => 200,
+                        'message' => 'Mã nhập vào đã tồn tại'
+                    );
+                }
+            }
+
+        }
+    }
+    public function updateBranch(Request $request){
+        if(!empty($request->id)){
+            $branch = Branch::where('id_branch' ,$request->id)
+                ->first();
+            $branch->name_branch= $request->name;
+            $branch->save();
+            return array(
+                'success' => true,
+                'status' => 200,
+                'message' => 'Cập nhận thành công'
+            );
+        }else{
+            return array(
+                'success' => false,
+                'status' => 200,
+                'message' => 'Vui lòng nhập đầy đủ thông tin'
+            );
+        }
+
+
+
+    }
+    public function deleteBranch(Request $request){
+        try{
+            $delete = Branch::where('id_branch',$request->id)->first();
+            $delete->delete();
+            return array(
+                'success' => true,
+                'status' => 200,
+                'message' => 'Cập nhận thành công'
+            );
+        }catch (\Exception $e){
+            return array(
+                'success' => false,
+                'status' => 200,
+                'message' => 'Mã chi nhánh đã đã được liên kết với nhân viên bạn phải cập nhật lại chi nhánh của nhân viên đó trước'
+            );
+        }
+
+    }
+    public function addTypeCustomer(Request $request){
+        if(!empty($request->id)){
+            $checks = DB::table('type_customer')->select(DB::raw('count(id) as id'))->where('id','=',$request->id)->get();
+            foreach ($checks as $check){
+                if($check->id == 0){
+                    $branch = new Type_Customer();
+                    $branch->id = $request->id;
+                    $branch->name_type = $request->name;
+                    $branch->save();
+                    return array(
+                        'success' => true,
+                        'status' => 200,
+                        'message' => 'Thêm mới thành công'
+                    );
+                }else{
+                    return array(
+                        'success' => false,
+                        'status' => 200,
+                        'message' => 'Mã nhập vào đã tồn tại'
+                    );
+                }
+            }
+
+        }
+    }
+    public function updateTypeCustomer(Request $request){
+        if(!empty($request->id)){
+            $type_customer = Type_Customer::where('id' ,$request->id)
+                ->first();
+            $type_customer->name_type= $request->name;
+            $type_customer->save();
+            return array(
+                'success' => true,
+                'status' => 200,
+                'message' => 'Cập nhận thành công'
+            );
+        }else{
+            return array(
+                'success' => false,
+                'status' => 200,
+                'message' => 'Vui lòng nhập đầy đủ thông tin'
+            );
+        }
+
+
+
+    }
+    public function deleteTypeCustomer(Request $request){
+        try{
+            $delete = Type_Customer::where('id',$request->id)->first();
+            $delete->delete();
+            return array(
+                'success' => true,
+                'status' => 200,
+                'message' => 'Cập nhận thành công'
+            );
+        }catch (\Exception $e){
+            return array(
+                'success' => false,
+                'status' => 200,
+                'message' => 'Thể loại đã đã được liên kết với khách hàng bạn phải cập nhật lại thể loại của khách hàng đó trước'
+            );
+        }
+
+    }
+
+
+
 
     public function setPay1($id)
     {

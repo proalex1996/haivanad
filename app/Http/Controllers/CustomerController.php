@@ -111,8 +111,6 @@ class CustomerController extends Controller
         $customer->phone_customer = $request->phone_customer;
         $customer->email_customer = $request->email_customer;
         $customer->type_customer = $request->type_customer;
-        $customer->solvency = $request->solvency;
-        $customer->mass = $request->mass;
         $customer->status_customer = $request->status_customer;
         $customer->adress_customer = $request->adress_customer;
         $customer->position_customer  = $request->position_customer;

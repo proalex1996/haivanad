@@ -23,8 +23,8 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-customer-input" value="{{$banners->id_banner}}" onchange="getProduct()" id="id_banner"
-                                               name="id_banner" style="background-color: #ffffff"
-                                               disabled>
+                                               name="id_banner"
+                                               readonly>
                                     </div>
                                 </div>
                             </div>
@@ -304,7 +304,7 @@
                             </div>
                         </div>
                     </div>
-                    </div>
+
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-12">
@@ -320,7 +320,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Đặc Điểm:</label>
                         <textarea class="form-control" name="dac_diem" rows="5">{{$banners->dac_diem}}</textarea>
@@ -364,8 +364,10 @@
                     </div>
                 </div>
             </div>
+            </div>
         </form>
     </div>
+
 @endsection
 <div class="modal fade" id="detroy">
     <div class="modal-dialog modal-dialog-centered">
@@ -379,9 +381,7 @@
                 Xác nhận xóa
             </div>
             <div class="modal-footer">
-
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-
                 <a type="button" id="destroy-value"
                    data-destroy-link="{{\Illuminate\Support\Facades\URL::to('product/destroy')."/"}}"
                    class="btn btn-primary">Xác Nhận
@@ -393,7 +393,6 @@
                         Bạn không được cấp quyền xóa
                      </div>
                     <button type="button" class="btn btn-secondary m-t-70" data-dismiss="modal">Đóng</button>
-
 
                @endif
             </div>

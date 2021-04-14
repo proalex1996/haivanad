@@ -59,6 +59,7 @@ Route::group(['prefix' => 'contract'], function () {
         Route::get('/setpay1/{id_contract}', 'ContractController@setPay1');
         Route::get('/setpay2/{id_contract}', 'ContractController@setPay2');
 
+
     });
 });
 Route::group(['prefix' => 'users'], function () {
@@ -78,7 +79,6 @@ Route::group(['prefix' => 'users'], function () {
         Route::get('/import-staff', 'staffController@importStaff');
         Route::post('/import-staff', 'staffController@import');
         Route::post('/add-status','AuthController@addstatus_product');
-
         Route::get('/export', 'staffController@export');
 
     });

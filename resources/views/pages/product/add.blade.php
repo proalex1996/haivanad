@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-customer-input" onchange="getProduct()" id="id_banners"
-                                               name="id_banner" style="background-color: #ffffff"
+                                               name="id_banner"
                                                readonly>
                                     </div>
                                 </div>
@@ -359,7 +359,7 @@
                     </div>
                     <div class="form-group">
                         <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">
-                            <i class="zmdi zmdi-plus"></i>Thêm
+                            <i class="zmdi zmdi-plus"></i>Lưu
                         </button>
                     </div>
                 </div>
@@ -403,7 +403,8 @@
     </div>
 </div>
 {{--Modal thêm loại hình sản phẩm--}}
-<div class="modal fade" id="type_banner" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="type_banner" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

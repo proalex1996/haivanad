@@ -54,7 +54,27 @@ Route::group(['prefix' => 'product'], function () {
 
 Route::group(['prefix' => 'user'], function (){
     Route::post('/add-status','AuthController@addstatus_product');
+    Route::post('/update-status','AuthController@updatestatus_product');
+    Route::post('/delete-status','AuthController@deletestatus_product');
     Route::post('/add-type','AuthController@addType_product');
+    Route::post('/update-type','AuthController@updateType_product');
+    Route::post('/delete-type','AuthController@deleteType_product');
+    Route::post('/update-kind','ContractController@updateKind');
+    Route::post('/delete-kind','ContractController@deleteKind');
+    Route::post('/add-kind', 'ContractController@addKind');
+    Route::post('/add-stt-contract', 'ContractController@addSttContract');
+    Route::post('/delete-stt-contract', 'ContractController@deleteSttContract');
+    Route::post('/update-stt-contract', 'ContractController@updateSttContract');
+    Route::post('/add-branch', 'ContractController@addBranch');
+    Route::post('/update-branch', 'ContractController@updateBranch');
+    Route::post('/delete-branch', 'ContractController@deleteBranch');
+    Route::post('/add-nguon','AuthController@add_nguon');
+    Route::post('/update-nguon','AuthController@update_nguon');
+    Route::post('/delete-nguon','AuthController@delete_nguon');
+    Route::post('/add-type-customer','ContractController@addTypeCustomer');
+    Route::post('/update-type-customer','ContractController@updateTypeCustomer');
+    Route::post('/delete-type-customer','ContractController@deleteTypeCustomer');
+
 });
 
 

@@ -364,11 +364,9 @@
                         </div>
                     </div>
                 </fieldset>
-
-                <form>
-                    <fieldset class="border-text">
+                <fieldset class="border-text">
                         <legend class='text-left'>Thanh Toán</legend>
-                        <div class="container-set">
+                        <div class="container-fluid">
                             <table id="example" class="display table-borderless table-responsive" style="width:100%">
                                 <thead>
                                 <tr>
@@ -413,10 +411,6 @@
                             </div>
                         </div>
                     </fieldset>
-
-                </form>
-
-
                 <div class="form-group m-t-20">
                     <label for="exampleFormControlSelect1">Nội dung hợp đồng</label>
                     <div class="custom-file">

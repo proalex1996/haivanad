@@ -111,9 +111,7 @@
                                             <a class="dropdown-item"
                                                href="{{\Illuminate\Support\Facades\URL::to('customer/update')."/".$customer->id}}">Sửa
                                                 thông tin khách hàng</a>
-                                            <a id="open-deleteContract" class="dropdown-item"
-                                               data-id_data="{{$customer->id}}" data-toggle="modal"
-                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa Thông Tin Khách Hàng</a>
+
                                         </div>
                                     </td>
                                     <td>{{$customer->customer_id}}</td>
@@ -132,24 +130,5 @@
     </div>
 @endsection
 
-<div class="modal fade" id="detroy">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Thông Báo</h4>
-                <button type="button" class="close" data-dismiss="modal">×</button>
-            </div>
-            <div class="modal-body">
-                Xác nhận xóa
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <a type="button" id="destroy-value"
-                        data-destroy-link="{{\Illuminate\Support\Facades\URL::to('customer/destroy')."/"}}"
-                        class="btn btn-primary">Xác Nhận
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+
 

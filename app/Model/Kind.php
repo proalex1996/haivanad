@@ -6,7 +6,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Salary extends Model
+class Kind extends Model
 {
     protected $table = 'kind_contract';
     public $timestamps = false;

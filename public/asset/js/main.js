@@ -2171,11 +2171,12 @@ function RamdomID() {
 
         var _getRandomInt = function( min, max ) {
             return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
+
         }
 
         this.generate = function() {
             var ts = this.timestamp.toString();
-            var parts = ts.split( "" ).reverse();
+            var parts = ts.split( "" ).reverse();console.log(parts)
             var id = "";
 
             for( var i = 0; i < this.length; ++i ) {
@@ -2428,6 +2429,406 @@ function formatCurrency(input, blur) {
     input[0].setSelectionRange(caret_pos, caret_pos);
 }
 
+
+
+
+
+$('#submit_kind').on('click',function () {
+    var id = $('#id_kind').val();
+    var name = $('#kind_name').val()
+    var data = {id: id,name: name};
+    var url = $('#domain').attr('href');
+    if(name ==""){
+        $.ajax({
+            method: 'POST',
+            url: url + '/api/user/update-kind',
+            data: data,
+            async: false,
+            success: function(result) {
+                if(result.success){
+                    alert(result.message)
+                    $('#id_kind').val("")
+                    $('#kind_name').val("")
+                    $('#kind_contract').modal('hide')
+                    location.reload();
+                }else {
+                    alert(result.message)
+                }
+
+            },
+            error: function () {
+                alert('Đã xãy ra lỗi');
+
+            }
+
+        })
+    }
+})
+$('#kind_contract').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id_contarct = button.data('id_contract') // Extract info from data-* attributes
+    var name_kind = button.data('name_kind')
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    modal.find('.modal-body #id_kind').val(id_contarct)
+    modal.find('.modal-body #kind_name').val(name_kind)
+})
+$('#status_contract').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id_contarct = button.data('id_contract') // Extract info from data-* attributes
+    var name = button.data('name')
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    modal.find('.modal-body #id_status_contract').val(id_contarct)
+    modal.find('.modal-body #name_status_contract').val(name)
+})
+$('#branch').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id') // Extract info from data-* attributes
+    var name = button.data('name')
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    modal.find('.modal-body #modal_id_branch').val(id)
+    modal.find('.modal-body #modal_name_branch').val(name)
+})
+$('#type_banner').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id') // Extract info from data-* attributes
+    var name = button.data('name')
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    modal.find('.modal-body #modal_id_typebanner').val(id)
+    modal.find('.modal-body #modal_name_type').val(name)
+})
+$('#status_banner').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id') // Extract info from data-* attributes
+    var name = button.data('name')
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    modal.find('.modal-body #modal_id_status').val(id)
+    modal.find('.modal-body #modal_name_status').val(name)
+})
+$('#nguon').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id') // Extract info from data-* attributes
+    var name = button.data('name')
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    modal.find('.modal-body #modal_id_nguon').val(id)
+    modal.find('.modal-body #modal_name_nguon').val(name)
+})
+$('#type_customer').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id') // Extract info from data-* attributes
+    var name = button.data('name')
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    modal.find('.modal-body #modal_id_type_customer').val(id)
+    modal.find('.modal-body #modal_name_type_customer').val(name)
+})
+
+$(document).on("click", ".delete_kind", function(){
+    var id_kind = $(this).parents("tr");
+    var id = id_kind[0].id
+    var url = $('#domain').attr('href');
+    $(this).parents("tr").remove();
+    $.ajax({
+        method: 'POST',
+        url: url + '/api/user/delete-kind',
+        data: {id: id},
+        async: false,
+        success: function (result) {
+            if(result.success){
+
+                alert(result.message)
+            }
+        },
+        error: function () {
+            alert('Đã xãy ra lỗi');
+        }
+    })
+});
+$('#add_kind').on('click',function () {
+    var id = $('#id_contract').val();
+    var name = $('#name_kind').val();
+    var url = $('#domain').attr('href');
+    $.ajax({
+        method: 'POST',
+        url: url + '/api/user/add-kind',
+        data: {id: id, name: name},
+        async: false,
+        success: function (result) {
+            if(id != "" && name != ""){
+                if(result.success){
+                    alert(result.message)
+                    location.reload();
+                }else{
+                    alert(result.message)
+                }
+            }else {
+                alert('Vui lòng nhập đầy đủ thông tin')
+            }
+
+        }
+    })
+
+})
+$('#add_status_contract').on('click',function () {
+    var id = $('#id_status_contract').val();
+    var name = $('#name_status_contract').val();
+    var url = $('#domain').attr('href');
+    if(name ==""){
+        $.ajax({
+            method: 'POST',
+            url: url + '/api/user/add-stt-contract',
+            data: {id: id, name: name},
+            async: false,
+            success: function (result) {
+                if(id != "" && name != ""){
+                    if(result.success){
+                        alert(result.message)
+                        location.reload();
+                    }else{
+                        alert(result.message)
+                    }
+                }else {
+                    alert('Vui lòng nhập đầy đủ thông tin')
+                }
+
+            },
+            error: function () {
+                alert('Đã xãy ra lỗi')
+            }
+        })
+    }
+})
+$(document).on("click", ".delete_status_contract", function(){
+    var id_status_contract = $(this).parents("tr");
+    var id = id_status_contract[0].id
+    var url = $('#domain').attr('href');
+
+    $.ajax({
+        method: 'POST',
+        url: url + '/api/user/delete-stt-contract',
+        data: {id: id},
+        async: false,
+        success: function (result) {
+            if(result.success){
+                id_status_contract.remove();
+                alert(result.message)
+            }else {
+                alert(result.message)
+            }
+        },
+        error: function () {
+            alert('Đã xãy ra lỗi');
+        }
+    })
+});
+$('#submit_status_contract').on('click',function () {
+    var id = $('#id_status_contract').val();
+    var name = $('#name_status_contract').val()
+    var data = {id: id,name: name};
+    var url = $('#domain').attr('href');
+    $.ajax({
+        method: 'POST',
+        url: url + '/api/user/update-stt-contract',
+        data: data,
+        async: false,
+        success: function(result) {
+            if(result.success){
+                alert(result.message)
+                $('#id_status_contract').val("")
+                $('#kind_name').val("")
+                $('#name_status_contract').modal('hide')
+                location.reload();
+            }else {
+                alert(result.message)
+            }
+
+        },
+        error: function () {
+            alert('Đã xãy ra lỗi');
+
+        }
+
+    })
+})
+// Action branch
+$('#add_branch').on('click',function () {
+    var id = $('#id_branch').val();
+    var name = $('#name_branch').val();
+    var url = $('#domain').attr('href');
+    $.ajax({
+        method: 'POST',
+        url: url + '/api/user/add-branch',
+        data: {id: id, name: name},
+        async: false,
+        success: function (result) {
+            if(id != "" && name != ""){
+                if(result.success){
+                    alert(result.message)
+                    location.reload();
+                }else{
+                    alert(result.message)
+                }
+            }else {
+                alert('Vui lòng nhập đầy đủ thông tin')
+            }
+
+        },
+        error: function () {
+            alert('Đã xãy ra lỗi')
+        }
+    })
+
+})
+$('#submit_branch').on('click',function () {
+    var id = $('#modal_id_branch').val();
+    var name = $('#modal_name_branch').val()
+    var data = {id: id,name: name};
+    var url = $('#domain').attr('href');
+    if (name == ""){
+        alert('Vui lòng nhập đày đủ thông tin')
+    }else {
+        $.ajax({
+            method: 'POST',
+            url: url + '/api/user/update-branch',
+            data: data,
+            async: false,
+            success: function(result) {
+                if(result.success){
+                    alert(result.message)
+                    $('#modal_id_branch').val("")
+                    $('#modal_name_branch').val("")
+                    $('#modal_name_branch').modal('hide')
+                    location.reload();
+                }else {
+                    alert(result.message)
+                }
+            },
+            error: function () {
+                alert('Đã xãy ra lỗi');
+            }
+
+        })
+    }
+
+})
+$(document).on("click", ".delete_branch", function(){
+    var id_status_contract = $(this).parents("tr");
+    var id = id_status_contract[0].id
+    var url = $('#domain').attr('href');
+
+    $.ajax({
+        method: 'POST',
+        url: url + '/api/user/delete-branch',
+        data: {id: id},
+        async: false,
+        success: function (result) {
+            if(result.success){
+                id_status_contract.remove();
+                alert(result.message)
+            }else {
+                alert(result.message)
+            }
+        },
+        error: function () {
+            alert('Đã xãy ra lỗi');
+        }
+    })
+});
+// Action type product
+$('#submit_type_product').on('click',function () {
+    var id = $('#id_typebanner').val();
+    var name = $('#name_type').val()
+    var data = {id: id,name: name};
+    var url = $('#domain').attr('href');
+    $.ajax({
+        method: 'POST',
+        url: url + '/api/user/add-type',
+        data: data,
+        async: false,
+        success: function(result) {
+            if(result.success){
+                alert(result.message)
+                location.reload();
+            }else {
+                alert(result.message)
+            }
+
+        },
+        error: function () {
+            alert('Đã xãy ra lỗi');
+
+        }
+
+    })
+})
+$('#submit_type').on('click',function () {
+    var id = $('#modal_id_typebanner').val();
+    var name = $('#modal_name_type').val()
+    var data = {id: id,name: name};
+    var url = $('#domain').attr('href');
+    if (name == ""){
+        alert('Vui lòng nhập đày đủ thông tin')
+    }else {
+        $.ajax({
+            method: 'POST',
+            url: url + '/api/user/update-type',
+            data: data,
+            async: false,
+            success: function(result) {
+                if(result.success){
+                    alert(result.message)
+                    $('#modal_id_typebanner').val("")
+                    $('#modal_name_type').val("")
+                    $('#modal_name_type').modal('hide')
+                    location.reload();
+                }else {
+                    alert(result.message)
+                }
+            },
+            error: function () {
+                alert('Đã xãy ra lỗi');
+            }
+
+        })
+    }
+
+})
+$(document).on("click", ".delete_type_banner", function(){
+    var id_type = $(this).parents("tr");
+    var id = id_type[0].id
+    var url = $('#domain').attr('href');
+
+    $.ajax({
+        method: 'POST',
+        url: url + '/api/user/delete-type',
+        data: {id: id},
+        async: false,
+        success: function (result) {
+            if(result.success){
+                id_type.remove();
+                alert(result.message)
+            }else {
+                alert(result.message)
+            }
+        },
+        error: function () {
+            alert('Đã xãy ra lỗi');
+        }
+    })
+});
+// Action status banner
 $('#submit_product').on('click',function () {
     var id = $('#id_status').val();
     var name = $('#name_status').val()
@@ -2444,39 +2845,10 @@ $('#submit_product').on('click',function () {
                 $('#id_status').val("")
                 $('#name_status').val("")
                 $('#status_banner').modal('hide')
+                location.reload()
 
             }else
                 alert(result.message)
-
-        },
-        error: function () {
-                alert('Đã xãy ra lỗi');
-
-        }
-
-    })
-})
-
-$('#submit_type_product').on('click',function () {
-    var id = $('#id_typebanner').val();
-    var name = $('#name_type').val()
-    var data = {id: id,name: name};
-    var url = $('#domain').attr('href');
-    $.ajax({
-        method: 'POST',
-        url: url + '/api/user/add-type',
-        data: data,
-        async: false,
-        success: function(result) {
-           if(result.success){
-               alert(result.message)
-               $('#id_typebanner').val("")
-               $('#name_type').val("")
-               $('#type_banner').modal('hide')
-               location.reload();
-           }else {
-               alert(result.message)
-           }
 
         },
         error: function () {
@@ -2486,7 +2858,233 @@ $('#submit_type_product').on('click',function () {
 
     })
 })
+$('#submit_status_banner').on('click',function () {
+    var id = $('#modal_id_status').val();
+    var name = $('#modal_name_status').val()
+    var data = {id: id,name: name};
+    var url = $('#domain').attr('href');
+    if (name == ""){
+        alert('Vui lòng nhập đày đủ thông tin')
+    }else {
+        $.ajax({
+            method: 'POST',
+            url: url + '/api/user/update-status',
+            data: data,
+            async: false,
+            success: function(result) {
+                if(result.success){
+                    alert(result.message)
+                    $('#modal_id_status').val("")
+                    $('#modal_name_status').val("")
+                    location.reload();
+                }else {
+                    alert(result.message)
+                }
+            },
+            error: function () {
+                alert('Đã xãy ra lỗi');
+            }
 
+        })
+    }
 
+})
+$(document).on("click", ".delete_status_banner", function(){
+    var id_status = $(this).parents("tr");
+    var id = id_status[0].id
+    var url = $('#domain').attr('href');
+
+    $.ajax({
+        method: 'POST',
+        url: url + '/api/user/delete-status',
+        data: {id: id},
+        async: false,
+        success: function (result) {
+            if(result.success){
+                id_status.remove();
+                alert(result.message)
+            }else {
+                alert(result.message)
+            }
+        },
+        error: function () {
+            alert('Đã xãy ra lỗi');
+        }
+    })
+});
+// Action nguồn khác hàng
+$('#submit_nguon').on('click',function () {
+    var id = $('#id_nguon').val();
+    var name = $('#name_nguon').val()
+    var data = {id: id,name: name};
+    var url = $('#domain').attr('href');
+    if(id == "" || name ==""){
+        alert('Vui lòng nhập đầy đủ thông tin')
+    }else {
+        $.ajax({
+            method: 'POST',
+            url: url + '/api/user/add-nguon',
+            data: data,
+            async: false,
+            success: function(result) {
+                if(result.success){
+                    alert(result.message)
+                    $('#id_nguon').val("")
+                    $('#name_nguon').val("")
+                    location.reload()
+
+                }else
+                    alert(result.message)
+
+            },
+            error: function () {
+                alert('Đã xãy ra lỗi');
+
+            }
+
+        })
+    }
+
+})
+$('#submit_nguon_customer').on('click',function () {
+    var id = $('#modal_id_nguon').val();
+    var name = $('#modal_name_nguon').val()
+    var data = {id: id,name: name};
+    var url = $('#domain').attr('href');
+    if (name == ""){
+        alert('Vui lòng nhập đày đủ thông tin')
+    }else {
+        $.ajax({
+            method: 'POST',
+            url: url + '/api/user/update-nguon',
+            data: data,
+            async: false,
+            success: function(result) {
+                if(result.success){
+                    alert(result.message)
+                    $('#modal_id_nguon').val("")
+                    $('#modal_name_nguon').val("")
+                    location.reload();
+                }else {
+                    alert(result.message)
+                }
+            },
+            error: function () {
+                alert('Đã xãy ra lỗi');
+            }
+
+        })
+    }
+
+})
+$(document).on("click", ".delete_nguon", function(){
+    var id_status = $(this).parents("tr");
+    var id = id_status[0].id
+    var url = $('#domain').attr('href');
+    $.ajax({
+        method: 'POST',
+        url: url + '/api/user/delete-nguon',
+        data: {id: id},
+        async: false,
+        success: function (result) {
+            if(result.success){
+                id_status.remove();
+                alert(result.message)
+            }else {
+                alert(result.message)
+            }
+        },
+        error: function () {
+            alert('Đã xãy ra lỗi');
+        }
+    })
+});
+// Action Loại khách hàng
+$('#submit_type_customer').on('click',function () {
+    var id = $('#id_type_customer').val();
+    var name = $('#name_type_customer').val()
+    var data = {id: id,name: name};
+    var url = $('#domain').attr('href');
+    if(id == "" || name ==""){
+        alert('Vui lòng nhập đầy đủ thông tin')
+    }else {
+        $.ajax({
+            method: 'POST',
+            url: url + '/api/user/add-type-customer',
+            data: data,
+            async: false,
+            success: function(result) {
+                if(result.success){
+                    alert(result.message)
+                    $('#id_type_customer').val("")
+                    $('#name_type_customer').val("")
+                    location.reload()
+
+                }else
+                    alert(result.message)
+
+            },
+            error: function () {
+                alert('Đã xãy ra lỗi');
+
+            }
+
+        })
+    }
+
+})
+$('#modal_submit_type_customer').on('click',function () {
+    var id = $('#modal_id_type_customer').val();
+    var name = $('#modal_name_type_customer').val()
+    var data = {id: id,name: name};
+    var url = $('#domain').attr('href');
+    if (name == ""){
+        alert('Vui lòng nhập đày đủ thông tin')
+    }else {
+        $.ajax({
+            method: 'POST',
+            url: url + '/api/user/update-type-customer',
+            data: data,
+            async: false,
+            success: function(result) {
+                if(result.success){
+                    alert(result.message)
+                    $('#modal_id_type_customer').val("")
+                    $('#modal_name_type_customer').val("")
+                    location.reload();
+                }else {
+                    alert(result.message)
+                }
+            },
+            error: function () {
+                alert('Đã xãy ra lỗi');
+            }
+
+        })
+    }
+
+})
+$(document).on("click", ".delete_type_customer", function(){
+    var id_status = $(this).parents("tr");
+    var id = id_status[0].id
+    var url = $('#domain').attr('href');
+    $.ajax({
+        method: 'POST',
+        url: url + '/api/user/delete-type-customer',
+        data: {id: id},
+        async: false,
+        success: function (result) {
+            if(result.success){
+                id_status.remove();
+                alert(result.message)
+            }else {
+                alert(result.message)
+            }
+        },
+        error: function () {
+            alert('Đã xãy ra lỗi');
+        }
+    })
+});
 
 

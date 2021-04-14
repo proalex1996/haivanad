@@ -15052,7 +15052,7 @@ legend {
     margin-left: 10px;
 }
 .table-responsive{
-    width: 100px!important;
+    width: 100px;
     overflow-x: auto !important;
 
 }
@@ -15315,7 +15315,7 @@ span#fcta-zalo-tracking {
 }
 
 .progress {
-    background: green;
+    background: green   ;
     display: block;
     height: 3px;
     text-align: center;
