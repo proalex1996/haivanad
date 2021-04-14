@@ -11,9 +11,9 @@ class RamdomCode
         $char =now()->year."HV";
         $result = $char;
         if (is_null($maxId)){
-            $result .= '00001';
+            $result .= '0001';
         }else{
-            $str = '00000';
+            $str = '0000';
             $length = strlen($maxId + 1);
             $result .= substr_replace($str, $maxId + 1, -$length);
         }
