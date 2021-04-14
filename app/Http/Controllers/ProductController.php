@@ -13,6 +13,7 @@ use App\Model\PickupModel;
 use App\Model\ProductModel;
 use App\Repositories\Product\ProductRepositoryEloquent;
 use App\Utilili\PptxFomat;
+use App\Utilili\RamdomCode;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -153,6 +154,8 @@ class ProductController extends Controller
 
     public function addProduct()
     {
+        $maxid = DB::table('banner')->max('id');
+        $code = RamdomCode::generateCode($maxid);
         $type_banners = DB::table('type_banner')->select('*')->get();
         $product = DB::table('banner')->select('*')->get();
         $status = DB::table('status_banner')->select('*')->get();
@@ -163,7 +166,8 @@ class ProductController extends Controller
             'type_banners' => $type_banners,
             'products' => $product,
             'statuss' => $status,
-            'provinces' => $province
+            'provinces' => $province,
+            'code' => $code,
         ]);
     }
 
@@ -350,6 +354,7 @@ class ProductController extends Controller
             }
             return Response::download(public_path('storage/PPTX/'.$datas[0].'.zip'));
         }
+
 
 
 

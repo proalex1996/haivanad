@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\ContractModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -101,5 +102,18 @@ class HomeController extends Controller
         header('Content - type: ' . $content_type);
         echo $body;
         }
+    public function generateCode($maxId)
+    {
+        $char = date('Y', now())."HV";
+        $result = $char;
+        if (is_null($maxId)){
+            $result .= '00001';
+        }else{
+            $str = '00000';
+            $length = strlen($maxId + 1);
+            $result .= substr_replace($str, $maxId + 1, -$length);
+        }
+        return $result;
+    }
 
 }

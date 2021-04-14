@@ -21,11 +21,13 @@
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1 uname">Mã Sản Phẩm:</label>
                                     </div>
+
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input" onchange="getProduct()" id="id_banners"
+                                        <input type="text" class="form-customer-input" value="{{$code}} "onchange="getProduct()" id="id_banner"
                                                name="id_banner"
                                                readonly>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -382,7 +384,7 @@
                 <form>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Mã Trạng Thái:</label>
-                        <input type="text" class="form-control" id="id_status">
+                        <input type="text"  class="form-control" id="id_statu">
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Tên Trạng Thái:</label>
