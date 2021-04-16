@@ -41,6 +41,7 @@ header('Access-Control-Allow-Origin: *');
 <script href="{{asset('public/asset/js/fontawesome.js')}}"></script>
 <link href="{{asset('public/asset/css/chosen.css')}}" rel="stylesheet" media="all">
 <link href="{{asset('public/asset/css/theme.css')}}" rel="stylesheet" media="all">
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
 </head>
 
 <body class="animsition">

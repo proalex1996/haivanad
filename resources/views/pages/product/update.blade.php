@@ -244,7 +244,18 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Giá Năm(USD): </label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-customer-input" data-type="currency" type="text" value="{{$banners->gianam}}"  name="gianam"
+                                               placeholder="Giá Năm">
+                                        <div class="invalid-feedback">Giá Năm không được để trống</div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
@@ -258,17 +269,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Giá Đèn(USD): </label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="text" value="{{$banners->v_light}}" name="v_light"
-                                               placeholder="Giá Đèn(USD)">
-                                    </div>
-                                </div>
-                            </div>
+
 
                         </div>
                     </div>
@@ -277,12 +278,11 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Giá Năm(USD): </label>
+                                        <label for="exampleFormControlInput1 uname">Giá Đèn(USD): </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" data-type="currency" type="text" value="{{$banners->gianam}}"  name="gianam"
-                                               placeholder="Giá Năm">
-                                        <div class="invalid-feedback">Giá Năm không được để trống</div>
+                                        <input class="form-customer-input" type="text" value="{{$banners->v_light}}" name="v_light"
+                                               placeholder="Giá Đèn(USD)">
                                     </div>
                                 </div>
                             </div>
