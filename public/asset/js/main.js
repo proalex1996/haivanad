@@ -1743,18 +1743,7 @@ function openDestroyDialog(element, submitType) {
     $("#" + submitType).attr("href", link + product);
 }
 
-function openDueContract(element) {
-    var contract = $(element).closest('tr.dropdown');
-    var startDate = contract.children('td.date_start').text();
-    $('input[name=date_start]').val(startDate);
-    var startEnd = contract.children('td.date_end').text();
-    $('input[name=date_end]').val(startEnd);
-    var contract_value = $('.value_contract span').text();
-    $('input[name=value_contract]').val(contract_value);
-    var contract = $(element).data('contract_id');
-    var link = $("#due-contract").data('due-link');
-    $("#due-contract").attr("action", link + contract)
-};
+
 
 function get(element) {
 
@@ -1832,13 +1821,19 @@ function getQuan(element) {
 }
 
 checkAll();
-var i = 2
 $('#addrowPayment').on('click', function () {
-
-    var j = i + 1
-    i++;
-    $('#idBodyPayment').append(
-        `
+    var i = 0;
+    var ek = $('.ratio').map((_,el) => el.value).get()
+    $.each(ek ,function (index, ele) {
+       i +=parseInt(ele);
+    })
+       if(i>=100)
+       {
+           alert("Tổng tỉ lệ đã đạt 100%")
+           $('#addrowPayment').prop('disabled',true)
+       }
+       $('#idBodyPayment').append(
+               `
                                 <tr class="idTrPayment">
                                     <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
                                                class="display-input m-r-5"></td>
@@ -1846,10 +1841,10 @@ $('#addrowPayment').on('click', function () {
                                                required>
                                     </td>
                                     <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onblur="setRatio(this)" name="ratio[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract" onblur="getRatio(this)" id="id_value_contract"
-                                               name="id_value_contract[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat" onblur="getRatio(this)" name="id_vat[]" required></td>
-                                    <td><input type="text" class="form-control display-input total" id="total" name="total_value[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_value_contract"  id="id_value_contract"
+                                               name="id_value_contract[]" placeholder="Số Tiền (USD)" readonly></td>
+                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" value="10" id="id_vat" name="id_vat[]" readonly></td>
+                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (USD)" id="total" name="total_value[]" readonly></td>
                                     <td><input type="date" class="form-control display-input" name="_pay_due[]" required>
                                     </td>
                                     <td><a class="dropdown-toggle form-control display-input" data-toggle="dropdown" aria-haspopup="true"
@@ -1862,9 +1857,11 @@ $('#addrowPayment').on('click', function () {
                                         </div>
                                     </td>
                                 </tr>
+           `)
 
-`
-    )
+
+
+
 })
 $('#addrowPayment1').on('click', function () {
 
@@ -1878,11 +1875,11 @@ $('#addrowPayment1').on('click', function () {
                                     <td><input type="text" class="display-input form-control payment_period" id="payment_period" name="payment_period[]"
                                                required>
                                     </td>
-                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onblur="setRatio(this)" name="ratio[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract" onblur="getRatio(this)" id="id_value_contract"
-                                               name="id_value_contract[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat" onblur="getRatio(this)" name="id_vat[]" required></td>
-                                    <td><input type="text" class="form-control display-input total" id="total" name="total_value[]" required></td>
+                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onchange="setRatio(this)" name="ratio[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_value_contract"  id="id_value_contract"
+                                               name="id_value_contract[]" placeholder="Số Tiền (USD)" readonly></td>
+                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" value="10" id="id_vat" name="id_vat[]" readonly></td>
+                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (USD)" id="total" name="total_value[]" readonly></td>
                                     <td><input type="date" class="form-control display-input" name="_pay_due[]" required>
 
                                 </tr>
@@ -1899,16 +1896,21 @@ function deleteRowPayment() {
     var chill = checked.children('td').find('.payment_period');
     var data = $('#id_contract').val();
     var data1 = $(chill).val()
-    $.ajax({
-        url: url +'/api/contract/deletepay/'+data+'/'+data1,
-        async: false,
-        method: "POST",
-        success: function () {
-            $.each(parent, function (index, element) {
-                checked.remove();
-            })
-        }
-    })
+    if(data1 == ""){
+        checked.remove();
+    }else {
+        $.ajax({
+            url: url +'/api/contract/deletepay/'+data+'/'+data1,
+            async: false,
+            method: "POST",
+            success: function () {
+                $.each(parent, function (index, element) {
+                    checked.remove();
+                })
+            }
+        })
+    }
+
 
 
 }
@@ -1933,7 +1935,7 @@ function getCustomer() {
             if (datas.length > 0) {
                 $.each(datas, function (index, ele) {
                     $('#id_nguoncustomer').append(`<option value='${ele.id_nguon}' selected>${ele.name_nguon}</option>`);
-                    $('#position_customer').append(`<option value='${ele.position_customer}' selected>${ele.name_position}</option>`);
+                    $('#position_customer').append(`<option value='${ele.position_customer}' selected>${ele.position_customer}</option>`);
                     $('#mst').val(ele.mst);
                     $('#adress_customer').val(ele.adress_customer);
                     $('#phone_customer').val(ele.phone_customer);
@@ -1973,10 +1975,11 @@ $(document).ready(function () {
         'hideMethod': 'fadeOut',
     }
 });
-getTong();
 
 function getTong() {
     var gia = $('#value_contract').val();
+    gia = gia.split('$').join("");
+    gia = gia.split(',').join("");
     var thue = (($('#thue').val() * gia) / 100);
     $('#tong').val(parseInt(gia) + parseInt(thue));
 }
@@ -1986,20 +1989,23 @@ function setRatio(elements) {
     var gia = parent.children('td').find('.ratio');
     var value = $('#value_contract').val()
     var id_value = parent.children('td').find('.id_value_contract');
-    $(id_value).val((value * $(gia).val())/100)
-}
-function getRatio(element) {
-    var parent = $(element).closest('tr');
-    var gia = parent.children('td').find('.id_value_contract');
+        value = value.split('$').join("");
+        value = value.split(',').join("");
+     $(id_value).val((value * $(gia).val())/100)
     var thue = parent.children('td').find('.id_vat');
     var total = parent.children('td').find('.total');
-    var vat = ($(thue).val() * $(gia).val())/ 100
-    $(total).val(parseInt($(gia).val()) + parseInt(vat));
+    var vat = ($(thue).val() * $(id_value).val())/ 100
+    $(total).val(parseInt($(id_value).val()) + parseInt(vat));
 
-    // var gia = $('#id_value_contract').val();
-    // var thue = (($('#id_vat').val() * gia) / 100);
-    // $('[id^="total"]').val(parseInt(gia) + parseInt(thue));
 }
+// function getRatio(element) {
+//     var parent = $(element).closest('tr');
+//     var gia = parent.children('td').find('.id_value_contract');
+//
+//     // var gia = $('#id_value_contract').val();
+//     // var thue = (($('#id_vat').val() * gia) / 100);
+//     // $('[id^="total"]').val(parseInt(gia) + parseInt(thue));
+// }
 
 
 
@@ -2027,7 +2033,12 @@ product()
 
 function product() {
     var url = $('#domain').attr('href');
-    var data = $('#id_banner').val();
+
+    if($('#id_banner').val()!= ""){
+        var data = $('#id_banner').val();
+    }else if($('#_name_banner')!=""){
+        data = $('#_name_banner').val();
+    }
     $('#image-input').children().remove();
     $.ajax({
         url: url + '/api/contract/product/' + data,
@@ -2043,7 +2054,7 @@ function product() {
                 $.each(datas, function (index, ele) {
                     $('#id_typebanner').append(`<option value='${ele.id_typebanner}' selected>${ele.name_type}</option>`);
                     $('#id_system').val(ele.id_system)
-                    $('#location').val(ele._name_banner);
+                    $('#_name_banner').append(`<option value='${ele._name_banner}' selected>${ele._name_banner}</option>`)
                     $('#dien_tích').val(ele.dien_tich);
                     $('#tinh').val(ele.tinh);
                     getQuan($('#tinh'))
@@ -2064,28 +2075,28 @@ function product() {
                     //         })
                     //     }
                     // })
-                    $.ajax({
-                        url: url + '/api/contract/photo/' + data,
-                        async: false,
-                        method: "POST",
-                        success: function (result) {
-                            var photo = JSON.parse(result).photo;
-                            if (photo !== "") {
-                                $.each(photo, function (index, element) {
-                                    $('#image-input').append(`
-                                                    <div class="polaroid">
-                                                        <img src="${url}/public/storage/content/${element._name_photo}" id="img-check" alt="${element._name_photo}" style="width:100%">
-                                                        <div class="container container-image-text">
-                                                        <p>1-10.jpg</p></div>
-                                                    </div>
-
-                                                </div>`);
-
-                                })
-                            }
-
-                        }
-                    })
+                    // $.ajax({
+                    //     url: url + '/api/contract/photo/' + data,
+                    //     async: false,
+                    //     method: "POST",
+                    //     success: function (result) {
+                    //         var photo = JSON.parse(result).photo;
+                    //         if (photo !== "") {
+                    //             $.each(photo, function (index, element) {
+                    //                 $('#image-input').append(`
+                    //                                 <div class="polaroid">
+                    //                                     <img src="${url}/public/storage/content/${element._name_photo}" id="img-check" alt="${element._name_photo}" style="width:100%">
+                    //                                     <div class="container container-image-text">
+                    //                                     <p>1-10.jpg</p></div>
+                    //                                 </div>
+                    //
+                    //                             </div>`);
+                    //
+                    //             })
+                    //         }
+                    //
+                    //     }
+                    // })
                 })
             } else if (datas.length == 0) {
                 $('#id_nguoncustomer').val('');
@@ -2138,19 +2149,19 @@ function Ratio() {
                                                required>
                                     </td>
                                     <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" value="${ele.ratio}" id="ratio" onblur="setRatio(this)" name="ratio[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract" value="${ele.id_value_contract}" onblur="getRatio(this)" id="id_value_contract"
-                                               name="id_value_contract[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat" value="${ele.id_vat}" onblur="getRatio(this)" name="id_vat[]" required></td>
-                                    <td><input type="text" class="form-control display-input total" value="${ele.total_value}" id="total" name="total_value[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_value_contract" value="${ele.id_value_contract}" id="id_value_contract"
+                                               name="id_value_contract[]" readonly></td>
+                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat" value="${ele.id_vat}" name="id_vat[]" readonly></td>
+                                    <td><input type="text" class="form-control display-input total" value="${ele.total_value}" id="total" name="total_value[]" readonly></td>
                                     <td><input type="date" class="form-control display-input" value="${ele._pay_due}" name="_pay_due[]" required>
                                     </td>
                                     <td><a class="dropdown-toggle form-control display-input" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> Trạng Thái</a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item"
-                                               href="{{url('/contract/setpay1/'${$('#id_banner').val()}')}}">Đã Thanh Toán</a>
+                                               href="${url+'/contract/setpay1/'+$('#id_contract').val()}">Đã Thanh Toán</a>
                                             <a  class="dropdown-item"
-                                               href="{{url('/contract/setpay2/'${$('#id_banner').val()}')}}">Công Nợ</a>
+                                               href="${url+'/contract/setpay2/'+$('#id_contract').val()}">Công Nợ</a>
                                         </div>
                                     </td>
                                 </tr>` )
@@ -2161,44 +2172,15 @@ function Ratio() {
         }
     })
 }
-RamdomID();
-
-function RamdomID() {
-    function IDGenerator() {
-
-        this.length = 4;
-        this.timestamp = +new Date;
-
-        var _getRandomInt = function( min, max ) {
-            return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
-
-        }
-
-        this.generate = function() {
-            var ts = this.timestamp.toString();
-            var parts = ts.split( "" ).reverse();console.log(parts)
-            var id = "";
-
-            for( var i = 0; i < this.length; ++i ) {
-                var index = _getRandomInt( 0, parts.length - 1 );
-                id += parts[index];
-            }
-
-            return id;
-        }
-    }
-    var currentYear = (new Date).getFullYear();
-        var generator = new IDGenerator();
-        $('#id_banners').val(currentYear+'HV'+generator.generate())
-        $('#id_customers').val(currentYear+'HV'+generator.generate())
-        $('#id_staffs').val(currentYear+'HV'+generator.generate())
-        $('#id_contracts').val(currentYear+'HV'+generator.generate())
-
-}
 countSearch()
 function countSearch() {
     $('#count').append(`<label> Tìm Thấy Được ${$('.id_banner').length} Sản Phẩm</label>`)
 }
+countSearchCustomer()
+function countSearchCustomer() {
+    $('#count_customer').append(`<label> Tìm Thấy Được ${$('.id_customer').length} Kết Quả</label>`)
+}
+
 
 function fomatBank(elements) {
     var num = $(elements).val();
@@ -2244,13 +2226,18 @@ function addCommas(elements) {
 
 $('[id^="redirect"]').dblclick(function () {
     var url = $('#domain').attr('href');
-    var data = $(this).find('td:first').find('a:first').attr('data-target');
+    var data = $(this).find('td:first').find('input').attr('data-target');
     location.assign(url+"/customer/update/"+data)
 })
 $('[id^="row_product"]').dblclick(function () {
     var url = $('#domain').attr('href');
     var data = $(this).find('td:first').find('input').attr('data-target')
     location.assign(url+"/product/update/"+data)
+})
+$('[id^="row_contract"]').dblclick(function () {
+    var url = $('#domain').attr('href');
+    var data = $(this).find('td:first').find('input').attr('data-target')
+    location.assign(url+"/contract/update/"+data)
 })
 getPhoto()
 function getPhoto() {
@@ -3086,5 +3073,35 @@ $(document).on("click", ".delete_type_customer", function(){
         }
     })
 });
+
+function setDue() {
+    var id = $('#id_contract').val();
+    var url = $('#domain').attr('href');
+    $.ajax({
+        url: url+'/api/contract/set-due',
+        method: 'POST',
+        data: {id: id},
+        async: false,
+        success: function (result) {
+            var datas = JSON.parse(result).due
+            $.each(datas, function (index,ele) {
+                $('#modal_date_start').val(ele.date_start)
+                $('#modal_date_end').val(ele.date_end)
+                $('#modal_status_contract').val(ele.status_contract)
+                $('#modal_value_contract').val(ele.value_contract)
+            })
+        }
+    })
+
+}
+function getNumber(element) {
+    var input =$(element).val();
+    number = new Intl.NumberFormat().format(input)
+    number = number.toString();
+    console.log(number)
+    $(element).val(number);
+}
+
+
 
 

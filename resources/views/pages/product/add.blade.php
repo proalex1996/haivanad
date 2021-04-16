@@ -63,7 +63,7 @@
                                     <div class="col-md-9 col-sm-12">
                                         <input type="text" class="form-customer-input" id="banner_adress"
                                                name="banner_adress"
-                                               placeholder="Địa chỉ" required>
+                                               placeholder="Địa chỉ">
                                         <div class="invalid-feedback">Địa chỉ không được để trống</div>
                                     </div>
                                 </div>
@@ -128,7 +128,7 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-customer-input" id="id_system" name="id_system"
-                                               placeholder="Kết Cấu" required>
+                                               placeholder="Kết Cấu"  maxlength="20">
                                     </div>
 
                                 </div>
@@ -159,9 +159,9 @@
                                         <label for="exampleFormControlInput1 uname">Kích Thước:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="number" id="size_banner"
+                                        <input class="form-customer-input" type="text" id="size_banner"
                                                name="size_banner"
-                                               placeholder="Kích thước" required>
+                                               placeholder="Kích thước"  maxlength="20">
                                         <div class="invalid-feedback">Kích thước không được để trống</div>
                                     </div>
 
@@ -192,7 +192,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <input class="form-customer-input" type="text" id="height_banner"
                                                name="height_banner"
-                                               placeholder="Tổng chiều cao" required>
+                                               placeholder="Tổng chiều cao"  maxlength="20">
                                         <div class="invalid-feedback">Email không được để trống</div>
                                     </div>
                                 </div>
@@ -210,7 +210,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <input class="form-customer-input" type="text" id="light_system"
                                                name="light_system"
-                                               placeholder="Hệ thống đèn" required>
+                                               placeholder="Hệ thống đèn"  maxlength="20">
                                         <div class="invalid-feedback">Hệ thống đèn không được để trống</div>
                                     </div>
 
@@ -222,8 +222,8 @@
                                         <label for="exampleFormControlInput1 uname">Lưu Lượng Người: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="number" id="flow" name="flow"
-                                               placeholder="Lưu Lượng Người" required>
+                                        <input class="form-customer-input" type="text" id="flow" name="flow"
+                                               placeholder="Lưu Lượng Người"  maxlength="20">
                                         <div class="invalid-feedback">Lưu Lượng Người không được để trống</div>
                                     </div>
                                 </div>
@@ -238,7 +238,7 @@
                                         <label for="exampleFormControlInput1 uname">Giá Đèn: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" maxlength="50" data-type="currency" type="text" id="v_light"
+                                        <input class="form-customer-input" maxlength="20" data-type="currency" type="text" id="v_light"
                                                name="v_light"
                                                placeholder="Giá Đèn">
                                     </div>
@@ -251,7 +251,7 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input class="form-customer-input" type="text" id="escom" name="escom"
-                                               placeholder="Điểm Escom" required>
+                                               placeholder="Điểm Escom" >
                                         <div class="invalid-feedback">Điểm Escom không được để trống</div>
                                     </div>
 
@@ -299,12 +299,12 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Nội Dung Quản Cáo Hiện Tại: </label>
+                                        <label for="exampleFormControlInput1 uname">Nội Dung Quảng Cáo Hiện Tại: </label>
                                     </div>
                                     <div class="col-md-9 col-sm-12">
                                         <input class="form-customer-input" type="text" id="content"
                                                name="content"
-                                               placeholder="Nội Dung Quản Cáo Hiện Tại">
+                                               placeholder="Nội Dung Quảng Cáo Hiện Tại">
                                     </div>
                                 </div>
                             </div>
@@ -312,7 +312,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Đặc Điểm:</label>
-                        <textarea class="form-control" id="dac_diem" name="dac_diem" rows="5"></textarea>
+                        <textarea class="form-control text-aria" id="dac_diem" name="dac_diem" rows="5"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -369,7 +369,6 @@
         </form>
     </div>
 @endsection
-
 {{--Modal thêm trạng thái--}}
 <div class="modal fade" id="status_banner" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

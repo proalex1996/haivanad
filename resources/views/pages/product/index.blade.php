@@ -109,8 +109,8 @@
                         <tbody class="overflow-scroll">
                         @foreach($banners as $banner)
                             @if ($banner->id_status == 2)
-                                <tr class="status--process" id="row_product_{{$banner->id}}" data-target="{{$banner->id}}">
-                                    <td><input type="checkbox" id="check-box" onchange="getCheckedBox()" name="check_box[]" value="{{$banner->id_banner}}"
+                                <tr class="status--process" id="row_product_{{$banner->id}}" >
+                                    <td><input type="checkbox" id="check-box" onchange="getCheckedBox()" data-target="{{$banner->id}}" name="check_box[]" value="{{$banner->id_banner}}"
                                                class="display-input m-r-5"></td>
                                     <td class="id_banner">{{$banner->id_banner}}</td>
                                     <td>2021+{{$banner->name_type}}</td>
@@ -118,12 +118,12 @@
                                     <td>{{$banner->_name}}</td>
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->name_status}}</a>
-                                        <div class="dropdown-menu">
-                                            @foreach($status_banners as $status_banner)
-                                                <a class="dropdown-item"
-                                                   href="{{\Illuminate\Support\Facades\URL::to('product/pickupBanner'.$status_banner->id_status)."/".$banner->id}}">{{$status_banner->name_status}}</a>
-                                            @endforeach
-                                        </div>
+{{--                                        <div class="dropdown-menu">--}}
+{{--                                            @foreach($status_banners as $status_banner)--}}
+{{--                                                <a class="dropdown-item"--}}
+{{--                                                   href="{{\Illuminate\Support\Facades\URL::to('product/pickupBanner'.$status_banner->id_status)."/".$banner->id}}">{{$status_banner->name_status}}</a>--}}
+{{--                                            @endforeach--}}
+{{--                                        </div>--}}
                                     </td>
 
                                     <td><a href="{{url('/product/update/'.$banner->id)}}">Xem Chi Tiết</a></td>
@@ -139,12 +139,30 @@
                                     <td>{{$banner->_name}}</td>
                                     <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->name_status}}</a>
-                                        <div class="dropdown-menu">
-                                            @foreach($status_banners as $status_banner)
-                                                <a class="dropdown-item"
-                                                   href="{{\Illuminate\Support\Facades\URL::to('product/pickupBanner'.$status_banner->id_status)."/".$banner->id}}">{{$status_banner->name_status}}</a>
-                                            @endforeach
-                                        </div>
+{{--                                        <div class="dropdown-menu">--}}
+{{--                                            @foreach($status_banners as $status_banner)--}}
+{{--                                                <a class="dropdown-item"--}}
+{{--                                                   href="{{\Illuminate\Support\Facades\URL::to('product/pickupBanner'.$status_banner->id_status)."/".$banner->id}}">{{$status_banner->name_status}}</a>--}}
+{{--                                            @endforeach--}}
+{{--                                        </div>--}}
+                                    </td>
+                                    <td><a href="{{url('/product/update/'.$banner->id)}}">Xem Chi Tiết</a></td>
+                            @else
+                                <tr id="row_product_{{$banner->id}}">
+                                    <td><input type="checkbox" id="check-box" data-target="{{$banner->id}}" name="check_box[]" onchange="getCheckedBox()" value="{{$banner->id_banner}}"
+                                               class="display-input m-r-5"></td>
+                                    <td class="id_banner">{{$banner->id_banner}}</td>
+                                    <td>{{$banner->name_type}}</td>
+                                    <td>{{$banner->_name_banner}}</td>
+                                    <td>{{$banner->_name}}</td>
+                                    <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                           aria-expanded="false" id="dropdownMenuLink"> {{$banner->name_status}}</a>
+{{--                                        <div class="dropdown-menu">--}}
+{{--                                            @foreach($status_banners as $status_banner)--}}
+{{--                                                <a class="dropdown-item"--}}
+{{--                                                   href="{{\Illuminate\Support\Facades\URL::to('product/pickupBanner'.$status_banner->id_status)."/".$banner->id}}">{{$status_banner->name_status}}</a>--}}
+{{--                                            @endforeach--}}
+{{--                                        </div>--}}
                                     </td>
                                     <td><a href="{{url('/product/update/'.$banner->id)}}">Xem Chi Tiết</a></td>
                             @endif
@@ -152,7 +170,6 @@
                         </tbody>
                     </table>
                     <div class="form-group m-t-10" id="count">
-
                     </div>
                     </div>
 

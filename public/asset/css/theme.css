@@ -15328,3 +15328,7 @@ span#fcta-zalo-tracking {
     transition: opacity 1.3s;
 }
 
+.text-aria{
+    font-family: serif !important;
+    font-size: 20px !important;
+}
