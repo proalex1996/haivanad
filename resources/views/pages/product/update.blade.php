@@ -153,7 +153,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <select class="form-control"  name="name_status">
                                             @foreach($statuss as $status)
-                                                @if($banners->name_banner == $status->id_status)
+                                                @if($banners->name_status == $status->id_status)
                                                     <option value="{{$status->id_status}}" selected>{{$status->name_status}}</option>
                                                 @else
                                                     <option value="{{$status->id_status}}">{{$status->name_status}}</option>
