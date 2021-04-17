@@ -121,8 +121,9 @@ class ProductController extends Controller
         $product->note_banner = $request->note_banner;
         $product->dien_tich = $request->dien_tich;
         $product->save();
-        $files =$request->file('files');
+
         $maps = array($request->file('maps'));
+        $files =$request->file('files');
         if(!empty($files[0]) || !is_null($files[0])){
             for($index = 0;$index < sizeof($files);$index++){
                 $photo = new PhotoModel();
@@ -147,10 +148,16 @@ class ProductController extends Controller
                 $map->save();
             }
         }
+        if ($request->add_product == 'save_copy') {
+            return redirect()->back()->with('product', $product);
+        }
+        if ($request->add_product == 'save_new') {
+            return redirect()->action('ProductController@update');
+        }
+        if ($request->add_product == 'save') {
+            return redirect()->action('ProductController@getIndex');
+        }
 
-
-
-        return redirect()->action('ProductController@getIndex');
     }
 
     public function addProduct()
@@ -163,12 +170,16 @@ class ProductController extends Controller
         $province = DB::table('province')
             ->select('*')
             ->get();
+        $district = DB::table('district')
+            ->select('*')
+            ->get();
         return view('pages.product.add', [
             'type_banners' => $type_banners,
             'products' => $product,
             'statuss' => $status,
             'provinces' => $province,
             'code' => $code,
+            'districts' => $district
         ]);
     }
 
@@ -193,19 +204,96 @@ class ProductController extends Controller
     {
         $data = $request->all();
         if (!empty($data)) {
-            $dataBanner = $request->except('photos');
+            $dataBanner = $request->except('files');
             $up = $this->productRepository->update($id, $dataBanner);
-            if (!empty($data['photos'])) {
-                foreach ($data['photos'] as $photo){
-                    $fileName = $photo->getClientOriginalName();
-                    $storage = Storage::putFileAs('content', $photo, $fileName);
-                    $photoModel =  PhotoModel::where(['id_banner' => $data['id_banner']])->first();
-                    $photoModel->_name_photo = $fileName;
-                    $photoModel->save();
-                }
-            }
+            if(array_key_exists("files", $data) != false || array_key_exists("maps", $data) != false){
+                if(array_key_exists("files", $data) != false){
+                    $check =  ProductController::containsOnlyNull($data['files']);
+                    if($check == false) {
+                        $files = $request->file('files');
+                        if (!empty($files)) {
+                            for ($i = 0; $i < sizeof($files); $i++) {
+                                if (file_exists($data['files'][$i]) == false) {
+                                    $fileName = basename($files[$i]->getClientOriginalName());
+                                    $file = $request->file('files')[$i];
+                                    $storage = Storage::putFileAs('content', $file, $fileName);
+                                    $photoModel = PhotoModel::where(['id_banner' => $data['id_banner']])->where(['id' => $data['id_photo'][$i]])->update([
+                                        '_name_photo' => $fileName,
+                                        'views' => $data['views'][$i]
+                                    ]);
+                                } else {
+                                    if (array_key_exists('id_photo', $data) != false) {
+                                        $fileName = basename($data['files'][$i]->getClientOriginalName());
+                                        $photoModel = PhotoModel::where(['id_banner' => $data['id_banner']])->where(['id' => $data['id_photo'][$i]])->update([
+                                            '_name_photo' => $fileName,
+                                            'views' => $data['views'][$i]
+                                        ]);
+                                    } else {
+                                        if (!empty($files[$i]) || !is_null($files[$i])) {
+                                            $photo = new PhotoModel();
+                                            $file = $files[$i];
+                                            $photo->id_banner = $request->id_banner;
+                                            $photo->views = $request->views[$i];
+                                            $fileName = $request->file('files')[$i]->getClientOriginalName();
+                                            $photo->_name_photo = $fileName;
+                                            $storage = Storage::putFileAs('content', $request->file('files')[$i], $fileName);
+                                            $photo->save();
+                                            $photoModel = PhotoModel::where(['id_banner' => $data['id_banner']])->where(['id' => $data['id_photo'][$i]])->update([
+                                                'views' => $data['views'][$i]
+                                            ]);
+                                        }
 
-            return redirect()->action('ProductController@getIndex');
+                                    }
+                                }
+
+                            }
+
+
+                        } else {
+                            for ($i = 0; $i < sizeof($data['views']); $i++) {
+                                $photoModel = PhotoModel::where(['id_banner' => $data['id_banner']])->where(['id' => $data['id_photo'][$i]])->update([
+                                    'views' => $data['views'][$i]
+                                ]);
+                            }
+                        }
+                    }
+                }
+                if(array_key_exists("maps", $data) != false) {
+                    $dbmap = DB::table('map')->where('id_banner',$data['id_banner'])->get();
+                    $checkmap = ProductController::containsOnlyNull($data['maps']);
+                    if ($checkmap == false) {
+                        $maps = $request->file('maps');
+                        if(!empty($dbmap[0])){
+                            if(!empty($maps)){
+                                if(file_exists($data['maps'][0])==true){
+                                    $maps = $request->file('maps')[0];
+                                    $mapsName = basename($maps->getClientOriginalName());
+                                    $storage = Storage::putFileAs('content', $maps, $mapsName);
+                                    $photoModel =  MapModel::where('id_banner',$data['id_banner'])->update([
+                                        '_name_map' => $mapsName
+                                    ]);
+                                }
+
+                            }
+                        }else{
+                            $map = new MapModel();
+                            $mapFile = $maps[0];
+                            $map->id_banner  = $request->id_banner;
+                            $mapName = $request->file('maps')[0]->getClientOriginalName();
+                            $map->_name_map = $mapName;
+                            $storage= Storage::putFileAs('content', $request->file('maps')[0], $mapName);
+                            $map->save();
+                        }
+
+
+                        }
+
+                    }
+                }
+
+
+
+            return redirect()->back();
         }
 
         $banners = $this->productRepository->find($id);
@@ -220,6 +308,10 @@ class ProductController extends Controller
             'provinces' => $province,
             'districts'=>$district
         ]);
+    }
+    function containsOnlyNull($input)
+    {
+        return empty(array_filter($input, function ($a) { return $a !== null;}));
     }
 
     public function province(Request $request)
@@ -320,11 +412,20 @@ class ProductController extends Controller
         }
     }
     public function getPhoto(Request $request){
-        $photo = DB::table('photo')
-            ->join('map','photo.id_banner','=','map.id_banner')
-            ->select('_name_photo','map._name_map','views')
-            ->where('photo.id_banner','=',$request->id_banner)
-            ->get();
+        $maps = DB::table('map')->select('*')->where('map.id_banner','=',$request->id_banner)->get();
+        if(!empty($maps[0])){
+            $photo = DB::table('photo')
+                ->join('map','photo.id_banner','=','map.id_banner')
+                ->select('photo.id as id_photo','_name_photo','map._name_map','views')
+                ->where('photo.id_banner','=',$request->id_banner)
+                ->get();
+        }else{
+            $photo = DB::table('photo')
+                ->select('photo.id as id_photo','_name_photo','views')
+                ->where('photo.id_banner','=',$request->id_banner)
+                ->get();
+        }
+
         return json_encode(['photo' => $photo], 200);
     }
     public function getPptx(Request $request){

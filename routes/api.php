@@ -34,9 +34,12 @@ Route::group(['prefix' => 'contract'], function () {
     Route::post('/product/{id_banner}', 'ContractController@getProduct');
     Route::get('/product', 'ContractController@getProduct');
     Route::post('/photo/{id_banner}', 'ContractController@getphoto');
+    Route::post('/product-all/', 'ContractController@getALLProduct');
     Route::get('/photo', 'ContractController@getphoto');
     Route::post('/ratio/{id_contract}', 'ContractController@getRatio');
     Route::post('/deletepay/{id_contract}/{payment_period}', 'ContractController@delete_payment');
+    Route::post('/set-due', 'ContractController@setDue');
+
 
 
 
@@ -49,6 +52,7 @@ Route::group(['prefix' => 'product'], function () {
     Route::get('/province/{id}','ProductController@province');
     Route::post('/photo/{id_banner}','ProductController@getPhoto');
     Route::get('/photo/','ProductController@getPhoto');
+
 
 });
 

@@ -45,9 +45,15 @@
                                         <label for="exampleFormControlInput1 uname">Tên Sản Phẩm:</label>
                                     </div>
                                     <div class="col-md-9 col-sm-12">
+                                        @if(!empty(Session::get('product')->_name_banner))
                                         <input type="text" class="form-customer-input" id="_name_banner"
                                                name="_name_banner"
-                                               placeholder="Tên Sản Phẩm" required>
+                                               placeholder="Tên Sản Phẩm" value="{{Session::get('product')->_name_banner}}" required>
+                                        @else
+                                            <input type="text" class="form-customer-input" id="_name_banner"
+                                                   name="_name_banner"
+                                                   placeholder="Tên Sản Phẩm" value="" required>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -61,10 +67,17 @@
                                         <label for="exampleFormControlInput1 uname">Địa Chỉ: </label>
                                     </div>
                                     <div class="col-md-9 col-sm-12">
-                                        <input type="text" class="form-customer-input" id="banner_adress"
+                                        @if(!empty(Session::get('product')->banner_adress))
+                                        <input type="text" class="form-customer-input" value="{{Session::get('product')->banner_adress}}" id="banner_adress"
                                                name="banner_adress"
                                                placeholder="Địa chỉ">
                                         <div class="invalid-feedback">Địa chỉ không được để trống</div>
+                                        @else
+                                            <input type="text" class="form-customer-input"  id="banner_adress"
+                                                   name="banner_adress"
+                                                   placeholder="Địa chỉ">
+                                            <div class="invalid-feedback">Địa chỉ không được để trống</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -77,15 +90,27 @@
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlSelect1">Tỉnh/Thành Phố:</label>
                                     </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
-                                            <option value="">--Tỉnh/Thành Phố--</option>
+                                        @if(!empty(Session::get('product')->quan))
+                                            <div class="col-md-6 col-sm-12">
+                                                <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)" required>
+                                                    <option value="">--Tỉnh/Thành Phố--</option>
+                                                    @foreach($provinces as $province)
+                                                        @if (Session::get('product')->tinh == $province -> _code)
+                                                            <option value="{{$province -> _code}}">{{$province -> _name}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                    @else
+                                        <div class="col-md-6 col-sm-12">
+                                            <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)" required>
+                                                <option value="">--Tỉnh/Thành Phố--</option>
                                             @foreach($provinces as $province)
                                                 <option value="{{$province -> _code}}">{{$province -> _name}}</option>
                                             @endforeach
-                                        </select>
-                                    </div>
-
+                                            </select>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -93,11 +118,23 @@
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlSelect1">Quận/Huyện:</label>
                                     </div>
+                                    @if(!empty(Session::get('product')->quan))
+                                        <div class="col-md-6 col-sm-12">
+                                            <select class="form-control" id="quan" name="quan">
+                                                @foreach($districts as $district)
+                                                    @if(Session::get('product')->quan == $district->id_district)
+                                                    <option value="{{$district->id_district}}">{{$district->_name_district}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    @else
                                     <div class="col-md-6 col-sm-12">
                                         <select class="form-control" id="quan" name="quan">
                                             <option value="">--Quận/Huyện--</option>
                                         </select>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -110,6 +147,18 @@
                                         <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
+                                        @if(!empty(Session::get('product')->id_typebanner))
+                                                <select class="form-control" id="id_typebanner" name="id_typebanner">
+                                                    @foreach($type_banners as $type_banner)
+                                                        @if(Session::get('product')->id_typebanner == $type_banner->id_typebanner)
+                                                            <option
+                                                                value="{{$type_banner->id_typebanner}}" selected>{{$type_banner->name_type}}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                                <button type="button" class="btn-selected" data-toggle="modal" data-target="#type_banner">Loại hình sp không có sẵn?</button>
+                                            </div>
+                                        @else
                                         <select class="form-control" id="id_typebanner" name="id_typebanner">
                                             @foreach($type_banners as $type_banner)
                                                 <option
@@ -118,6 +167,7 @@
                                         </select>
                                         <button type="button" class="btn-selected" data-toggle="modal" data-target="#type_banner">Loại hình sp không có sẵn?</button>
                                     </div>
+                                @endif
                                 </div>
 
                             </div>
@@ -127,8 +177,14 @@
                                         <label for="exampleFormControlInput1">Kết Cấu: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input" id="id_system" name="id_system"
-                                               placeholder="Kết Cấu"  maxlength="20">
+                                        @if(!empty(Session::get('product')->id_system))
+                                            <input type="text" class="form-customer-input" value="{{Session::get('product')->id_system}}" id="id_system" name="id_system"
+                                                   placeholder="Kết Cấu">
+                                        @else
+                                            <input type="text" class="form-customer-input" id="id_system" name="id_system"
+                                                   placeholder="Kết Cấu" >
+                                        @endif
+
                                     </div>
 
                                 </div>
@@ -144,12 +200,27 @@
                                         <label for="exampleFormControlSelect1">Trạng Thái:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="status_banner" name="status_banner">
-                                            @foreach($statuss as $status)
-                                                <option value="{{$status->id_status}}">{{$status->name_status}}</option>
-                                            @endforeach
-                                        </select>
-                                        <button type="button" class="btn-selected" data-toggle="modal" data-target="#status_banner">Trạng thái không có sẵn?</button>
+                                        @if(!empty(Session::get('product')->banner_adress))
+                                            <select class="form-control" id="status_banner" name="status_banner">
+                                                <option value="">--Tỉnh/Thành Phố--</option>
+                                                @foreach($statuss as $status)
+                                                    @if (Session::get('product')->name_status == $status -> id_status)
+                                                        <option value="{{$status -> id_status}}" selected>{{$status -> name_status}}</option>
+                                                    @else
+                                                        <option value="{{$status -> id_status}}">{{$status -> name_status}}</option>
+                                                    @endif
+
+                                                @endforeach
+                                            </select>
+                                            <button type="button" class="btn-selected" data-toggle="modal" data-target="#status_banner">Trạng thái không có sẵn?</button>
+                                        @else
+                                            <select class="form-control" id="status_banner" name="status_banner">
+                                                @foreach($statuss as $status)
+                                                    <option value="{{$status->id_status}}">{{$status->name_status}}</option>
+                                                @endforeach
+                                            </select>
+                                            <button type="button" class="btn-selected" data-toggle="modal" data-target="#status_banner">Trạng thái không có sẵn?</button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -159,10 +230,16 @@
                                         <label for="exampleFormControlInput1 uname">Kích Thước:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="size_banner"
-                                               name="size_banner"
-                                               placeholder="Kích thước"  maxlength="20">
-                                        <div class="invalid-feedback">Kích thước không được để trống</div>
+                                        @if(!empty(Session::get('product')->size_banner))
+                                            <input class="form-customer-input" type="text" value="{{Session::get('product')->size_banner}}" id="size_banner"
+                                                   name="size_banner"
+                                                   placeholder="Kích thước">
+                                        @else
+                                            <input class="form-customer-input" type="text" id="size_banner"
+                                                   name="size_banner"
+                                                   placeholder="Kích thước">
+                                        @endif
+
                                     </div>
 
                                 </div>
@@ -178,9 +255,14 @@
                                         <label for="exampleFormControlInput1 uname">Diện Tích: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="dien_tich" name="dien_tich"
-                                               placeholder="Diện Tích" required>
-                                        <div class="invalid-feedback">Email không được để trống</div>
+                                        @if(!empty(Session::get('product')->dien_tich))
+                                            <input class="form-customer-input" value="{{Session::get('product')->dien_tich}}" type="text" id="dien_tich" name="dien_tich"
+                                                   placeholder="Diện Tích">
+                                        @else
+                                            <input class="form-customer-input" type="text" id="dien_tich" name="dien_tich"
+                                                   placeholder="Diện Tích">
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -190,10 +272,15 @@
                                         <label for="exampleFormControlInput1 uname">Tổng Chiều Cao: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="height_banner"
-                                               name="height_banner"
-                                               placeholder="Tổng chiều cao"  maxlength="20">
-                                        <div class="invalid-feedback">Email không được để trống</div>
+                                        @if(!empty(Session::get('product')->height_banner))
+                                            <input class="form-customer-input" value="{{Session::get('product')->height_banner}}" type="text" id="height_banner"
+                                                   name="height_banner"
+                                                   placeholder="Tổng chiều cao"  maxlength="20">
+                                        @else
+                                            <input class="form-customer-input" type="text" id="height_banner"
+                                                   name="height_banner"
+                                                   placeholder="Tổng chiều cao"  maxlength="20">
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -208,10 +295,16 @@
                                         <label for="exampleFormControlInput1 uname">Hệ Thống Đèn: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="light_system"
-                                               name="light_system"
-                                               placeholder="Hệ thống đèn"  maxlength="20">
-                                        <div class="invalid-feedback">Hệ thống đèn không được để trống</div>
+                                        @if(!empty(Session::get('product')->light_system))
+                                            <input class="form-customer-input" value="{{Session::get('product')->light_system}}" type="text" id="light_system"
+                                                   name="light_system"
+                                                   placeholder="Hệ thống đèn"  maxlength="20">
+                                        @else
+                                            <input class="form-customer-input" type="text" id="light_system"
+                                                   name="light_system"
+                                                   placeholder="Hệ thống đèn"  maxlength="20">
+                                        @endif
+
                                     </div>
 
                                 </div>
@@ -222,9 +315,13 @@
                                         <label for="exampleFormControlInput1 uname">Lưu Lượng Người: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="flow" name="flow"
-                                               placeholder="Lưu Lượng Người"  maxlength="20">
-                                        <div class="invalid-feedback">Lưu Lượng Người không được để trống</div>
+                                        @if(!empty(Session::get('product')->flow))
+                                            <input class="form-customer-input" value="{{Session::get('product')->flow}}" type="text" id="flow" name="flow"
+                                                   placeholder="Lưu Lượng Người"  maxlength="20">
+                                        @else
+                                            <input class="form-customer-input" type="text" id="flow" name="flow"
+                                                   placeholder="Lưu Lượng Người"  maxlength="20">
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -238,9 +335,16 @@
                                         <label for="exampleFormControlInput1 uname">Giá Đèn: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" maxlength="20" data-type="currency" type="text" id="v_light"
-                                               name="v_light"
-                                               placeholder="Giá Đèn">
+                                        @if(!empty(Session::get('product')->v_light))
+                                            <input class="form-customer-input" value="{{Session::get('product')->v_light}}" maxlength="20" data-type="currency" type="text" id="v_light"
+                                                   name="v_light"
+                                                   placeholder="Giá Đèn">
+                                        @else
+                                            <input class="form-customer-input" maxlength="20" data-type="currency" type="text" id="v_light"
+                                                   name="v_light"
+                                                   placeholder="Giá Đèn">
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -250,9 +354,15 @@
                                         <label for="exampleFormControlInput1 uname">Điểm Escom: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="escom" name="escom"
-                                               placeholder="Điểm Escom" >
-                                        <div class="invalid-feedback">Điểm Escom không được để trống</div>
+                                        @if(!empty(Session::get('product')->escom))
+                                            <input class="form-customer-input" value="{{Session::get('product')->escom}}" type="text" id="escom" name="escom"
+                                                   placeholder="Điểm Escom" >
+                                        @else
+                                            <input class="form-customer-input" type="text" id="escom" name="escom"
+                                                   placeholder="Điểm Escom" >
+                                        @endif
+
+                                    </div>
                                     </div>
 
                                 </div>
@@ -262,16 +372,22 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-12">
                                         <label for="exampleFormControlInput1 uname">Giá Năm(USD): </label>
                                     </div>
                                     <div class="col-md-9 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="gianam" data-type="currency"
-                                               pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" name="gianam"
-                                               placeholder="Giá Năm">
+                                        @if(!empty(Session::get('product')->gianam))
+                                            <input class="form-customer-input" type="text"  value="{{Session::get('product')->gianam}}" id="gianam" data-type="currency"
+                                                   pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" name="gianam"
+                                                   placeholder="Giá Năm">
+                                        @else
+                                            <input class="form-customer-input" type="text" id="gianam" data-type="currency"
+                                                   pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" name="gianam"
+                                                   placeholder="Giá Năm">
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -286,9 +402,16 @@
                                         <label for="exampleFormControlInput1 uname">Ghi Chú: </label>
                                     </div>
                                     <div class="col-md-9 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="note_banner"
-                                               name="note_banner"
-                                               placeholder="Ghi Chú">
+                                        @if(!empty(Session::get('product')->note_banner))
+                                            <input class="form-customer-input" type="text" id="note_banner" value="{{Session::get('product')->note_banner}}"
+                                                   name="note_banner"
+                                                   placeholder="Ghi Chú">
+                                        @else
+                                            <input class="form-customer-input" type="text" id="note_banner"
+                                                   name="note_banner"
+                                                   placeholder="Ghi Chú">
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -302,9 +425,16 @@
                                         <label for="exampleFormControlInput1 uname">Nội Dung Quảng Cáo Hiện Tại: </label>
                                     </div>
                                     <div class="col-md-9 col-sm-12">
-                                        <input class="form-customer-input" type="text" id="content"
-                                               name="content"
-                                               placeholder="Nội Dung Quảng Cáo Hiện Tại">
+                                        @if(!empty(Session::get('product')->content))
+                                            <input class="form-customer-input" type="text" id="content" value="{{Session::get('product')->content}}"
+                                                   name="content"
+                                                   placeholder="Nội Dung Quảng Cáo Hiện Tại">
+                                        @else
+                                            <input class="form-customer-input" type="text" id="content"
+                                                   name="content"
+                                                   placeholder="Nội Dung Quảng Cáo Hiện Tại">
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>
@@ -312,7 +442,9 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Đặc Điểm:</label>
-                        <textarea class="form-control text-aria" id="dac_diem" name="dac_diem" rows="5"></textarea>
+                            <textarea class="form-control text-aria" id="dac_diem" name="dac_diem" rows="5"></textarea>
+
+
                     </div>
 
                     <div class="form-group">
@@ -360,7 +492,15 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">
+                        <button type="submit" name="add_product" value="save_copy" class="au-btn au-btn-icon au-btn--blue float-right m-b-25 m-r-10">
+                            <i class="zmdi zmdi-plus"></i>Lưu và Copy
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" name="add_product" value="save_new" class="au-btn au-btn-icon au-btn--blue float-right m-b-25 m-r-10">
+                            <i class="zmdi zmdi-plus"></i>Lưu và Thêm mới
+                        </button>
+                        <button type="submit" name="add_product" value="save" class="au-btn au-btn-icon au-btn--blue float-right m-b-25 m-r-10">
                             <i class="zmdi zmdi-plus"></i>Lưu
                         </button>
                     </div>

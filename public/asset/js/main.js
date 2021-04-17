@@ -1941,6 +1941,9 @@ function getCustomer() {
                     $('#phone_customer').val(ele.phone_customer);
                     $('#name_contact').val(ele.phone_customer);
                     $('#contact_name').val(ele.contact_name);
+
+
+
                 });
             } else if (datas.length == 0) {
                 $('#id_nguoncustomer').val('');
@@ -1975,7 +1978,6 @@ $(document).ready(function () {
         'hideMethod': 'fadeOut',
     }
 });
-
 function getTong() {
     var gia = $('#value_contract').val();
     gia = gia.split('$').join("");
@@ -2033,84 +2035,46 @@ product()
 
 function product() {
     var url = $('#domain').attr('href');
+       var data = $('#_name_banner').val();
+        $.ajax({
+            url: url + '/api/contract/product/' + data,
+            async: false,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*'
+            },
+            method: 'POST',
+            success: function (result) {
+                var datas = JSON.parse(result).banner;
+                if (datas.length > 0) {
+                    $.each(datas, function (index, ele) {
+                        $('#id_typebanner').append(`<option value='${ele.id_typebanner}' selected>${ele.name_type}</option>`);
+                        $('#id_system').val(ele.id_system)
+                        $('#id_banner').append(`<option value='${ele.id_banner}' selected>${ele.id_banner}</option>`)
+                        $('#dien_tích').val(ele.dien_tich);
+                        $('#tinh').val(ele.tinh);
+                        getQuan($('#tinh'))
+                        $('#quan').val(ele.quan);
+                        $('#banner_adress').val(ele.banner_adress);
+                        $('#size_banner').val(ele.size_banner);
+                        $('#gianam').val(ele.gianam);
+                    })
+                } else if (datas.length == 0) {
+                    $('#id_nguoncustomer').val('');
+                    $('#adress_customer').val('');
+                    $('#phone_customer').val('');
+                    $('#mst').val('');
+                    $('#contact_name').val('');
+                    $('#position_customer').val('');
+                    $('#size_banner').val('');
+                    $('#gianam').val('');
+                }
 
-    if($('#id_banner').val()!= ""){
-        var data = $('#id_banner').val();
-    }else if($('#_name_banner')!=""){
-        data = $('#_name_banner').val();
-    }
-    $('#image-input').children().remove();
-    $.ajax({
-        url: url + '/api/contract/product/' + data,
-        async: false,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': '*'
-        },
-        method: 'POST',
-        success: function (result) {
-            var datas = JSON.parse(result).banner;
-            if (datas.length > 0) {
-                $.each(datas, function (index, ele) {
-                    $('#id_typebanner').append(`<option value='${ele.id_typebanner}' selected>${ele.name_type}</option>`);
-                    $('#id_system').val(ele.id_system)
-                    $('#_name_banner').append(`<option value='${ele._name_banner}' selected>${ele._name_banner}</option>`)
-                    $('#dien_tích').val(ele.dien_tich);
-                    $('#tinh').val(ele.tinh);
-                    getQuan($('#tinh'))
-                    $('#quan').val(ele.quan);
 
-                    $('#banner_adress').val(ele.banner_adress);
-                    // $.ajax({
-                    //     url: 'https://api.mysupership.vn/v1/partner/areas/district?province=' + $('#tinh').val(),
-                    //     async: false,
-                    //     success: function (result) {
-                    //         var quan = result.results;
-                    //         var id_quan = $('#quan').val()
-                    //         $.each(quan, function (index, element) {
-                    //             if (id_quan == element.code) {
-                    //                 $('#quan').append(`<option value='${element.code}' selected>${element.name}</option>`);
-                    //                 return false;
-                    //             }
-                    //         })
-                    //     }
-                    // })
-                    // $.ajax({
-                    //     url: url + '/api/contract/photo/' + data,
-                    //     async: false,
-                    //     method: "POST",
-                    //     success: function (result) {
-                    //         var photo = JSON.parse(result).photo;
-                    //         if (photo !== "") {
-                    //             $.each(photo, function (index, element) {
-                    //                 $('#image-input').append(`
-                    //                                 <div class="polaroid">
-                    //                                     <img src="${url}/public/storage/content/${element._name_photo}" id="img-check" alt="${element._name_photo}" style="width:100%">
-                    //                                     <div class="container container-image-text">
-                    //                                     <p>1-10.jpg</p></div>
-                    //                                 </div>
-                    //
-                    //                             </div>`);
-                    //
-                    //             })
-                    //         }
-                    //
-                    //     }
-                    // })
-                })
-            } else if (datas.length == 0) {
-                $('#id_nguoncustomer').val('');
-                $('#adress_customer').val('');
-                $('#phone_customer').val('');
-                $('#mst').val('');
-                $('#contact_name').val('');
-                $('#position_customer').val('');
             }
+        })
+    }
 
-
-        }
-    })
-}
 
 
 Ratio();
@@ -2254,13 +2218,18 @@ function getPhoto() {
             let preloaded2 =[];
             $.each(datas,function (index,elements) {
                 preloaded1.push(
-                    {id: elements.id , src: url+'/public/storage/content/'+elements._name_photo}
+                    {id: elements._name_photo , src: url+'/public/storage/content/'+elements._name_photo}
                 );
-                preloaded2.push(
-                    {id: elements.id , src: url+'/public/storage/content/'+elements._name_map}
-                );
+                if(typeof elements._name_map !== 'undefined'){
+                    preloaded2.push(
+                        {id: elements._name_map , src: url+'/public/storage/content/'+elements._name_map}
+                    );
+                }
+
                 $('#views-photo').append(`
                     <div class="col-md-3 col-sm-12">
+                                        <input type="hidden" value="${elements.id_photo}" name="id_photo[]"
+                                           >
                                     <input class="form-customer-input" type="text" value="${elements.views}" name="views[]"
                                            placeholder="Hướng Nhìn ${i++}">
                                 </div>
@@ -2269,15 +2238,15 @@ function getPhoto() {
             $('.input-images-2').imageUploader({
                 preloaded: preloaded1,
                 imagesInputName: 'files',
-                preloadedInputName: 'old',
+                preloadedInputName: 'files',
                 maxSize: 2 * 1024 * 1024,
-                maxFiles: 10
+                maxFiles: 4
             });
-            var preloaded = preloaded2.slice(0,1);
+            var preloaded = preloaded2.splice(0,3);
             $('.input-images-map-2').imageUploader({
-                preloaded: preloaded,
+                preloaded: preloaded2,
                 imagesInputName: 'maps',
-                preloadedInputName: 'old',
+                preloadedInputName: 'maps',
                 maxSize: 2 * 1024 * 1024,
                 maxFiles: 1
             });
@@ -3102,6 +3071,164 @@ function getNumber(element) {
     $(element).val(number);
 }
 
+$(".hover").mouseleave(
+    function() {
+        $(this).removeClass("hover");
+    }
+);
 
 
+$('#more_product').on('click',function () {
+    var url = $('#domain').attr('href');
+    data = $('#_name_banner').val();
+    $.ajax({
+        url: url + '/api/contract/product-all',
+        async: false,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*'
+        },
+        method: 'POST',
+        success: function (result) {
+            var datas = JSON.parse(result).banner;
+            if (datas.length > 0) {
 
+                    $('#form-product').append(`
+                    <fieldset class="border-text border-text-product">
+                    <legend class='text-left'>Thông Tin Sản Phẩm</legend>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12">
+                                <label for="exampleFormControlSelect1">Tên Sản Phẩm</label>
+                            </div>
+                            <div class="col-md-9 col-sm-12">
+                                <select class="form-control chosen-select select-more"
+                                id="_name_banner" name="_name_banner" onchange="product()">
+                                    <option value="">--Chọn Pano--</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Mã Sản Phẩm</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="id_banner" name="id_banner">
+                                            <option value="">--Chọn Mã Pano--</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="id_typebanner" name="id_typebanner">
+                                            <option value="">--Loại Hình--</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12">
+                                <label for="exampleFormControlInput1 uname">Địa Chỉ</label>
+                            </div>
+                            <div class="col-md-9 col-sm-12">
+                                <input type="text" class="form-control" id="banner_adress"
+                                       name="banner_adress"
+                                       placeholder="Địa Chỉ Pano" required>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Tỉnh/Thành Phố</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
+                                            <option value="">--Tỉnh/Thành Phố--</option>
+                                            @foreach($provinces as $province)
+                                                <option value="{{$province -> _code}}">{{$province -> _name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Quận/Huyện</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="quan" name="quan">
+                                            <option value="">--Quận/Huyện--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Kết Cấu</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" class="form-control" value="" id="id_system" name="id_system"
+                                               placeholder="Kết Cấu" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Kích Thước</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" class="form-control" value="" id="size_banner" name="size_banner"
+                                               placeholder="Kích Thước" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12">
+                                <label for="exampleFormControlInput1 uname">Giá Năm</label>
+                            </div>
+                            <div class="col-md-9 col-sm-12">
+                                <input type="text" class="form-control" id="gianam" name="gianam"
+                                       placeholder="Giá Năm" value="" required>
+                                <div class="invalid-feedback">Địa chỉ không được để trống</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+        `)
+                $.each(datas, function (index, ele) {
+                    $('.select-more').append(`<option value="${ele.id_banner}">${ele._name_banner}</option>`)
+                })
+
+            }
+        }
+})
+
+})
+getTong()
+
+$('#close-deleteContract').on('click',function () {
+    $('#form_update').attr('readonly', 'readonly');
+})

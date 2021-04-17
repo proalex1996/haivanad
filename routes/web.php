@@ -57,8 +57,7 @@ Route::group(['prefix' => 'contract'], function () {
         Route::post('/import-contract', 'ContractController@import');
         Route::get('/download-exmple', 'ContractController@dowloadExample');
         Route::get('/setpay1/{id_contract}', 'ContractController@setPay1');
-        Route::get('/setpay2/{id_contract}', 'ContractController@setPay2');
-
+        Route::get('/setpay2/{id_contract}/', 'ContractController@setPay2');
 
     });
 });
