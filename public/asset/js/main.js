@@ -1689,6 +1689,24 @@ $('#content_contract').change(function () {
         $(this).next('div').show();
     }
 });
+$('#contented').change(function () {
+
+    let listValidFileType = [
+        'docx',
+        'doc',
+        'pdf'
+    ];
+
+    var i = $(this).prev('label').clone();
+    var file = $('#contented')[0].files[0].name;
+    $(this).prev('label').text(file);
+
+    let fileType = file.slice((file.lastIndexOf(".") - 1 >>> 0) + 2);
+
+    if (listValidFileType.indexOf(fileType) < 0) {
+        $(this).next('div').show();
+    }
+});
 
 (function () {
     'use strict';
@@ -2216,17 +2234,17 @@ function getPhoto() {
             var datas = JSON.parse(result).photo
             let preloaded1 = [];
             let preloaded2 =[];
-            $.each(datas,function (index,elements) {
-                preloaded1.push(
-                    {id: elements._name_photo , src: url+'/public/storage/content/'+elements._name_photo}
-                );
-                if(typeof elements._name_map !== 'undefined'){
-                    preloaded2.push(
-                        {id: elements._name_map , src: url+'/public/storage/content/'+elements._name_map}
+            if(datas != ""){
+                $.each(datas,function (index,elements) {
+                    preloaded1.push(
+                        {id: elements._name_photo , src: url+'/public/storage/content/'+elements._name_photo}
                     );
-                }
-
-                $('#views-photo').append(`
+                    if(typeof elements._name_map !== 'undefined'){
+                        preloaded2.push(
+                            {id: elements._name_map , src: url+'/public/storage/content/'+elements._name_map}
+                        );
+                    }
+                    $('#views-photo').append(`
                     <div class="col-md-3 col-sm-12">
                                         <input type="hidden" value="${elements.id_photo}" name="id_photo[]"
                                            >
@@ -2234,7 +2252,21 @@ function getPhoto() {
                                            placeholder="Hướng Nhìn ${i++}">
                                 </div>
                 `)
-            })
+                })
+            }else {
+                for(var j = 1;j<5;j++){
+                    $('#views-photo').append(`
+                    <div class="col-md-3 col-sm-12">
+                                        <input type="hidden" value="" name="id_photo[]"
+                                           >
+                                    <input class="form-customer-input" type="text" value="" name="views[]"
+                                           placeholder="Hướng Nhìn ${j}">
+                                </div>
+                `)
+                }
+               
+            }
+
             $('.input-images-2').imageUploader({
                 preloaded: preloaded1,
                 imagesInputName: 'files',
@@ -3077,7 +3109,7 @@ $(".hover").mouseleave(
     }
 );
 
-
+var i =1;
 $('#more_product').on('click',function () {
     var url = $('#domain').attr('href');
     data = $('#_name_banner').val();
@@ -3092,7 +3124,6 @@ $('#more_product').on('click',function () {
         success: function (result) {
             var datas = JSON.parse(result).banner;
             if (datas.length > 0) {
-
                     $('#form-product').append(`
                     <fieldset class="border-text border-text-product">
                     <legend class='text-left'>Thông Tin Sản Phẩm</legend>
@@ -3103,7 +3134,7 @@ $('#more_product').on('click',function () {
                             </div>
                             <div class="col-md-9 col-sm-12">
                                 <select class="form-control chosen-select select-more"
-                                id="_name_banner" name="_name_banner" onchange="product()">
+                                id="_name_banner_${i}" name="_name_banner_${i}[]" onchange="product()">
                                     <option value="">--Chọn Pano--</option>
 
                                 </select>
@@ -3116,7 +3147,7 @@ $('#more_product').on('click',function () {
                                         <label for="exampleFormControlSelect1">Mã Sản Phẩm</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_banner" name="id_banner">
+                                        <select class="form-control" id="id_banner_${i}" name="id_banner_${i}[]">
                                             <option value="">--Chọn Mã Pano--</option>
                                         </select>
                                     </div>
@@ -3129,7 +3160,7 @@ $('#more_product').on('click',function () {
                                         <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_typebanner" name="id_typebanner">
+                                        <select class="form-control" id="id_typebanner_${i}" name="id_typebanner_${i}[]">
                                             <option value="">--Loại Hình--</option>
                                         </select>
                                     </div>
@@ -3144,7 +3175,7 @@ $('#more_product').on('click',function () {
                             </div>
                             <div class="col-md-9 col-sm-12">
                                 <input type="text" class="form-control" id="banner_adress"
-                                       name="banner_adress"
+                                       name="banner_adress_${i}[]"
                                        placeholder="Địa Chỉ Pano" required>
                             </div>
                         </div>
@@ -3157,7 +3188,7 @@ $('#more_product').on('click',function () {
                                         <label for="exampleFormControlSelect1">Tỉnh/Thành Phố</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
+                                        <select class="form-control" id="tinh_${i}" name="tinh_${i}[]" onchange="getQuan(this)">
                                             <option value="">--Tỉnh/Thành Phố--</option>
                                             @foreach($provinces as $province)
                                                 <option value="{{$province -> _code}}">{{$province -> _name}}</option>
@@ -3173,7 +3204,7 @@ $('#more_product').on('click',function () {
                                         <label for="exampleFormControlSelect1">Quận/Huyện</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="quan" name="quan">
+                                        <select class="form-control" id="quan_${i}" name="quan_${i}[]">
                                             <option value="">--Quận/Huyện--</option>
                                         </select>
                                     </div>
@@ -3187,7 +3218,7 @@ $('#more_product').on('click',function () {
                                         <label for="exampleFormControlSelect1">Kết Cấu</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" value="" id="id_system" name="id_system"
+                                        <input type="text" class="form-control" value="" id="id_system_${i}" name="id_system_${i}[]"
                                                placeholder="Kết Cấu" required>
                                     </div>
                                 </div>
@@ -3198,7 +3229,7 @@ $('#more_product').on('click',function () {
                                         <label for="exampleFormControlSelect1">Kích Thước</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" value="" id="size_banner" name="size_banner"
+                                        <input type="text" class="form-control" value="" id="size_banner_${i}" name="size_banner_${i}[]"
                                                placeholder="Kích Thước" required>
                                     </div>
                                 </div>
@@ -3209,7 +3240,7 @@ $('#more_product').on('click',function () {
                                 <label for="exampleFormControlInput1 uname">Giá Năm</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
-                                <input type="text" class="form-control" id="gianam" name="gianam"
+                                <input type="text" class="form-control" id="gianam_${i}" name="gianam_${i}[]"
                                        placeholder="Giá Năm" value="" required>
                                 <div class="invalid-feedback">Địa chỉ không được để trống</div>
                             </div>
@@ -3221,14 +3252,44 @@ $('#more_product').on('click',function () {
                 $.each(datas, function (index, ele) {
                     $('.select-more').append(`<option value="${ele.id_banner}">${ele._name_banner}</option>`)
                 })
-
             }
         }
 })
-
+i++;
 })
 getTong()
 
 $('#close-deleteContract').on('click',function () {
-    $('#form_update').attr('readonly', 'readonly');
+    var url = $('#domain').attr('href');
+    var id =  $('#id_contract').val();
+    $.ajax({
+        method: 'POST',
+        url: url + '/api/contract/close',
+        data: {id: id},
+        async: false,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*'
+        },
+        success: function (result) {
+                location.reload()
+        }
+    })
+})
+$('#openmode-deleteContract').on('click',function () {
+    var url = $('#domain').attr('href');
+    var id =  $('#id_contract').val();
+    $.ajax({
+        method: 'POST',
+        url: url + '/api/contract/open',
+        data: {id: id},
+        async: false,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*'
+        },
+        success: function (result) {
+            location.reload()
+        }
+    })
 })
