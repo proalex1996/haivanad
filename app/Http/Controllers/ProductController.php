@@ -152,7 +152,7 @@ class ProductController extends Controller
             return redirect()->back()->with('product', $product);
         }
         if ($request->add_product == 'save_new') {
-            return redirect()->action('ProductController@update');
+            return redirect()->action('ProductController@addProduct');
         }
         if ($request->add_product == 'save') {
             return redirect()->action('ProductController@getIndex');
