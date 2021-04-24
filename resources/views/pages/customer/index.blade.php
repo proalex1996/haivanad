@@ -93,7 +93,9 @@
                     <table id="" class="table table-borderless table-data3">
                         <thead>
                         <tr>
-                            <th width="10%">STT</th>
+                            <th><input type="checkbox" id="check-all" name="title" onchange="getCheckedBox()" onclick="checkAll()"></th>
+
+                            {{--                            <th width="10%">STT</th>--}}
                             <th width="10%">Mã Khách Hàng</th>
                             <th width="20%">Tên Khách Hàng</th>
                             <th width="25%">Địa Chỉ</th>
@@ -105,16 +107,18 @@
                         <tbody>
                         @foreach($customers as $customer)
                                 <tr id ="redirect_{{$customer->id}}">
-                                    <td><a class="dropdown-toggle" data-target="{{$customer->id}}" data-toggle="dropdown" aria-haspopup="true"
-                                           aria-expanded="false" id="dropdownMenuLink"> {{$customer->id}}</a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item"
-                                               href="{{\Illuminate\Support\Facades\URL::to('customer/update')."/".$customer->id}}">Sửa
-                                                thông tin khách hàng</a>
-
-                                        </div>
-                                    </td>
-                                    <td>{{$customer->customer_id}}</td>
+                                    <td><input type="checkbox" id="check-box" data-target="{{$customer->id}}" name="check_box[]" onchange="getCheckedBox()" value="{{$customer->customer_id}}"
+                                               class="display-input m-r-5"></td>
+                                    {{--                                           aria-expanded="false" id="dropdownMenuLink"> {{$customer->id}}</a>
+                                    {{--                                    <td><a class="dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true"--}}
+{{--                                           aria-expanded="false" id="dropdownMenuLink"> {{$customer->id}}</a>--}}
+{{--                                        <div class="dropdown-menu">--}}
+{{--                                            <a class="dropdown-item"--}}
+{{--                                               href="{{\Illuminate\Support\Facades\URL::to('customer/update')."/".$customer->id}}">Sửa--}}
+{{--                                                thông tin khách hàng</a>--}}
+{{--                                        </div>--}}
+{{--                                    </td>--}}
+                                    <td class="id_customer" >{{$customer->customer_id}}</td>
                                     <td>{{$customer->name_customer}}</td>
                                     <td>{{$customer->adress_customer}}</td>
                                     <td>{{$customer->mst}}</td>
@@ -124,6 +128,8 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <div class="form-group m-t-10" id="count_customer">
+                    </div>
                 </div>
             </div>
         </div>

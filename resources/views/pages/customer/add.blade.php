@@ -24,7 +24,7 @@
                                             <label for="exampleFormControlInput1 uname">Mã Khách Hàng:</label>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <input type="text" class="form-customer-input" value="" id="id_customers" name="customer_id"
+                                            <input type="text" class="form-customer-input" value="{{$code}}" id="id_customer" name="customer_id"
                                                    placeholder="Mã Khách Hàng" size="20" readonly>
                                         </div>
 
@@ -55,6 +55,21 @@
                                             <input type="text" class="form-customer-input" id="mst" name="mst"
                                                    placeholder="Mã Số Thuế" required>
                                             <div class="invalid-feedback">Mã Khách hàng không được để trống</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <label for="exampleFormControlSelect1" style="width: 340px;">Trạng Thái</label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <select class="form-control" id="status" name="status_customer">
+                                                @foreach($statuss as $status)
+                                                    <option value="{{$status->id_status}}">{{$status->status}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
 
                                     </div>
@@ -194,25 +209,6 @@
                             </div>
 
 
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1" style="width: 340px;">Trạng Thái</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="status" name="status_customer">
-                                            @foreach($statuss as $status)
-                                                <option value="{{$status->id_status}}">{{$status->status}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                </div>
-                            </div>
                         </div>
                     </div>
                     </div>

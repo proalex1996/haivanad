@@ -19,7 +19,7 @@
                                 </div>
                                 <div class="col-xl-6 col-sm-12">
                                     <input type="text" class="form-control" value="{{$contract->id_contract}}" id="id_contract" name="id_contract"
-                                           placeholder="Tên Hợp đồng" required>
+                                           placeholder="Tên Hợp đồng" required {{$contract->readonly}}>
                                     <div class="invalid-feedback">Tên Hợp đồng không được để trống</div>
                                 </div>
                             </div>
@@ -30,10 +30,10 @@
                                     <label for="exampleFormControlSelect2">Nhân Viên Phụ Trách</label>
                                 </div>
                                 <div class="col-xl-5 col-sm-12">
-                                    <select class="form-control " id="exampleFormControlSelect2" name="id_staff" required>
+                                    <select class="form-control " id="exampleFormControlSelect2" name="id_staff" required required {{$contract->readonly}}>
                                         @foreach($staffs as $staff)
                                             @if ($staff->id_staff == $contract ->id_staff)
-                                                <option value="{{$staff->id_staff}}" selected>{{$staff->name}}</option>
+                                                <option value="{{$staff->id_staff}}" selected readonly>{{$staff->name}}</option>
                                             @else
                                                 <option value="{{$staff->id_staff}}">{{$staff->name}}</option>
                                             @endif
@@ -48,7 +48,7 @@
                                     <label for="exampleFormControlSelect1">Loại hợp đồng</label>
                                 </div>
                                 <div class="col-xl-6 col-sm-12">
-                                    <select class="form-control" id="kind_name" name="kind_name">
+                                    <select class="form-control" id="kind_name" name="kind" required {{$contract->readonly}}>
                                         @foreach($kind_contract as $kind)
                                             @if($kind->id_contract == $contract ->kind)
                                             <option value="{{$kind->id_contract}}" selected>{{$kind->name_kind}}</option>
@@ -72,8 +72,8 @@
                                         <label for="exampleFormControlSelect1">Tên khách hàng</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_customer" name="name_customer"
-                                                onchange="getCustomer()">
+                                        <select class="form-control chosen-select" id="id_customer" name="name_customer"
+                                                onchange="getCustomer()" required {{$contract->readonly}}>
                                             @foreach($customers as $customer)
                                                 @if($customer->customer_id == $contract->id_customer)
                                                 <option value="{{$customer->customer_id}}" selected>{{$customer->name_customer}}</option>
@@ -92,9 +92,7 @@
                                         <label for="exampleFormControlSelect1">Nguồn Khách Hàng</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_nguoncustomer" name="id_nguoncustomer">
-                                            <select class="form-control" id="id_nguoncustomer" name="id_nguoncustomer">
-                                            </select>
+                                        <select class="form-control" id="id_nguoncustomer" name="id_nguoncustomer" required {{$contract->readonly}}>
 
                                         </select>
                                     </div>
@@ -103,7 +101,16 @@
 
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12">
+                                <label for="exampleFormControlInput1 uname">Địa Chỉ</label>
+                            </div>
+                            <div class="col-md-9 col-sm-12">
+                                <input type="text" class="form-control" id="adress_customer" name="adress_customer"
+                                       placeholder="Địa Chỉ" value="" required required {{$contract->readonly}}>
+                                <div class="invalid-feedback">Địa chỉ không được để trống</div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
@@ -112,7 +119,7 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-control" value="" id="mst" name="mst"
-                                               placeholder="Mã Số Thuế" required>
+                                               placeholder="Mã Số Thuế" required required {{$contract->readonly}}>
                                         <div class="invalid-feedback">MST không được để trống</div>
                                     </div>
 
@@ -128,7 +135,7 @@
                                         <input type="text" class="form-control" id="phone_customer"
                                                name="phone_customer"
                                                placeholder="Số Điện Thoại"
-                                               maxlength="10" value="" required>
+                                               maxlength="10" value="" required required {{$contract->readonly}}>
                                         <div class="invalid-feedback">Số điện thoại không được để trống</div>
                                     </div>
                                 </div>
@@ -145,7 +152,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-control" value="" id="contact_name"
                                                name="contact_name"
-                                               placeholder="Tên Người Đại Diện" required>
+                                               placeholder="Tên Người Đại Diện" required required {{$contract->readonly}}>
                                         <div class="invalid-feedback">Đại Diện không được để trống</div>
                                     </div>
 
@@ -157,7 +164,7 @@
                                         <label for="exampleFormControlSelect1" style="width: 116px;">Chức Vụ</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="position_customer" name="position_customer">
+                                        <select class="form-control" id="position_customer" name="position_customer" required {{$contract->readonly}}>
                                             <option value="">--Chức Vụ--</option>
                                         </select>
                                     </div>
@@ -167,16 +174,7 @@
                             </div>
 
                         </div>
-                        <div class="row">
-                            <div class="col-md-3 col-sm-12">
-                                <label for="exampleFormControlInput1 uname">Địa Chỉ</label>
-                            </div>
-                            <div class="col-md-9 col-sm-12">
-                                <input type="text" class="form-control" id="adress_customer" name="adress_customer"
-                                       placeholder="Địa Chỉ" value="" required>
-                                <div class="invalid-feedback">Địa chỉ không được để trống</div>
-                            </div>
-                        </div>
+
                     </div>
 
                 </fieldset>
@@ -184,14 +182,31 @@
                     <legend class='text-left'>Thông Tin Sản Phẩm</legend>
                     <div class="container-fluid">
                         <div class="row">
+                            <div class="col-md-3 col-sm-12">
+                                <label for="exampleFormControlSelect1">Vị Trí</label>
+                            </div>
+                            <div class="col-md-9 col-sm-12">
+                                <select class="form-control chosen-select" id="_name_banner" name="_name_banner"
+                                        onchange="product()" required {{$contract->readonly}}>
+                                    @foreach($banners as $banner)
+                                        @if ($banner->id_banner == $contract->id_banner)
+                                            <option value="{{$banner->id_banner}}" selected>{{$banner->_name_banner}}</option>
+                                        @else
+                                            <option value="{{$banner->id_banner}}">{{$banner->_name_banner}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1" style="width: 150px;">Mã Sản Phẩm</label>
+                                        <label for="exampleFormControlSelect1">Mã Sản Phẩm</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_banner" name="id_banner"
-                                                onchange="product()">
+                                        <select class="form-control" id="id_banner" name="id_banner" required {{$contract->readonly}}
+                                                >
                                             @foreach($banners as $banner)
                                                   @if ($banner->id_banner == $contract->id_banner)
                                                         <option value="{{$banner->id_banner}}" selected>{{$banner->id_banner}}</option>
@@ -210,7 +225,7 @@
                                         <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_typebanner" name="id_typebanner">
+                                        <select class="form-control" id="id_typebanner" name="id_typebanner" required {{$contract->readonly}}>
                                             <option value="">--Loại Hình--</option>
                                         </select>
                                     </div>
@@ -220,27 +235,13 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Kết Cấu</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" value="" id="id_system" name="id_system"
-                                               placeholder="Kết Cấu" required>
-                                    </div>
-                                </div>
+                            <div class="col-md-3 col-sm-12">
+                                <label for="exampleFormControlInput1 uname">Địa Chỉ</label>
                             </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Vị Trí</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" value="" id="location" name="location"
-                                               placeholder="Vị Trí" required>
-                                    </div>
-                                </div>
+                            <div class="col-md-9 col-sm-12">
+                                <input type="text" class="form-control" id="banner_adress"
+                                       name="banner_adress"
+                                       placeholder="Địa Chỉ Pano" required required {{$contract->readonly}}>
                             </div>
                         </div>
                         <div class="row">
@@ -250,7 +251,7 @@
                                         <label for="exampleFormControlSelect1">Tỉnh/Thành Phố</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
+                                        <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)" required {{$contract->readonly}}>
                                             <option value="">--Tỉnh/Thành Phố--</option>
                                             @foreach($provinces as $province)
                                                 <option value="{{$province -> _code}}">{{$province -> _name}}</option>
@@ -266,7 +267,7 @@
                                         <label for="exampleFormControlSelect1">Quận/Huyện</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="quan" name="quan">
+                                        <select class="form-control" id="quan" name="quan" required {{$contract->readonly}}>
                                             <option value="">--Quận/Huyện--</option>
                                         </select>
                                     </div>
@@ -274,24 +275,39 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Kết Cấu</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" class="form-control" value="" id="id_system" name="id_system"
+                                               placeholder="Kết Cấu" required {{$contract->readonly}}>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
                             <div class="col-md-3 col-sm-12">
-                                <label for="exampleFormControlInput1 uname">Địa Chỉ</label>
+                                <label for="exampleFormControlInput1 uname">Giá Năm</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
-                                <input type="text" class="form-control" id="banner_adress"
-                                       name="banner_adress"
-                                       placeholder="Địa Chỉ Pano" required>
+                                <input type="text" class="form-control" id="gianam" name="gianam"
+                                       placeholder="Giá Năm" value="" required {{$contract->readonly}}>
+                                <div class="invalid-feedback">Địa chỉ không được để trống</div>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Hình Ảnh:</label>
-                            <div class="row" id="image-input">
+
+{{--                        <div class="form-group">--}}
+{{--                            <label for="exampleFormControlSelect1">Hình Ảnh:</label>--}}
+{{--                            <div class="row" id="image-input">--}}
 
 
-                            </div>
+{{--                            </div>--}}
 
-                        </div>
+{{--                        </div>--}}
                     </div>
 
                 </fieldset>
@@ -302,12 +318,41 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
+                                        <label for="dateofbirth">Ngày bắt đầu:</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-control" value="{{$contract->date_start}}" type="date" name="date_start" id="dateofbirth"
+                                               required {{$contract->readonly}}>
+                                        <div class="invalid-feedback m-l-20">Vui lòng nhập ngày bắt đầu hợp đồng</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="dateofbirth">Ngày kết thúc</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-control" value="{{$contract->date_end}}" type="date" name="date_end" id="dateofbirth"
+                                               required {{$contract->readonly}} >
+                                        <div class="invalid-feedback m-l-20">Vui lòng nhập ngày kết thúc hợp đồng</div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1">Giá trị hợp đồng</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="number" class="form-control" id="value_contract"
+                                        <input type="text" class="form-control" id="value_contract"
                                                name="value_contract"
-                                               placeholder="Giá trị hợp đồng" onchange="getTong()" value="{{$contract->value_contract}}" required>
+                                               placeholder="Giá trị hợp đồng" data-type="currency" onchange="getTong()" value="{{$contract->value_contract}}" required {{$contract->readonly}}>
                                         <div class="invalid-feedback m-l-20">Vui lòng nhập giá trị hợp đồng</div>
                                     </div>
 
@@ -321,7 +366,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <input type="number" class="form-control" onchange="getTong()" id="thue"
                                                name="thue"
-                                               placeholder="Thuế (%)" value="{{$contract->vat}}" required>
+                                               placeholder="Thuế (%)" value="10" readonly >
                                     </div>
 
                                 </div>
@@ -329,35 +374,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="dateofbirth">Ngày bắt đầu:</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input class="form-control" value="{{$contract->date_start}}" type="date" name="date_start" id="dateofbirth"
-                                               required>
-                                        <div class="invalid-feedback m-l-20">Vui lòng nhập ngày bắt đầu hợp đồng</div>
-                                    </div>
 
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="dateofbirth">Ngày kết thúc</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input class="form-control" value="{{$contract->date_end}}" type="date" name="date_end" id="dateofbirth"
-                                               required>
-                                        <div class="invalid-feedback m-l-20">Vui lòng nhập ngày kết thúc hợp đồng</div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
@@ -366,7 +383,7 @@
                                     </div>
                                     <div class="col-md-9 col-sm-12">
                                         <input type="number" class="form-control" value="" step="0.01" id="tong" name="tong"
-                                               placeholder="Tổng Giá Trị hợp Đồng">
+                                               placeholder="Tổng Giá Trị hợp Đồng" readonly>
                                     </div>
 
                                 </div>
@@ -396,22 +413,22 @@
                                 <tbody id="idBodyPayment">
                                     <tr class="idTrPayment">
                                     <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
-                                               class="display-input m-r-5"></td>
-                                    <td><input type="text" class="display-input form-control payment_period" data-target="{{$contract->id_contract}}" id="payment_period" name="payment_period[]" required>
+                                               class="display-input m-r-5" {{$contract->readonly}}></td>
+                                    <td><input type="text" class="display-input form-control payment_period" data-target="{{$contract->id_contract}}" id="payment_period" name="payment_period[]" required {{$contract->readonly}}>
                                     </td>
-                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onblur="setRatio(this)" name="ratio[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract" onblur="getRatio(this)" id="id_value_contract"
-                                               name="id_value_contract[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat" onblur="getRatio(this)" name="id_vat[]" required></td>
-                                    <td><input type="text" class="form-control display-input total" id="total" name="total_value[]" required></td>
-                                    <td><input type="date" class="form-control display-input" id="_pay_due" name="_pay_due[]" required> </td>
+                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onblur="setRatio(this)" name="ratio[]" required {{$contract->readonly}}></td>
+                                    <td><input type="text" class="form-control display-input id_value_contract" id="id_value_contract"
+                                               name="id_value_contract[]" readonly></td>
+                                    <td><input type="text" class="form-control display-input id_vat" value="10" placeholder="Thuế (%)" id="id_vat"  name="id_vat[]" readonly></td>
+                                    <td><input type="text" class="form-control display-input total" id="total" name="total_value[]" readonly></td>
+                                    <td><input type="date" class="form-control display-input" id="_pay_due" name="_pay_due[]" required {{$contract->readonly}}> </td>
                                     <td><a class="dropdown-toggle form-control display-input" data-toggle="dropdown" aria-haspopup="true"
-                                           aria-expanded="false" id="dropdownMenuLink"> Trạng Thái</a>
+                                           aria-expanded="false" id="dropdownMenuLink" {{$contract->readonly}}>Trạng Thái</a>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item"
-                                               href="{{url('/contract/setpay1/'.$contract->id_contract)}}">Đã Thanh Toán</a>
+                                               href="{{url('contract/setpay1/'.$contract->id_contract)}}" {{$contract->readonly}}>Đã Thanh Toán</a>
                                             <a  class="dropdown-item"
-                                               href="{{url('/contract/setpay2/'.$contract->id_contract)}}">Công Nợ</a>
+                                               href="{{url('contract/setpay2/'.$contract->id_contract)}}" {{$contract->readonly}}>Công Nợ</a>
                                         </div>
                                     </td>
                                 </tr>
@@ -420,27 +437,33 @@
                             </table>
                             <div class="form-group">
                                 <button type="button"  onclick="deleteRowPayment()" id="addPayment"
-                                        class="au-btn au-btn-icon au-btn--blue float-right m-b-20" style="color: #ffff;">
-                                    <i class="zmdi zmdi-plus"></i>Xóa Kỳ Thanh Toán
+                                        class="au-btn au-btn-icon au-btn--blue float-right m-b-20" style="color: #ffff;" {{$contract->readonly}}>
+                                    <i class="zmdi zmdi-plus" {{$contract->readonly}}></i>Xóa Kỳ Thanh Toán
                                 </button>
                                 <button type="button" id="addrowPayment"
                                         class="au-btn au-btn-icon au-btn--blue float-right m-b-20 m-r-20"
-                                        style="color: #ffff;">
+                                        style="color: #ffff;" {{$contract->readonly}}>
                                     <i class="zmdi zmdi-plus"></i>Thêm Kỳ Thanh Toán
                                 </button>
                             </div>
                         </div>
                     </fieldset>
-
                 </form>
-
-
+                <div class="form-group m-t-20">
+                    <label for="exampleFormControlSelect1">Hợp đồng đã ký</label>
+                    <div class="custom-file">
+                        <label class="custom-file-label" for="validatedCustomFile">{{$contract->contented}}</label>
+                        <input type="file" class="custom-file-input" accept=".doc,.docx,.pdf" id="contented"
+                               name="contented" {{$contract->readonly}}>
+                        <div class="invalid-feedback">Định dạng file phải là .doc, .docx, .pdf</div>
+                    </div>
+                </div>
                 <div class="form-group m-t-20">
                     <label for="exampleFormControlSelect1">Nội dung hợp đồng</label>
                     <div class="custom-file">
                         <label class="custom-file-label" for="validatedCustomFile">{{$contract->content}}</label>
                         <input type="file" class="custom-file-input" accept=".doc,.docx,.pdf" id="content_contract"
-                               name="content_contract" required>
+                               name="content_contract" {{$contract->readonly}}>
                         <div class="invalid-feedback">Định dạng file phải là .doc, .docx, .pdf</div>
                     </div>
                 </div>
@@ -448,181 +471,187 @@
                     <label for="exampleFormControlSelect1">Ghi Chú</label>
                     <div class="custom-file">
                         <input class="form-control" value="{{$contract->note_contract}}" type="text" name="note_contract"
-                              >
+                            {{$contract->readonly}} >
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">
-                        <i class="zmdi zmdi-plus"></i>Lưu
-                    </button>
+                    <div class="row">
+
+                            <div class="col-md-3">
+                                <a type="button" class="au-btn au-btn-icon au-btn--blue m-b-25" href="{{url('/contract')}}">
+                                    <i class="fas fa-undo"></i>Quay Lại</a>
+                            </div>
+                        <div class="col-md-2">
+                            <a id="open-deleteContract" class="dropdown-item au-btn au-btn-icon au-btn--blue"
+                               data-id_data="{{$contract->id}}" style="color: #ffffff" data-toggle="modal"
+                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')"><i class="far fa-trash-alt"></i>Xóa</a>
+
+                        </div>
+                        <div class="col-md-2">
+                            <a id="close-deleteContract" class="dropdown-item au-btn au-btn-icon au-btn--red"
+                              ><i class="fas fa-eye-dropper"></i>Đóng</a>
+
+                        </div>
+
+                            <div class="col-md-3">
+                                <a type="button" id="open-dueContract" class="au-btn au-btn-icon au-btn--blue"
+                                   data-contract_id="{{$contract->id}}" style="color: #ffffff" data-toggle="modal"
+                                   data-target="#due" onclick="setDue()"><i class="fas fa-pen"></i>Gia Hạn</a>
+                            </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="au-btn au-btn-icon au-btn--blue m-b-25">
+                                <i class="far fa-edit"></i>Lưu
+                            </button>
+                        </div>
+                    </div>
+                    @if(auth()->user()->id_phan_quyen == 1)
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a id="openmode-deleteContract" class="dropdown-item au-btn au-btn-icon au-btn--red"
+                            ><i class="fas fa-eye-dropper"></i>Mở Hợp đồng</a>
+
+                        </div>
+                    </div>
+                    @endif
+
+
+
+                    </div>
                 </div>
-            </div>
-
-
         </form>
     </div>
 @endsection
 
 
-{{--    <div class="container-fluid">--}}
-{{--        <div class="col-md-12 m-b-40">--}}
-{{--            <div class="overview-wrap" style="width: 400px;">--}}
-{{--                <a href="{{url('/')}}">Trang Chủ>></a><a href="{{url('/contract')}}">Hợp đồng>></a>Sửa thông tin khách hàng--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <form action="{{\Illuminate\Support\Facades\URL::to('/contract/update/' . $contract->id)}}" enctype="multipart/form-data" class="needs-validation" method="post">--}}
-{{--            @csrf--}}
-{{--            <div class="form-group">--}}
-{{--                <label for="exampleFormControlInput1 uname">Mã Hợp Đồng</label>--}}
-{{--                <input type="text" class="form-control" value="{{$contract->id_contract}}" id="id_contract"--}}
-{{--                       name="id_contract"--}}
-{{--                       placeholder="Tên Hợp đồng" required>--}}
-{{--                <div class="invalid-feedback">Tên Hợp đồng không được để trống</div>--}}
-{{--            </div>--}}
-{{--            <div class="form-group">--}}
-{{--                <label for="exampleFormControlSelect1">Tên khách hàng</label>--}}
-{{--                <select class="form-control" id="name_customer" name="id_customer">--}}
-{{--                    @foreach($customers as $customer)--}}
-{{--                        @if($customer->customer_id == $contract->id_customer)--}}
-{{--                        <option value="{{$customer->customer_id}}" selected>{{$customer->name_customer}}</option>--}}
-{{--                        @else--}}
-{{--                            <option value="{{$customer->customer_id}}">{{$customer->name_customer}}</option>--}}
-{{--                        @endif--}}
-{{--                    @endforeach--}}
-{{--                </select>--}}
-{{--            </div>--}}
-{{--            <div class="form-group">--}}
-{{--                <label for="exampleFormControlSelect1">Mã Pano</label>--}}
-{{--                <select class="form-control" id="name_banner" name="id_banner">--}}
-{{--                  @foreach($banners as $banner)--}}
-{{--                      @if ($banner->id == $contract->id_banner)--}}
-{{--                            <option value="{{$banner->id}}" selected>{{$banner->id_banner}}</option>--}}
-{{--                        @else--}}
-{{--                            <option value="{{$banner->id}}">{{$banner->id_banner}}</option>--}}
-{{--                        @endif--}}
-{{--                    @endforeach--}}
-{{--                </select>--}}
-{{--            </div>--}}
-{{--            <div class="form-group">--}}
-{{--                <label for="exampleFormControlSelect1">Nội dung hợp đồng</label>--}}
-{{--                <div class="custom-file">--}}
-{{--                    <label class="custom-file-label" for="validatedCustomFile">{{$contract->content}}</label>--}}
-{{--                    <input type="file" class="custom-file-input"--}}
-{{--                           accept=".doc,.docx,.pdf" id="content_contract"--}}
-{{--                           name="content" {{is_null($contract->content) ? "required" : ""}}>--}}
-{{--                    <input type="hidden" name="content_hide" value="{{$contract->content}}">--}}
-{{--                    <div class="invalid-feedback">Định dạng file phải là .doc, .docx, .pdf</div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="form-group">--}}
-{{--                <label for="exampleFormControlSelect2">Nhân Viên Phụ Trách</label>--}}
-{{--                <select class="form-control " id="exampleFormControlSelect2" name="id_staff" required>--}}
-{{--                    @foreach($staffs as $staff)--}}
-{{--                        @if ($staff->id == $contract ->id_staff)--}}
-{{--                            <option value="{{$staff->id}}" selected>{{$staff->name_staff}}</option>--}}
-{{--                        @else--}}
-{{--                            <option value="{{$staff->id}}">{{$staff->name_staff}}</option>--}}
-{{--                        @endif--}}
 
-{{--                    @endforeach--}}
-{{--                </select>--}}
-{{--            </div>--}}
-{{--            <div class="row form-group">--}}
-{{--                <div class='col-sm-6'>--}}
-{{--                    <label for="dateofbirth">Ngày bắt đầu</label>--}}
-{{--                    <input value="{{$contract->date_start}}" type="date" name="date_start" id="dateofbirth" required>--}}
-{{--                </div>--}}
-{{--                <div class='col-sm-6'>--}}
-{{--                    <label for="dateofbirth">Ngày kết thúc</label>--}}
-{{--                    <input type="date" value="{{$contract->date_end}}" name="date_end" id="dateofbirth" required>--}}
-{{--                </div>--}}
-{{--                <div class='col-sm-6'>--}}
-{{--                    <label for="dateofbirth">Ngày Thanh Toán</label>--}}
-{{--                    <input type="date" value="{{$contract->pay_due}}" name="_pay_due" id="dateofbirth" required>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="form-group">--}}
-{{--                <label for="exampleFormControlSelect1">Loại hợp đồng</label>--}}
-{{--                <select class="form-control" id="kind_name" name="kind">--}}
-{{--                    @foreach($kind_contract as $kind)--}}
-{{--                        @if($kind->id_contract == $contract ->kind)--}}
-{{--                        <option value="{{$kind->id_contract}}" selected>{{$kind->name_kind}}</option>--}}
-{{--                        @else--}}
-{{--                            <option value="{{$kind->id_contract}}">{{$kind->name_kind}}</option>--}}
-{{--                        @endif--}}
-{{--                    @endforeach--}}
-{{--                </select>--}}
-{{--            </div>--}}
-{{--            <div class="form-group">--}}
-{{--                <label for="exampleFormControlInput1 uname">Giá Năm</label>--}}
-{{--                <input type="text" class="form-control" value="{{$contract->gianam}}" id="id_contract"--}}
-{{--                       name="gianam"--}}
-{{--                       placeholder="Giá Năm">--}}
-{{--            </div>--}}
-{{--            <div class="form-group">--}}
-{{--                <label for="exampleFormControlInput1 uname">Giá 3 Tháng</label>--}}
-{{--                <input type="text" class="form-control" value="{{$contract->gia3thang}}" id="id_contract"--}}
-{{--                       name="gianam"--}}
-{{--                       placeholder="Giá 3 Tháng">--}}
-{{--            </div>--}}
-{{--            <div class="form-group">--}}
-{{--                <label for="exampleFormControlInput1 uname">Giá 6 Tháng</label>--}}
-{{--                <input type="text" class="form-control" value="{{$contract->gia6thang}}" id="id_contract"--}}
-{{--                       name="gia6thang"--}}
-{{--                       placeholder="Giá 6 Tháng">--}}
-{{--            </div>--}}
-{{--            <div class="form-group">--}}
-{{--                <label for="exampleFormControlInput1 uname">Giá 9 Tháng</label>--}}
-{{--                <input type="text" class="form-control" value="{{$contract->gia9thang}}" id="id_contract"--}}
-{{--                       name="gia9thang"--}}
-{{--                       placeholder="Giá 9 Tháng">--}}
-{{--            </div>--}}
-{{--            <div class="form-group">--}}
-{{--                <label for="exampleFormControlInput1">Giá trị hợp đồng</label>--}}
-{{--                <div class="d-inline-flex">--}}
-{{--                    <input type="number" value="{{$contract->value_contract}}" class="form-control"--}}
-{{--                           id="exampleFormControlInput1" name="value_contract"--}}
-{{--                           placeholder="Giá trị hợp đồng" required>--}}
-{{--                    <label for="exampleFormControlInput1">VND</label>--}}
-{{--                    <div class="invalid-feedback m-l-20">Vui lòng nhập giá trị hợp đồng</div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="form-group">--}}
-{{--                <label for="exampleFormControlSelect1">Trạng Thái Hợp Đồng</label>--}}
-{{--                <select class="form-control" id="status" name="status_contract">--}}
-{{--                    @foreach($status as $stt)--}}
-{{--                        @if ($stt -> id_contract == $contract->status_contract)--}}
-{{--                            <option value="{{$stt->id_contract}}" selected>{{$stt->name_status}}</option>--}}
-{{--                        @else--}}
-{{--                            <option value="{{$stt->id_contract}}">{{$stt->name_status}}</option>--}}
-{{--                        @endif--}}
+<div class="modal fade" id="due">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content container-fluid">
 
-{{--                    @endforeach--}}
-{{--                </select>--}}
-{{--            </div>--}}
-{{--            <div class="form-group">--}}
-{{--                <button data-toggle="modal" data-target="#update" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">--}}
-{{--                    Sửa--}}
-{{--                </button>--}}
-{{--            </div>--}}
-{{--        </form>--}}
-{{--    </div>--}}
-{{--@endsection--}}
-{{--<div class="modal fade" id="update">--}}
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Gia hạn hợp đồng</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
 
-{{--    <div class="modal-dialog modal-dialog-centered">--}}
-{{--        <div class="modal-content container-fluid">--}}
+            <!-- Modal body -->
+            <form id="due-contract"  data-due-link="{{\Illuminate\Support\Facades\URL::to('contract/update/').$contract->id}}"
+                  enctype="multipart/form-data" class="needs-validation" method="POST">
+                @csrf
+                <div class="row form-group">
+                    <input type="hidden" name="id_contract" value="{{$contract->id_contract}}" id="modal_id_contract" >
+                    <div class='col-sm-6'>
+                        <label for="dateofbirth">Ngày bắt đầu</label>
+                        <input type="date" name="date_start" id="modal_date_start" required>
+                        <div class="invalid-feedback m-l-20">Vui lòng nhập ngày bắt đầu hợp đồng</div>
+                    </div>
+                    <div class='col-sm-6'>
+                        <label for="dateofbirth">Ngày kết thúc</label>
+                        <input type="date" name="date_end" id="modal_date_end" required>
+                        <div class="invalid-feedback m-l-20">Vui lòng nhập ngày kết thúc hợp đồng</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Giá trị hợp đồng</label>
+                    <div class="d-inline-flex">
+                        <input type="number" class="form-control"
+                               name="value_contract" id="modal_value_contract"
+                               placeholder="Giá trị hợp đồng" required>
+                        <label for="exampleFormControlInput1">VND</label>
+                        <div class="invalid-feedback m-l-20">Vui lòng nhập giá trị hợp đồng</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Trạng Thái</label>
+                    <select class="form-control" id="modal_status_contract" name="status_contract">
+                        {{$status = \Illuminate\Support\Facades\DB::table('contract_status')->select('*')->get()}}
+                        @foreach($status as $stt)
+                            <option value="{{$stt->id_contract}}">{{$stt->name_status}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <table  id="example" class="display table-borderless table-responsive" style="width:100%; display: none">
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" id="check-all" name="title" onclick="checkAll()"></th>
+                        <th class="text-center">Kỳ</th>
+                        <th class="text-center">Tỷ Lệ</th>
+                        <th class="text-center">Số Tiền</th>
+                        <th class="text-center">VAT</th>
+                        <th class="text-center">Tổng</th>
+                        <th class="text-center">Ngày Thanh Toán</th>
+                        <th class="text-center"width="20%">Trạng Thái</th>
+                    </tr>
+                    </thead>
+                    <tbody id="idBodyPayment">
+                    <tr class="idTrPayment">
+                        <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
+                                   class="display-input m-r-5"></td>
+                        <td><input type="text" class="display-input form-control payment_period" data-target="{{$contract->id_contract}}" id="payment_period" name="payment_period[]" required>
+                        </td>
+                        <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onblur="setRatio(this)" name="ratio[]" required></td>
+                        <td><input type="text" class="form-control display-input id_value_contract" id="id_value_contract"
+                                   name="id_value_contract[]" readonly></td>
+                        <td><input type="text" class="form-control display-input id_vat" value="10" placeholder="Thuế (%)" id="id_vat"  name="id_vat[]" readonly></td>
+                        <td><input type="text" class="form-control display-input total" id="total" name="total_value[]" readonly></td>
+                        <td><input type="date" class="form-control display-input" id="_pay_due" name="_pay_due[]" required> </td>
+                        <td><a class="dropdown-toggle form-control display-input" data-toggle="dropdown" aria-haspopup="true"
+                               aria-expanded="false" id="dropdownMenuLink">Trạng Thái</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item"
+                                   href="{{url('contract/setpay1/'.$contract->id_contract)}}">Đã Thanh Toán</a>
+                                <a  class="dropdown-item"
+                                    href="{{url('contract/setpay2/'.$contract->id_contract)}}">Công Nợ</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
 
-{{--            <!-- Modal Header -->--}}
-{{--            <div class="modal-header">--}}
-{{--                <h4 class="modal-title">Thông Báo</h4>--}}
-{{--                <button type="button" class="close" data-dismiss="modal">×</button>--}}
-{{--            </div>--}}
+                </table>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="submit"
+                            class="btn btn-primary">Xác Nhận
+                    </button>
+                </div>
 
-{{--            <!-- Modal body -->--}}
-{{--            <div class="modal-body">--}}
-{{--                Sửa thông tin hợp đồng thành công!!--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="detroy">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Thông Báo</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+
+            @if(auth()->user()->id_phan_quyen == 1)
+            <div class="modal-body">
+                Xác nhận xóa
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <a type="button" id="destroy-value"
+                   data-destroy-link="{{\Illuminate\Support\Facades\URL::to('contract/destroy')."/"}}"
+                   class="btn btn-primary">Xác Nhận
+                </a>
+            </div>
+            @else
+                <div class="modal-body">
+                    Bạn không được cấp quyền xóa
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            @endif
+
+        </div>
+    </div>
+</div>

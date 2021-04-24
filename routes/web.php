@@ -48,7 +48,6 @@ Route::group(['prefix' => 'contract'], function () {
         Route::get('/update/{id}', 'ContractController@update');
         Route::post('/update/{id}', 'ContractController@update');
         Route::post('/add', 'ContractController@createContract');
-        Route::get('/download', 'ContractController@getDownload');
         Route::get('/destroy/{id}', 'ContractController@destroy');
         Route::get('/export', 'ContractController@export');
         Route::get('/rpmat-bang', 'ContractController@rpMatBang');

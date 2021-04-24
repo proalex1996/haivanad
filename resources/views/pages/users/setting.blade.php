@@ -64,7 +64,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-3 col-sm-12 m-t-10">
-                            <label for="exampleFormControlInput1 ">Mã Loai</label>
+                            <label for="exampleFormControlInput1 ">Mã Loại</label>
                             <input type="text" class="form-control" id="id_contract" name="id_contract"
                                    placeholder="Mã Loại Hợp Đồng" required>
                         </div>

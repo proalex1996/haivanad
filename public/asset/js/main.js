@@ -2048,50 +2048,54 @@ function getProduct() {
         }
     });
 }
-
-product()
-
-function product() {
-    var url = $('#domain').attr('href');
-       var data = $('#_name_banner').val();
-        $.ajax({
-            url: url + '/api/contract/product/' + data,
-            async: false,
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers': '*'
-            },
-            method: 'POST',
-            success: function (result) {
-                var datas = JSON.parse(result).banner;
-                if (datas.length > 0) {
-                    $.each(datas, function (index, ele) {
-                        $('#id_typebanner').append(`<option value='${ele.id_typebanner}' selected>${ele.name_type}</option>`);
-                        $('#id_system').val(ele.id_system)
-                        $('#id_banner').append(`<option value='${ele.id_banner}' selected>${ele.id_banner}</option>`)
-                        $('#dien_tích').val(ele.dien_tich);
-                        $('#tinh').val(ele.tinh);
-                        getQuan($('#tinh'))
-                        $('#quan').val(ele.quan);
-                        $('#banner_adress').val(ele.banner_adress);
-                        $('#size_banner').val(ele.size_banner);
-                        $('#gianam').val(ele.gianam);
-                    })
-                } else if (datas.length == 0) {
-                    $('#id_nguoncustomer').val('');
-                    $('#adress_customer').val('');
-                    $('#phone_customer').val('');
-                    $('#mst').val('');
-                    $('#contact_name').val('');
-                    $('#position_customer').val('');
-                    $('#size_banner').val('');
-                    $('#gianam').val('');
-                }
-
-
-            }
-        })
-    }
+// var baloon = 1;
+// product()
+//
+// function product(element) {
+//     $('#more_product').on('click',function () {
+//         baloon++;
+//     })
+//
+//     var data =    $(element).find(':selected').val();
+//     var url = $('#domain').attr('href');
+//         $.ajax({
+//             url: url + '/api/contract/product/' + data,
+//             async: false,
+//             headers: {
+//                 'Access-Control-Allow-Origin': '*',
+//                 'Access-Control-Allow-Headers': '*'
+//             },
+//             method: 'POST',
+//             success: function (result) {
+//                 var datas = JSON.parse(result).banner;
+//                 if (datas.length > 0) {
+//                     $.each(datas, function (index, ele) {
+//                         $('#id_typebanner_'+baloon+'').append(`<option value='${ele.id_typebanner}' selected>${ele.name_type}</option>`);
+//                         $('#id_system_'+baloon+'').val(ele.id_system)
+//                         $('#id_banner_'+baloon+'').append(`<option value='${ele.id_banner}' selected>${ele.id_banner}</option>`)
+//                         $('#dien_tich_'+baloon+'').val(ele.dien_tich);
+//                         $('#tinh_'+baloon+'').val(ele.tinh);
+//                         getQuan($('#tinh_'+baloon+''))
+//                         $('#quan_'+baloon+'').val(ele.quan);
+//                         $('#banner_adress_'+baloon+'').val(ele.banner_adress);
+//                         $('#size_banner_'+baloon+'').val(ele.size_banner);
+//                         $('#gianam_'+baloon+'').val(ele.gianam);
+//                     })
+//                 } else if (datas.length == 0) {
+//                     $('#id_nguoncustomer'+baloon+'').val('');
+//                     $('#adress_customer'+baloon+'').val('');
+//                     $('#phone_customer'+baloon+'').val('');
+//                     $('#mst'+baloon+'').val('');
+//                     $('#contact_name'+baloon+'').val('');
+//                     $('#position_customer'+baloon+'').val('');
+//                     $('#size_banner_'+baloon+'').val('');
+//                     $('#gianam_'+baloon+'').val('');
+//                 }
+//
+//
+//             }
+//         })
+//     }
 
 
 
@@ -2264,7 +2268,7 @@ function getPhoto() {
                                 </div>
                 `)
                 }
-               
+
             }
 
             $('.input-images-2').imageUploader({
@@ -2288,12 +2292,10 @@ function getPhoto() {
 $(document).ready(function(){
     $(".chosen-select").chosen({no_results_text: "Không có kết quả nào!"+" "})
 });
-
 $('.input-images-map').imageUploader({
     imagesInputName: 'maps',
     maxFiles: 1
 })
-
 function getCheckedBox() {
     var checkbox = $("input[name='check_box[]']:checked");
     var name = []
@@ -2322,9 +2324,7 @@ function disableButton(elements) {
     }else {
         document.getElementById(''+form.id+'').submit();
     }
-
 }
-
 $('#export_ppt_form').submit(function(e){
     e.preventDefault();
 });
@@ -2342,14 +2342,10 @@ $("input[data-type='currency']").on({
         formatCurrency($(this), "blur");
     }
 });
-
-
 function formatNumber(n) {
     // format number 1000000 to 1,234,567
     return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
-
-
 function formatCurrency(input, blur) {
     // appends $ to value, validates decimal side
     // and puts cursor back in right position.
@@ -2416,11 +2412,6 @@ function formatCurrency(input, blur) {
     caret_pos = updated_len - original_len + caret_pos;
     input[0].setSelectionRange(caret_pos, caret_pos);
 }
-
-
-
-
-
 $('#submit_kind').on('click',function () {
     var id = $('#id_kind').val();
     var name = $('#kind_name').val()
@@ -2522,7 +2513,6 @@ $('#type_customer').on('show.bs.modal', function (event) {
     modal.find('.modal-body #modal_id_type_customer').val(id)
     modal.find('.modal-body #modal_name_type_customer').val(name)
 })
-
 $(document).on("click", ".delete_kind", function(){
     var id_kind = $(this).parents("tr");
     var id = id_kind[0].id
@@ -2960,10 +2950,8 @@ $('#submit_nguon_customer').on('click',function () {
             error: function () {
                 alert('Đã xãy ra lỗi');
             }
-
         })
     }
-
 })
 $(document).on("click", ".delete_nguon", function(){
     var id_status = $(this).parents("tr");
@@ -3014,12 +3002,9 @@ $('#submit_type_customer').on('click',function () {
             },
             error: function () {
                 alert('Đã xãy ra lỗi');
-
             }
-
         })
     }
-
 })
 $('#modal_submit_type_customer').on('click',function () {
     var id = $('#modal_id_type_customer').val();
@@ -3074,7 +3059,6 @@ $(document).on("click", ".delete_type_customer", function(){
         }
     })
 });
-
 function setDue() {
     var id = $('#id_contract').val();
     var url = $('#domain').attr('href');
@@ -3102,163 +3086,12 @@ function getNumber(element) {
     console.log(number)
     $(element).val(number);
 }
-
 $(".hover").mouseleave(
     function() {
         $(this).removeClass("hover");
     }
 );
-
-var i =1;
-$('#more_product').on('click',function () {
-    var url = $('#domain').attr('href');
-    data = $('#_name_banner').val();
-    $.ajax({
-        url: url + '/api/contract/product-all',
-        async: false,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': '*'
-        },
-        method: 'POST',
-        success: function (result) {
-            var datas = JSON.parse(result).banner;
-            if (datas.length > 0) {
-                    $('#form-product').append(`
-                    <fieldset class="border-text border-text-product">
-                    <legend class='text-left'>Thông Tin Sản Phẩm</legend>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-3 col-sm-12">
-                                <label for="exampleFormControlSelect1">Tên Sản Phẩm</label>
-                            </div>
-                            <div class="col-md-9 col-sm-12">
-                                <select class="form-control chosen-select select-more"
-                                id="_name_banner_${i}" name="_name_banner_${i}[]" onchange="product()">
-                                    <option value="">--Chọn Pano--</option>
-
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Mã Sản Phẩm</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_banner_${i}" name="id_banner_${i}[]">
-                                            <option value="">--Chọn Mã Pano--</option>
-                                        </select>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_typebanner_${i}" name="id_typebanner_${i}[]">
-                                            <option value="">--Loại Hình--</option>
-                                        </select>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3 col-sm-12">
-                                <label for="exampleFormControlInput1 uname">Địa Chỉ</label>
-                            </div>
-                            <div class="col-md-9 col-sm-12">
-                                <input type="text" class="form-control" id="banner_adress"
-                                       name="banner_adress_${i}[]"
-                                       placeholder="Địa Chỉ Pano" required>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Tỉnh/Thành Phố</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="tinh_${i}" name="tinh_${i}[]" onchange="getQuan(this)">
-                                            <option value="">--Tỉnh/Thành Phố--</option>
-                                            @foreach($provinces as $province)
-                                                <option value="{{$province -> _code}}">{{$province -> _name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Quận/Huyện</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="quan_${i}" name="quan_${i}[]">
-                                            <option value="">--Quận/Huyện--</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Kết Cấu</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" value="" id="id_system_${i}" name="id_system_${i}[]"
-                                               placeholder="Kết Cấu" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Kích Thước</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" value="" id="size_banner_${i}" name="size_banner_${i}[]"
-                                               placeholder="Kích Thước" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3 col-sm-12">
-                                <label for="exampleFormControlInput1 uname">Giá Năm</label>
-                            </div>
-                            <div class="col-md-9 col-sm-12">
-                                <input type="text" class="form-control" id="gianam_${i}" name="gianam_${i}[]"
-                                       placeholder="Giá Năm" value="" required>
-                                <div class="invalid-feedback">Địa chỉ không được để trống</div>
-                            </div>
-                        </div>
-                    </div>
-
-                </fieldset>
-        `)
-                $.each(datas, function (index, ele) {
-                    $('.select-more').append(`<option value="${ele.id_banner}">${ele._name_banner}</option>`)
-                })
-            }
-        }
-})
-i++;
-})
 getTong()
-
 $('#close-deleteContract').on('click',function () {
     var url = $('#domain').attr('href');
     var id =  $('#id_contract').val();
@@ -3293,3 +3126,197 @@ $('#openmode-deleteContract').on('click',function () {
         }
     })
 })
+function delete_setfeild(element) {
+    var fielset = element.closest('fieldset');
+    fielset.remove();
+}
+function getAllproduct(element) {
+    var id_banner = element;
+    var url = $('#domain').attr('href');
+    $.ajax({
+        url: url+'/api/contract/product-all',
+        async: false,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*'
+        },
+        method: 'POST',
+        success: function (result) {
+            var datas = JSON.parse(result).banner;
+            $.each(datas,function (index,element) {
+                $(id).append(`<option value="${element.id_banner}" selected>${element._name_banner}</option>`)
+            })
+
+        }
+    })
+}
+var baloon = 2
+$('#more_product').on('click',function () {
+    $('#form_product').append(`
+        <fieldset class="border-text border-text-product">
+                    <legend class='text-left'><div type="button" id="delete_setfeild" onclick="delete_setfeild(this)" class="snip1548"><span>Thông Tin Sản Phẩm</span></div></legend>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12">
+                                <label for="exampleFormControlSelect1">Tên Sản Phẩm</label>
+                            </div>
+                            <div class="col-md-9 col-sm-12">
+                                <select class="form-control chosen-select" id="_name_banner_${baloon}" name="_name_banner_${baloon}[]" onclick="product(baloon)">
+                                    <option value="">--Chọn Pano--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Mã Sản Phẩm</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="id_banner_${baloon}" name="id_banner_${baloon}[]">
+                                            <option value="">--Chọn Mã Pano--</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="id_typebanner_${baloon}" name="id_typebanner_${baloon}[]">
+                                            <option value="">--Loại Hình--</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12">
+                                <label for="exampleFormControlInput1 uname">Địa Chỉ</label>
+                            </div>
+                            <div class="col-md-9 col-sm-12">
+                                <input type="text" class="form-control" id="banner_adress_${baloon}"
+                                       name="banner_adress_${baloon}[]"
+                                       placeholder="Địa Chỉ Pano" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Tỉnh/Thành Phố</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="tinh_${baloon}" name="tinh_${baloon}[]">
+                                            <option value="">--Tỉnh/Thành Phố--</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Quận/Huyện</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="quan_${baloon}" name="quan_${baloon}[]">
+                                            <option value="">--Quận/Huyện--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Kết Cấu</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" class="form-control" value="" id="id_system_${baloon}" name="id_system_${baloon}[]"
+                                               placeholder="Kết Cấu" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Kích Thước</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" class="form-control" value="" id="size_banner_${baloon}" name="size_banner_${baloon}[]"
+                                               placeholder="Kích Thước" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12">
+                                <label for="exampleFormControlInput1 uname">Giá Năm</label>
+                            </div>
+                            <div class="col-md-9 col-sm-12">
+                                <input type="text" class="form-control" id="gianam_${baloon}" name="gianam_${baloon}[]"
+                                       placeholder="Giá Năm" value="" required>
+                                <div class="invalid-feedback">Địa chỉ không được để trống</div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+    `);
+
+    baloon++
+})
+
+function product(element) {
+    var id = element - 1;
+    var _name_banner = $('#_name_banner_'+id);
+    var id_banner = $('#id_banner_'+id);
+    var id_type_banner = $('#id_type_banner_'+id);
+    var banner_adress = $('#banner_adress_'+id);
+
+      console.log(_name_banner)
+    var url = $('#domain').attr('href');
+    $.ajax({
+        url: url+'/api/contract/product-all',
+        async: false,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*'
+        },
+        method: 'POST',
+        success: function (result) {
+            var datas = JSON.parse(result).banner;
+            $.each(datas,function (index,ele) {
+                _name_banner.append(`<option value="${ele.id_banner}">${ele._name_banner}</option>`)
+            })
+
+        }
+    })
+    var data = _name_banner.val();
+
+    $.ajax({
+        url: url + '/api/contract/product/' + data,
+            async: false,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*'
+            },
+            method: 'POST',
+        success: function (result) {
+            var datas = JSON.parse(result).banner;
+            if(datas.length>0){
+                $.each(datas,function (index, elements) {
+
+                })
+            }
+        }
+    })
+}
+//only use in funtion Contract
+

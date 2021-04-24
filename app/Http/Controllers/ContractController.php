@@ -448,6 +448,10 @@ class ContractController extends Controller
         $contract->content = basename($request->content_contract->getClientOriginalName());
         $file = $request->file('content_contract');
         $fileName = $request->file('content_contract')->getClientOriginalName();
+        $contented = $request->file('contented');
+        $contentedName = $request->file('contented')->getClientOriginalName();
+        $storage = Storage::putFileAs('contract', $contented, $contentedName);
+        $contract->contented = $contentedName;
         $contract->date_start = $request->date_start;
         $contract->date_end = $request->date_end;
         $contract->kind = $request->kind_name;
@@ -484,10 +488,9 @@ class ContractController extends Controller
         return redirect()->action('ContractController@getContract');
     }
 
-    public function getDownload()
+    public function getDownload(Request $request)
     {
-        $filePath = public_path("storage/contract");
-        return response()->download($filePath);
+        return redirect('public/storage/contract/'.$request->contented);
 
     }
 
@@ -618,16 +621,15 @@ class ContractController extends Controller
 
     public function getProduct(Request $request)
     {
-        $request->all();
         $data = DB::table('banner')
             ->join('type_banner', 'banner.id_typebanner', '=', 'type_banner.id_typebanner')
+            ->join('district','banner.quan','=','district.id_district')
             ->select('*')
             ->where('banner.id_banner', '=', $request->id_banner)->get();
         return json_encode(['banner' => $data], 200);
     }
     public function getALLProduct(Request $request)
     {
-        $request->all();
         $data = DB::table('banner')
             ->join('type_banner', 'banner.id_typebanner', '=', 'type_banner.id_typebanner')
             ->select('*')->get();
@@ -1012,5 +1014,15 @@ class ContractController extends Controller
         $dues = DB::table('contract')->select('value_contract','date_start','date_end','status_contract')
             ->where('id_contract',$request->id)->get();
         return json_encode(['due'=>$dues],200);
+    }
+    public function close(Request $request){
+        $close = ContractModel::where('id_contract',$request->id)->update([
+            'readonly' => 'disabled'
+        ]);
+    }
+    public function open(Request $request){
+        $close = ContractModel::where('id_contract',$request->id)->update([
+            'readonly' => null
+        ]);
     }
 }

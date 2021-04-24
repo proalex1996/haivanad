@@ -39,11 +39,9 @@ Route::group(['prefix' => 'contract'], function () {
     Route::post('/ratio/{id_contract}', 'ContractController@getRatio');
     Route::post('/deletepay/{id_contract}/{payment_period}', 'ContractController@delete_payment');
     Route::post('/set-due', 'ContractController@setDue');
-
-
-
-
-
+    Route::post('/close', 'ContractController@close');
+    Route::post('/open', 'ContractController@open');
+    Route::get('/download', 'ContractController@getDownload');
 });
 
 Route::group(['prefix' => 'product'], function () {

@@ -57,6 +57,25 @@
 
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <label for="exampleFormControlSelect1" style="width: 340px;">Trạng Thái</label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <select class="form-customer-input" id="status" name="status_customer">
+                                                @foreach($statuss as $status)
+                                                    @if($customers->status_customer == $status->id_status)
+                                                        <option value="{{$status->id_status}}"
+                                                                selected>{{$status->status}}</option>
+                                                    @else
+                                                        <option value="{{$status->id_status}}">{{$status->status}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -194,29 +213,6 @@
                                 </div>
 
 
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-6 col-sm-12">
-                                            <label for="exampleFormControlSelect1" style="width: 340px;">Trạng Thái</label>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <select class="form-customer-input" id="status" name="status_customer">
-                                                @foreach($statuss as $status)
-                                                    @if($customers->status_customer == $status->id_status)
-                                                        <option value="{{$status->id_status}}"
-                                                                selected>{{$status->status}}</option>
-                                                    @else
-                                                        <option value="{{$status->id_status}}">{{$status->status}}</option>
-                                                    @endif
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

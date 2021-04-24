@@ -8,6 +8,7 @@ use App\Exports\ExportCustomer;
 use App\Model\CustomerModel;
 
 use App\Repositories\Customer\CustomerRepositoryEloquent;
+use App\Utilili\RamdomCode;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -82,6 +83,8 @@ class CustomerController extends Controller
 
     public function addCustomer(Request $request)
     {
+        $maxid = DB::table('customer')->max('id');
+        $code = RamdomCode::generateCode($maxid);
         $status = DB::table('status')->select('*')->get();
         $type_customer = DB::table('type_customer')->select('*')->get();
         $customer = DB::table('customer')->select('*')->get();
@@ -94,7 +97,8 @@ class CustomerController extends Controller
             'customers' => $customer,
             'solvencys'=>$solvency,
             'nguons' => $nguon,
-            'positions' => $positions
+            'positions' => $positions,
+            'code' => $code,
 
         ]);
 

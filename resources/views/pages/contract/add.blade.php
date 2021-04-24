@@ -183,7 +183,7 @@
                                 <label for="exampleFormControlSelect1">Tên Sản Phẩm</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
-                                <select class="form-control chosen-select" id="_name_banner" name="_name_banner" onchange="product()">
+                                <select class="form-control chosen-select" id="_name_banner_1" name="_name_banner_1[]" onchange="product(1)">
                                     <option value="">--Chọn Pano--</option>
                                     @foreach($banners as $banner)
                                         <option value="{{$banner->id_banner}}">{{$banner->_name_banner}}</option>
@@ -198,7 +198,7 @@
                                         <label for="exampleFormControlSelect1">Mã Sản Phẩm</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_banner" name="id_banner">
+                                        <select class="form-control" id="id_banner_1" name="id_banner_1[]">
                                             <option value="">--Chọn Mã Pano--</option>
                                         </select>
                                     </div>
@@ -211,7 +211,7 @@
                                         <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_typebanner" name="id_typebanner">
+                                        <select class="form-control" id="id_typebanner_1" name="id_typebanner_1[]">
                                             <option value="">--Loại Hình--</option>
                                         </select>
                                     </div>
@@ -225,13 +225,11 @@
                                 <label for="exampleFormControlInput1 uname">Địa Chỉ</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
-                                <input type="text" class="form-control" id="banner_adress"
-                                       name="banner_adress"
+                                <input type="text" class="form-control" id="banner_adress_1"
+                                       name="banner_adress_1[]"
                                        placeholder="Địa Chỉ Pano" required>
                             </div>
                         </div>
-
-
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
@@ -239,7 +237,7 @@
                                         <label for="exampleFormControlSelect1">Tỉnh/Thành Phố</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
+                                        <select class="form-control" id="tinh_1" name="tinh_1[]" onchange="getQuan(this)">
                                             <option value="">--Tỉnh/Thành Phố--</option>
                                             @foreach($provinces as $province)
                                                 <option value="{{$province -> _code}}">{{$province -> _name}}</option>
@@ -255,7 +253,7 @@
                                         <label for="exampleFormControlSelect1">Quận/Huyện</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="quan" name="quan">
+                                        <select class="form-control" id="quan_1" name="quan_1[]">
                                             <option value="">--Quận/Huyện--</option>
                                         </select>
                                     </div>
@@ -269,7 +267,7 @@
                                         <label for="exampleFormControlSelect1">Kết Cấu</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" value="" id="id_system" name="id_system"
+                                        <input type="text" class="form-control" value="" id="id_system_1" name="id_system_1[]"
                                                placeholder="Kết Cấu" required>
                                     </div>
                                 </div>
@@ -280,7 +278,7 @@
                                         <label for="exampleFormControlSelect1">Kích Thước</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" value="" id="size_banner" name="size_banner"
+                                        <input type="text" class="form-control" value="" id="size_banner_1" name="size_banner_1[]"
                                                placeholder="Kích Thước" required>
                                     </div>
                                 </div>
@@ -291,25 +289,15 @@
                                 <label for="exampleFormControlInput1 uname">Giá Năm</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
-                                <input type="text" class="form-control" id="gianam" name="gianam"
+                                <input type="text" class="form-control" id="gianam_1" name="gianam_1[]"
                                        placeholder="Giá Năm" value="" required>
                                 <div class="invalid-feedback">Địa chỉ không được để trống</div>
                             </div>
                         </div>
-
-
-{{--                        <div class="form-group">--}}
-{{--                            <label for="exampleFormControlSelect1">Hình Ảnh:</label>--}}
-{{--                                <div class="row" id="image-input">--}}
-
-
-{{--                                </div>--}}
-
-{{--                        </div>--}}
                     </div>
 
                 </fieldset>
-                <div id="form-product">
+                <div id="form_product">
 
                 </div>
                 <fieldset class="border-text">
@@ -439,6 +427,15 @@
                         </div>
                     </fieldset>
                 <div class="form-group m-t-20">
+                    <label for="exampleFormControlSelect1">Hợp đồng đã ký</label>
+                    <div class="custom-file">
+                        <label class="custom-file-label" for="validatedCustomFile">Chọn file...</label>
+                        <input type="file" class="custom-file-input" accept=".doc,.docx,.pdf" id="contented"
+                               name="contented">
+                        <div class="invalid-feedback">Định dạng file phải là .doc, .docx, .pdf</div>
+                    </div>
+                </div>
+                <div class="form-group m-t-20">
                     <label for="exampleFormControlSelect1">Nội dung hợp đồng</label>
                     <div class="custom-file">
                         <label class="custom-file-label" for="validatedCustomFile">Chọn file...</label>
@@ -497,7 +494,7 @@
             <div class="modal-footer">
 
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary" id="submit_type_product">Xác Nhận</button>
+                <button type="button" class="btn btn-primary" id="add_kind">Xác Nhận</button>
             </div>
         </div>
     </div>

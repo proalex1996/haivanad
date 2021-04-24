@@ -27,8 +27,8 @@ class ContractModel extends Model
         'value_contract',
         'vat',
         'note_contract',
-        'readonly'
-
+        'readonly',
+        'contented'
     ];
 
 
