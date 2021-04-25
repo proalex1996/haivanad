@@ -19,6 +19,7 @@ class PptxFomat
 //        dd($banners);
         $j = 0;
         $i = 0;
+
         foreach ($banners as $banner) {
             $photos[] = $banner->photos;
             $views[] = $banner->views;

@@ -206,14 +206,27 @@ class ProductController extends Controller
         if (!empty($data)) {
             $dataBanner = $request->except('files');
             $up = $this->productRepository->update($id, $dataBanner);
+            $db_check = DB::table('photo')->where('id_banner','=',$data['id_banner'])->get();
+            $files = $request->file('files');
+            if(empty($db_check[0]) == true){
+                for($index = 0;$index < sizeof($data['files']);$index++){
+                    $photo = new PhotoModel();
+                    $file = $files[$index];
+                    $photo->id_banner = $request->id_banner;
+                    $photo->views = $request->views[$index];
+                    $fileName =$request->file('files')[$index]->getClientOriginalName();
+                    $photo->_name_photo = $fileName;
+                    $storage= Storage::putFileAs('content', $request->file('files')[$index], $fileName);
+                    $photo->save();
+                }
+            }
             if(array_key_exists("files", $data) != false || array_key_exists("maps", $data) != false){
                 if(array_key_exists("files", $data) != false){
                     $check =  ProductController::containsOnlyNull($data['files']);
                     if($check == false) {
-                        $files = $request->file('files');
                         if (!empty($files)) {
                             for ($i = 0; $i < sizeof($files); $i++) {
-                                if (file_exists($data['files'][$i]) == false) {
+                                if (file_exists($data['files'][$i]) == false){
                                     $fileName = basename($files[$i]->getClientOriginalName());
                                     $file = $request->file('files')[$i];
                                     $storage = Storage::putFileAs('content', $file, $fileName);
@@ -293,7 +306,7 @@ class ProductController extends Controller
 
 
 
-            return redirect()->back();
+            return redirect()->action('ProductController@getIndex');
         }
 
         $banners = $this->productRepository->find($id);
@@ -441,8 +454,6 @@ class ProductController extends Controller
                         'banner.light_system', 'banner.id_banner', DB::raw('group_concat(photo._name_photo) as photos '),DB::raw('group_concat(photo.views) as views'), 'banner.size_banner','banner.v_light', 'map._name_map')
                         ->whereIn('banner.id_banner', $datas)->groupBy('banner.id_banner')
                     ->get();
-
-
 
                 $pptx = new PptxFomat();
 
