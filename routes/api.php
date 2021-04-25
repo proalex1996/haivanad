@@ -42,6 +42,8 @@ Route::group(['prefix' => 'contract'], function () {
     Route::post('/close', 'ContractController@close');
     Route::post('/open', 'ContractController@open');
     Route::get('/download', 'ContractController@getDownload');
+    Route::post('/show/{id_contract}', 'ContractController@showProduct');
+
 });
 
 Route::group(['prefix' => 'product'], function () {

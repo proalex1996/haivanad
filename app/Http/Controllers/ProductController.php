@@ -306,7 +306,7 @@ class ProductController extends Controller
 
 
 
-            return redirect()->action('ProductController@getIndex');
+            return redirect()->refresh();
         }
 
         $banners = $this->productRepository->find($id);
@@ -454,16 +454,10 @@ class ProductController extends Controller
                         'banner.light_system', 'banner.id_banner', DB::raw('group_concat(photo._name_photo) as photos '),DB::raw('group_concat(photo.views) as views'), 'banner.size_banner','banner.v_light', 'map._name_map')
                         ->whereIn('banner.id_banner', $datas)->groupBy('banner.id_banner')
                     ->get();
-
                 $pptx = new PptxFomat();
-
                 $pptx->CreatePpt($banners);
-
                 $myzip->addFile(public_path('storage/PPTX/Greeting.pptx'),'Greeting.pptx');
-
-
                 $myzip->close();
-
             }
             return Response::download(public_path('storage/PPTX/'.$datas[0].'.zip'));
         }

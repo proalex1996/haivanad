@@ -183,7 +183,7 @@
                                 <label for="exampleFormControlSelect1">Tên Sản Phẩm</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
-                                <select class="form-control chosen-select" id="_name_banner_1" name="_name_banner_1[]" onchange="product(1)">
+                                <select class="form-control chosen-select" id="_name_banner_1" name="_name_banner[]" onchange="product(1)">
                                     <option value="">--Chọn Pano--</option>
                                     @foreach($banners as $banner)
                                         <option value="{{$banner->id_banner}}">{{$banner->_name_banner}}</option>
@@ -198,7 +198,7 @@
                                         <label for="exampleFormControlSelect1">Mã Sản Phẩm</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_banner_1" name="id_banner_1[]">
+                                        <select class="form-control" id="id_banner_1" name="id_banner[]">
                                             <option value="">--Chọn Mã Pano--</option>
                                         </select>
                                     </div>
@@ -211,7 +211,7 @@
                                         <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_typebanner_1" name="id_typebanner_1[]">
+                                        <select class="form-control" id="id_typebanner_1" name="id_typebanner[]">
                                             <option value="">--Loại Hình--</option>
                                         </select>
                                     </div>
@@ -226,7 +226,7 @@
                             </div>
                             <div class="col-md-9 col-sm-12">
                                 <input type="text" class="form-control" id="banner_adress_1"
-                                       name="banner_adress_1[]"
+                                       name="banner_adress[]"
                                        placeholder="Địa Chỉ Pano" required>
                             </div>
                         </div>
@@ -237,7 +237,7 @@
                                         <label for="exampleFormControlSelect1">Tỉnh/Thành Phố</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="tinh_1" name="tinh_1[]" onchange="getQuan(this)">
+                                        <select class="form-control" id="tinh_1" name="tinh[]" onchange="getQuan(this)">
                                             <option value="">--Tỉnh/Thành Phố--</option>
                                             @foreach($provinces as $province)
                                                 <option value="{{$province -> _code}}">{{$province -> _name}}</option>
@@ -253,7 +253,7 @@
                                         <label for="exampleFormControlSelect1">Quận/Huyện</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="quan_1" name="quan_1[]">
+                                        <select class="form-control" id="quan_1" name="quan[]">
                                             <option value="">--Quận/Huyện--</option>
                                         </select>
                                     </div>
@@ -267,7 +267,7 @@
                                         <label for="exampleFormControlSelect1">Kết Cấu</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" value="" id="id_system_1" name="id_system_1[]"
+                                        <input type="text" class="form-control" value="" id="id_system_1" name="id_system[]"
                                                placeholder="Kết Cấu" required>
                                     </div>
                                 </div>
@@ -278,7 +278,7 @@
                                         <label for="exampleFormControlSelect1">Kích Thước</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" value="" id="size_banner_1" name="size_banner_1[]"
+                                        <input type="text" class="form-control" value="" id="size_banner_1" name="size_banner[]"
                                                placeholder="Kích Thước" required>
                                     </div>
                                 </div>
@@ -289,7 +289,7 @@
                                 <label for="exampleFormControlInput1 uname">Giá Năm</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
-                                <input type="text" class="form-control" id="gianam_1" name="gianam_1[]"
+                                <input type="text" class="form-control" id="gianam_1" name="gianam"
                                        placeholder="Giá Năm" value="" required>
                                 <div class="invalid-feedback">Địa chỉ không được để trống</div>
                             </div>

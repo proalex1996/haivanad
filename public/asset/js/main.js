@@ -1882,9 +1882,6 @@ $('#addrowPayment').on('click', function () {
 
 })
 $('#addrowPayment1').on('click', function () {
-
-    var j = i + 1
-    i++;
     $('#idBodyPayment').append(
         `
                                 <tr class="idTrPayment">
@@ -1900,7 +1897,7 @@ $('#addrowPayment1').on('click', function () {
                                     <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (USD)" id="total" name="total_value[]" readonly></td>
                                     <td><input type="date" class="form-control display-input" name="_pay_due[]" required>
 
-                                </tr>
+                               </tr>
 
 `
     )
@@ -3161,7 +3158,7 @@ $('#more_product').on('click',function () {
                                 <label for="exampleFormControlSelect1">Tên Sản Phẩm</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
-                                <select class="form-control chosen-select" id="_name_banner_${baloon}" name="_name_banner_${baloon}[]" onclick="product(baloon)">
+                                <select class="form-control chosen-select" id="_name_banner_${baloon}" name="_name_banner_${baloon}" onclick="getListproduct(baloon)" onchange="product(baloon)">
                                     <option value="">--Chọn Pano--</option>
                                 </select>
                             </div>
@@ -3173,7 +3170,7 @@ $('#more_product').on('click',function () {
                                         <label for="exampleFormControlSelect1">Mã Sản Phẩm</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_banner_${baloon}" name="id_banner_${baloon}[]">
+                                        <select class="form-control" id="id_banner_${baloon}" name="id_banner[]">
                                             <option value="">--Chọn Mã Pano--</option>
                                         </select>
                                     </div>
@@ -3186,7 +3183,7 @@ $('#more_product').on('click',function () {
                                         <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_typebanner_${baloon}" name="id_typebanner_${baloon}[]">
+                                        <select class="form-control" id="id_typebanner_${baloon}" name="id_typebanner[]">
                                             <option value="">--Loại Hình--</option>
                                         </select>
                                     </div>
@@ -3201,7 +3198,7 @@ $('#more_product').on('click',function () {
                             </div>
                             <div class="col-md-9 col-sm-12">
                                 <input type="text" class="form-control" id="banner_adress_${baloon}"
-                                       name="banner_adress_${baloon}[]"
+                                       name="banner_adress[]"
                                        placeholder="Địa Chỉ Pano" required>
                             </div>
                         </div>
@@ -3212,7 +3209,7 @@ $('#more_product').on('click',function () {
                                         <label for="exampleFormControlSelect1">Tỉnh/Thành Phố</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="tinh_${baloon}" name="tinh_${baloon}[]">
+                                        <select class="form-control" id="tinh_${baloon}" name="tinh[]">
                                             <option value="">--Tỉnh/Thành Phố--</option>
                                         </select>
                                     </div>
@@ -3225,7 +3222,7 @@ $('#more_product').on('click',function () {
                                         <label for="exampleFormControlSelect1">Quận/Huyện</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="quan_${baloon}" name="quan_${baloon}[]">
+                                        <select class="form-control" id="quan_${baloon}" name="quan[]">
                                             <option value="">--Quận/Huyện--</option>
                                         </select>
                                     </div>
@@ -3239,7 +3236,7 @@ $('#more_product').on('click',function () {
                                         <label for="exampleFormControlSelect1">Kết Cấu</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" value="" id="id_system_${baloon}" name="id_system_${baloon}[]"
+                                        <input type="text" class="form-control" value="" id="id_system_${baloon}" name="id_system[]"
                                                placeholder="Kết Cấu" required>
                                     </div>
                                 </div>
@@ -3250,7 +3247,7 @@ $('#more_product').on('click',function () {
                                         <label for="exampleFormControlSelect1">Kích Thước</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" value="" id="size_banner_${baloon}" name="size_banner_${baloon}[]"
+                                        <input type="text" class="form-control" value="" id="size_banner_${baloon}" name="size_banner[]"
                                                placeholder="Kích Thước" required>
                                     </div>
                                 </div>
@@ -3261,7 +3258,7 @@ $('#more_product').on('click',function () {
                                 <label for="exampleFormControlInput1 uname">Giá Năm</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
-                                <input type="text" class="form-control" id="gianam_${baloon}" name="gianam_${baloon}[]"
+                                <input type="text" class="form-control" id="gianam_${baloon}" name="gianam_${baloon}"
                                        placeholder="Giá Năm" value="" required>
                                 <div class="invalid-feedback">Địa chỉ không được để trống</div>
                             </div>
@@ -3269,37 +3266,27 @@ $('#more_product').on('click',function () {
                     </div>
                 </fieldset>
     `);
-
     baloon++
 })
 
 function product(element) {
-    var id = element - 1;
-    var _name_banner = $('#_name_banner_'+id);
-    var id_banner = $('#id_banner_'+id);
-    var id_type_banner = $('#id_type_banner_'+id);
-    var banner_adress = $('#banner_adress_'+id);
-
-      console.log(_name_banner)
+    var count = element;
+    if(count == 1){
+        count = count;
+    }else if(count > 1){
+        count = count - 1;
+    }
+    var _name_banner = $('#_name_banner_'+count);
+    var id_banner = $('#id_banner_'+count);
+    var id_type_banner = $('#id_typebanner_'+count);
+    var banner_adress = $('#banner_adress_'+count);
+    var tinh = $('#tinh_'+count);
+    var quan = $('#quan_'+count);
+    var id_system = $('#id_system_'+count);
+    var size_banner = $('#size_banner_'+count);
+    var gianam = $('#gianam_'+count);
     var url = $('#domain').attr('href');
-    $.ajax({
-        url: url+'/api/contract/product-all',
-        async: false,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': '*'
-        },
-        method: 'POST',
-        success: function (result) {
-            var datas = JSON.parse(result).banner;
-            $.each(datas,function (index,ele) {
-                _name_banner.append(`<option value="${ele.id_banner}">${ele._name_banner}</option>`)
-            })
-
-        }
-    })
     var data = _name_banner.val();
-
     $.ajax({
         url: url + '/api/contract/product/' + data,
             async: false,
@@ -3312,11 +3299,175 @@ function product(element) {
             var datas = JSON.parse(result).banner;
             if(datas.length>0){
                 $.each(datas,function (index, elements) {
-
+                    id_banner.append(`<option value="${elements.id_banner}" selected>${elements.id_banner}</option>`)
+                    id_type_banner.append(`<option value="${elements.id_typebanner}" selected>${elements.name_type}</option>`)
+                    banner_adress.val(elements.banner_adress)
+                    if(count > 1){
+                        tinh.append(`<option value="${elements._code}">${elements._name}</option>`)
+                    }
+                    tinh.val(elements.tinh)
+                    quan.append(`<option value="${elements.quan}" selected>${elements._name_district}</option>`)
+                    id_system.val(elements.id_system)
+                    size_banner.val(elements.size_banner);
+                    gianam.val(elements.gianam);
+                    console.log(elements)
                 })
             }
         }
     })
 }
 //only use in funtion Contract
+function getListproduct(element) {
+    var count = element - 1;
+    var _name_banner = $('#_name_banner_' + count);
+    var chill_name = _name_banner.children();console.log(chill_name)
+    if(count > 1){
+        var url = $('#domain').attr('href');
+        $.ajax({
+            url: url + '/api/contract/product-all',
+            async: false,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': '*'
+            },
+            method: 'POST',
+            success: function (result) {
+                var datas = JSON.parse(result).banner;
+                $.each(datas, function (index, ele) {
+                    _name_banner.append(`<option value="${ele.id_banner}">${ele._name_banner}</option>`)
+                })
 
+            }
+        })
+    }
+
+}
+//show product in contract
+showProduct()
+function showProduct() {
+    var data = $('#id_contract').val();
+    var url = $('#domain').attr('href');
+    $.ajax({
+        url: url + '/api/contract/show/'+ data,
+        async: false,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*'
+        },
+        method: 'POST',
+        success: function (result) {
+            var datas = JSON.parse(result).show;
+            $.each(datas, function (index, ele) {
+                $('#show_product').append(`
+                    <fieldset class="border-text border-text-product">
+                    <legend class='text-left'>Thông Tin Sản Phẩm</legend>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12">
+                                <label for="exampleFormControlSelect1">Tên</label>
+                            </div>
+                            <div class="col-md-9 col-sm-12">
+                                <select class="form-control chosen-select" id="_name_banner" name="_name_banner">
+                                            <option value="${ele.id_banner}" selected>${ele._name_banner}</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Mã Sản Phẩm</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="id_banner" name="id_banner">
+                                                        <option value="${ele.id_banner}" selected>${ele.id_banner}</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="id_typebanner" name="id_typebanner">
+                                            <option value="${ele.id_typebanner}">${ele.name_type}</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12">
+                                <label for="exampleFormControlInput1 uname">Địa Chỉ</label>
+                            </div>
+                            <div class="col-md-9 col-sm-12">
+                                <input type="text" class="form-control" id="banner_adress"
+                                       name="banner_adress"
+                                       placeholder="Địa Chỉ Pano" value="${ele.banner_adress}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Tỉnh/Thành Phố</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
+                                            <option value="${ele.tinh}">${ele._name_province}</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Quận/Huyện</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <select class="form-control" id="quan" name="quan">
+                                            <option value="${ele.quan}">${ele._name_district}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlSelect1">Kết Cấu</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" class="form-control" value="${ele.id_system}" id="id_system" name="id_system"
+                                               placeholder="Kết Cấu" >
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-12">
+                                <label for="exampleFormControlInput1 uname">Giá Năm</label>
+                            </div>
+                            <div class="col-md-9 col-sm-12">
+                                <input type="text" class="form-control" id="gianam" name="gianam"
+                                       placeholder="Giá Năm" value="${ele.gianam}">
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+                `)
+            })
+
+        }
+    })
+}

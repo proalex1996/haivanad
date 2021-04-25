@@ -120,7 +120,6 @@
                             <th>Mã Hợp Đồng</th>
                             <th>Tên Khách Hàng</th>
                             <th>Loại Hợp Đồng</th>
-                            <th>Loại Sản Phẩm</th>
                             <th>Tên Sản Phẩm</th>
                             <th>Ngày Hết Hạn</th>
                             <th>Tổng Giá Trị</th>
@@ -154,10 +153,7 @@
                                     <td>{{$contract->id_contract}}</td>
                                     <td>{{$contract->name_customer}}</td>
                                     <td>{{$contract->name_kind}}</td>
-                                    <td>
-                                        {{$contract->name_type}}
-                                    </td>
-                                    <td>{{$contract->_name_banner}}</td>
+                                    <td>{{$contract->id_banner}}</td>
                                     <td>{{$contract->date_end}}</td>
                                     <td class="value_contract"><span>{{$contract->value_contract}}</span>
                                         VND
@@ -192,10 +188,7 @@
                                     <td>{{$contract->id_contract}}</td>
                                     <td>{{$contract->name_customer}}</td>
                                     <td>{{$contract->name_kind}}</td>
-                                    <td>
-                                        {{$contract->name_type}}
-                                    </td>
-                                    <td>{{$contract->_name_banner}}</td>
+                                    <td>{{$contract->id_banner}}</td>
                                     <td>{{$contract->date_end}}</td>
                                     <td class="value_contract"><span>{{$contract->value_contract}}</span>
                                         VND
@@ -222,10 +215,7 @@
                                     <td>{{$contract->id_contract}}</td>
                                     <td>{{$contract->name_customer}}</td>
                                     <td>{{$contract->name_kind}}</td>
-                                    <td>
-                                        {{$contract->name_type}}
-                                    </td>
-                                    <td>{{$contract->_name_banner}}</td>
+                                    <td>{{$contract->id_banner}}</td>
                                     <td>{{$contract->date_end}}</td>
                                     <td class="value_contract"><span>{{$contract->value_contract}}</span>
                                         VND
