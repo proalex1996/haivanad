@@ -3471,3 +3471,10 @@ function showProduct() {
         }
     })
 }
+
+
+function finder() {
+    var data = $('#id_banner').val();
+    var url = $('#domain').attr('href');
+
+}

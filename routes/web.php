@@ -130,7 +130,13 @@ Route::group(['prefix' => 'product'], function () {
 
     });
 }
+
 );
+Route::group(['prefix' => 'finder'], function () {
+    Route::group(['middleware'=>'auth'],function (){
+        Route::get('/','FinderController@index');
+    });
+});
 Route::group(['prefix' => '/'], function () {
     Route::group(['middleware' => 'auth'], function () {
         Route::get('/', 'HomeController@index');
