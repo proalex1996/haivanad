@@ -19,7 +19,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-2 col-sm-12 m-t-30">
+                <div class="col-md-2 col-sm-12 m-t-15">
                     <label for="exampleFormControlInput1 "></label>
                     <button class="btn btn-primary btn-block" type="button" id="id_finder" onclick="finder()" aria-expanded="false">Tìm
                     </button>

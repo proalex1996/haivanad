@@ -15,7 +15,7 @@ class finderController extends Controller
             ->select('*')->get();
         return view('pages.finder.index',['banners'=>$banners]);
     }
-    public function getInfo(Request $request){
-        $infos = DB::table(banner)
-    }
+//    public function getInfo(Request $request){
+//        $infos = DB::table(banner)
+//    }
 }
