@@ -277,20 +277,20 @@
                                     <th class="text-center">VAT</th>
                                     <th class="text-center">Tổng</th>
                                     <th class="text-center">Ngày Thanh Toán</th>
-                                    <th class="text-center"width="20%">Trạng Thái</th>
+                                    <th class="text-center" width="20%">Trạng Thái</th>
                                 </tr>
                                 </thead>
                                 <tbody id="idBodyPayment">
                                     <tr class="idTrPayment">
                                     <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
                                                class="display-input m-r-5" {{$contract->readonly}}></td>
-                                    <td><input type="text" class="display-input form-control payment_period" data-target="{{$contract->id_contract}}" id="payment_period" name="payment_period[]" required {{$contract->readonly}}>
+                                    <td><input type="text" class="display-input form-control" data-target="{{$contract->id_contract}}" value="" id="payment_period" name="payment_period[]" required {{$contract->readonly}}>
                                     </td>
-                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onblur="setRatio(this)" name="ratio[]" required {{$contract->readonly}}></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract" id="id_value_contract"
+                                    <td><input type="text" class="form-control display-input" placeholder="Tỉ Lệ(%)" id="ratio" name="ratio[]" required {{$contract->readonly}}></td>
+                                    <td><input type="text" class="form-control display-input" id="id_value_contract"
                                                name="id_value_contract[]" readonly></td>
-                                    <td><input type="text" class="form-control display-input id_vat" value="10" placeholder="Thuế (%)" id="id_vat"  name="id_vat[]" readonly></td>
-                                    <td><input type="text" class="form-control display-input total" id="total" name="total_value[]" readonly></td>
+                                    <td><input type="text" class="form-control display-input" value="10" placeholder="Thuế (%)" id="id_vat"  name="id_vat[]" readonly></td>
+                                    <td><input type="text" class="form-control display-input" id="total" name="total_value[]" readonly></td>
                                     <td><input type="date" class="form-control display-input" id="_pay_due" name="_pay_due[]" required {{$contract->readonly}}> </td>
                                     <td><a class="dropdown-toggle form-control display-input" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink" {{$contract->readonly}}>Trạng Thái</a>
@@ -440,44 +440,6 @@
                         @endforeach
                     </select>
                 </div>
-                <table  id="example" class="display table-borderless table-responsive" style="width:100%; display: none">
-                    <thead>
-                    <tr>
-                        <th><input type="checkbox" id="check-all" name="title" onclick="checkAll()"></th>
-                        <th class="text-center">Kỳ</th>
-                        <th class="text-center">Tỷ Lệ</th>
-                        <th class="text-center">Số Tiền</th>
-                        <th class="text-center">VAT</th>
-                        <th class="text-center">Tổng</th>
-                        <th class="text-center">Ngày Thanh Toán</th>
-                        <th class="text-center"width="20%">Trạng Thái</th>
-                    </tr>
-                    </thead>
-                    <tbody id="idBodyPayment">
-                    <tr class="idTrPayment">
-                        <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
-                                   class="display-input m-r-5"></td>
-                        <td><input type="text" class="display-input form-control payment_period" data-target="{{$contract->id_contract}}" id="payment_period" name="payment_period[]" required>
-                        </td>
-                        <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onblur="setRatio(this)" name="ratio[]" required></td>
-                        <td><input type="text" class="form-control display-input id_value_contract" id="id_value_contract"
-                                   name="id_value_contract[]" readonly></td>
-                        <td><input type="text" class="form-control display-input id_vat" value="10" placeholder="Thuế (%)" id="id_vat"  name="id_vat[]" readonly></td>
-                        <td><input type="text" class="form-control display-input total" id="total" name="total_value[]" readonly></td>
-                        <td><input type="date" class="form-control display-input" id="_pay_due" name="_pay_due[]" required> </td>
-                        <td><a class="dropdown-toggle form-control display-input" data-toggle="dropdown" aria-haspopup="true"
-                               aria-expanded="false" id="dropdownMenuLink">Trạng Thái</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item"
-                                   href="{{url('contract/setpay1/'.$contract->id_contract)}}">Đã Thanh Toán</a>
-                                <a  class="dropdown-item"
-                                    href="{{url('contract/setpay2/'.$contract->id_contract)}}">Công Nợ</a>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-
-                </table>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                     <button type="submit"

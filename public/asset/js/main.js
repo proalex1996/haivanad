@@ -3419,8 +3419,8 @@ function showProduct() {
                                         <label for="exampleFormControlSelect1">Tỉnh/Thành Phố</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="tinh" name="tinh" onchange="getQuan(this)">
-                                            <option value="${ele.tinh}">${ele._name_province}</option>
+                                        <select class="form-control" id="tinh" name="tinh">
+                                            <option value="${ele.tinh}">${ele._name}</option>
                                         </select>
                                     </div>
 
