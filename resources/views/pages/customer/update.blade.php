@@ -47,11 +47,20 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12">
-                                            <label for="exampleFormControlInput1 uname">Người Đại Diện:</label>
+                                            <label for="exampleFormControlSelect1">Loại Khách Hàng</label>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <input type="text" class="form-customer-input" value="{{$customers->_cmnd}}" id="_cmnd" name="_cmnd"
-                                                   placeholder="Người Đại Diện">
+                                            <select class="form-customer-input" name="type_customer">
+                                                @foreach($type_customers as $type_customer)
+                                                    @if( $type_customer->id == $customers->type_customer)
+                                                        <option value="{{$type_customer->id}}"
+                                                                selected>{{$type_customer->name_type}}</option>
+                                                    @else
+                                                        <option
+                                                            value="{{$type_customer->id}}">{{$type_customer->name_type}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -142,6 +151,17 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12">
+                                            <label for="exampleFormControlInput1 uname">Người Đại Diện:</label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <input type="text" class="form-customer-input" value="{{$customers->_cmnd}}" id="_cmnd" name="_cmnd"
+                                                   placeholder="Người Đại Diện">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
                                             <label for="exampleFormControlInput1 uname">Chức Vụ</label>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
@@ -150,26 +170,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-6 col-sm-12">
-                                            <label for="exampleFormControlSelect1" >Loại Khách Hàng</label>
-                                        </div>
-                                        <div class="col-md-6 col-sm-12">
-                                            <select class="form-customer-input" name="type_customer">
-                                                @foreach($type_customers as $type_customer)
-                                                    @if( $type_customer->id == $customers->type_customer)
-                                                        <option value="{{$type_customer->id}}"
-                                                                selected>{{$type_customer->name_type}}</option>
-                                                    @else
-                                                        <option
-                                                            value="{{$type_customer->id}}">{{$type_customer->name_type}}</option>
-                                                    @endif
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+
 
                             </div>
                         </div>
@@ -214,7 +215,7 @@
                                             <label for="exampleFormControlInput1 uname" >Email:</label>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <input class="form-customer-input" type="email"  name="email_customer" value="{{$customers->email_customer}}" size="20" placeholder="example@mail.com" required>
+                                            <input class="form-customer-input" type="text"  name="email_customer" value="{{$customers->email_customer}}" size="20" placeholder="example@mail.com" required>
                                             <div class="invalid-feedback">Email không được để trống</div>
                                         </div>
                                     </div>
