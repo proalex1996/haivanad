@@ -124,8 +124,7 @@
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <input type="text" class="form-customer-input" oninput="addCommas(this)" maxlength="20"  name="_bank"
-                                                   placeholder="1111-2222-3333-4444" value="{{$customers->_bank}}" required>
-                                            <div class="invalid-feedback">Tên liên hệ không được để trống</div>
+                                                   placeholder="1111-2222-3333-4444" value="{{$customers->_bank}}">
                                         </div>
 
                                     </div>
