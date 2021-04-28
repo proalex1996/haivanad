@@ -18,6 +18,20 @@
                     <div class="container">
                         <div class="form-group">
                             <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <label for="exampleFormControlInput1 uname">Tên Khách Hàng:</label>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <input class="form-customer-input" type="text" id="name_customer" name="name_customer" placeholder="Tên Khách Hàng" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12">
@@ -33,11 +47,11 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12">
-                                            <label for="exampleFormControlInput1 uname">Tên Khách Hàng:</label>
+                                            <label for="exampleFormControlInput1 uname">Người Đại Diện:</label>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <input type="text" class="form-customer-input" id="name_customer" name="name_customer"
-                                                   placeholder="Tên Khách Hàng" required>
+                                            <input type="text" class="form-customer-input" id="_cmnd" name="_cmnd"
+                                                   placeholder="Người Đại Diện" required>
                                             <div class="invalid-feedback">Tên khách hàng không được để trống</div>
                                         </div>
                                     </div>
@@ -84,7 +98,7 @@
                                             <label for="exampleFormControlInput1">Đia Chỉ</label>
                                         </div>
                                         <div class="col-sm-9">
-                                            <input class="form-customer-input" type="text" id="adress_customer" name="adress_customer" placeholder="Địa Chỉ" required>
+                                            <input class="form-customer-input" type="text" id="adress_customer" name="adress_customer" placeholder="Địa Chỉ">
                                         </div>
                                     </div>
                                 </div>
@@ -99,7 +113,7 @@
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <input type="text" class="form-customer-input" oninput="addCommas(this)" maxlength="20" id="_bank" name="_bank"
-                                                   placeholder="1111-2222-3333-4444" required>
+                                                   placeholder="1111-2222-3333-4444">
                                             <div class="invalid-feedback">Tên liên hệ không được để trống</div>
                                         </div>
 
@@ -108,12 +122,11 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12">
-                                            <label for="exampleFormControlInput1 uname">Chức Vụ</label>
+                                            <label for="exampleFormControlInput1 uname">Tên Ngân Hàng</label>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <input type="text" class="form-customer-input" maxlength="20" id="position_customer" name="position_customer"
-                                                   placeholder="Chức Vụ" required>
-                                            <div class="invalid-feedback">Tên liên hệ không được để trống</div>
+                                            <input type="text" class="form-customer-input" maxlength="20" id="name_bank" name="name_bank"
+                                                   placeholder="Tên Ngân Hàng">
                                         </div>
 
                                     </div>
@@ -123,6 +136,19 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <label for="exampleFormControlInput1 uname">Chức Vụ</label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <input type="text" class="form-customer-input" maxlength="20" id="position_customer" name="position_customer"
+                                                   placeholder="Chức Vụ">
+                                            <div class="invalid-feedback">Tên liên hệ không được để trống</div>
+                                        </div>
+
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12">
@@ -160,8 +186,7 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-customer-input" id="contact_name" name="contact_name"
-                                               placeholder="Tên Liên Hệ" required>
-                                        <div class="invalid-feedback">Tên liên hệ không được để trống</div>
+                                               placeholder="Tên Liên Hệ">
                                     </div>
                                 </div>
                             </div>
@@ -171,8 +196,7 @@
                                         <label for="exampleFormControlInput1 uname">Số Điện Thoại:</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input class="form-customer-input" type="tel" id="phone_customer" name="phone_customer" size="20" maxlength="10" placeholder="Số Điện Thoại" required>
-                                        <div class="invalid-feedback">Số điện thoại không được để trống</div>
+                                        <input class="form-customer-input" type="tel" id="phone_customer" name="phone_customer" size="20" maxlength="10" placeholder="Số Điện Thoại">
                                     </div>
 
                                 </div>

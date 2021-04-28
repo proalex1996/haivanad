@@ -16,6 +16,21 @@
                     <div class="container">
                         <div class="form-group">
                             <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <label for="exampleFormControlInput1 uname">Tên Khách Hàng:</label>
+                                        </div>
+                                        <div class="col-md-9 col-sm-12">
+                                            <input type="text" class="form-customer-input" value="{{$customers->name_customer}}" id="name_customer" name="name_customer"
+                                                   placeholder="Tên Khách Hàng">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12">
@@ -23,7 +38,7 @@
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <input type="text" class="form-customer-input" id="id_customer" name="customer_id"
-                                                   placeholder="Mã Khách Hàng" value="{{$customers->customer_id}}" size="20" required>
+                                                   placeholder="Mã Khách Hàng" value="{{$customers->customer_id}}" size="20" readonly>
                                             <div class="invalid-feedback">Mã khách hàng không được để trống</div>
                                         </div>
 
@@ -32,12 +47,11 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12">
-                                            <label for="exampleFormControlInput1 uname">Tên Khách Hàng:</label>
+                                            <label for="exampleFormControlInput1 uname">Người Đại Diện:</label>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <input type="text" class="form-customer-input" value="{{$customers->name_customer}}" id="name_customer" name="name_customer"
-                                                   placeholder="Tên Khách Hàng" required>
-                                            <div class="invalid-feedback">Tên khách hàng không được để trống</div>
+                                            <input type="text" class="form-customer-input" value="{{$customers->_cmnd}}" id="_cmnd" name="_cmnd"
+                                                   placeholder="Người Đại Diện">
                                         </div>
                                     </div>
                                 </div>
@@ -110,6 +124,24 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12">
+                                            <label for="exampleFormControlInput1 uname">Tên Ngân Hàng</label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <input type="text" class="form-customer-input" value="{{$customers->name_bank}}" maxlength="20" id="name_bank" name="name_bank"
+                                                   placeholder="Tên Ngân Hàng">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
                                             <label for="exampleFormControlInput1 uname">Chức Vụ</label>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
@@ -118,11 +150,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12">

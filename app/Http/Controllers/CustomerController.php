@@ -84,7 +84,8 @@ class CustomerController extends Controller
     public function addCustomer(Request $request)
     {
         $maxid = DB::table('customer')->max('id');
-        $code = RamdomCode::generateCode($maxid);
+        $catelory = 'KH';
+        $code = RamdomCode::generateCode($catelory,$maxid);
         $status = DB::table('status')->select('*')->get();
         $type_customer = DB::table('type_customer')->select('*')->get();
         $customer = DB::table('customer')->select('*')->get();
@@ -112,6 +113,7 @@ class CustomerController extends Controller
         $customer->contact_name = $request->contact_name;
         $customer->_bank = $request->_bank;
         $customer->_cmnd = $request->_cmnd;
+        $customer->name_bank = $request->name_bank;
         $customer->phone_customer = $request->phone_customer;
         $customer->email_customer = $request->email_customer;
         $customer->type_customer = $request->type_customer;
@@ -130,7 +132,7 @@ class CustomerController extends Controller
         if(!empty($data))
         {
             $up = $this->customerRepository->update($id, $data);
-            return redirect()->action('CustomerController@getIndex');
+            return redirect()->refresh();
         }
         $customer = $this->customerRepository->find($id);
         $status = DB::table('status')->select('*')->get();

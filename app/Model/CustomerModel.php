@@ -26,6 +26,7 @@ class CustomerModel extends Model
         'adress_customer',
         '_cmnd',
         '_bank',
-        'position_customer'
+        'position_customer',
+        'name_bank'
     ];
 }

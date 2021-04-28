@@ -277,7 +277,6 @@
                                     <th class="text-center">VAT</th>
                                     <th class="text-center">Tổng</th>
                                     <th class="text-center">Ngày Thanh Toán</th>
-                                    <th class="text-center" width="20%">Trạng Thái</th>
                                 </tr>
                                 </thead>
                                 <tbody id="idBodyPayment">
@@ -292,15 +291,7 @@
                                     <td><input type="text" class="form-control display-input" value="10" placeholder="Thuế (%)" id="id_vat"  name="id_vat[]" readonly></td>
                                     <td><input type="text" class="form-control display-input" id="total" name="total_value[]" readonly></td>
                                     <td><input type="date" class="form-control display-input" id="_pay_due" name="_pay_due[]" required {{$contract->readonly}}> </td>
-                                    <td><a class="dropdown-toggle form-control display-input" data-toggle="dropdown" aria-haspopup="true"
-                                           aria-expanded="false" id="dropdownMenuLink" {{$contract->readonly}}>Trạng Thái</a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item"
-                                               href="{{url('contract/setpay1/'.$contract->id_contract)}}" {{$contract->readonly}}>Đã Thanh Toán</a>
-                                            <a  class="dropdown-item"
-                                               href="{{url('contract/setpay2/'.$contract->id_contract)}}" {{$contract->readonly}}>Công Nợ</a>
-                                        </div>
-                                    </td>
+
                                 </tr>
                                 </tbody>
 
@@ -391,9 +382,6 @@
         </form>
     </div>
 @endsection
-
-
-
 <div class="modal fade" id="due">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content container-fluid">
@@ -452,8 +440,6 @@
         </div>
     </div>
 </div>
-
-
 <div class="modal fade" id="detroy">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

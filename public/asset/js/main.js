@@ -1865,15 +1865,6 @@ $('#addrowPayment').on('click', function () {
                                     <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (USD)" id="total" name="total_value[]" readonly></td>
                                     <td><input type="date" class="form-control display-input" name="_pay_due[]" required>
                                     </td>
-                                    <td><a class="dropdown-toggle form-control display-input" data-toggle="dropdown" aria-haspopup="true"
-                                           aria-expanded="false" id="dropdownMenuLink"> Trạng Thái</a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item"
-                                               href="{{url('/contract/setpay1/'.$contract->id_contract)}}">Đã Thanh Toán</a>
-                                            <a  class="dropdown-item"
-                                               href="{{url('/contract/setpay2/'.$contract->id_contract)}}">Công Nợ</a>
-                                        </div>
-                                    </td>
                                 </tr>
            `)
 
@@ -2097,7 +2088,6 @@ function getProduct() {
 
 
 Ratio();
-
 function Ratio() {
     var url = $('#domain').attr('href');
     var data = $('#id_contract').val();
@@ -2117,11 +2107,11 @@ function Ratio() {
                         $('#payment_period').val(ele.payment_period)
                         $('#ratio').val(ele.ratio)
                         $('#id_value_contract').val(ele.id_value_contract)
-                        $('#id_vat').val(ele.id_vat)
                         $('#total').val(ele.total_value)
                         $('#_pay_due').val(ele._pay_due)
                     })
-                } else if (datas.length > 1) {
+                }
+                else if (datas.length > 1) {
                     $('.idTrPayment').remove();
                     $.each(datas, function (index, ele) {
                         $('#idBodyPayment').append(
@@ -2135,17 +2125,8 @@ function Ratio() {
                                     <td><input type="text" class="form-control display-input id_value_contract" value="${ele.id_value_contract}" id="id_value_contract"
                                                name="id_value_contract[]" readonly></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat" value="${ele.id_vat}" name="id_vat[]" readonly></td>
-                                    <td><input type="text" class="form-control display-input total" value="${ele.total_value}" id="total" name="total_value[]" readonly></td>
+                                    <td><input type="text" class="form-control display-input total" value="10" id="total" name="total_value[]" readonly></td>
                                     <td><input type="date" class="form-control display-input" value="${ele._pay_due}" name="_pay_due[]" required>
-                                    </td>
-                                    <td><a class="dropdown-toggle form-control display-input" data-toggle="dropdown" aria-haspopup="true"
-                                           aria-expanded="false" id="dropdownMenuLink"> Trạng Thái</a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item"
-                                               href="${url+'/contract/setpay1/'+$('#id_contract').val()}">Đã Thanh Toán</a>
-                                            <a  class="dropdown-item"
-                                               href="${url+'/contract/setpay2/'+$('#id_contract').val()}">Công Nợ</a>
-                                        </div>
                                     </td>
                                 </tr>` )
                     })

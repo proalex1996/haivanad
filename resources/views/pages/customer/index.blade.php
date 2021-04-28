@@ -43,25 +43,18 @@
                                    placeholder="Địa Chỉ">
                         </div>
                         <div class="col-md-5 col-sm-12 m-t-10">
-                            <label for="exampleFormControlInput1 ">Mã Số Thuế</label>
+                            <label for="exampleFormControlInput1 ">Mã Số Thuế/CMND</label>
                                <input type="text" class="form-control" id="mst" name="mst"
-                                   placeholder="Mã Số Thuế">
+                                   placeholder="Mã Số Thuế/CMND">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-5 col-sm-12 m-t-10">
-                            <label for="exampleFormControlSelect1">CMND</label>
-                            <input type="text" class="form-control" id="_cmnd" name="_cmnd"
-                                   placeholder="Chứng Minh Nhân Dân">
-                        </div>
+
                         <div class="col-md-5 col-sm-12 m-t-10">
                             <label for="exampleFormControlSelect1">Người Liên Hệ</label>
                             <input type="text" class="form-control" id="contact_name" name="contact_name"
                                    placeholder="Người Liên Hệ">
                         </div>
-
-                    </div>
-                    <div class="row">
                         <div class="col-md-5 col-sm-12 m-t-10">
                             <label for="exampleFormControlSelect1">Loại Khách Hàng</label>
                             <select class="form-control" id="type_customer" name="type_customer">
@@ -71,6 +64,10 @@
                                 @endforeach
                             </select>
                         </div>
+
+                    </div>
+                    <div class="row">
+
                         <div class="col-md-5 col-sm-12 m-t-10">
                             <label for="exampleFormControlSelect1">Trạng Thái</label>
                             <select class="form-control" id="status_customer" name="status_customer">
@@ -99,7 +96,7 @@
                             <th width="10%">Mã Khách Hàng</th>
                             <th width="20%">Tên Khách Hàng</th>
                             <th width="25%">Địa Chỉ</th>
-                            <th width="10%">Mã Số Thuế</th>
+                            <th width="10%">Mã Số Thuế/CMND</th>
                             <th width="10%">Loại khách hàng</th>
                             <th width="15%"></th>
                         </tr>

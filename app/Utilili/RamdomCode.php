@@ -6,9 +6,9 @@ namespace App\Utilili;
 
 class RamdomCode
 {
-    public static function generateCode($maxId)
+    public static function generateCode($catelory,$maxId)
     {
-        $char =now()->year."HV";
+        $char =substr(''.now()->year.'',2,2).$catelory."-HV";
         $result = $char;
         if (is_null($maxId)){
             $result .= '0001';
