@@ -62,7 +62,7 @@ class ProductController extends Controller
         if (!empty($request->id_typebanner)) {
             $banners = $banners->where('banner.id_typebanner', '=', $request->id_typebanner);
         }if(!empty($request->_name_banner)){
-        $banners = $banners ->where('banner._name_banner','=',$request->_name_banner);
+        $banners = $banners ->where('banner._name_banner','LIKE','%'.$request->_name_banner.'%');
     }
 
         $banners = $banners->groupBy('banner.id')->orderBy('banner.id', 'DESC')->get();
@@ -163,7 +163,8 @@ class ProductController extends Controller
     public function addProduct()
     {
         $maxid = DB::table('banner')->max('id');
-        $code = RamdomCode::generateCode($maxid);
+        $catelory = "SP";
+        $code = RamdomCode::generateCode($catelory,$maxid);
         $type_banners = DB::table('type_banner')->select('*')->get();
         $product = DB::table('banner')->select('*')->get();
         $status = DB::table('status_banner')->select('*')->get();

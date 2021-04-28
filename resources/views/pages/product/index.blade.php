@@ -1,3 +1,4 @@
+
 @extends('pages.top-page.master')
 @section('title','Sản Phẩm')
 @section('content')
@@ -10,7 +11,7 @@
                         @csrf
                         <div class="exp-excel m-r-10">
                             <input type="hidden" id="export_product" name="export_product" value="">
-                            <button class="au-btn au-btn-icon au-btn--blue" type="submit">
+                            <button class="au-btn au-btn-icon au-btn--blue"  type="submit">
                                 <i class="zmdi zmdi-plus"></i>Xuất file Excel
                             </button>
                         </div>
@@ -19,7 +20,7 @@
                         @csrf
                             <div class="add-contract">
                             <input type="hidden" id="checkbox_hidden" name="checkbox_hidden" value="">
-                            <button id="button_1" name="form1" onclick="disableButton(this)" class="au-btn au-btn-icon au-btn--blue">
+                            <button id="button_1" name="form1" onclick="disableButton(this), getSession()" class="au-btn au-btn-icon au-btn--blue">
                                 <i class="zmdi zmdi-plus"></i>Xuất File PPT
                             </button>
                         </div>

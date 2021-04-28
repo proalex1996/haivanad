@@ -59,11 +59,6 @@ class PptxFomat
             ->setOffsetX(7.68)
             ->setOffsetY(285.12);
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $textRun = $shape->createTextRun('THÀNH PHỐ CẦN THƠ');
-        $textRun->getFont()->setName('Times New Roman')
-            ->setBold(true)
-            ->setSize(50)
-            ->setColor(new Color('#000'));
         //side 1
         for ($i; $i < count($id_banner); $i++) {
             $currentSlide = $objPHPPowerPoint->createSlide();
@@ -80,7 +75,7 @@ class PptxFomat
                 ->setOffsetX(208.32)
                 ->setOffsetY(272.64);
             $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-            $textRun = $shape->createTextRun($name_banner[$i]);
+            $textRun = $shape->createTextRun('      Vị Trí Quảng Cáo                  '.$name_banner[$i]);
             $textRun->getFont()->setName('Times New Roman')
                 ->setBold(true)
                 ->setSize(31)
@@ -116,13 +111,13 @@ class PptxFomat
                 $text = $cell->createTextRun($_views[$i][0]);
                 $text->getFont()->setName('Times New Roman')
                     ->setItalic(true)
-                    ->setSize(18)
+                    ->setSize(14)
                     ->setColor(new Color('#000'));
                 $cell = $row->getCell(1);
                 $text = $cell->createTextRun($_views[$i][1]);
                 $text->getFont()->setName('Times New Roman')
                     ->setItalic(true)
-                    ->setSize(18)
+                    ->setSize(14)
                     ->setColor(new Color('#000'));
                 $row = $table_shape->createRow()
                     ->setHeight(254.4);
@@ -131,13 +126,13 @@ class PptxFomat
                 $text = $cell->createTextRun($_views[$i][2]);
                 $text->getFont()->setName('Times New Roman')
                     ->setItalic(true)
-                    ->setSize(18)
+                    ->setSize(14)
                     ->setColor(new Color('#000'));
                 $cell = $row->getCell(1);
                 $text = $cell->createTextRun($_views[$i][3]);
                 $text->getFont()->setName('Times New Roman')
                     ->setItalic(true)
-                    ->setSize(18)
+                    ->setSize(14)
                     ->setColor(new Color('#000'));
                 $shape = $currentSlide->createDrawingShape();
                 $shape->setName('PHPPresentation logo')
@@ -201,12 +196,12 @@ class PptxFomat
                     ->setOffsetY(496.32);
                 $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
                 $textRun = $shape->createTextRun('
-                - Kích thước: '.$size[$i].';
-                - Đặc điểm: '.$dac_diem[$i] . '.
-                - Kết cấu: '.$system[$i] . '
-                - Đèn chiếu sáng: '.$light_system[$i].'
-                - Đơn giá pano: '. $gianam[$i] . ' usd/năm (Chưa VAT)
-                - Đơn giá đèn: '.$v_light[$i].' usd/năm (Chưa gồm VAT)');
+    - Kích thước: '.$size[$i].';
+    - Đặc điểm: '.$dac_diem[$i] . '.
+    - Kết cấu: '.$system[$i] . '
+    - Đèn chiếu sáng: '.$light_system[$i].'
+    - Đơn giá đèn: '.$v_light[$i].' usd/năm (Chưa gồm VAT)
+    - Đơn giá pano: '. $gianam[$i] . ' usd/năm (Chưa VAT)');
                 $textRun->getFont()->setName('Times New Roman')
                     ->setSize(16);
                 break;

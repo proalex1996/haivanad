@@ -1824,13 +1824,17 @@ function getQuan(element) {
             for (i = length - 1; i >= 0; i--) {
                 select.options[i] = null;
             }
+            $('#quan').append(`<option value="">Tất Cả</option>`);
             $.each(quan, function (index, ele) {
 
                 if ($('#quan')[0].getAttribute('data-target') == ele.id) {
-                    $('#quan').append(`<option value='${ele.id_district}' selected>${ele._name_district}</option>`);
+
+                    $('#quan').append(`
+
+                            <option value='${ele.id_district}' selected>${ele._name_district}</option>`);
                 } else {
 
-                    $('#quan').append(`<option value='${ele.id_district}' >${ele._name_district}</option>`);
+                    $('#quan').append(` <option value='${ele.id_district}' >${ele._name_district}</option>`);
                 }
 
             });
@@ -2274,24 +2278,33 @@ $('.input-images-map').imageUploader({
     imagesInputName: 'maps',
     maxFiles: 1
 })
+
 function getCheckedBox() {
     var checkbox = $("input[name='check_box[]']:checked");
     var name = []
+    if ( typeof(Storage) !== 'undefined') {
+
+
+
     $.each(checkbox,function (index,ele) {
         name.push(ele.value)
-    })
-    $('#checkbox_hidden').val(name);
+
+    });
+        sessionStorage.setItem('checkboxs',name);
+    var getItem = sessionStorage.getItem('checkboxs');
+        var storage = getItem
+    } else {
+        alert('Trình duyệt của bạn không hỗ trợ!');
+    }
     $('#export_product').val(name);
 }
-// function disableButton() {
-//
-//     if ($('#checkbox_hidden').val() == ""){
-//            alert("Vui lòng chọn sản phẩm xuất để file");
-//     }else {
-//         document.getElementById('export_ppt_form').submit();
-//     }
-//
-// }
+getSession()
+function getSession() {
+    var neft =  sessionStorage.getItem('checkboxs');
+    console.log(neft);
+    $('#checkbox_hidden').val(neft);
+    sessionStorage.clear();
+}
 function disableButton(elements) {
     var div  = elements.closest('div');
     var input = div.children[0];
