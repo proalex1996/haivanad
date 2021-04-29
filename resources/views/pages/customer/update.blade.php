@@ -135,7 +135,7 @@
                                             <label for="exampleFormControlInput1 uname">Tên Ngân Hàng</label>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
-                                            <input type="text" class="form-customer-input" value="{{$customers->name_bank}}" maxlength="20" id="name_bank" name="name_bank"
+                                            <input type="text" class="form-customer-input" value="{{$customers->name_bank}}" id="name_bank" name="name_bank"
                                                    placeholder="Tên Ngân Hàng">
                                         </div>
 
