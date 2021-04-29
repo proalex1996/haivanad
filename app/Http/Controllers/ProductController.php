@@ -49,7 +49,7 @@ class ProductController extends Controller
             ->join('status_banner', 'banner.name_status', '=', 'status_banner.id_status')
             ->join('type_banner','banner.id_typebanner','=','type_banner.id_typebanner')
             ->join('province','banner.tinh','=','province._code')
-            ->select('banner.id', 'status_banner.name_status','province._name', 'type_banner.name_type','banner._name_banner','status_banner.id_status', 'banner.id_banner');
+            ->select('banner.id', 'status_banner.name_status','province._name', 'banner.gianam','type_banner.name_type','banner._name_banner','status_banner.id_status', 'banner.id_banner');
         if (!empty($request->id_banner)) {
             $banners = $banners->where('banner.id_banner', '=',  $request->id_banner );
         }
