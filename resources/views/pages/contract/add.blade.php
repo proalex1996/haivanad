@@ -286,7 +286,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-3 col-sm-12">
-                                <label for="exampleFormControlInput1 uname">Giá Năm</label>
+                                <label for="exampleFormControlInput1 uname">Giá Năm(USD)</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
                                 <input type="text" class="form-control" id="gianam_1" name="gianam"
@@ -336,7 +336,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1">Giá trị hợp đồng</label>
+                                        <label for="exampleFormControlInput1">Giá trị hợp đồng(USD)</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-control" data-type="currency" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" onchange="getTong()" id="value_contract"
@@ -350,7 +350,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1">Thuế VAT</label>
+                                        <label for="exampleFormControlInput1">Thuế VAT(%)</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="number" class="form-control"  onchange="getTong()" id="thue"
@@ -366,7 +366,7 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Tổng</label>
+                                        <label for="exampleFormControlInput1 uname">Tổng(VND)</label>
                                     </div>
                                     <div class="col-md-9 col-sm-12">
                                         <input type="number" class="form-control" value="" id="tong" name="tong"

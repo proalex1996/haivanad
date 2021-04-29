@@ -2282,27 +2282,22 @@ $('.input-images-map').imageUploader({
 function getCheckedBox() {
     var checkbox = $("input[name='check_box[]']:checked");
     var name = []
-    if ( typeof(Storage) !== 'undefined') {
-
-
-
     $.each(checkbox,function (index,ele) {
         name.push(ele.value)
-
     });
-        sessionStorage.setItem('checkboxs',name);
-    var getItem = sessionStorage.getItem('checkboxs');
-        var storage = getItem
-    } else {
-        alert('Trình duyệt của bạn không hỗ trợ!');
-    }
+
+    $('#checkbox_hidden').val(name);
+    var checkboxs = $('#checkbox_hidden').val();
     $('#export_product').val(name);
+    sessionStorage.setItem('checkboxs',checkboxs);
+
 }
 getSession()
 function getSession() {
+    var checkboxs = $('#checkbox_hidden').val();
     var neft =  sessionStorage.getItem('checkboxs');
+    neft += neft + checkboxs;
     console.log(neft);
-    $('#checkbox_hidden').val(neft);
     sessionStorage.clear();
 }
 function disableButton(elements) {

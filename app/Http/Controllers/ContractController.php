@@ -315,7 +315,8 @@ class ContractController extends Controller
     public function addContract(Request $request)
     {
         $maxid = DB::table('contract')->max('id');
-        $code = RamdomCode::generateCode($maxid);
+        $catelory = "HD";
+        $code = RamdomCode::generateCode($catelory,$maxid);
         $banner = DB::table('banner')->select('*')->get();
         $kind_contract = DB::table('kind_contract')->select('*')->get();
         $staff = DB::table('users')->select('*')->get();
