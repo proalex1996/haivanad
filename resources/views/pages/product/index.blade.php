@@ -101,17 +101,17 @@
                             <th><input type="checkbox" id="check-all" name="title" onchange="getCheckedBox()" onclick="checkAll()"></th>
                             <th width="20%">Mã Pano</th>
                             <th width="20%">Loại Hình</th>
-                            <th width="20%">Vị Trí</th>
+                            <th>Vị Trí</th>
                             <th width="20%">Tỉnh/Thành Phố</th>
                             <th width="10%">Trạng thái</th>
-                            <th></th>
+                            <th>Giá Năm</th>
                         </tr>
                         </thead>
                         <tbody class="overflow-scroll">
                         @foreach($banners as $banner)
                             @if ($banner->id_status == 2)
                                 <tr class="status--process" id="row_product_{{$banner->id}}" >
-                                    <td><input type="checkbox" id="check-box" onchange="getCheckedBox()" data-target="{{$banner->id}}" name="check_box[]" value="{{$banner->id_banner}}"
+                                    <td><input type="checkbox" id="check-box" onchange="getCheckedBox()" onclick="getSession()" data-target="{{$banner->id}}" name="check_box[]" value="{{$banner->id_banner}}"
                                                class="display-input m-r-5"></td>
                                     <td class="id_banner">{{$banner->id_banner}}</td>
                                     <td>2021+{{$banner->name_type}}</td>
@@ -127,12 +127,12 @@
 {{--                                        </div>--}}
                                     </td>
 
-                                    <td><a href="{{url('/product/update/'.$banner->id)}}">Xem Chi Tiết</a></td>
+                                    <td>{{$banner->gianam}}</td>
 
 
                             @elseif($banner->id_status==1)
                                 <tr id="row_product_{{$banner->id}}">
-                                    <td><input type="checkbox" id="check-box" data-target="{{$banner->id}}" name="check_box[]" onchange="getCheckedBox()" value="{{$banner->id_banner}}"
+                                    <td><input type="checkbox" id="check-box" data-target="{{$banner->id}}" name="check_box[]" onchange="getCheckedBox()" onclick="getSession()" value="{{$banner->id_banner}}"
                                                class="display-input m-r-5"></td>
                                     <td class="id_banner">{{$banner->id_banner}}</td>
                                     <td>{{$banner->name_type}}</td>
@@ -147,10 +147,10 @@
 {{--                                            @endforeach--}}
 {{--                                        </div>--}}
                                     </td>
-                                    <td><a href="{{url('/product/update/'.$banner->id)}}">Xem Chi Tiết</a></td>
+                                    <td>{{$banner->gianam}}</td>
                             @else
                                 <tr id="row_product_{{$banner->id}}">
-                                    <td><input type="checkbox" id="check-box" data-target="{{$banner->id}}" name="check_box[]" onchange="getCheckedBox()" value="{{$banner->id_banner}}"
+                                    <td><input type="checkbox" id="check-box" data-target="{{$banner->id}}" name="check_box[]" onchange="getCheckedBox()" onclick="getSession()" value="{{$banner->id_banner}}"
                                                class="display-input m-r-5"></td>
                                     <td class="id_banner">{{$banner->id_banner}}</td>
                                     <td>{{$banner->name_type}}</td>
@@ -165,7 +165,7 @@
 {{--                                            @endforeach--}}
 {{--                                        </div>--}}
                                     </td>
-                                    <td><a href="{{url('/product/update/'.$banner->id)}}">Xem Chi Tiết</a></td>
+                                    <td>{{$banner->gianam}}</td>
                             @endif
                         @endforeach
                         </tbody>
