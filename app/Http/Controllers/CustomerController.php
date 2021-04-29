@@ -52,25 +52,22 @@ class CustomerController extends Controller
            $customers = $customers ->where('customer_id','=',$request->customer_id);
        }
         if(!empty($request->name_customer)){
-            $customers = $customers ->where('name_customer','=',$request->name_customer);
+            $customers = $customers ->where('name_customer','LIKE','%'.$request->name_customer.'%');
         }
         if(!empty($request->mst)){
-            $customers = $customers ->where('customer.mst','=',$request->mst);
+            $customers = $customers ->where('customer.mst','LIKE','%'.$request->mst.'%');
         }
         if(!empty($request->adress_customer)){
-            $customers = $customers ->where('customer.adress_customer','=',$request->adress_customer);
+            $customers = $customers ->where('customer.adress_customer','LIKE','%'.$request->adress_customer.'%');
         }
         if(!empty($request->contact_name)){
-            $customers = $customers ->where('customer.contact_name','=',$request->contact_name);
+            $customers = $customers ->where('customer.contact_name','LIKE','%'.$request->contact_name.'%');
         }
         if(!empty($request->type_customer)){
             $customers = $customers ->where('customer.type_customer','=',$request->type_customer);
         }
         if(!empty($request->status_customer)){
             $customers = $customers ->where('customer.status_customer','=',$request->status_customer);
-        }
-        if(!empty($request->_cmnd)){
-            $customers = $customers ->where('customer._cmnd','=',$request->_cmnd);
         }
 
         $customers= $customers->groupBy('customer.id')->orderBy('customer.id','DESC')->get();
