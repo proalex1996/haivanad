@@ -14804,6 +14804,16 @@ section {
     margin: unset;
     background-image: url(../images/finder.png);
 }
+.icon-payment{
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: unset;
+    background-image: url(../images/payment.png);
+}
 .item-menu{
     display: inline-flex;
     margin-left: 20px;

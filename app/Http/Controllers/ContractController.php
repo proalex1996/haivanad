@@ -351,6 +351,7 @@ class ContractController extends Controller
         $contract->id_contract = $request->id_contract;
         $contract->id_customer = $request->name_customer;
         $contract->id_staff = $request->id_staff;
+
         if(!empty($request->id_banner[0])){
             for ($j = 0;$j < sizeof($request->id_banner);$j++){
                 $inContract = new Product_in_Contract();
@@ -373,6 +374,10 @@ class ContractController extends Controller
         $value_contract = $request->value_contract;
         $value_contract = str_replace('$','',$value_contract);
         $value_contract = str_replace(',','',$value_contract);
+        $exchange = $request->exchange;
+        $exchange = str_replace('$','',$exchange);
+        $exchange = str_replace(',','',$exchange);
+        $contract->exchange = $exchange;
         $contract->value_contract = $value_contract;
         $contract->note_contract = $request->note_contract;
         //$pdf = PDF::loadview('contract.blade.php',$file);

@@ -214,7 +214,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1">Giá trị hợp đồng</label>
@@ -228,7 +228,21 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlInput1">Tỉ Giá VND/1USD</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" class="form-control" data-type="currency" value="{{$contract->exchange}}" onchange="getTong()" id="exchange"
+                                               name="exchange"
+                                               placeholder="VND">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1">Thuế VAT</label>
@@ -283,9 +297,9 @@
                                     <tr class="idTrPayment">
                                     <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
                                                class="display-input m-r-5" {{$contract->readonly}}></td>
-                                    <td><input type="text" class="display-input form-control" data-target="{{$contract->id_contract}}" value="" id="payment_period" name="payment_period[]" required {{$contract->readonly}}>
+                                    <td><input type="text" class="display-input form-control" data-target="{{$contract->id_contract}}"  value="" id="payment_period" name="payment_period[]" required {{$contract->readonly}}>
                                     </td>
-                                    <td><input type="text" class="form-control display-input" placeholder="Tỉ Lệ(%)" id="ratio" name="ratio[]" required {{$contract->readonly}}></td>
+                                    <td><input type="text" class="form-control display-input" placeholder="Tỉ Lệ(%)" id="ratio" onchange="setRatio(this)" name="ratio[]" required {{$contract->readonly}}></td>
                                     <td><input type="text" class="form-control display-input" id="id_value_contract"
                                                name="id_value_contract[]" readonly></td>
                                     <td><input type="text" class="form-control display-input" value="10" placeholder="Thuế (%)" id="id_vat"  name="id_vat[]" readonly></td>

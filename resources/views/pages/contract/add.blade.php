@@ -332,8 +332,8 @@
 
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
+                        <div class="row" style="margin-bottom: 20px; margin-top: 15px">
+                            <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1">Giá trị hợp đồng(USD)</label>
@@ -342,21 +342,36 @@
                                         <input type="text" class="form-control" data-type="currency" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" onchange="getTong()" id="value_contract"
                                                name="value_contract" maxlength="13"
                                                placeholder="Giá trị hợp đồng" value="" required>
-                                        <div class="invalid-feedback m-l-20">Vui lòng nhập giá trị hợp đồng</div>
                                     </div>
 
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="exampleFormControlInput1">Tỉ Giá VND/1USD</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" class="form-control" data-type="currency"  onchange="getTong()" id="exchange"
+                                               name="exchange"
+                                               placeholder="VND">
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <label for="exampleFormControlInput1">Thuế VAT(%)</label>
                                     </div>
-                                    <div class="col-md-6 col-sm-12">
+                                    <div class="col-md-3 col-sm-12">
                                         <input type="number" class="form-control"  onchange="getTong()" id="thue"
                                                name="thue"
                                                placeholder="Thuế (%)" value="10" readonly>
+
                                     </div>
+                                    <label for="exampleFormControlInput1">(%)</label>
 
                                 </div>
 

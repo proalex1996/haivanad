@@ -1990,20 +1990,28 @@ $(document).ready(function () {
 });
 function getTong() {
     var gia = $('#value_contract').val();
+    var exchange = $('#exchange').val();
+    exchange = exchange.split('$').join("");
+    exchange = exchange.split(',').join("");
     gia = gia.split('$').join("");
     gia = gia.split(',').join("");
-    var thue = (($('#thue').val() * gia) / 100);
-    $('#tong').val(parseInt(gia) + parseInt(thue));
+    var total = gia * exchange;
+    var thue = (($('#thue').val() * total) / 100);
+    $('#tong').val(parseInt(total) + parseInt(thue));
 }
 
 function setRatio(elements) {
     var parent = $(elements).closest('tr');
     var gia = parent.children('td').find('.ratio');
-    var value = $('#value_contract').val()
+    var value = $('#value_contract').val();
+    var exchange = $('#exchange').val();
+    exchange = exchange.split('$').join("");
+    exchange = exchange.split(',').join("");
     var id_value = parent.children('td').find('.id_value_contract');
         value = value.split('$').join("");
         value = value.split(',').join("");
-     $(id_value).val((value * $(gia).val())/100)
+        var total_value = value * exchange
+     $(id_value).val((total_value * $(gia).val())/100)
     var thue = parent.children('td').find('.id_vat');
     var total = parent.children('td').find('.total');
     var vat = ($(thue).val() * $(id_value).val())/ 100
@@ -2125,7 +2133,7 @@ function Ratio() {
                                     <td><input type="text" class="display-input form-control payment_period" id="payment_period" value="${ele.payment_period}" name="payment_period[]"
                                                required>
                                     </td>
-                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" value="${ele.ratio}" id="ratio" onblur="setRatio(this)" name="ratio[]" required></td>
+                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" value="${ele.ratio}" id="ratio" onchange="setRatio(this)" name="ratio[]" required></td>
                                     <td><input type="text" class="form-control display-input id_value_contract" value="${ele.id_value_contract}" id="id_value_contract"
                                                name="id_value_contract[]" readonly></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat" value="${ele.id_vat}" name="id_vat[]" readonly></td>

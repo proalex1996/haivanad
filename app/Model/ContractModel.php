@@ -28,7 +28,8 @@ class ContractModel extends Model
         'vat',
         'note_contract',
         'readonly',
-        'contented'
+        'contented',
+        'exchange'
     ];
 
 
