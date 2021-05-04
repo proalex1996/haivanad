@@ -340,7 +340,7 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-control" data-type="currency" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" onchange="getTong()" id="value_contract"
-                                               name="value_contract" maxlength="13"
+                                               name="value_contract"
                                                placeholder="Giá trị hợp đồng" value="" required>
                                     </div>
 

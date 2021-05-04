@@ -3284,6 +3284,15 @@ function product(element) {
     var gianam = $('#gianam_'+count);
     var url = $('#domain').attr('href');
     var data = _name_banner.val();
+    var value_contract = '';
+    if( $('#value_contract').val() == ""){
+        value_contract = 0;
+    }else {
+        value_contract =  $('#value_contract').val();
+    }
+
+
+
     $.ajax({
         url: url + '/api/contract/product/' + data,
             async: false,
@@ -3307,17 +3316,23 @@ function product(element) {
                     id_system.val(elements.id_system)
                     size_banner.val(elements.size_banner);
                     gianam.val(elements.gianam);
-                    console.log(elements)
+                    var gianamText =  gianam.val().toString();
+                    gianamText = gianamText.replace('$','');
+                    gianamText = gianamText.replace(',','');
+                    value_contract = parseInt(value_contract) + parseInt(gianamText);
+
                 })
+                $('#value_contract').val(value_contract);
             }
         }
     })
+
 }
 //only use in funtion Contract
 function getListproduct(element) {
     var count = element - 1;
     var _name_banner = $('#_name_banner_' + count);
-    var chill_name = _name_banner.children();console.log(chill_name)
+    var chill_name = _name_banner.children();
     if(count > 1){
         var url = $('#domain').attr('href');
         $.ajax({

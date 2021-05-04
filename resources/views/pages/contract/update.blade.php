@@ -346,7 +346,7 @@
                     <label for="exampleFormControlSelect1">Ghi Chú</label>
                     <div class="custom-file">
                         <input class="form-control" value="{{$contract->note_contract}}" type="text" name="note_contract"
-                            {{$contract->readonly}} >
+                            {{$contract->readonly}}bn>
                     </div>
                 </div>
                 <div class="form-group">
