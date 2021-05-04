@@ -72,17 +72,13 @@
                         </thead>
                         <tbody>
                         @foreach($users as $user)
-                            <tr>
-                                <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            <tr id ="row_staff_{{$user->id}}">
+                                <td data-target="{{$user->id}}"><a class="dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true"
                                        aria-expanded="false" id="dropdownMenuLink"> {{$user->id}}</a>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item"
                                            href="{{\Illuminate\Support\Facades\URL::to('users/update')."/".$user->id}}">Sửa
                                             thông tin nhân viên</a>
-                                        <a id="open-deleteStaff" class="dropdown-item"
-                                           data-id_data="{{$user->id}}" data-toggle="modal"
-                                           data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa
-                                        </a>
                                     </div>
                                 </td>
                                 <td>{{$user->id_staff}}</td>
@@ -156,28 +152,6 @@
 
     </div>
 @endsection
-<div class="modal fade" id="detroy">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Thông Báo</h4>
-                <button type="button" class="close" data-dismiss="modal">×</button>
-            </div>
-            <div class="modal-body">
-                Xác nhận xóa
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <a type="button" id="destroy-value"
-                   data-destroy-link="{{\Illuminate\Support\Facades\URL::to('users/destroy')."/"}}"
-                   class="btn btn-primary">Xác Nhận
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 {{--<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"--}}
 {{--     aria-hidden="true">--}}
 {{--    <div class="modal-dialog modal-dialog-centered" role="document">--}}

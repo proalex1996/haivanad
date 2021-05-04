@@ -230,12 +230,36 @@
                         <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">
                             <i class="zmdi zmdi-plus"></i>Lưu
                         </button>
+                        <a id="open-deleteStaff"
+                           data-id_data="{{$staffs->id}}" data-toggle="modal"
+                           data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')" class="au-btn au-btn-icon au-btn--red float-left">Xóa
+                        </a>
                     </div>
                 </div>
             </div>
         </form>
     </div>
 @endsection
+<div class="modal fade" id="detroy">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Thông Báo</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+                Xác nhận xóa
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <a type="button" id="destroy-value"
+                   data-destroy-link="{{\Illuminate\Support\Facades\URL::to('users/destroy')."/"}}"
+                   class="btn btn-primary">Xác Nhận
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

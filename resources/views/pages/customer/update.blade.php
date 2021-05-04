@@ -250,7 +250,7 @@
                     </button>
                     <a type="button" id="open-deleteContract"
                        data-id_data="{{$customers->id}}" data-toggle="modal"
-                       data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')"class="au-btn au-btn-icon au-btn--red float-left">
+                       data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')" class="au-btn au-btn-icon au-btn--red float-left">
                         <i class="far fa-trash-alt"></i>Xóa
                     </a>
                 </div>

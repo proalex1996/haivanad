@@ -2216,6 +2216,12 @@ $('[id^="row_contract"]').dblclick(function () {
     var data = $(this).find('td:first').find('input').attr('data-target')
     location.assign(url+"/contract/update/"+data)
 })
+$('[id^="row_staff"]').dblclick(function () {
+    var url = $('#domain').attr('href');
+    var data = $(this).find('td:first').attr('data-target')
+    location.assign(url+"/users/update/"+data)
+})
+
 getPhoto()
 function getPhoto() {
     var url = $('#domain').attr('href');
