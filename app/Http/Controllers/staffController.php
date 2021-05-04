@@ -7,8 +7,10 @@ namespace App\Http\Controllers;
 use App\Exports\ExportProduct;
 use App\Exports\ExportStaff;
 use App\Imports\ImportStaff;
+use App\Model\Position;
 use App\Model\staffModel;
 use App\Repositories\Staff\staffRepositoryEloquent;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
@@ -186,5 +188,68 @@ class staffController extends Controller
     public function export()
     {
         return Excel::download(new ExportStaff, 'Danh Sách Nhân Viên.xlsx');
+    }
+    public function addPosition(Request $request){
+        $checks = DB::table('positions')->select(DB::raw('count(id_position) as id_position'))->where('id_position','=',$request->id)->get();
+        foreach ($checks as $check){
+            if($check->id_position == 0){
+                $position = new Position();
+                $position ->id_position = $request->id;
+                $position->name_position = $request->name;
+                $position->save();
+                return array(
+                    'success' => true,
+                    'status' => 200,
+                    'message' => 'Cập nhận thành công'
+                );
+            }else{
+                return array(
+                    'success' => false,
+                    'status' => 200,
+                    'message' => 'Mã nhập vào đã tồn tại'
+                );
+            }
+        }
+
+    }
+    public function updatePosition(Request $request){
+        if(!empty($request->id)){
+            $position = Position::where('id_position' ,$request->id)
+                ->first();
+            $position->name_position = $request->name;
+            $position->save();
+
+
+            return array(
+                'success' => true,
+                'status' => 200,
+                'message' => 'Cập nhận thành công'
+            );
+        }else{
+            return array(
+                'success' => false,
+                'status' => 200,
+                'message' => 'Vui lòng nhập đầy đủ thông tin'
+            );
+        }
+    }
+    public function deletePosition(Request $request){
+        try{
+            $position = Position::where('id_position' ,$request->id)
+                ->first();
+            $position->delete();
+            return array(
+                'success' => true,
+                'status' => 200,
+                'message' => 'Cập nhận thành công'
+            );
+        }catch (\Exception $e){
+            return array(
+                'success' => false,
+                'status' => 200,
+                'message' => 'Mã trạng thái đã được liên kết với 1 nhân viên bạn phải xóa nhân viên đó trước'
+            );
+        }
+
     }
 }

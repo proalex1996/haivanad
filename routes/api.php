@@ -78,6 +78,9 @@ Route::group(['prefix' => 'user'], function (){
     Route::post('/add-type-customer','ContractController@addTypeCustomer');
     Route::post('/update-type-customer','ContractController@updateTypeCustomer');
     Route::post('/delete-type-customer','ContractController@deleteTypeCustomer');
+    Route::post('/add-position','staffController@addPosition');
+    Route::post('/update-position','staffController@updatePosition');
+    Route::post('/delete-position','staffController@deletePosition');
 
 });
 

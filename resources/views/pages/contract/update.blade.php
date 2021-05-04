@@ -115,7 +115,7 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">MST</label>
+                                        <label for="exampleFormControlInput1 uname">MST/CMND</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-control" value="" id="mst" name="mst"
@@ -301,9 +301,9 @@
                                     </td>
                                     <td><input type="text" class="form-control display-input" placeholder="Tỉ Lệ(%)" id="ratio" onchange="setRatio(this)" name="ratio[]" required {{$contract->readonly}}></td>
                                     <td><input type="text" class="form-control display-input" id="id_value_contract"
-                                               name="id_value_contract[]" readonly></td>
-                                    <td><input type="text" class="form-control display-input" value="10" placeholder="Thuế (%)" id="id_vat"  name="id_vat[]" readonly></td>
-                                    <td><input type="text" class="form-control display-input" id="total" name="total_value[]" readonly></td>
+                                               name="id_value_contract[]"></td>
+                                    <td><input type="text" class="form-control display-input" value="10" placeholder="Thuế (%)" id="id_vat"  name="id_vat[]"></td>
+                                    <td><input type="text" class="form-control display-input" id="total" name="total_value[]" ></td>
                                     <td><input type="date" class="form-control display-input" id="_pay_due" name="_pay_due[]" required {{$contract->readonly}}> </td>
 
                                 </tr>
@@ -324,29 +324,33 @@
                         </div>
                     </fieldset>
                 </form>
-                <div class="form-group m-t-20">
-                    <label for="exampleFormControlSelect1">Hợp đồng đã ký</label>
-                    <div class="custom-file">
-                        <label class="custom-file-label" for="validatedCustomFile">{{$contract->contented}}</label>
-                        <input type="file" class="custom-file-input" accept=".doc,.docx,.pdf" id="contented"
-                               name="contented" {{$contract->readonly}}>
-                        <div class="invalid-feedback">Định dạng file phải là .doc, .docx, .pdf</div>
+                <div class="row">
+                    <div class="form-group m-t-20 col-md-6">
+                        <label for="exampleFormControlSelect1">Hợp đồng đã ký</label>
+                        <div class="custom-file">
+                            <label class="custom-file-label" for="validatedCustomFile">{{$contract->contented}}</label>
+                            <input type="file" class="custom-file-input" accept=".doc,.docx,.pdf" id="contented"
+                                   name="contented" {{$contract->readonly}}>
+                        </div>
+                    </div>
+                    <div class="col-md-6 m-t-20">
+                            sfsfsf
                     </div>
                 </div>
-                <div class="form-group m-t-20">
+
+                <div class="form-group m-t-20 col-md-6">
                     <label for="exampleFormControlSelect1">Nội dung hợp đồng</label>
                     <div class="custom-file">
                         <label class="custom-file-label" for="validatedCustomFile">{{$contract->content}}</label>
                         <input type="file" class="custom-file-input" accept=".doc,.docx,.pdf" id="content_contract"
                                name="content_contract" {{$contract->readonly}}>
-                        <div class="invalid-feedback">Định dạng file phải là .doc, .docx, .pdf</div>
                     </div>
                 </div>
-                <div class="form-group m-t-20">
+                <div class="form-group m-t-20 col-md-6">
                     <label for="exampleFormControlSelect1">Ghi Chú</label>
                     <div class="custom-file">
                         <input class="form-control" value="{{$contract->note_contract}}" type="text" name="note_contract"
-                            {{$contract->readonly}}bn>
+                            {{$contract->readonly}}>
                     </div>
                 </div>
                 <div class="form-group">

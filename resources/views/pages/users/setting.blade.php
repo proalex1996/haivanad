@@ -15,6 +15,55 @@
                 </div>
             @endif
             <fieldset class="border-text">
+                <legend class='text-left'>Chức Vụ</legend>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-12 m-t-10">
+                            <label for="exampleFormControlInput1 ">Mã Chức Vụ</label>
+                            <input type="text" class="form-control" id="id_position" name="id_position"
+                                   placeholder="Mã Chức Vụ" required>
+                        </div>
+                        <div class="col-md-3 col-sm-12 m-t-10">
+                            <label for="exampleFormControlInput1 ">Tên Chức Vụ</label>
+                            <input type="text" class="form-control" id="name_position" name="name_position"
+                                   placeholder="Tên Chức Vụ" required>
+                        </div>
+                        <div class="col-md-3 col-sm-12" style="margin-top: 43px">
+                            <button type="button" class="btn btn-info" id="add_position">Thêm</button>
+                        </div>
+                    </div>
+                    <table class="table table-hover" style="background-color: #ffffff; margin-bottom: 1rem;">
+                        <thead>
+                        <tr>
+                            <th scope="col">Mã Chức Vụ</th>
+                            <th scope="col">Tên Chức Vụ</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($positions as $position)
+                            <tr id = "{{$position->id_position}}">
+                                <td>{{$position->id_position}}</td>
+                                <td>{{$position->name_position}}</td>
+                                <td>
+                                    <button type="button" title="Sửa" class="btn btn-success"
+                                            data-toggle="modal" data-target="#position"
+                                            data-id = "{{$position->id_position}}"
+                                            data-name="{{$position->name_position}}" ><i class="fas fa-edit"></i></button>
+                                    <button type="button" title="Xóa" name="delete_position"
+                                            class="btn btn-danger delete_position">
+                                        <i class="far fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+            </fieldset>
+            <fieldset class="border-text">
                 <legend class='text-left'>Chi Nhánh</legend>
                 <div class="container">
                     <div class="row">
@@ -589,5 +638,39 @@
         </div>
     </div>
 </div>
+{{--edit position--}}
+<div class="modal fade" id="position" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cập Nhật Loại KH</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Mã Loại KH:</label>
+                        <input type="text" class="form-control" id="modal_id_position" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Tên Loại KH:</label>
+                        <input type="text" class="form-control" id="modal_name_position">
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" id="modal_submit_position">Xác Nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 

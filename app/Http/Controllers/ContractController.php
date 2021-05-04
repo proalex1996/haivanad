@@ -616,6 +616,7 @@ class ContractController extends Controller
         $status_banner = DB::table('status_banner')->select()->get();
         $nguons = DB::table('nguon_customer')->select('*')->get();
         $type_customers = DB::table('type_customer')->select('*')->get();
+        $position = DB::table('positions')->select('*')->get();
         return view('pages.users.setting',[
             'kinds' => $kinds,
             'status_contracts' => $status_contract,
@@ -623,7 +624,8 @@ class ContractController extends Controller
             'type_banners' => $type_banner,
             'status_banners' => $status_banner,
             'nguons' => $nguons,
-            'type_customers' =>$type_customers
+            'type_customers' =>$type_customers,
+            'positions' => $position
 
         ]);
     }
@@ -952,6 +954,7 @@ class ContractController extends Controller
             ->join('province','banner.tinh','=','province._code')
             ->join('district','banner.quan','=','district.id_district')
             ->join('product_in_contract','banner.id_banner','=','product_in_contract.id_banner')
+            ->select('banner.*','contract.readonly')
             ->where('product_in_contract.id_contract',$request->id_contract)->get();
         return json_encode(['show' => $show], 200);
     }

@@ -1950,7 +1950,8 @@ function getCustomer() {
                     $('#adress_customer').val(ele.adress_customer);
                     $('#phone_customer').val(ele.phone_customer);
                     $('#name_contact').val(ele.phone_customer);
-                    $('#contact_name').val(ele.contact_name);
+                    $('#_cmnd').val(ele._cmnd);
+                    $('#contact_name').val(ele.contact_name)
 
 
 
@@ -2507,6 +2508,16 @@ $('#type_customer').on('show.bs.modal', function (event) {
     modal.find('.modal-body #modal_id_type_customer').val(id)
     modal.find('.modal-body #modal_name_type_customer').val(name)
 })
+$('#position').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id') // Extract info from data-* attributes
+    var name = button.data('name')
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    modal.find('.modal-body #modal_id_position').val(id)
+    modal.find('.modal-body #modal_name_position').val(name)
+})
 $(document).on("click", ".delete_kind", function(){
     var id_kind = $(this).parents("tr");
     var id = id_kind[0].id
@@ -2954,6 +2965,84 @@ $(document).on("click", ".delete_nguon", function(){
     $.ajax({
         method: 'POST',
         url: url + '/api/user/delete-nguon',
+        data: {id: id},
+        async: false,
+        success: function (result) {
+            if(result.success){
+                id_status.remove();
+                alert(result.message)
+            }else {
+                alert(result.message)
+            }
+        },
+        error: function () {
+            alert('Đã xãy ra lỗi');
+        }
+    })
+});
+// Action Chức Vụ
+$('#add_position').on('click',function (){
+    var id = $('#id_position').val();
+    var name = $('#name_position').val();
+    var data = {id: id,name: name};
+    var url = $('#domain').attr('href');
+    if (name == ""){
+        alert('Vui lòng nhập đày đủ thông tin')
+    }else {
+        $.ajax({
+            method: 'POST',
+            url: url + '/api/user/add-position',
+            data: data,
+            async: false,
+            success: function(result) {
+                if(result.success){
+                    alert(result.message)
+                    location.reload();
+                }else {
+                    alert(result.message)
+                }
+            },
+            error: function () {
+                alert('Đã xãy ra lỗi');
+            }
+        })
+    }
+
+})
+$('#modal_submit_position').on('click',function () {
+    var id = $('#modal_id_position').val();
+    var name = $('#modal_name_position').val()
+    var data = {id: id,name: name};
+    var url = $('#domain').attr('href');
+    if (name == ""){
+        alert('Vui lòng nhập đày đủ thông tin')
+    }else {
+        $.ajax({
+            method: 'POST',
+            url: url + '/api/user/update-position',
+            data: data,
+            async: false,
+            success: function(result) {
+                if(result.success){
+                    alert(result.message)
+                    location.reload();
+                }else {
+                    alert(result.message)
+                }
+            },
+            error: function () {
+                alert('Đã xãy ra lỗi');
+            }
+        })
+    }
+})
+$(document).on("click", ".delete_position", function(){
+    var id_status = $(this).parents("tr");
+    var id = id_status[0].id
+    var url = $('#domain').attr('href');
+    $.ajax({
+        method: 'POST',
+        url: url + '/api/user/delete-position',
         data: {id: id},
         async: false,
         success: function (result) {

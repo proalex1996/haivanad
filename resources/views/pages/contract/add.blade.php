@@ -62,12 +62,12 @@
                     <legend class='text-left'>Khách Hàng</legend>
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-12">
+                                    <div class="col-md-3 col-sm-12">
                                         <label for="exampleFormControlSelect1">Tên khách hàng</label>
                                     </div>
-                                    <div class="col-md-6 col-sm-12">
+                                    <div class="col-md-9 col-sm-12">
                                         <div class="form-group">
                                             <select class="form-control chosen-select custom-chosen" id="id_customer" name="name_customer"
                                                     onchange="getCustomer()">
@@ -82,21 +82,6 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Nguồn Khách Hàng</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_nguoncustomer" name="id_nguoncustomer">
-                                            <option value="">--Chọn Nguồn Khách Hàng--</option>
-
-                                        </select>
-                                    </div>
-
-                                </div>
-
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3 col-sm-12">
@@ -104,20 +89,18 @@
                             </div>
                             <div class="col-md-9 col-sm-12">
                                 <input type="text" class="form-control" id="adress_customer" name="adress_customer"
-                                       placeholder="Địa Chỉ" value="" required>
-                                <div class="invalid-feedback">Địa chỉ không được để trống</div>
+                                       placeholder="Địa Chỉ" value="">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">MST</label>
+                                        <label for="exampleFormControlInput1 uname">MST/CMND</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-control" value="" id="mst" name="mst"
-                                               placeholder="Mã Số Thuế" required>
-                                        <div class="invalid-feedback">MST không được để trống</div>
+                                               placeholder="Mã Số Thuế">
                                     </div>
 
                                 </div>
@@ -132,8 +115,7 @@
                                         <input type="text" class="form-control" id="phone_customer"
                                                name="phone_customer"
                                                placeholder="Số Điện Thoại"
-                                               maxlength="10" value="" required>
-                                        <div class="invalid-feedback">Số điện thoại không được để trống</div>
+                                               maxlength="10" value="">
                                     </div>
                                 </div>
 
@@ -147,10 +129,9 @@
                                             Diện</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" value="" id="contact_name"
-                                               name="contact_name"
-                                               placeholder="Tên Người Đại Diện" required>
-                                        <div class="invalid-feedback">Đại Diện không được để trống</div>
+                                        <input type="text" class="form-control" value="" id="_cmnd"
+                                               name="_cmnd"
+                                               placeholder="Tên Người Đại Diện" >
                                     </div>
 
                                 </div>
@@ -170,6 +151,34 @@
 
                             </div>
 
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <label for="exampleFormControlInput1 uname" >Tên Liên Hệ: </label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <input type="text" class="form-customer-input" id="contact_name" name="contact_name"
+                                                   placeholder="Tên Liên Hệ">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <label for="exampleFormControlSelect1">Nguồn Khách Hàng</label>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <select class="form-control" id="id_nguoncustomer" name="id_nguoncustomer">
+                                                <option value="">--Chọn Nguồn Khách Hàng--</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
