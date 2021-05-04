@@ -418,9 +418,9 @@
                                     </td>
                                     <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onchange="setRatio(this)" name="ratio[]" required></td>
                                     <td><input type="text" class="form-control display-input id_value_contract" id="id_value_contract"
-                                               name="id_value_contract[]" placeholder="Số Tiền(USD)" readonly></td>
+                                               name="id_value_contract[]" placeholder="Số Tiền(VND)" readonly></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat"  value="10" name="id_vat[]" readonly></td>
-                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền(USD)" id="total" name="total_value[]" readonly></td>
+                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền(VND)" id="total" name="total_value[]" readonly></td>
                                     <td><input type="date" class="form-control display-input" name="_pay_due[]" required>
 
 
