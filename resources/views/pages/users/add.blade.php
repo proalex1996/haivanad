@@ -22,9 +22,8 @@
                                         <label for="exampleFormControlInput1 uname">Mã Nhân Viên: </label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-customer-input" id="id_staffs"
-                                               name="id_staff"
-                                               placeholder="Địa chỉ" required>
+                                        <input type="text" value="{{$codes}}" class="form-customer-input" id="id_staffs"
+                                               name="id_staff" readonly>
                                         <div class="invalid-feedback">Địa chỉ không được để trống</div>
                                     </div>
                                 </div>

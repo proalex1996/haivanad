@@ -10,6 +10,7 @@ use App\Imports\ImportStaff;
 use App\Model\Position;
 use App\Model\staffModel;
 use App\Repositories\Staff\staffRepositoryEloquent;
+use App\Utilili\RamdomCode;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -56,6 +57,9 @@ class staffController extends Controller
         ]);
     }
     public function createStaff(){
+        $maxid = DB::table('users')->max('id');
+        $catelory = "NV";
+        $code = RamdomCode::generateCode($catelory,$maxid);
         $branchs = DB::table('branch')->select('*')->get();
         $salarys = DB::table('salary')->select('*')->get();
         $statuss = DB::table('status')->select('*')->get();
@@ -66,7 +70,8 @@ class staffController extends Controller
             'salarys' => $salarys,
             'statuss' => $statuss,
             'phan_quyen' => $phan_quyen,
-            'positions' => $positions
+            'positions' => $positions,
+            'codes' => $code
         ]);
     }
     public function addStaff(Request $request){

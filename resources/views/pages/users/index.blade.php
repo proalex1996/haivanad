@@ -73,13 +73,8 @@
                         <tbody>
                         @foreach($users as $user)
                             <tr id ="row_staff_{{$user->id}}">
-                                <td data-target="{{$user->id}}"><a class="dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true"
-                                       aria-expanded="false" id="dropdownMenuLink"> {{$user->id}}</a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item"
-                                           href="{{\Illuminate\Support\Facades\URL::to('users/update')."/".$user->id}}">Sửa
-                                            thông tin nhân viên</a>
-                                    </div>
+                                <td data-target="{{$user->id}}"> {{$user->id}}
+
                                 </td>
                                 <td>{{$user->id_staff}}</td>
                                 <td>{{$user->name}}</td>

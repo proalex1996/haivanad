@@ -2201,22 +2201,22 @@ function addCommas(elements) {
     $(elements).val(nStr);
 }
 
-$('[id^="redirect"]').dblclick(function () {
+$('[id^="redirect"]').click(function () {
     var url = $('#domain').attr('href');
     var data = $(this).find('td:first').find('input').attr('data-target');
     location.assign(url+"/customer/update/"+data)
 })
-$('[id^="row_product"]').dblclick(function () {
+$('[id^="row_product"]').click(function () {
     var url = $('#domain').attr('href');
     var data = $(this).find('td:first').find('input').attr('data-target')
     location.assign(url+"/product/update/"+data)
 })
-$('[id^="row_contract"]').dblclick(function () {
+$('[id^="row_contract"]').click(function () {
     var url = $('#domain').attr('href');
     var data = $(this).find('td:first').find('input').attr('data-target')
     location.assign(url+"/contract/update/"+data)
 })
-$('[id^="row_staff"]').dblclick(function () {
+$('[id^="row_staff"]').click(function () {
     var url = $('#domain').attr('href');
     var data = $(this).find('td:first').attr('data-target')
     location.assign(url+"/users/update/"+data)
