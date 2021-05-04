@@ -361,13 +361,23 @@ class ContractController extends Controller
                 $inContract->save();
             }
         }
-        $contract->content = basename($request->content_contract->getClientOriginalName());
-        $file = $request->file('content_contract');
-        $fileName = $request->file('content_contract')->getClientOriginalName();
-        $contented = $request->file('contented');
-        $contentedName = $request->file('contented')->getClientOriginalName();
-        $storage = Storage::putFileAs('contract', $contented, $contentedName);
-        $contract->contented = $contentedName;
+        if($request->content_contract != null){
+            $contract->content = basename($request->content_contract->getClientOriginalName());
+            $file = $request->file('content_contract');
+            $fileName = $request->file('content_contract')->getClientOriginalName();
+            $storage = Storage::putFileAs('contract', $file, $fileName);
+        }else{
+            $contract->content = 'Bổ Sung Sau';
+        }
+        if($request->file('contented') != null){
+            $contented = $request->file('contented');
+            $contentedName = $request->file('contented')->getClientOriginalName();
+            $storage = Storage::putFileAs('contract', $contented, $contentedName);
+            $contract->contented = $contentedName;
+        }else{
+            $contract->contented = 'Bổ Sung Sau';
+        }
+
         $contract->date_start = $request->date_start;
         $contract->date_end = $request->date_end;
         $contract->kind = $request->kind_name;
@@ -381,7 +391,7 @@ class ContractController extends Controller
         $contract->value_contract = $value_contract;
         $contract->note_contract = $request->note_contract;
         //$pdf = PDF::loadview('contract.blade.php',$file);
-        $storage = Storage::putFileAs('contract', $file, $fileName);
+
         $contract->save();
         $payment_period = $request->payment_period;
         $ratio = $request->ratio;

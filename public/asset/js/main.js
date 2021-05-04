@@ -2461,8 +2461,8 @@ $('#status_contract').on('show.bs.modal', function (event) {
     // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
     // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
     var modal = $(this)
-    modal.find('.modal-body #id_status_contract').val(id_contarct)
-    modal.find('.modal-body #name_status_contract').val(name)
+    modal.find('.modal-body #modal_id_status_contract').val(id_contarct)
+    modal.find('.modal-body #modal_name_status_contract').val(name)
 })
 $('#branch').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
@@ -2574,7 +2574,7 @@ $('#add_status_contract').on('click',function () {
     var id = $('#id_status_contract').val();
     var name = $('#name_status_contract').val();
     var url = $('#domain').attr('href');
-    if(name ==""){
+    if(name !=""){
         $.ajax({
             method: 'POST',
             url: url + '/api/user/add-stt-contract',
@@ -2623,8 +2623,8 @@ $(document).on("click", ".delete_status_contract", function(){
     })
 });
 $('#submit_status_contract').on('click',function () {
-    var id = $('#id_status_contract').val();
-    var name = $('#name_status_contract').val()
+    var id = $('#modal_id_status_contract').val();
+    var name = $('#modal_name_status_contract').val()
     var data = {id: id,name: name};
     var url = $('#domain').attr('href');
     $.ajax({
@@ -2635,9 +2635,9 @@ $('#submit_status_contract').on('click',function () {
         success: function(result) {
             if(result.success){
                 alert(result.message)
-                $('#id_status_contract').val("")
+                $('#modal_id_status_contract').val("")
                 $('#kind_name').val("")
-                $('#name_status_contract').modal('hide')
+                $('#modal_name_status_contract').modal('hide')
                 location.reload();
             }else {
                 alert(result.message)
@@ -3474,7 +3474,7 @@ function showProduct() {
                                 <label for="exampleFormControlSelect1">Tên</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
-                                <select class="form-control chosen-select" id="_name_banner" name="_name_banner">
+                                <select class="form-control chosen-select" id="_name_banner" name="_name_banner" ${ele.readonly}>
                                             <option value="${ele.id_banner}" selected>${ele._name_banner}</option>
 
                                 </select>
@@ -3566,7 +3566,7 @@ function showProduct() {
                             </div>
                             <div class="col-md-9 col-sm-12">
                                 <input type="text" class="form-control" id="gianam" name="gianam"
-                                       placeholder="Giá Năm" value="${ele.gianam}">
+                                       placeholder="Giá Năm" value="${ele.gianam}" >
                             </div>
                         </div>
                     </div>

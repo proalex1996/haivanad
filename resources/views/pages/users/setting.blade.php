@@ -455,11 +455,11 @@
                 <form>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Mã Trạng Thái:</label>
-                        <input type="text" class="form-control" id="id_status_contract" readonly>
+                        <input type="text" class="form-control" id="modal_id_status_contract" readonly>
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Tên Trạng Thái:</label>
-                        <input type="text" class="form-control" id="name_status_contract">
+                        <input type="text" class="form-control" id="modal_name_status_contract">
                     </div>
                 </form>
             </div>

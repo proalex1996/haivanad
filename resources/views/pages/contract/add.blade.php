@@ -464,7 +464,7 @@
                     <div class="custom-file">
                         <label class="custom-file-label" for="validatedCustomFile">Chọn file...</label>
                         <input type="file" class="custom-file-input" accept=".doc,.docx,.pdf" id="content_contract"
-                               name="content_contract" required>
+                               name="content_contract">
                         <div class="invalid-feedback">Định dạng file phải là .doc, .docx, .pdf</div>
                     </div>
                 </div>
