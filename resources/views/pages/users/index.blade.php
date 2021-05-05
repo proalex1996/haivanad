@@ -79,7 +79,7 @@
                                 <td>{{$user->id_staff}}</td>
                                 <td>{{$user->name}}</td>
 
-                                <td>{{$user->born}}</td>
+                                <td>{{date('d-m-Y', strtotime($user->born))}}</td>
                                 <td>{{$user->staff_adress}}</td>
                                 <td>{{$user->staff_phone}}</td>
 
