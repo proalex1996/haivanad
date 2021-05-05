@@ -295,12 +295,11 @@
                         </div>
                         <div class="row">
                             <div class="col-md-3 col-sm-12">
-                                <label for="exampleFormControlInput1 uname">Giá Năm(USD)</label>
+                                <label for="exampleFormControlInput1 uname">Đơn Giá(USD)</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
                                 <input type="text" class="form-control" id="gianam_1" name="gianam"
-                                       placeholder="Giá Năm" value="" required>
-                                <div class="invalid-feedback">Địa chỉ không được để trống</div>
+                                       placeholder="Đơn Giá" value="" required>
                             </div>
                         </div>
                     </div>
@@ -427,9 +426,9 @@
                                     </td>
                                     <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onchange="setRatio(this)" name="ratio[]" required></td>
                                     <td><input type="text" class="form-control display-input id_value_contract" id="id_value_contract"
-                                               name="id_value_contract[]" placeholder="Số Tiền(VND)" readonly></td>
-                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat"  value="10" name="id_vat[]" readonly></td>
-                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền(VND)" id="total" name="total_value[]" readonly></td>
+                                               name="id_value_contract[]" placeholder="Số Tiền(VND)"></td>
+                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat"  value="10" name="id_vat[]" ></td>
+                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền(VND)" id="total" name="total_value[]"></td>
                                     <td><input type="date" class="form-control display-input" name="_pay_due[]" required>
 
 

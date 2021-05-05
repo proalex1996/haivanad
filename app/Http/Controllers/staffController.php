@@ -44,8 +44,8 @@ class staffController extends Controller
         if (!empty($request->id_status)) {
             $users = $users->where('status.id_status', '=', $request->id_status);
         }
-        if (!empty($request->id_staff)) {
-            $users = $users->where('users.id_staff', 'LIKE', '%'.$request->id_staff.'%');
+        if (!empty($request->name)) {
+            $users = $users->where('users.name', 'LIKE', '%'.$request->name.'%');
         }
         $users = $users->orderBy('users.id_staff','DESC')->get();
         $statuss = DB::table('status')->select('*')->get();

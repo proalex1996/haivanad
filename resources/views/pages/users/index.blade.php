@@ -26,9 +26,9 @@
                     @csrf
                     <div class="row">
                         <div class="col-md-3 col-sm-12 m-t-10">
-                            <label for="exampleFormControlInput1 ">Mã Nhân Viên</label>
-                            <input type="text" class="form-control" id="id_staff" name="id_staff"
-                                   placeholder="Mã Nhân Viên">
+                            <label for="exampleFormControlInput1 ">Tên Nhân Viên</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                   placeholder="Tên Nhân Viên">
                         </div>
                         <div class="col-md-3 col-sm-12 m-t-10">
                             <label for="exampleFormControlInput1 ">Trạng thái</label>
