@@ -68,7 +68,6 @@ Route::group(['prefix' => 'users'], function () {
         Route::post('/add', 'staffController@addStaff');
         Route::get('/update/{id}', 'staffController@update');
         Route::post('/update/{id}', 'staffController@update');
-        Route::get('/download', 'ContractController@getDownload');
         Route::get('/destroy/{id}', 'staffController@destroy');
         Route::get('/quyen1/{id}', 'staffController@quyen1');
         Route::get('/quyen2/{id}', 'staffController@quyen2');
@@ -135,6 +134,11 @@ Route::group(['prefix' => 'product'], function () {
 Route::group(['prefix' => 'finder'], function () {
     Route::group(['middleware'=>'auth'],function (){
         Route::get('/','FinderController@index');
+    });
+});
+Route::group(['prefix' => 'payment'], function () {
+    Route::group(['middleware'=>'auth'],function (){
+        Route::get('/','PaymentController@index');
     });
 });
 Route::group(['prefix' => '/'], function () {

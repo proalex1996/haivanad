@@ -23,10 +23,6 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Maatwebsite\Excel\Facades\Excel;
-use PhpOffice\PhpPresentation\PhpPresentation;
-use PhpOffice\PhpPresentation\IOFactory;
-use PhpOffice\PhpPresentation\Style\Color;
-use PhpOffice\PhpPresentation\Style\Alignment;
 use PhpOffice\PhpWord\Shared\ZipArchive;
 use ZipStream\Option\Archive;
 

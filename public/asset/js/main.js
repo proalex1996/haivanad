@@ -3487,7 +3487,7 @@ function showProduct() {
                                         <label for="exampleFormControlSelect1">Mã Sản Phẩm</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_banner" name="id_banner">
+                                        <select class="form-control" id="id_banner" name="id_banner" ${ele.readonly}>
                                                         <option value="${ele.id_banner}" selected>${ele.id_banner}</option>
                                         </select>
                                     </div>
@@ -3500,7 +3500,7 @@ function showProduct() {
                                         <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_typebanner" name="id_typebanner">
+                                        <select class="form-control" id="id_typebanner" name="id_typebanner" ${ele.readonly}>
                                             <option value="${ele.id_typebanner}">${ele.name_type}</option>
                                         </select>
                                     </div>
@@ -3516,7 +3516,7 @@ function showProduct() {
                             <div class="col-md-9 col-sm-12">
                                 <input type="text" class="form-control" id="banner_adress"
                                        name="banner_adress"
-                                       placeholder="Địa Chỉ Pano" value="${ele.banner_adress}">
+                                       placeholder="Địa Chỉ Pano" value="${ele.banner_adress}" ${ele.readonly}>
                             </div>
                         </div>
                         <div class="row">
@@ -3526,7 +3526,7 @@ function showProduct() {
                                         <label for="exampleFormControlSelect1">Tỉnh/Thành Phố</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="tinh" name="tinh">
+                                        <select class="form-control" id="tinh" name="tinh" ${ele.readonly}>
                                             <option value="${ele.tinh}">${ele._name}</option>
                                         </select>
                                     </div>
@@ -3539,7 +3539,7 @@ function showProduct() {
                                         <label for="exampleFormControlSelect1">Quận/Huyện</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="quan" name="quan">
+                                        <select class="form-control" id="quan" name="quan" ${ele.readonly}>
                                             <option value="${ele.quan}">${ele._name_district}</option>
                                         </select>
                                     </div>
@@ -3554,7 +3554,7 @@ function showProduct() {
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-control" value="${ele.id_system}" id="id_system" name="id_system"
-                                               placeholder="Kết Cấu" >
+                                               placeholder="Kết Cấu" ${ele.readonly}>
                                     </div>
                                 </div>
                             </div>
@@ -3566,7 +3566,7 @@ function showProduct() {
                             </div>
                             <div class="col-md-9 col-sm-12">
                                 <input type="text" class="form-control" id="gianam" name="gianam"
-                                       placeholder="Giá Năm" value="${ele.gianam}" >
+                                       placeholder="Giá Năm" value="${ele.gianam}" ${ele.readonly}>
                             </div>
                         </div>
                     </div>
@@ -3585,3 +3585,75 @@ function finder() {
     var url = $('#domain').attr('href');
 
 }
+function downloadContent(element){
+    var data_target = $(element).data('target');
+    var data = {data: data_target }
+    var url = $('#domain').attr('href');
+    $.ajax({
+        url: url + '/api/contract/download',
+        async: false,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*'
+        },
+        data: data,
+        method: 'POST',
+        success: function () {
+           alert('Đang Tải Xuống')
+        },
+        error: function (){
+            alert('Không tìm thấy file')
+        }
+    })
+}
+function detailPayment(){
+    var id = $('#id_contract').val();
+    var url = $('#domain').attr('href');
+    $('#payment_period').find('option').not(':eq(0)').remove();
+    $.ajax({
+        url: url + '/api/payment/get-bill',
+        async: false,
+        data: {id: id},
+        method: 'POST',
+        success: function (result) {
+            var datas = JSON.parse(result).detail_payment;
+            $.each(datas, function (index, ele) {
+                $('#payment_period').append(`
+                        <option value="${ele.payment_period}">${ele.payment_period}</option>
+                `)
+                $('#value_contract').val(ele.value_contract)
+            })
+
+        }
+    })
+}
+
+function getDetailBill(){
+    var id = $('#id_contract').val();
+    var period = $('#payment_period').val()
+    var url = $('#domain').attr('href');
+    var data = {id: id, payment_period: period};
+    $.ajax({
+        url: url + '/api/payment/get-detail-bill',
+        async: false,
+        data: data,
+        method: 'POST',
+        success: function (result) {
+            var datas = JSON.parse(result).payment_period;
+            $.each(datas, function (index, ele) {
+                $('#ratio').val(ele.ratio);
+                $('#id_value_contract').val(ele.id_value_contract)
+                $('#vat').val(ele.id_vat);
+                $('#total_value').val(ele.total_value);
+                $('#_pay_due').val(ele._pay_due);
+
+            })
+
+        }
+    })
+}
+$('#modal_summit_pay').on('click',function (){
+   $('#dat_cho').modal('show');
+});
+
+

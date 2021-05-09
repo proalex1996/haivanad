@@ -18,12 +18,8 @@ use App\Model\Type;
 use App\Model\Type_Customer;
 use App\Repositories\Contract\ContractRepositoryEloquent;
 use App\Utilili\RamdomCode;
-use Barryvdh\DomPDF\Facade as PDF;
-use FontLib\Table\Type\name;
-use http\Message;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -461,6 +457,13 @@ class ContractController extends Controller
                 $file = $request->file('content');
                 $fileName = $request->file('content')->getClientOriginalName();
                 $storage = Storage::putFileAs('contract', $file, $fileName);
+            }
+            if (!empty($data['contented'])) {
+                $data['contented'] = basename($request->contented->getClientOriginalName());
+                $contented = $request->file('contented');
+                $contentedName = $request->file('contented')->getClientOriginalName();
+                $storage = Storage::putFileAs('contract', $contented, $contentedName);
+
             }
 //            $detail = DB::table('detail_payment')->update([
 //                ''
@@ -964,8 +967,20 @@ class ContractController extends Controller
             ->join('province','banner.tinh','=','province._code')
             ->join('district','banner.quan','=','district.id_district')
             ->join('product_in_contract','banner.id_banner','=','product_in_contract.id_banner')
-            ->select('banner.*','contract.readonly')
+            ->join('contract','contract.id_contract','=','product_in_contract.id_contract')
+            ->select('banner.*','type_banner.*','province.*','district.*','product_in_contract.*','contract.readonly')
             ->where('product_in_contract.id_contract',$request->id_contract)->get();
         return json_encode(['show' => $show], 200);
     }
+    public function downloadContent(Request $request){
+        //PDF file is stored under project/public/download/info.pdf
+            $file= public_path(). "/contract/".$request->data;
+
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+
+        return Storage::download($file, $request->data, $headers);
+    }
 }
+

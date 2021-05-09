@@ -43,6 +43,7 @@ Route::group(['prefix' => 'contract'], function () {
     Route::post('/open', 'ContractController@open');
     Route::get('/download', 'ContractController@getDownload');
     Route::post('/show/{id_contract}', 'ContractController@showProduct');
+    Route::post('/download', 'ContractController@downloadContent');
 
 });
 
@@ -82,6 +83,10 @@ Route::group(['prefix' => 'user'], function (){
     Route::post('/update-position','staffController@updatePosition');
     Route::post('/delete-position','staffController@deletePosition');
 
+});
+Route::group(['prefix' => 'payment'], function () {
+        Route::post('/get-bill', 'PaymentController@getBill');
+        Route::post('/get-detail-bill', 'PaymentController@getDetailBill');
 });
 
 
