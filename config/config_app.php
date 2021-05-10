@@ -2,12 +2,12 @@
 
 return array(
     'domain' => array(
-        'method' => 'http://',
+        'method' => 'https://',
         'url' => '192.168.1.5',
         'name' => 'haivanad',
-        'url_api' => 'http://localhost/haivanad/api',
+        'url_api' => 'https://localhost/haivanad/api',
         'port' => ':8888/',
-        'domain' => 'http://haivan.kaviet.vn',
-        'local' => 'http://localhost/haivanad'
+        'domain' => 'https://haivan.kaviet.vn',
+        'local' => 'https://localhost/haivanad'
     )
 );
