@@ -376,7 +376,7 @@
                                     <div class="col-md-3 col-sm-12">
                                         <input type="number" class="form-control"  onchange="getTong()" id="thue"
                                                name="thue"
-                                               placeholder="Thuế (%)" value="10" readonly>
+                                               placeholder="Thuế (%)" value="10" >
 
                                     </div>
                                     <label for="exampleFormControlInput1">(%)</label>
@@ -393,7 +393,7 @@
                                     </div>
                                     <div class="col-md-9 col-sm-12">
                                         <input type="number" class="form-control" value="" id="tong" name="tong"
-                                               placeholder="Tổng Giá Trị hợp Đồng(USD)" readonly>
+                                               placeholder="Tổng Giá Trị hợp Đồng(USD)" >
                                     </div>
 
                                 </div>
