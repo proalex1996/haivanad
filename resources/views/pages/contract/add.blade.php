@@ -360,7 +360,7 @@
                                         <label for="exampleFormControlInput1">Tỉ Giá VND/1USD</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" data-type="currency"  onchange="getTong()" id="exchange"
+                                        <input type="text" class="form-control"  onchange="getTong()" id="exchange"
                                                name="exchange"
                                                placeholder="VND">
                                     </div>
@@ -374,7 +374,7 @@
                                         <label for="exampleFormControlInput1">Thuế VAT(%)</label>
                                     </div>
                                     <div class="col-md-3 col-sm-12">
-                                        <input type="number" class="form-control"  onchange="getTong()" id="thue"
+                                        <input style="width: 75px !important;" type="number" class="form-control"  onchange="getTong()" id="thue"
                                                name="thue"
                                                placeholder="Thuế (%)" value="10" >
 
@@ -424,8 +424,8 @@
                                     <td><input type="text" class="display-input form-control payment_period" id="payment_period" name="payment_period[]"
                                                required>
                                     </td>
-                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onchange="setRatio(this)" name="ratio[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract" id="id_value_contract"
+                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" onchange="setRatio(this)" id="ratio"  name="ratio[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_value_contract" onchange="setValueContract()" id="id_value_contract"
                                                name="id_value_contract[]" placeholder="Số Tiền(VND)"></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat"  value="10" name="id_vat[]" ></td>
                                     <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền(VND)" id="total" name="total_value[]"></td>
@@ -522,4 +522,3 @@
         </div>
     </div>
 </div>
-

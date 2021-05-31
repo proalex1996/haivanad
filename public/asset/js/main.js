@@ -1953,8 +1953,6 @@ function getCustomer() {
                     $('#_cmnd').val(ele._cmnd);
                     $('#contact_name').val(ele.contact_name)
 
-
-
                 });
             } else if (datas.length == 0) {
                 $('#id_nguoncustomer').val('');
@@ -2001,6 +1999,26 @@ function getTong() {
     $('#tong').val(parseInt(total) + parseInt(thue));
 }
 
+window.onload = function(){
+    sumPrice();
+} 
+
+function sumPrice() {
+    var gianam = $('#gianam').val();
+    var v_light = $('#v_light').val();
+    gianam = gianam.split('$').join("");
+    gianam = gianam.split(',').join("");
+    if(v_light==''){
+        $('#tong').val(parseInt(gianam));
+    }
+    else{
+        v_light = v_light.split('$').join("");
+        v_light = v_light.split(',').join("");
+        var tong = parseInt(gianam) + parseInt(v_light);
+        $('#tong').val(parseInt(tong));
+    }
+}
+
 function setRatio(elements) {
     var parent = $(elements).closest('tr');
     var gia = parent.children('td').find('.ratio');
@@ -2012,13 +2030,20 @@ function setRatio(elements) {
         value = value.split('$').join("");
         value = value.split(',').join("");
         var total_value = value * exchange
-     $(id_value).val((total_value * $(gia).val())/100)
+    $(id_value).val((total_value * $(gia).val())/100)
     var thue = parent.children('td').find('.id_vat');
     var total = parent.children('td').find('.total');
     var vat = ($(thue).val() * $(id_value).val())/ 100
     $(total).val(parseInt($(id_value).val()) + parseInt(vat));
-
 }
+
+function setValueContract() {
+    var sotien = $('#id_value_contract').val();
+    var thue = $('#id_vat').val();
+    var tong = parseInt(sotien) + parseInt(sotien * thue / 100);
+    $('#total').val(parseInt(tong));
+}
+
 // function getRatio(element) {
 //     var parent = $(element).closest('tr');
 //     var gia = parent.children('td').find('.id_value_contract');
@@ -2236,13 +2261,14 @@ function getPhoto() {
             let preloaded1 = [];
             let preloaded2 =[];
             if(datas != ""){
+                console.log("abc");
                 $.each(datas,function (index,elements) {
                     preloaded1.push(
-                        {id: elements._name_photo , src: url+'/public/storage/content/'+elements._name_photo}
+                        {id: elements._name_photo , src: url+'/storage/app/public/content/'+elements._name_photo}
                     );
                     if(typeof elements._name_map !== 'undefined'){
                         preloaded2.push(
-                            {id: elements._name_map , src: url+'/public/storage/content/'+elements._name_map}
+                            {id: elements._name_map , src: url+'/storage/app/public/content/'+elements._name_map}
                         );
                     }
                     $('#views-photo').append(`
@@ -3347,11 +3373,11 @@ $('#more_product').on('click',function () {
                         </div>
                         <div class="row">
                             <div class="col-md-3 col-sm-12">
-                                <label for="exampleFormControlInput1 uname">Giá Năm</label>
+                                <label for="exampleFormControlInput1 uname">Đơn giá</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
                                 <input type="text" class="form-control" id="gianam_${baloon}" name="gianam_${baloon}"
-                                       placeholder="Giá Năm" value="" required>
+                                       placeholder="Đơn giá" value="" required>
                                 <div class="invalid-feedback">Địa chỉ không được để trống</div>
                             </div>
                         </div>
@@ -3385,8 +3411,6 @@ function product(element) {
     }else {
         value_contract =  $('#value_contract').val();
     }
-
-
 
     $.ajax({
         url: url + '/api/contract/product/' + data,
