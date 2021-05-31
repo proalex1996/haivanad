@@ -234,6 +234,8 @@ class ProductController extends Controller
                                 } else {
                                     if (array_key_exists('id_photo', $data) != false) {
                                         $fileName = basename($data['files'][$i]->getClientOriginalName());
+                                        $file = $request->file('files')[$i];
+                                        $storage = Storage::putFileAs('content', $file, $fileName);
                                         $photoModel = PhotoModel::where(['id_banner' => $data['id_banner']])->where(['id' => $data['id_photo'][$i]])->update([
                                             '_name_photo' => $fileName,
                                             'views' => $data['views'][$i]
@@ -311,18 +313,12 @@ class ProductController extends Controller
         $type_banner = DB::table('type_banner')->select('*')->get();
         $province = DB::table('province') ->select('*')->get();
         $district = DB::table('district') ->select('*')->get();
-        // $gianam = $banners->gianam;
-        // $v_light = $banners->v_light;
-        // $gianam = str_replace( array('$', ',') , '', $gianam );
-        // $v_light = str_replace( array('$', ',') , '', $v_light );
-        // $tong = (Float)$gianam + (Float)$v_light;
         return view('pages.product.update', [
             'banners' => $banners,
             'statuss' => $statuss,
             'type_banners' => $type_banner,
             'provinces' => $province,
             'districts'=>$district
-            // 'sumprice'=>$tong
         ]);
     }
     function containsOnlyNull($input)
