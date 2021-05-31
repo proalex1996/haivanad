@@ -2261,7 +2261,6 @@ function getPhoto() {
             let preloaded1 = [];
             let preloaded2 =[];
             if(datas != ""){
-                console.log("abc");
                 $.each(datas,function (index,elements) {
                     preloaded1.push(
                         {id: elements._name_photo , src: url+'/storage/app/public/content/'+elements._name_photo}
