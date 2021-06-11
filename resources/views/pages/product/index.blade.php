@@ -107,7 +107,7 @@
                         <tbody class="overflow-scroll">
                         @foreach($banners as $banner)
                             @if ($banner->id_status == 2)
-                                <tr class="status--process"  >
+                                <tr class="status--process id_banners"  >
                                     <td><input type="checkbox" id="check-box" data-target="{{$banner->id}}" onchange="getCheckedBox()" onclick="getSession()" name="check_box[]" value="{{$banner->id_banner}}"
                                                class="display-input m-r-5"></td>
                                     <td><a class="id_banner text text-dark" href="product/update/{{$banner->id}}">{{$banner->id_banner}}</a></td>
@@ -122,7 +122,7 @@
 
 
                             @elseif($banner->id_status==1)
-                                <tr >
+                                <tr class="id_banners">
                                     <td><input type="checkbox" id="check-box" data-target="{{$banner->id}}"  onchange="getCheckedBox()" onclick="getSession()" name="check_box[]" value="{{$banner->id_banner}}"
                                                class="display-input m-r-5"></td>
                                     <td ><a class="id_banner text text-dark" href="product/update/{{$banner->id}}">{{$banner->id_banner}}</a></td>
@@ -134,7 +134,7 @@
                                     </td>
                                     <td>{{$banner->gianam}}</td>
                             @else
-                                <tr >
+                                <tr class="id_banners">
                                     <td><input type="checkbox" id="check-box" data-target="{{$banner->id}}" name="check_box[]" onchange="getCheckedBox()" onclick="getSession()" value="{{$banner->id_banner}}"
                                                class="display-input m-r-5"></td>
                                     <td ><a class="id_banner text text-dark" href="product/update/{{$banner->id}}">{{$banner->id_banner}}</a></td>

@@ -347,13 +347,12 @@ class ContractController extends Controller
         $contract->id_contract = $request->id_contract;
         $contract->id_customer = $request->name_customer;
         $contract->id_staff = $request->id_staff;
-
         if(!empty($request->id_banner[0])){
             for ($j = 0;$j < sizeof($request->id_banner);$j++){
                 $inContract = new Product_in_Contract();
                 $inContract->id_banner = $request->id_banner[$j];
                 $inContract->id_contract = $request->id_contract;
-                $inContract->real_value = $request -> gianam;
+                $inContract->real_value = $request->gianam[$j];
                 $inContract->save();
             }
         }
@@ -377,12 +376,12 @@ class ContractController extends Controller
         $contract->date_start = $request->date_start;
         $contract->date_end = $request->date_end;
         $contract->kind = $request->kind_name;
-        $value_contract = $request->value_contract;
+        $value_contract = $request->_value_contract;
         $value_contract = str_replace('$','',$value_contract);
         $value_contract = str_replace(',','',$value_contract);
         $exchange = $request->exchange;
-        $exchange = str_replace('$','',$exchange);
-        $exchange = str_replace(',','',$exchange);
+        $exchange = str_replace('₫','',$exchange);
+        $exchange = str_replace('.','',$exchange);
         $contract->exchange = $exchange;
         $contract->value_contract = $value_contract;
         $contract->note_contract = $request->note_contract;
@@ -402,8 +401,12 @@ class ContractController extends Controller
                 $detail->id_contract = $request->id_contract;
                 $detail->payment_period = $payment_period[$i];
                 $detail->ratio = $ratio[$i];
+                $id_value_contract[$i] = str_replace('₫','',$id_value_contract[$i]);
+                $id_value_contract[$i] = str_replace('.','',$id_value_contract[$i]);
                 $detail->id_value_contract = $id_value_contract[$i];
                 $detail->id_vat = $id_vat[$i];
+                $total_value[$i] = str_replace('₫','',$total_value[$i]);
+                $total_value[$i] = str_replace('.','',$total_value[$i]);
                 $detail->total_value = $total_value[$i];
                 $detail->_pay_due = $_pay_due[$i];
                 $detail->save();
@@ -494,9 +497,15 @@ class ContractController extends Controller
         $status = DB::table('contract_status')->select('*')->get();
         $provinces = DB::table('province')->select('*')->get();
         $nguon = DB::table('nguon_customer')->select('*')->get();
+        $product_contract = DB::table('product_in_contract')
+            ->join('banner', 'product_in_contract.id_banner', '=', 'banner.id_banner')
+            ->join('contract', 'product_in_contract.id_contract', '=', 'contract.id_contract')
+            ->select('*')->where('product_in_contract.id_contract',$id)
+            ->get();
         $detail = DB::table('detail_payment')
             ->join('contract', 'detail_payment.id_contract', '=', 'contract.id_contract')
             ->select('*')->get();
+        $cost_contract = $contract->value_contract;
         return view('pages.contract.update', [
             'contract' => $contract,
             'banners' => $banner,
@@ -506,7 +515,9 @@ class ContractController extends Controller
             'status' => $status,
             'provinces' => $provinces,
             'nguons' => $nguon,
-            'details' => $detail
+            'details' => $detail,
+            'product_contracts' => $product_contract,
+            'cost_contract' => $cost_contract
         ]);
 
     }

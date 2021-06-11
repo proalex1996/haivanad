@@ -136,7 +136,7 @@ class PptxFomat
                     ->setColor(new Color('#000'));
                 $shape = $currentSlide->createDrawingShape();
                 $shape->setName('PHPPresentation logo')
-                    ->setPath(public_path('storage/content/' . $image[$i][0]))
+                    ->setPath(public_path('storage/app/public/content/' . $image[$i][0]))
                     ->setHeight(293.76)
                     ->setWidth(427.2)
                     ->setOffsetX(72)
@@ -144,21 +144,21 @@ class PptxFomat
 
                 $shape = $currentSlide->createDrawingShape();
                 $shape->setName('PHPPresentation logo')
-                    ->setPath(public_path('storage/content/' . $image[$i][1]))
+                    ->setPath(public_path('storage/app/public/content/' . $image[$i][1]))
                     ->setHeight(242.88)
                     ->setWidth(432)
                     ->setOffsetX(510.72)
                     ->setOffsetY(119.04);
                 $shape = $currentSlide->createDrawingShape();
                 $shape->setName('PHPPresentation logo')
-                    ->setPath(public_path('storage/content/' . $image[$i][2]))
+                    ->setPath(public_path('storage/app/public/content/' . $image[$i][2]))
                     ->setHeight(256.32)
                     ->setWidth(427.2)
                     ->setOffsetX(72)
                     ->setOffsetY(409.92);
                 $shape = $currentSlide->createDrawingShape();
                 $shape->setName('PHPPresentation logo')
-                    ->setPath(public_path('storage/content/' . $image[$i][3]))
+                    ->setPath(public_path('storage/app/public/content/' . $image[$i][3]))
                     ->setHeight(282.24)
                     ->setWidth(427.2)
                     ->setOffsetX(514.56)
@@ -184,7 +184,7 @@ class PptxFomat
                     ->setColor(new Color('#000'));
                 $shape = $currentSlide->createDrawingShape();
                 $shape->setName('PHPPresentation logo')
-                    ->setPath(public_path('storage/content/' . $map[$i]))
+                    ->setPath(public_path(k'storage/app/public/content/' . $map[$i]))
                     ->setHeight(367.68)
                     ->setWidth(736.32)
                     ->setOffsetX(136.32)

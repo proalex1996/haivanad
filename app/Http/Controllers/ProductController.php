@@ -442,7 +442,6 @@ class ProductController extends Controller
     }
     public function getPptx(Request $request){
         $datas = explode(",",$request->checkbox_hidden);
-
             $myzip = new ZipArchive;
             if ($myzip->open(public_path('storage/PPTX/'.$datas[0].'.zip'),  ZipArchive::CREATE || ZipArchive::OVERWRITE) === TRUE)
             {

@@ -178,9 +178,11 @@
                     </div>
 
                 </fieldset>
+
                 <div id="show_product">
 
                 </div>
+
                 <fieldset class="border-text">
                     <legend class='text-left'>Hợp Đồng</legend>
                     <div class="container-fluid">
@@ -222,7 +224,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-control" id="value_contract"
                                                name="value_contract"
-                                               placeholder="Giá trị hợp đồng" data-type="currency" onchange="getTong()" value="{{$contract->value_contract}}" required {{$contract->readonly}}>
+                                               placeholder="Giá trị hợp đồng" data-type="currency" onchange="getTong()" value="{{$cost_contract}}" required {{$contract->readonly}}>
                                         <div class="invalid-feedback m-l-20">Vui lòng nhập giá trị hợp đồng</div>
                                     </div>
                                 </div>
@@ -233,7 +235,7 @@
                                         <label for="exampleFormControlInput1">Tỉ Giá VND/1USD</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" data-type="currency" value="{{$contract->exchange}}" onchange="getTong()" id="exchange"
+                                        <input type="text" class="form-control" value="{{$contract->exchange}}" onchange="getTong()" id="exchange"
                                                name="exchange"
                                                placeholder="VND" {{$contract->readonly}}>
                                     </div>
@@ -258,13 +260,19 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Tổng</label>
+                                        <label for="exampleFormControlInput1 uname">Tổng(VND + 10% VAT)</label>
                                     </div>
-                                    <div class="col-md-9 col-sm-12">
-                                        <input type="number" class="form-control" value="" step="0.01" id="tong" name="tong"
+                                    <div class="col-md-3 col-sm-12">
+                                        <input type="text" class="form-control" value="" step="0.01" id="tong" name="tong"
                                                placeholder="Tổng Giá Trị hợp Đồng">
                                     </div>
-
+                                    <div class="col-md-2 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Tổng(VND)</label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <input type="text" class="form-control" value="" step="0.01" id="tongvat" name="tongvat"
+                                               placeholder="Tổng Giá Trị hợp Đồng">
+                                    </div>
                                 </div>
 
                             </div>

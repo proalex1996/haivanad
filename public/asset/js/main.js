@@ -1,3 +1,5 @@
+// const { isNull } = require("lodash");
+
 (function ($) {
     // USE STRICT
     "use strict";
@@ -1886,7 +1888,7 @@ $('#addrowPayment1').on('click', function () {
                                                required>
                                     </td>
                                     <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onchange="setRatio(this)" name="ratio[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract"  id="id_value_contract"
+                                    <td><input type="text" class="form-control display-input id_value_contract value_contract"  id="id_value_contract" onchange="setValueContract(this)"
                                                name="id_value_contract[]" placeholder="Số Tiền (VND)"></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" value="10" id="id_vat" name="id_vat[]"></td>
                                     <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND)" id="total" name="total_value[]"></td>
@@ -1990,14 +1992,31 @@ $(document).ready(function () {
 function getTong() {
     var gia = $('#value_contract').val();
     var exchange = $('#exchange').val();
-    exchange = exchange.split('$').join("");
-    exchange = exchange.split(',').join("");
     gia = gia.split('$').join("");
     gia = gia.split(',').join("");
-    var total = gia * exchange;
+    var total = parseInt(gia) * parseInt(exchange);
     var thue = (($('#thue').val() * total) / 100);
-    $('#tong').val(parseInt(total) + parseInt(thue));
+    var tong = parseInt(total) + parseInt(thue);
+    tong = tong.toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    });
+    total = total.toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    });
+    exchange = parseInt(exchange).toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    });
+    $('#exchange').val(exchange);
+    $('#tong').val(tong);
+    $('#tongvat').val(total);
 }
+
+// function updatePrice(){
+
+// }
 
 window.onload = function(){
     sumPrice();
@@ -2006,8 +2025,8 @@ window.onload = function(){
 function sumPrice() {
     var gianam = $('#gianam').val();
     var v_light = $('#v_light').val();
-    gianam = gianam.split('$').join("");
-    gianam = gianam.split(',').join("");
+    gianam = gianam.split('$').join('');
+    gianam = gianam.split(',').join('');
     if(v_light==''){
         $('#tong').val(parseInt(gianam));
     }
@@ -2024,24 +2043,34 @@ function setRatio(elements) {
     var gia = parent.children('td').find('.ratio');
     var value = $('#value_contract').val();
     var exchange = $('#exchange').val();
-    exchange = exchange.split('$').join("");
-    exchange = exchange.split(',').join("");
+    exchange = exchange.split('₫').join("");
+    exchange = exchange.split('.').join("");
     var id_value = parent.children('td').find('.id_value_contract');
         value = value.split('$').join("");
         value = value.split(',').join("");
-        var total_value = value * exchange
-    $(id_value).val((total_value * $(gia).val())/100)
+        var total_value = value * exchange;
+    value_contract = (total_value * $(gia).val())/100;
+    $(id_value).val(parseInt(value_contract).toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    }));
+    var price =  $(id_value).val();
+        price = price.split('₫').join("");
+        price = price.split('.').join("");
     var thue = parent.children('td').find('.id_vat');
     var total = parent.children('td').find('.total');
-    var vat = ($(thue).val() * $(id_value).val())/ 100
-    $(total).val(parseInt($(id_value).val()) + parseInt(vat));
+    var vat = ($(thue).val() * parseInt(price))/ 100;
+    tong = parseInt(price) + parseInt(vat);
+    $(total).val(tong.toLocaleString('vi', {style : 'currency', currency : 'VND'}));
 }
 
-function setValueContract() {
-    var sotien = $('#id_value_contract').val();
-    var thue = $('#id_vat').val();
-    var tong = parseInt(sotien) + parseInt(sotien * thue / 100);
-    $('#total').val(parseInt(tong));
+function setValueContract(elements) {
+    var parent = $(elements).closest('tr');
+    var gia = parent.children('td').find('.value_contract');
+    var thue = parent.children('td').find('.id_vat');
+    var total = parent.children('td').find('.total');
+    var vat = ($(thue).val() * $(gia).val())/ 100;
+    $(total).val(parseInt($(gia).val()) + parseInt(vat));
 }
 
 // function getRatio(element) {
@@ -2160,10 +2189,10 @@ function Ratio() {
                                                required>
                                     </td>
                                     <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" value="${ele.ratio}" id="ratio" onchange="setRatio(this)" name="ratio[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract" value="${ele.id_value_contract}" id="id_value_contract"
+                                    <td><input type="text" class="form-control display-input id_value_contract" value="${(ele.id_value_contract).toLocaleString('vi', {style : 'currency', currency : 'VND'})}" id="id_value_contract"
                                                name="id_value_contract[]" readonly></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat" value="${ele.id_vat}" name="id_vat[]" readonly></td>
-                                    <td><input type="text" class="form-control display-input total" value="10" id="total" name="total_value[]" readonly></td>
+                                    <td><input type="text" class="form-control display-input total" value="${(ele.total_value).toLocaleString('vi', {style : 'currency', currency : 'VND'})}" id="total" name="total_value[]" readonly></td>
                                     <td><input type="date" class="form-control display-input" value="${ele._pay_due}" name="_pay_due[]" required>
                                     </td>
                                 </tr>` )
@@ -2176,7 +2205,7 @@ function Ratio() {
 }
 countSearch()
 function countSearch() {
-    $('#count').append(`<label> Tìm Thấy Được ${$('.id_banner').length} Sản Phẩm</label>`)
+    $('#count').append(`<label> Tìm Thấy Được ${$('.id_banners').length} Sản Phẩm</label>`)
 }
 countSearchCustomer()
 function countSearchCustomer() {
@@ -3375,7 +3404,7 @@ $('#more_product').on('click',function () {
                                 <label for="exampleFormControlInput1 uname">Đơn giá</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
-                                <input type="text" class="form-control" id="gianam_${baloon}" name="gianam_${baloon}"
+                                <input type="text" class="form-control" id="gianam_${baloon}" name="gianam[]" 
                                        placeholder="Đơn giá" value="" required>
                                 <div class="invalid-feedback">Địa chỉ không được để trống</div>
                             </div>
@@ -3385,6 +3414,10 @@ $('#more_product').on('click',function () {
     `);
     baloon++
 })
+
+function getget(){
+    alert('done');
+}
 
 function product(element) {
     var count = element;
@@ -3409,6 +3442,8 @@ function product(element) {
         value_contract = 0;
     }else {
         value_contract =  $('#value_contract').val();
+        value_contract = value_contract.replace('$','');
+        value_contract = value_contract.replace(',','');
     }
 
     $.ajax({
@@ -3433,12 +3468,30 @@ function product(element) {
                     quan.append(`<option value="${elements.quan}" selected>${elements._name_district}</option>`)
                     id_system.val(elements.id_system)
                     size_banner.val(elements.size_banner);
-                    gianam.val(elements.gianam);
+                    // gianam.val(elements.gianam);
+                    var giaNam = elements.gianam;
+                        giaNam = giaNam.replace('$','');
+                        giaNam = giaNam.replace(',','');
+                    var giaden = elements.v_light;
+                    if(giaden == null){
+                        giaden = 0;
+                    }else{
+                        giaden = giaden.replace('$','');
+                        giaden = giaden.replace(',','');
+                    }
+                    var sumprice = (parseInt(giaNam)+parseInt(giaden)).toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                    });
+                    gianam.val(sumprice);         
                     var gianamText =  gianam.val().toString();
                     gianamText = gianamText.replace('$','');
                     gianamText = gianamText.replace(',','');
                     value_contract = parseInt(value_contract) + parseInt(gianamText);
-
+                    value_contract = value_contract.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                    });
                 })
                 $('#value_contract').val(value_contract);
             }
@@ -3585,11 +3638,11 @@ function showProduct() {
                         </div>
                         <div class="row">
                             <div class="col-md-3 col-sm-12">
-                                <label for="exampleFormControlInput1 uname">Giá Năm</label>
+                                <label for="exampleFormControlInput1 uname">Đơn giá</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
                                 <input type="text" class="form-control" id="gianam" name="gianam"
-                                       placeholder="Giá Năm" value="${ele.gianam}" ${ele.readonly}>
+                                       placeholder="Đơn giá" value="${ele.real_value}" ${ele.readonly}>
                             </div>
                         </div>
                     </div>

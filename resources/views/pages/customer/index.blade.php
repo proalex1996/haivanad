@@ -103,24 +103,15 @@
                         </thead>
                         <tbody>
                         @foreach($customers as $customer)
-                                <tr id ="redirect_{{$customer->id}}">
+                                <tr >
                                     <td><input type="checkbox" id="check-box" data-target="{{$customer->id}}" name="check_box[]" onchange="getCheckedBox()" value="{{$customer->customer_id}}"
                                                class="display-input m-r-5"></td>
-                                    {{--                                           aria-expanded="false" id="dropdownMenuLink"> {{$customer->id}}</a>
-                                    {{--                                    <td><a class="dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true"--}}
-{{--                                           aria-expanded="false" id="dropdownMenuLink"> {{$customer->id}}</a>--}}
-{{--                                        <div class="dropdown-menu">--}}
-{{--                                            <a class="dropdown-item"--}}
-{{--                                               href="{{\Illuminate\Support\Facades\URL::to('customer/update')."/".$customer->id}}">Sửa--}}
-{{--                                                thông tin khách hàng</a>--}}
-{{--                                        </div>--}}
-{{--                                    </td>--}}
-                                    <td class="id_customer" >{{$customer->customer_id}}</td>
-                                    <td>{{$customer->name_customer}}</td>
-                                    <td>{{$customer->adress_customer}}</td>
-                                    <td>{{$customer->mst}}</td>
-                                    <td>{{$customer->name_type}}</td>
-                                    <td> <a href="{{\Illuminate\Support\Facades\URL::to('customer/update')."/".$customer->id}}">Xem chi tiết</a></td>
+                                    <td class="id_customer" ><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('customer/update')."/".$customer->id}}">{{$customer->customer_id}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('customer/update')."/".$customer->id}}">{{$customer->name_customer}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('customer/update')."/".$customer->id}}">{{$customer->adress_customer}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('customer/update')."/".$customer->id}}">{{$customer->mst}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('customer/update')."/".$customer->id}}">{{$customer->name_type}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('customer/update')."/".$customer->id}}">Xem chi tiết</a></td>
                                 </tr>
                         @endforeach
                         </tbody>

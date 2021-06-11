@@ -298,7 +298,7 @@
                                 <label for="exampleFormControlInput1 uname">Đơn Giá(USD)</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
-                                <input type="text" class="form-control" id="gianam_1" name="gianam"
+                                <input type="text" class="form-control" id="gianam_1" name="gianam[]" onchange="updatePrice()"
                                        placeholder="Đơn Giá" value="" required>
                             </div>
                         </div>
@@ -348,7 +348,7 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-control" data-type="currency" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" onchange="getTong()" id="value_contract"
-                                               name="value_contract"
+                                               name="_value_contract"
                                                placeholder="Giá trị hợp đồng" value="" required>
                                     </div>
 
@@ -389,13 +389,19 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Tổng(VND + 10% VAT)</label>
+                                    </div>
+                                    <div class="col-md-3 col-sm-12">
+                                        <input type="text" class="form-control" value="" id="tong" name="tong" onchange="setTong()"
+                                               placeholder="Tổng Giá Trị hợp Đồng (Gồm 10% VAT)" >
+                                    </div>
+                                    <div class="col-md-2 col-sm-12">
                                         <label for="exampleFormControlInput1 uname">Tổng(VND)</label>
                                     </div>
-                                    <div class="col-md-9 col-sm-12">
-                                        <input type="number" class="form-control" value="" id="tong" name="tong"
-                                               placeholder="Tổng Giá Trị hợp Đồng(USD)" >
+                                    <div class="col-md-4 col-sm-12">
+                                        <input type="text" class="form-control" value="" id="tongvat" name="value_contract"
+                                               placeholder="Tổng Giá Trị hợp Đồng" >
                                     </div>
-
                                 </div>
 
                             </div>
@@ -425,7 +431,7 @@
                                                required>
                                     </td>
                                     <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" onchange="setRatio(this)" id="ratio"  name="ratio[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract" onchange="setValueContract()" id="id_value_contract"
+                                    <td><input type="text" class="form-control display-input id_value_contract value_contract" onchange="setValueContract(this)" id="id_value_contract"
                                                name="id_value_contract[]" placeholder="Số Tiền(VND)"></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat"  value="10" name="id_vat[]" ></td>
                                     <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền(VND)" id="total" name="total_value[]"></td>

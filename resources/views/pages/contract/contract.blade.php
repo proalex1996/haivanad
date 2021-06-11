@@ -132,98 +132,58 @@
                         <tbody>
                         @foreach($contracts as $contract)
                             @if ((\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())) > '60')
-                                <tr class="status--process dropdown" id ="row_contract_{{$contract->id}}">
+                                <tr class="status--process dropdown">
                                     <td><input type="checkbox" id="check-box" data-target="{{$contract->id}}" name="check_box[]" onchange="getCheckedBox()" value="{{$contract->id_contract}}"
                                                class="display-input m-r-5"></td>
-{{--                                    <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"--}}
-{{--                                           aria-expanded="false" id="dropdownMenuLink"> {{$contract->id}}</a>--}}
-{{--                                        <div class="dropdown-menu">--}}
-{{--                                            <a class="dropdown-item"--}}
-{{--                                               href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">Sửa--}}
-{{--                                                thông tin hợp đồng</a>--}}
-{{--                                            <a id="open-deleteContract" class="dropdown-item"--}}
-{{--                                               data-id_data="{{$contract->id}}" data-toggle="modal"--}}
-{{--                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa hợp đồng</a>--}}
-{{--                                            <hr>--}}
-{{--                                            <a id="open-dueContract" class="dropdown-item"--}}
-{{--                                               data-contract_id="{{$contract->id}}" data-toggle="modal"--}}
-{{--                                               data-target="#due" onclick="openDueContract(this)">Gia hạn hợp đồng</a>--}}
-{{--                                        </div>--}}
-{{--                                    </td>--}}
-                                    <td>{{$contract->id_contract}}</td>
-                                    <td>{{$contract->name_customer}}</td>
-                                    <td>{{$contract->name_kind}}</td>
-                                    <td>{{$contract->id_banner}}</td>
-                                    <td>{{$contract->date_end}}</td>
-                                    <td class="value_contract"><span>{{$contract->value_contract}}</span>
-                                        VND
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->id_contract}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->name_customer}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->name_kind}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->id_banner}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->date_end}}</a></td>
+                                    <td class="value_contract"><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}"><span>{{$contract->value_contract}}</span>
+                                        VND</a>
                                     </td>
-                                    <td>{{$contract->paid}}</td>
-                                    <td>{{$contract->due}}</td>
-                                    <td>{{$contract->name_status}}</td>
-                                    <td><a href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">Xem Chi Tiết</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->paid}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->due}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->name_status}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">Xem Chi Tiết</a></td>
 
                                 </tr>
 
                             @elseif('60' > App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString()) &&
                                     \App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString()) >= '0')
-                                <tr class="status--warn dropdown" id ="row_contract_{{$contract->id}}">
+                                <tr class="status--warn dropdown" >
                                     <td><input type="checkbox" id="check-box" data-target="{{$contract->id}}" name="check_box[]" onchange="getCheckedBox()" value="{{$contract->id_contract}}"
                                                class="display-input m-r-5"></td>
-{{--                                    <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"--}}
-{{--                                           aria-expanded="false" id="dropdownMenuLink"> {{$contract->id}}</a>--}}
-{{--                                        <div class="dropdown-menu">--}}
-{{--                                            <a class="dropdown-item"--}}
-{{--                                               href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">Sửa--}}
-{{--                                                thông tin hợp đồng</a>--}}
-{{--                                            <a id="open-deleteContract" class="dropdown-item"--}}
-{{--                                               data-id_data="{{$contract->id}}" data-toggle="modal"--}}
-{{--                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa hợp đồng</a>--}}
-{{--                                            <hr>--}}
-{{--                                            <a id="open-dueContract" class="dropdown-item"--}}
-{{--                                               data-contract_id="{{$contract->id}}" data-toggle="modal"--}}
-{{--                                               data-target="#due" onclick="openDueContract(this)">Gia hạn hợp đồng</a>--}}
-{{--                                        </div>--}}
-{{--                                    </td>--}}
-                                    <td>{{$contract->id_contract}}</td>
-                                    <td>{{$contract->name_customer}}</td>
-                                    <td>{{$contract->name_kind}}</td>
-                                    <td>{{$contract->id_banner}}</td>
-                                    <td>{{$contract->date_end}}</td>
-                                    <td class="value_contract"><span>{{$contract->value_contract}}</span>
-                                        VND
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->id_contract}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->name_customer}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->name_kind}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->id_banner}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->date_end}}</a></td>
+                                    <td class="value_contract"><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}"><span>{{$contract->value_contract}}</span>
+                                        VND</a>
                                     </td>
-                                    <td>{{$contract->paid}}</td>
-                                    <td>{{$contract->due}}</td>
-                                    <td>{{$contract->name_status}}</td>
-                                    <td><a href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">Xem Chi Tiết</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->paid}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->due}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->name_status}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">Xem Chi Tiết</a></td>
                                 </tr>
                             @elseif( (\App\Utilili\DateTimeFormat::getDate($contract->date_end) - \App\Utilili\DateTimeFormat::getDate(\Carbon\Carbon::now()->toDateString())) < '0')
-                                <tr class="dropdown status--denied" id ="row_contract_{{$contract->id}}">
+                                <tr class="dropdown status--denied">
                                     <td><input type="checkbox" id="check-box" data-target="{{$contract->id}}" name="check_box[]" onchange="getCheckedBox()" value="{{$contract->id_contract}}"
                                                class="display-input m-r-5"></td>
-{{--                                    <td><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"--}}
-{{--                                           aria-expanded="false" id="dropdownMenuLink"> {{$contract->id}}</a>--}}
-{{--                                        <div class="dropdown-menu">--}}
-{{--                                            <a id="open-deleteContract" class="dropdown-item"--}}
-{{--                                               data-id_data="{{$contract->id}}" data-toggle="modal"--}}
-{{--                                               data-target="#detroy" onclick="openDestroyDialog(this, 'destroy-value')">Xóa hợp đồng</a>--}}
-{{--                                            <hr>--}}
-
-{{--                                        </div>--}}
-{{--                                    </td>--}}
-                                    <td>{{$contract->id_contract}}</td>
-                                    <td>{{$contract->name_customer}}</td>
-                                    <td>{{$contract->name_kind}}</td>
-                                    <td>{{$contract->id_banner}}</td>
-                                    <td>{{$contract->date_end}}</td>
-                                    <td class="value_contract"><span>{{$contract->value_contract}}</span>
-                                        VND
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->id_contract}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->name_customer}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->name_kind}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->id_banner}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->date_end}}</a></td>
+                                    <td class="value_contract"><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}"><span>{{$contract->value_contract}}</span>
+                                        VND</a>
                                     </td>
-                                    <td>{{$contract->paid}}</td>
-                                    <td>{{$contract->due}}</td>
-                                    <td>{{$contract->name_status}}</td>
-                                    <td><a href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">Xem Chi Tiết</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->paid}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->due}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->name_status}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">Xem Chi Tiết</a></td>
                                 </tr>
                             @endif
                         @endforeach
