@@ -2018,9 +2018,32 @@ function getTong() {
 
 // }
 
+
+
 window.onload = function(){
     sumPrice();
 } 
+
+function getTongUpdate(){
+    var gia = $('#value_contract').val();
+    var exchange = $('#exchange').val();
+    gia = gia.split('$').join('');
+    gia = gia.split(',').join('');
+    exchange = exchange.split('.').join('');
+    exchange = exchange.split('₫').join('');
+    var tong = parseInt(gia) * parseInt(exchange);
+    $('#tongvat_').val(tong.toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    }));
+    var thue = $('#thue').val();
+    thue = parseInt(thue) * parseInt(tong) /100;
+    var tongvat = thue + tong;
+    $('#tong_').val(parseInt(tongvat).toLocaleString('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+    }));
+}
 
 function sumPrice() {
     var gianam = $('#gianam').val();

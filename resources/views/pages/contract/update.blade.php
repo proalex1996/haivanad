@@ -224,7 +224,7 @@
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-control" id="value_contract"
                                                name="value_contract"
-                                               placeholder="Giá trị hợp đồng" data-type="currency" onchange="getTong()" value="{{$cost_contract}}" required {{$contract->readonly}}>
+                                               placeholder="Giá trị hợp đồng" data-type="currency" onchange="getTongUpdate()" value="{{'$'.number_format($cost_contract).'.00'}}" required {{$contract->readonly}}>
                                         <div class="invalid-feedback m-l-20">Vui lòng nhập giá trị hợp đồng</div>
                                     </div>
                                 </div>
@@ -235,7 +235,7 @@
                                         <label for="exampleFormControlInput1">Tỉ Giá VND/1USD</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" value="{{$contract->exchange}}" onchange="getTong()" id="exchange"
+                                        <input type="text" class="form-control" value="{{$contract->exchange}}" onchange="getTongUpdate()" id="exchange"
                                                name="exchange"
                                                placeholder="VND" {{$contract->readonly}}>
                                     </div>
@@ -247,7 +247,7 @@
                                         <label for="exampleFormControlInput1">Thuế VAT</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="number" class="form-control" onchange="getTong()" id="thue"
+                                        <input type="number" class="form-control" onchange="getTongUpdate()" id="thue"
                                                name="thue"
                                                placeholder="Thuế (%)" value="10">
                                     </div>
@@ -263,18 +263,17 @@
                                         <label for="exampleFormControlInput1 uname">Tổng(VND + 10% VAT)</label>
                                     </div>
                                     <div class="col-md-3 col-sm-12">
-                                        <input type="text" class="form-control" value="" step="0.01" id="tong" name="tong"
+                                        <input type="text" class="form-control" value="{{number_format($contract->vl_contract_vat_vnd).' ₫'}}"  step="0.01" id="tong_" name="tong"
                                                placeholder="Tổng Giá Trị hợp Đồng">
                                     </div>
                                     <div class="col-md-2 col-sm-12">
                                         <label for="exampleFormControlInput1 uname">Tổng(VND)</label>
                                     </div>
                                     <div class="col-md-4 col-sm-12">
-                                        <input type="text" class="form-control" value="" step="0.01" id="tongvat" name="tongvat"
+                                        <input type="text" class="form-control" value="{{number_format($contract->vl_contract_vnd).' ₫'}}" step="0.01" id="tongvat_" name="tongvat"
                                                placeholder="Tổng Giá Trị hợp Đồng">
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>

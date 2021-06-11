@@ -385,6 +385,14 @@ class ContractController extends Controller
         $contract->exchange = $exchange;
         $contract->value_contract = $value_contract;
         $contract->note_contract = $request->note_contract;
+        $tong = $request->value_contract;
+        $tong = str_replace('₫','',$tong);
+        $tong = str_replace('.','',$tong);
+        $contract->vl_contract_vnd = $tong;
+        $tong_thue = $request->tong;
+        $tong_thue = str_replace('₫','',$tong_thue);
+        $tong_thue = str_replace('.','',$tong_thue);
+        $contract->vl_contract_vat_vnd = $tong_thue;
         //$pdf = PDF::loadview('contract.blade.php',$file);
 
         $contract->save();
@@ -454,6 +462,21 @@ class ContractController extends Controller
             $data['value_contract'] = str_replace(',','',$data['value_contract']);
         }
 
+        if(!empty($data['exchange'])){
+            $data['exchange'] = str_replace('.','',$data['exchange']);
+            $data['exchange'] = str_replace('₫','',$data['exchange']);
+        }
+
+        if(!empty($data['tongvat'])){
+            $data['vl_contract_vnd'] = str_replace(',','',$data['tongvat']);
+            $data['vl_contract_vnd'] = str_replace('₫','',$data['vl_contract_vnd']);
+        }
+
+        if(!empty($data['tong'])){
+            $data['vl_contract_vat_vnd'] = str_replace(',','',$data['tong']);
+            $data['vl_contract_vat_vnd'] = str_replace('₫','',$data['vl_contract_vat_vnd']);
+        }
+
         if (!empty($data)) {
             if (!empty($data['content'])) {
                 $data['content'] = basename($request->content_contract->getClientOriginalName());
@@ -479,9 +502,15 @@ class ContractController extends Controller
                     $detail->id_contract = $data['id_contract'];
                     $detail->payment_period = $data['payment_period'][$i];
                     $detail->ratio = $data['ratio'][$i];
-                    $detail->id_value_contract = $data['id_value_contract'][$i];
+                    $id_value_contract = $data['id_value_contract'][$i];
+                    $id_value_contract = str_replace('.','',$id_value_contract);
+                    $id_value_contract = str_replace('₫','',$id_value_contract);
+                    $detail->id_value_contract = $id_value_contract;
                     $detail->id_vat = $data['id_vat'][$i];
-                    $detail->total_value = $data['total_value'][$i];
+                    $total_value = $data['total_value'][$i];
+                    $total_value = str_replace('.','',$total_value);
+                    $total_value = str_replace('₫','',$total_value);
+                    $detail->total_value = $total_value;
                     $detail->_pay_due = $data['_pay_due'][$i];
                     $detail->save();
                 }
