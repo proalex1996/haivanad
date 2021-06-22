@@ -1,4 +1,4 @@
-// const { isNull } = require("lodash");
+
 
 (function ($) {
     // USE STRICT
@@ -1864,11 +1864,11 @@ $('#addrowPayment').on('click', function () {
                                     <td><input type="text" class="display-input form-control payment_period" data-target="{{$contract->id_contract}}" id="payment_period" name="payment_period[]"
                                                required>
                                     </td>
-                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onblur="setRatio(this)" name="ratio[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract"  id="id_value_contract"
-                                               name="id_value_contract[]" placeholder="Số Tiền (VND)" readonly></td>
-                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" value="10" id="id_vat" name="id_vat[]" readonly></td>
-                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND)" id="total" name="total_value[]" readonly></td>
+                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onchange="setRatio(this),totalPrice()" name="ratio[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_value_contract value_contract" onchange="setValueContract(this),totalPrice()" id="id_value_contract" data-type="currency_vnd" 
+                                               name="id_value_contract[]" placeholder="Số Tiền (VND)"></td>
+                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" value="10" id="id_vat" name="id_vat[]"></td>
+                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND)" data-type="currency_vnd" onchange="totalPrice()" id="total" name="total_value[]"></td>
                                     <td><input type="date" class="form-control display-input" name="_pay_due[]" required>
                                     </td>
                                 </tr>
@@ -1887,11 +1887,11 @@ $('#addrowPayment1').on('click', function () {
                                     <td><input type="text" class="display-input form-control payment_period" id="payment_period" name="payment_period[]"
                                                required>
                                     </td>
-                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onchange="setRatio(this)" name="ratio[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract value_contract"  id="id_value_contract" onchange="setValueContract(this)"
+                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onchange="setRatio(this),totalPrice()" name="ratio[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_value_contract value_contract" onchange="setValueContract(this),totalPrice()" data-type="currency_vnd" id="id_value_contract"
                                                name="id_value_contract[]" placeholder="Số Tiền (VND)"></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" value="10" id="id_vat" name="id_vat[]"></td>
-                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND)" id="total" name="total_value[]"></td>
+                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND)" data-type="currency_vnd" onchange="totalPrice()" id="total" name="total_value[]"></td>
                                     <td><input type="date" class="form-control display-input" name="_pay_due[]" required>
 
                                </tr>
@@ -1991,32 +1991,105 @@ $(document).ready(function () {
 });
 function getTong() {
     var gia = $('#value_contract').val();
+        gia = gia.split('$').join("");
+        gia = gia.split(',').join("");
     var exchange = $('#exchange').val();
-    gia = gia.split('$').join("");
-    gia = gia.split(',').join("");
+        exchange = exchange.split('₫').join("");
+        exchange = exchange.split(',').join("");
     var total = parseInt(gia) * parseInt(exchange);
     var thue = (($('#thue').val() * total) / 100);
     var tong = parseInt(total) + parseInt(thue);
-    tong = tong.toLocaleString('vi-VN', {
-        style: 'currency',
-        currency: 'VND'
-    });
-    total = total.toLocaleString('vi-VN', {
-        style: 'currency',
-        currency: 'VND'
-    });
-    exchange = parseInt(exchange).toLocaleString('vi-VN', {
-        style: 'currency',
-        currency: 'VND'
-    });
+    // tong = tong.toLocaleString('vi-VN', {
+    //     style: 'currency',
+    //     currency: 'VND'
+    // });
+    // total = total.toLocaleString('vi-VN', {
+    //     style: 'currency',
+    //     currency: 'VND'
+    // });
+    // exchange = parseInt(exchange).toLocaleString('vi-VN', {
+    //     style: 'currency',
+    //     currency: 'VND'
+    // });
     $('#exchange').val(exchange);
-    $('#tong').val(tong);
-    $('#tongvat').val(total);
+    $('#tong').val(format(tong));
+    $('#tongvat').val(format(total));
 }
 
-// function updatePrice(){
+function totalPrice(){
+    var parent = $('.ratio').closest('tr');
+    //Total Ratio
+    var tile = [];
+    var tile = parent.children('td').find('.ratio');
+    var tong_tile = 0;
+    for(var i = 0; i<tile.length; i++){
+        if(tong_tile < 100){
+            if($(tile[i]).val() === ""){
+                tong_tile = tong_tile;
+            }else{
+                tong_tile = tong_tile + parseInt($(tile[i]).val());
+            }
+        }else{
+            alert("Tổng tỉ lệ đã vượt 100%");
+            break;
+        }
+    }
+    $('#total_ratio').val(tong_tile);
+    //Total Money
+    var money = [];
+    var money = parent.children('td').find('.value_contract');
+    var tien = $('#tongvat').val();
+        tien = tien.split('₫').join("");
+        tien = tien.split(',').join("");
+    var thue = $('#id_vat').val();
+    var tien_vat = $('#tong').val();
+        tien_vat = tien_vat.split('₫').join("");
+        tien_vat = tien_vat.split(',').join("");
+    var tong_tien = 0;
+    for(i =0; i<money.length; i++){
+        tt = $(money[i]).val();
+        if(parseInt(tong_tien) < parseInt(tien)){
+            if(tt === ""){
+                tong_tien = tong_tien;
+            }else{
+                tt = tt.split('₫').join("");
+                tt = tt.split(',').join("");
+                tong_tien = tong_tien + parseInt(tt);
+            }
+        }else{
+            alert("Tổng tiền trước thuế đã vượt mức ban đầu!");
+        }
+    }
+    var tong_tien_vat = tong_tien + (tong_tien * parseInt(thue) / 100);
+    if( parseInt(tong_tile) == 100 && ((tong_tien != parseInt(tien)) || (tong_tien_vat != parseInt(tien_vat)))){
+        alert("Tổng tiền không đạt mức ban đâu");
+        exit();
+    }
+    tong_tien = tong_tien;
+    tong_tien_vat = tong_tien_vat;
+    $('#total_price').val(format(tong_tien));
+    $('#total_price_vat').val(format(tong_tien_vat));
 
-// }
+}
+
+function updatePrice(){
+    var gia = [];
+    var parent = $('.price').closest('.div_price');
+    var gia = parent.children('div').find('.price');
+    tong = 0;
+    var i = 0;
+    for( i = 0; i<gia.length; i++){
+        var temp = $(gia[i]).val();
+        temp = temp.split('$').join("");
+        temp = temp.split(',').join("");
+        tong = tong + parseInt(temp);
+    }
+    tong = tong.toLocaleString('en-US', {
+        style:'currency', 
+        currency:'USD'
+    });
+    $('#value_contract').val(tong);
+}
 
 
 
@@ -2029,20 +2102,19 @@ function getTongUpdate(){
     var exchange = $('#exchange').val();
     gia = gia.split('$').join('');
     gia = gia.split(',').join('');
-    exchange = exchange.split('.').join('');
+    exchange = exchange.split(',').join('');
     exchange = exchange.split('₫').join('');
     var tong = parseInt(gia) * parseInt(exchange);
-    $('#tongvat_').val(tong.toLocaleString('vi-VN', {
-        style: 'currency',
-        currency: 'VND'
-    }));
+    $('#tongvat_').val(format(tong));
     var thue = $('#thue').val();
     thue = parseInt(thue) * parseInt(tong) /100;
     var tongvat = thue + tong;
-    $('#tong_').val(parseInt(tongvat).toLocaleString('vi-VN', {
-        style: 'currency',
-        currency: 'VND'
-    }));
+    $('#tong_').val(format(parseInt(tongvat)));
+}
+
+function getCode(){
+    code = $('#code').val();
+    $('#id_contracts').val(code);
 }
 
 function sumPrice() {
@@ -2067,33 +2139,33 @@ function setRatio(elements) {
     var value = $('#value_contract').val();
     var exchange = $('#exchange').val();
     exchange = exchange.split('₫').join("");
-    exchange = exchange.split('.').join("");
+    exchange = exchange.split(',').join("");
     var id_value = parent.children('td').find('.id_value_contract');
         value = value.split('$').join("");
         value = value.split(',').join("");
         var total_value = value * exchange;
     value_contract = (total_value * $(gia).val())/100;
-    $(id_value).val(parseInt(value_contract).toLocaleString('vi-VN', {
-        style: 'currency',
-        currency: 'VND'
-    }));
+    $(id_value).val(format(parseInt(value_contract)));
     var price =  $(id_value).val();
         price = price.split('₫').join("");
-        price = price.split('.').join("");
+        price = price.split(',').join("");
     var thue = parent.children('td').find('.id_vat');
     var total = parent.children('td').find('.total');
     var vat = ($(thue).val() * parseInt(price))/ 100;
     tong = parseInt(price) + parseInt(vat);
-    $(total).val(tong.toLocaleString('vi', {style : 'currency', currency : 'VND'}));
+    $(total).val(format(tong));
 }
 
 function setValueContract(elements) {
     var parent = $(elements).closest('tr');
-    var gia = parent.children('td').find('.value_contract');
-    var thue = parent.children('td').find('.id_vat');
+    var thue = $('#id_vat').val();
     var total = parent.children('td').find('.total');
-    var vat = ($(thue).val() * $(gia).val())/ 100;
-    $(total).val(parseInt($(gia).val()) + parseInt(vat));
+    var gia = parent.children('td').find('.value_contract');
+        tien = $(gia).val();
+        tien = tien.split('₫').join("");
+        tien = tien.split(',').join("");
+    tong = parseInt(tien) + parseInt(tien) * parseInt(thue) / 100;
+    $(total).val(format(tong));
 }
 
 // function getRatio(element) {
@@ -2126,55 +2198,6 @@ function getProduct() {
         }
     });
 }
-// var baloon = 1;
-// product()
-//
-// function product(element) {
-//     $('#more_product').on('click',function () {
-//         baloon++;
-//     })
-//
-//     var data =    $(element).find(':selected').val();
-//     var url = $('#domain').attr('href');
-//         $.ajax({
-//             url: url + '/api/contract/product/' + data,
-//             async: false,
-//             headers: {
-//                 'Access-Control-Allow-Origin': '*',
-//                 'Access-Control-Allow-Headers': '*'
-//             },
-//             method: 'POST',
-//             success: function (result) {
-//                 var datas = JSON.parse(result).banner;
-//                 if (datas.length > 0) {
-//                     $.each(datas, function (index, ele) {
-//                         $('#id_typebanner_'+baloon+'').append(`<option value='${ele.id_typebanner}' selected>${ele.name_type}</option>`);
-//                         $('#id_system_'+baloon+'').val(ele.id_system)
-//                         $('#id_banner_'+baloon+'').append(`<option value='${ele.id_banner}' selected>${ele.id_banner}</option>`)
-//                         $('#dien_tich_'+baloon+'').val(ele.dien_tich);
-//                         $('#tinh_'+baloon+'').val(ele.tinh);
-//                         getQuan($('#tinh_'+baloon+''))
-//                         $('#quan_'+baloon+'').val(ele.quan);
-//                         $('#banner_adress_'+baloon+'').val(ele.banner_adress);
-//                         $('#size_banner_'+baloon+'').val(ele.size_banner);
-//                         $('#gianam_'+baloon+'').val(ele.gianam);
-//                     })
-//                 } else if (datas.length == 0) {
-//                     $('#id_nguoncustomer'+baloon+'').val('');
-//                     $('#adress_customer'+baloon+'').val('');
-//                     $('#phone_customer'+baloon+'').val('');
-//                     $('#mst'+baloon+'').val('');
-//                     $('#contact_name'+baloon+'').val('');
-//                     $('#position_customer'+baloon+'').val('');
-//                     $('#size_banner_'+baloon+'').val('');
-//                     $('#gianam_'+baloon+'').val('');
-//                 }
-//
-//
-//             }
-//         })
-//     }
-
 
 
 Ratio();
@@ -2211,11 +2234,11 @@ function Ratio() {
                                     <td><input type="text" class="display-input form-control payment_period" id="payment_period" value="${ele.payment_period}" name="payment_period[]"
                                                required>
                                     </td>
-                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" value="${ele.ratio}" id="ratio" onchange="setRatio(this)" name="ratio[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract" value="${(ele.id_value_contract).toLocaleString('vi', {style : 'currency', currency : 'VND'})}" id="id_value_contract"
-                                               name="id_value_contract[]" readonly></td>
-                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat" value="${ele.id_vat}" name="id_vat[]" readonly></td>
-                                    <td><input type="text" class="form-control display-input total" value="${(ele.total_value).toLocaleString('vi', {style : 'currency', currency : 'VND'})}" id="total" name="total_value[]" readonly></td>
+                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" value="${ele.ratio}" id="ratio" onchange="setRatio(this),totalPrice()" name="ratio[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_value_contract" data-type="currency_vnd" value="${format(ele.id_value_contract)}" id="id_value_contract" onchange="setValueContract(this),totalPrice()"
+                                               name="id_value_contract[]" ></td>
+                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat" value="${ele.id_vat}" name="id_vat[]" ></td>
+                                    <td><input type="text" class="form-control display-input total" data-type="currency_vnd" onchange="totalPrice()" value="${format(ele.total_value)}" id="total" name="total_value[]" ></td>
                                     <td><input type="date" class="form-control display-input" value="${ele._pay_due}" name="_pay_due[]" required>
                                     </td>
                                 </tr>` )
@@ -2410,6 +2433,82 @@ $('#export_ppt_form').submit(function(e){
 //     e.preventDefault();
 // });
 
+function format(n) {
+    return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " ₫";
+  }
+
+// format number vnd 
+$('input[data-type="currency_vnd"]').on({
+    keyup: function() {
+        formatCurrency_vnd($(this));
+    },
+    blur: function() {
+        formatCurrency_vnd($(this), "blur");
+    }
+});
+function formatNumber_vnd(n){
+    return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+function formatCurrency_vnd(input, bur){
+    // get input value
+    var input_val = input.val();
+
+    // don't validate empty input
+    if (input_val === "") { return; }
+
+    // original length
+    var original_len = input_val.length;
+
+    // initial caret position
+    var caret_pos = input.prop("selectionStart");
+
+    // check for decimal
+    if (input_val.indexOf(".") >= 0){
+        // get position of first decimal
+        // this prevents multiple decimals from
+        // being entered
+        var decimal_pos = input_val.indexOf(".");
+
+        // split number by decimal point
+        var left_side = input_val.substring(0, decimal_pos);
+        var right_side = input_val.substring(decimal_pos);
+
+        // add commas to left side of number
+        left_side = formatNumber_vnd(left_side);
+
+        // validate right side
+        right_side = formatNumber_vnd(right_side);
+
+        // On blur make sure 2 numbers after decimal
+        if (blur === "blur") {
+            right_side += "00";
+        }
+
+        // Limit decimal to only 2 digits
+        right_side = right_side.substring(0, 2);
+
+        // join number by .
+        input_val = left_side + "." + right_side + " ₫" ;
+    }else{
+        // no decimal entered
+        // add commas to number
+        // remove all non-digits
+        input_val = formatNumber_vnd(input_val);
+        input_val =  input_val + " ₫";
+
+        // final formatting
+        if (blur === "blur") {
+            input_val += ".00";
+        }
+    }
+    // send updated string to input
+    input.val(input_val);
+
+    // put caret back in the right position
+    var updated_len = input_val.length;
+    caret_pos = updated_len - original_len + caret_pos;
+    input[0].setSelectionRange(caret_pos, caret_pos);
+}
 // Jquery Dependency
 
 $("input[data-type='currency']").on({
@@ -2422,7 +2521,7 @@ $("input[data-type='currency']").on({
 });
 function formatNumber(n) {
     // format number 1000000 to 1,234,567
-    return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 function formatCurrency(input, blur) {
     // appends $ to value, validates decimal side
@@ -2492,10 +2591,10 @@ function formatCurrency(input, blur) {
 }
 $('#submit_kind').on('click',function () {
     var id = $('#id_kind').val();
-    var name = $('#kind_name').val()
+    var name = $('#kind_name').val();
     var data = {id: id,name: name};
     var url = $('#domain').attr('href');
-    if(name ==""){
+    if(name !=""){
         $.ajax({
             method: 'POST',
             url: url + '/api/user/update-kind',
@@ -3422,12 +3521,12 @@ $('#more_product').on('click',function () {
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row div_price">
                             <div class="col-md-3 col-sm-12">
                                 <label for="exampleFormControlInput1 uname">Đơn giá</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
-                                <input type="text" class="form-control" id="gianam_${baloon}" name="gianam[]" 
+                                <input type="text" class="form-control price" id="gianam_${baloon}" data-type="currency" name="gianam[]" onchange="updatePrice()"
                                        placeholder="Đơn giá" value="" required>
                                 <div class="invalid-feedback">Địa chỉ không được để trống</div>
                             </div>
@@ -3566,14 +3665,14 @@ function showProduct() {
             $.each(datas, function (index, ele) {
                 $('#show_product').append(`
                     <fieldset class="border-text border-text-product">
-                    <legend class='text-left'>Thông Tin Sản Phẩm</legend>
+                    <legend class='text-left'><div type="button" id="delete_setfeild" onclick="delete_setfeild(this)" class="snip1548"><span>Thông Tin Sản Phẩm</span></div></legend>
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-3 col-sm-12">
                                 <label for="exampleFormControlSelect1">Tên</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
-                                <select class="form-control chosen-select" id="_name_banner" name="_name_banner" ${ele.readonly}>
+                                <select class="form-control chosen-select" id="_name_banner" name="_name_banner[]" ${ele.readonly}>
                                             <option value="${ele.id_banner}" selected>${ele._name_banner}</option>
 
                                 </select>
@@ -3586,7 +3685,7 @@ function showProduct() {
                                         <label for="exampleFormControlSelect1">Mã Sản Phẩm</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_banner" name="id_banner" ${ele.readonly}>
+                                        <select class="form-control" id="id_banner" name="id_banner[]" ${ele.readonly}>
                                                         <option value="${ele.id_banner}" selected>${ele.id_banner}</option>
                                         </select>
                                     </div>
@@ -3599,7 +3698,7 @@ function showProduct() {
                                         <label for="exampleFormControlSelect1">Loại Hình Sản Phẩm</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_typebanner" name="id_typebanner" ${ele.readonly}>
+                                        <select class="form-control" id="id_typebanner" name="id_typebanner[]" ${ele.readonly}>
                                             <option value="${ele.id_typebanner}">${ele.name_type}</option>
                                         </select>
                                     </div>
@@ -3614,7 +3713,7 @@ function showProduct() {
                             </div>
                             <div class="col-md-9 col-sm-12">
                                 <input type="text" class="form-control" id="banner_adress"
-                                       name="banner_adress"
+                                       name="banner_adress[]"
                                        placeholder="Địa Chỉ Pano" value="${ele.banner_adress}" ${ele.readonly}>
                             </div>
                         </div>
@@ -3625,7 +3724,7 @@ function showProduct() {
                                         <label for="exampleFormControlSelect1">Tỉnh/Thành Phố</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="tinh" name="tinh" ${ele.readonly}>
+                                        <select class="form-control" id="tinh" name="tinh[]" ${ele.readonly}>
                                             <option value="${ele.tinh}">${ele._name}</option>
                                         </select>
                                     </div>
@@ -3638,7 +3737,7 @@ function showProduct() {
                                         <label for="exampleFormControlSelect1">Quận/Huyện</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="quan" name="quan" ${ele.readonly}>
+                                        <select class="form-control" id="quan" name="quan[]" ${ele.readonly}>
                                             <option value="${ele.quan}">${ele._name_district}</option>
                                         </select>
                                     </div>
@@ -3652,7 +3751,7 @@ function showProduct() {
                                         <label for="exampleFormControlSelect1">Kết Cấu</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" value="${ele.id_system}" id="id_system" name="id_system"
+                                        <input type="text" class="form-control" value="${ele.id_system}" id="id_system" name="id_system[]"
                                                placeholder="Kết Cấu" ${ele.readonly}>
                                     </div>
                                 </div>
@@ -3664,7 +3763,7 @@ function showProduct() {
                                 <label for="exampleFormControlInput1 uname">Đơn giá</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
-                                <input type="text" class="form-control" id="gianam" name="gianam"
+                                <input type="text" class="form-control" id="gianam" name="gianam[]" data-type="currency"
                                        placeholder="Đơn giá" value="${ele.real_value}" ${ele.readonly}>
                             </div>
                         </div>

@@ -75,7 +75,7 @@ class ContractController extends Controller
             is_null($typebanner) && is_null($id_staff) && is_null($_name_banner) && is_null($date_start) &&
             is_null($date_end) && is_null($id_status))  {
             $contracts = DB::select("
-               SELECT contract.id,contract.id_contract, customer.name_customer,
+                SELECT contract.id,contract.id_contract, customer.name_customer, contract.vl_contract_vat_vnd,
                 kind_contract.name_kind,contract.date_end,GROUP_CONCAT(product_in_contract.`id_banner`) AS id_banner,
                 contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
                 (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
@@ -93,7 +93,7 @@ class ContractController extends Controller
         }
         if(!empty($id_contract) ){
             $contracts = DB::select("
-       SELECT contract.id,contract.id_contract, customer.name_customer,
+       SELECT contract.id,contract.id_contract, customer.name_customer, contract.vl_contract_vat_vnd,
                 kind_contract.name_kind,contract.date_end,GROUP_CONCAT(product_in_contract.`id_banner`) AS id_banner,
                 contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
                 (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
@@ -111,8 +111,8 @@ class ContractController extends Controller
         ");
         }
         if(!empty($name_customer) ){
-            $contracts = DB::select("
-       SELECT contract.id,contract.id_contract, customer.name_customer,
+            $contracts = DB::select(" 
+       SELECT contract.id,contract.id_contract, customer.name_customer, contract.vl_contract_vat_vnd,
                 kind_contract.name_kind,contract.date_end,GROUP_CONCAT(product_in_contract.`id_banner`) AS id_banner,
                 contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
                 (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
@@ -131,7 +131,7 @@ class ContractController extends Controller
         }
         if(!empty($_nguon)){
             $contracts = DB::select("
-           SELECT contract.id,contract.id_contract, customer.name_customer,
+           SELECT contract.id,contract.id_contract, customer.name_customer, contract.vl_contract_vat_vnd,
                 kind_contract.name_kind,contract.date_end,GROUP_CONCAT(product_in_contract.`id_banner`) AS id_banner,
                 contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
                 (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
@@ -150,7 +150,7 @@ class ContractController extends Controller
         }
         if(!empty($id_staff)){
             $contracts = DB::select("
-            SELECT contract.id,contract.id_contract, customer.name_customer,
+            SELECT contract.id,contract.id_contract, customer.name_customer, contract.vl_contract_vat_vnd,
                 kind_contract.name_kind,contract.date_end,GROUP_CONCAT(product_in_contract.`id_banner`) AS id_banner,
                 contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
                 (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
@@ -169,7 +169,7 @@ class ContractController extends Controller
         }
         if(!empty($_kind)){
             $contracts = DB::select("
-           SELECT contract.id,contract.id_contract, customer.name_customer,
+           SELECT contract.id,contract.id_contract, customer.name_customer, contract.vl_contract_vat_vnd,
                 kind_contract.name_kind,contract.date_end,GROUP_CONCAT(product_in_contract.`id_banner`) AS id_banner,
                 contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
                 (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
@@ -188,7 +188,7 @@ class ContractController extends Controller
         }
         if(!empty($typebanner)){
             $contracts = DB::select("
-           SELECT contract.id,contract.id_contract, customer.name_customer,
+           SELECT contract.id,contract.id_contract, customer.name_customer, contract.vl_contract_vat_vnd,
                 kind_contract.name_kind,contract.date_end,GROUP_CONCAT(product_in_contract.`id_banner`) AS id_banner,
                 contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
                 (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
@@ -207,7 +207,7 @@ class ContractController extends Controller
         }
         if(!empty($_name_banner)){
             $contracts = DB::select("
-           SELECT contract.id,contract.id_contract, customer.name_customer,
+           SELECT contract.id,contract.id_contract, customer.name_customer, contract.vl_contract_vat_vnd,
                 kind_contract.name_kind,contract.date_end,GROUP_CONCAT(product_in_contract.`id_banner`) AS id_banner,
                 contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
                 (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
@@ -226,7 +226,7 @@ class ContractController extends Controller
         }
         if(!empty($date_start)){
             $contracts = DB::select("
-                SELECT contract.id,contract.id_contract, customer.name_customer,
+                SELECT contract.id,contract.id_contract, customer.name_customer, contract.vl_contract_vat_vnd,
                 kind_contract.name_kind,contract.date_end,GROUP_CONCAT(product_in_contract.`id_banner`) AS id_banner,
                 contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
                 (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
@@ -245,7 +245,7 @@ class ContractController extends Controller
         }
         if(!empty($date_end)){
             $contracts = DB::select("
-            SELECT contract.id,contract.id_contract, customer.name_customer,
+            SELECT contract.id,contract.id_contract, customer.name_customer, contract.vl_contract_vat_vnd,
                 kind_contract.name_kind,contract.date_end,GROUP_CONCAT(product_in_contract.`id_banner`) AS id_banner,
                 contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
                 (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
@@ -264,7 +264,7 @@ class ContractController extends Controller
         }
         if(!empty($id_status)){
             $contracts = DB::select("
-            SELECT contract.id,contract.id_contract, customer.name_customer,
+            SELECT contract.id,contract.id_contract, customer.name_customer, contract.vl_contract_vat_vnd,
                 kind_contract.name_kind,contract.date_end,GROUP_CONCAT(product_in_contract.`id_banner`) AS id_banner,
                 contract.value_contract,(SELECT COALESCE(SUM(detail_payment.total_value),0)  FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '1') AS paid,
                 (SELECT COALESCE(SUM(detail_payment.total_value),0) FROM detail_payment,contract WHERE contract.id_contract = detail_payment.id_contract && detail_payment.id_status = '3') AS due
@@ -373,6 +373,7 @@ class ContractController extends Controller
             $contract->contented = 'Bổ Sung Sau';
         }
 
+        $contract->date_sign = $request->date_sign;
         $contract->date_start = $request->date_start;
         $contract->date_end = $request->date_end;
         $contract->kind = $request->kind_name;
@@ -381,17 +382,17 @@ class ContractController extends Controller
         $value_contract = str_replace(',','',$value_contract);
         $exchange = $request->exchange;
         $exchange = str_replace('₫','',$exchange);
-        $exchange = str_replace('.','',$exchange);
+        $exchange = str_replace(',','',$exchange);
         $contract->exchange = $exchange;
         $contract->value_contract = $value_contract;
         $contract->note_contract = $request->note_contract;
         $tong = $request->value_contract;
         $tong = str_replace('₫','',$tong);
-        $tong = str_replace('.','',$tong);
+        $tong = str_replace(',','',$tong);
         $contract->vl_contract_vnd = $tong;
         $tong_thue = $request->tong;
         $tong_thue = str_replace('₫','',$tong_thue);
-        $tong_thue = str_replace('.','',$tong_thue);
+        $tong_thue = str_replace(',','',$tong_thue);
         $contract->vl_contract_vat_vnd = $tong_thue;
         //$pdf = PDF::loadview('contract.blade.php',$file);
 
@@ -410,11 +411,11 @@ class ContractController extends Controller
                 $detail->payment_period = $payment_period[$i];
                 $detail->ratio = $ratio[$i];
                 $id_value_contract[$i] = str_replace('₫','',$id_value_contract[$i]);
-                $id_value_contract[$i] = str_replace('.','',$id_value_contract[$i]);
+                $id_value_contract[$i] = str_replace(',','',$id_value_contract[$i]);
                 $detail->id_value_contract = $id_value_contract[$i];
                 $detail->id_vat = $id_vat[$i];
                 $total_value[$i] = str_replace('₫','',$total_value[$i]);
-                $total_value[$i] = str_replace('.','',$total_value[$i]);
+                $total_value[$i] = str_replace(',','',$total_value[$i]);
                 $detail->total_value = $total_value[$i];
                 $detail->_pay_due = $_pay_due[$i];
                 $detail->save();
@@ -463,7 +464,7 @@ class ContractController extends Controller
         }
 
         if(!empty($data['exchange'])){
-            $data['exchange'] = str_replace('.','',$data['exchange']);
+            $data['exchange'] = str_replace(',','',$data['exchange']);
             $data['exchange'] = str_replace('₫','',$data['exchange']);
         }
 
@@ -491,10 +492,19 @@ class ContractController extends Controller
                 $storage = Storage::putFileAs('contract', $contented, $contentedName);
 
             }
-//            $detail = DB::table('detail_payment')->update([
-//                ''
-//            ]);
-            DB::table('detail_payment')->where('id_contract', '=', $data['id_contract'])->delete();
+            
+            DB::table('product_in_contract')->where('id_contract', $data['id_contract'])->delete();
+            if(!empty($request->id_banner[0])){
+                for ($j = 0;$j < sizeof($request->id_banner);$j++){
+                    $inContract = new Product_in_Contract();
+                    $inContract->id_banner = $request->id_banner[$j];
+                    $inContract->id_contract = $request->id_contract;
+                    $inContract->real_value = $request->gianam[$j];
+                    $inContract->save();
+                }
+            }
+
+            DB::table('detail_payment')->where('id_contract', $data['id_contract'])->delete();
             if(!empty($data['payment_period'])){
                 $payment_period = $data['payment_period'];
                 for ($i = 0; $i < sizeof($payment_period); $i++) {
@@ -503,19 +513,30 @@ class ContractController extends Controller
                     $detail->payment_period = $data['payment_period'][$i];
                     $detail->ratio = $data['ratio'][$i];
                     $id_value_contract = $data['id_value_contract'][$i];
-                    $id_value_contract = str_replace('.','',$id_value_contract);
+                    $id_value_contract = str_replace(',','',$id_value_contract);
                     $id_value_contract = str_replace('₫','',$id_value_contract);
                     $detail->id_value_contract = $id_value_contract;
                     $detail->id_vat = $data['id_vat'][$i];
                     $total_value = $data['total_value'][$i];
-                    $total_value = str_replace('.','',$total_value);
+                    $total_value = str_replace(',','',$total_value);
                     $total_value = str_replace('₫','',$total_value);
                     $detail->total_value = $total_value;
                     $detail->_pay_due = $data['_pay_due'][$i];
                     $detail->save();
                 }
             }
-            $up = $this->contractRepository->update($id, $data);
+            $datas['id_staff'] = $data['id_staff'];
+            $datas['kind'] = $data['kind'];
+            $datas['date_sign'] = $data['date_sign'];
+            $datas['date_start'] = $data['date_start'];
+            $datas['date_end'] = $data['date_end'];
+            $datas['value_contract'] = $data['value_contract'];
+            $datas['note_contract'] = $data['note_contract'];
+            $datas['id_contract'] = $data['id_contract'];
+            $datas['exchange'] = $data['exchange'];
+            $datas['vl_contract_vnd'] = $data['vl_contract_vnd'];
+            $datas['vl_contract_vat_vnd'] = $data['vl_contract_vat_vnd'];
+            $up = $this->contractRepository->update($id, $datas);
             return redirect()->refresh();
         }
         $contract = $this->contractRepository->find($id);
@@ -532,9 +553,14 @@ class ContractController extends Controller
             ->select('*')->where('product_in_contract.id_contract',$id)
             ->get();
         $detail = DB::table('detail_payment')
+            ->where('detail_payment.id_contract',$contract->id_contract)
             ->join('contract', 'detail_payment.id_contract', '=', 'contract.id_contract')
             ->select('*')->get();
         $cost_contract = $contract->value_contract;
+        $total_ratio = 0;
+        foreach($detail as $item){
+            $total_ratio = $item->ratio + $total_ratio;
+        }
         return view('pages.contract.update', [
             'contract' => $contract,
             'banners' => $banner,
@@ -546,7 +572,8 @@ class ContractController extends Controller
             'nguons' => $nguon,
             'details' => $detail,
             'product_contracts' => $product_contract,
-            'cost_contract' => $cost_contract
+            'cost_contract' => $cost_contract,
+            'total_ratio' => $total_ratio
         ]);
 
     }
@@ -718,7 +745,7 @@ class ContractController extends Controller
                     return array(
                         'success' => true,
                         'status' => 200,
-                        'message' => 'Cập nhận thành công'
+                        'message' => 'Cập nhật thành công'
                     );
         }else{
             return array(

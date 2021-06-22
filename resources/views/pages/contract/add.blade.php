@@ -19,11 +19,14 @@
                             <div class="row">
                                 <div class="col-xl-6 col-sm-12">
                                     <label for="exampleFormControlInput1 uname">Mã Hợp đồng</label>
+                                    <!-- <input type="button" class="btn btn-primary" value="Lấy mã" onclick="getCode()"> -->
                                 </div>
                                 <div class="col-xl-6 col-sm-12">
+                                    <!-- <input type="text" style="display: none;" class="form-control" value="{{$codes}}" id="code"
+                                           placeholder="Tên Hợp đồng" > -->
                                     <input type="text" class="form-control" value="{{$codes}}" id="id_contracts" name="id_contract"
-                                           placeholder="Tên Hợp đồng" required>
-                                    <div class="invalid-feedback">Tên Hợp đồng không được để trống</div>
+                                           placeholder="Tên Hợp đồng" >
+                                    <div class="invalid-feedback">Mã Hợp đồng không được để trống</div>
                                 </div>
                             </div>
                         </div>
@@ -293,12 +296,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row div_price">
                             <div class="col-md-3 col-sm-12">
                                 <label for="exampleFormControlInput1 uname">Đơn Giá(USD)</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
-                                <input type="text" class="form-control" id="gianam_1" name="gianam[]" onchange="updatePrice()"
+                                <input type="text" class="form-control price" data-type="currency" id="gianam_1" name="gianam[]" onchange="updatePrice()"
                                        placeholder="Đơn Giá" value="" required>
                             </div>
                         </div>
@@ -311,6 +314,21 @@
                 <fieldset class="border-text">
                     <legend class='text-left'>Hợp Đồng</legend>
                     <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <label for="dateofbirth">Ngày kí hợp đồng:</label>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input class="form-control" type="date" name="date_sign" id="dateofbirth"
+                                               required>
+                                        <div class="invalid-feedback m-l-20">Vui lòng nhập ngày kí hợp đồng</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
@@ -360,7 +378,7 @@
                                         <label for="exampleFormControlInput1">Tỉ Giá VND/1USD</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control"  onchange="getTong()" id="exchange"
+                                        <input type="text" class="form-control" data-type="currency_vnd" onchange="getTong()" id="exchange"
                                                name="exchange"
                                                placeholder="VND">
                                     </div>
@@ -388,22 +406,22 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-3 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Tổng(VND + 10% VAT)</label>
-                                    </div>
-                                    <div class="col-md-3 col-sm-12">
-                                        <input type="text" class="form-control" value="" id="tong" name="tong" onchange="setTong()"
-                                               placeholder="Tổng Giá Trị hợp Đồng (Gồm 10% VAT)" >
-                                    </div>
                                     <div class="col-md-2 col-sm-12">
                                         <label for="exampleFormControlInput1 uname">Tổng(VND)</label>
                                     </div>
+                                    <div class="col-md-3 col-sm-12">
+                                        <input type="text" class="form-control" data-type="currency_vnd" value="" id="tongvat" name="value_contract"
+                                               placeholder="VND" >
+                                    </div>
+                                    <div class="col-md-3 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Tổng(VND + 10% VAT)</label>
+                                    </div>
                                     <div class="col-md-4 col-sm-12">
-                                        <input type="text" class="form-control" value="" id="tongvat" name="value_contract"
-                                               placeholder="Tổng Giá Trị hợp Đồng" >
+                                        <input type="text" class="form-control" data-type="currency_vnd" value="" id="tong" name="tong"
+                                               placeholder="VND" >
                                     </div>
                                 </div>
-
+                                
                             </div>
                         </div>
                     </div>
@@ -411,7 +429,7 @@
                 <fieldset class="border-text">
                         <legend class='text-left'>Thanh Toán</legend>
                         <div class="container-fluid">
-                            <table id="example" class="display table-borderless table-responsive" style="width:100%">
+                            <table id="example" class="display table-borderless table-responsive" style="width:100%;">
                                 <thead>
                                 <tr>
                                     <th><input type="checkbox" id="check-all" name="title" onclick="checkAll()"></th>
@@ -425,21 +443,25 @@
                                 </thead>
                                 <tbody id="idBodyPayment">
                                 <tr class="idTrPayment">
-                                    <td><input type="checkbox" id="check-box" name="check_box[]" value="1"
-                                               class="display-input m-r-5"></td>
-                                    <td><input type="text" class="display-input form-control payment_period" id="payment_period" name="payment_period[]"
-                                               required>
-                                    </td>
-                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" onchange="setRatio(this)" id="ratio"  name="ratio[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract value_contract" onchange="setValueContract(this)" id="id_value_contract"
+                                    <td><input type="checkbox" id="check-box" name="check_box[]" value="1" class="display-input m-r-5"></td>
+                                    <td><input type="text" class="display-input form-control payment_period" id="payment_period" name="payment_period[]" required></td>
+                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ (%)" onchange="setRatio(this),totalPrice()" id="ratio"  name="ratio[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_value_contract value_contract" data-type="currency_vnd" onchange="setValueContract(this),totalPrice()" id="id_value_contract"
                                                name="id_value_contract[]" placeholder="Số Tiền(VND)"></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat"  value="10" name="id_vat[]" ></td>
-                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền(VND)" id="total" name="total_value[]"></td>
-                                    <td><input type="date" class="form-control display-input" name="_pay_due[]" required>
-
-
-
+                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền(VND)" data-type="currency_vnd" onchange="totalPrice()" id="total" name="total_value[]"></td>
+                                    <td><input type="date" class="form-control display-input" name="_pay_due[]" required></td>
+                                </tr>
                                 </tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tỉ Lệ (%)" id="total_ratio" name=""></td>
+                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND)" data-type="currency_vnd" id="total_price" name=""></td>
+                                    <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat"  value="10" name="id_vat[]" ></td>
+                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND + Thuế)" data-type="currency_vnd" id="total_price_vat" name=""></td>
+                                    <td></td>
+                                </tr>
 
                             </table>
                             <div class="form-group">

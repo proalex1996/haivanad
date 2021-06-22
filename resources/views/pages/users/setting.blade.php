@@ -422,11 +422,11 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Mã Loại Hình:</label>
+                        <label for="recipient-name" class="col-form-label">Mã Loại Hợp Đồng:</label>
                         <input type="text" class="form-control" id="id_kind" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Tên Loại Hình:</label>
+                        <label for="recipient-name" class="col-form-label">Tên Loại Hợp Đồng:</label>
                         <input type="text" class="form-control" id="kind_name">
                     </div>
                 </form>

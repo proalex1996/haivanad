@@ -23,11 +23,11 @@
         <form class="post-form-sort" action="{{url('/contract')}}" method="post">
             @csrf
             <div class="row">
-                <div class="col-md-3 col-sm-12 m-t-10">
+                <!-- <div class="col-md-3 col-sm-12 m-t-10">
                     <label for="exampleFormControlInput1 ">Mã Hợp Đồng</label>
                     <input type="text" class="form-control" id="id_contract" name="id_contract"
                            placeholder="Mã Hợp Đồng">
-                </div>
+                </div> -->
                 <div class="col-md-3 col-sm-12 m-t-10">
                     <label for="exampleFormControlInput1 ">Tên Khách Hàng</label>
                     <input type="text" class="form-control" id="name_customer" name="name_customer"
@@ -41,6 +41,10 @@
                             <option value="{{$nguon -> id_nguon}}">{{$nguon -> name_nguon}}</option>
                         @endforeach
                     </select>
+                </div>
+                <div class="col-md-3 col-sm-12 m-t-10">
+                    <label for="exampleFormControlSelect1">Tên Vị Trí:</label>
+                    <input type="text" class="form-control display-input" name="_name_banner" placeholder="Tên Vị Trí">
                 </div>
             </div>
 {{--            <div class="row">--}}
@@ -78,10 +82,6 @@
             </div>
             <div class="row">
                 <div class="col-md-3 col-sm-12 m-t-10">
-                    <label for="exampleFormControlSelect1">Tên Vị Trí:</label>
-                    <input type="text" class="form-control display-input" name="_name_banner" placeholder="Tên Vị Trí">
-                </div>
-                <div class="col-md-3 col-sm-12 m-t-10">
                     <label for="exampleFormControlSelect1">Từ Ngày:</label>
                     <input type="date" class="form-control display-input" name="date_start" >
                 </div>
@@ -89,8 +89,6 @@
                     <label for="exampleFormControlSelect1">Đến Ngày:</label>
                     <input type="date" class="form-control display-input" name="date_end">
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-md-3 col-sm-12 m-t-10">
                     <label for="exampleFormControlInput1 ">Trạng thái</label>
                     <select type="text" class="form-control" id="id_status" name="id_status">
@@ -100,12 +98,14 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-2 col-sm-12 m-t-30">
+                <div class="col-md-3 col-sm-12 m-t-20">
                     <label for="exampleFormControlInput1 "></label>
                     <button class="btn btn-primary btn-block" type="submit" aria-expanded="false">Tìm
                     </button>
                 </div>
             </div>
+            <!-- <div class="row">
+            </div> -->
 
 
 
@@ -140,7 +140,7 @@
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->name_kind}}</a></td>
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->id_banner}}</a></td>
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->date_end}}</a></td>
-                                    <td class="value_contract"><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}"><span>{{$contract->value_contract}}</span>
+                                    <td class="value_contract"><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}"><span>{{number_format($contract->vl_contract_vat_vnd)}}</span>
                                         VND</a>
                                     </td>
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->paid}}</a></td>
@@ -160,7 +160,7 @@
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->name_kind}}</a></td>
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->id_banner}}</a></td>
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->date_end}}</a></td>
-                                    <td class="value_contract"><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}"><span>{{$contract->value_contract}}</span>
+                                    <td class="value_contract"><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}"><span>{{number_format($contract->vl_contract_vat_vnd)}}</span>
                                         VND</a>
                                     </td>
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->paid}}</a></td>
@@ -177,7 +177,7 @@
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->name_kind}}</a></td>
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->id_banner}}</a></td>
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->date_end}}</a></td>
-                                    <td class="value_contract"><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}"><span>{{$contract->value_contract}}</span>
+                                    <td class="value_contract"><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}"><span>{{number_format($contract->vl_contract_vat_vnd)}}</span>
                                         VND</a>
                                     </td>
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->paid}}</a></td>
