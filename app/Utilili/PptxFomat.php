@@ -47,7 +47,7 @@ class PptxFomat
         $shape = $currentSlide->createDrawingShape();
         $shape->setName('PHPPresentation logo')
             ->setDescription('PHPPresentation logo')
-            ->setPath(public_path('storage/imagePptx/start.png'))
+            ->setPath(public_path('storage\imagePptx\start.png'))
             ->setHeight(720)
             ->setWidth(959.04)
             ->setOffsetX(0)
@@ -64,7 +64,7 @@ class PptxFomat
             $currentSlide = $objPHPPowerPoint->createSlide();
             $shape = $currentSlide->createDrawingShape();
             $shape->setName('PHPPresentation logo')
-                ->setPath(public_path('storage/imagePptx/body.png'))
+                ->setPath(public_path('storage\imagePptx\body.png'))
                 ->setHeight(720)
                 ->setWidth(959.04)
                 ->setOffsetX(0)
@@ -83,7 +83,7 @@ class PptxFomat
             $currentSlide = $objPHPPowerPoint->createSlide();
             $shape = $currentSlide->createDrawingShape();
             $shape->setName('PHPPresentation logo')
-                ->setPath(public_path('storage/imagePptx/body.png'))
+                ->setPath(public_path('storage\imagePptx\body.png'))
                 ->setHeight(720)
                 ->setWidth(959.04)
                 ->setOffsetX(0)
@@ -167,7 +167,7 @@ class PptxFomat
                 $currentSlide = $objPHPPowerPoint->createSlide();
                 $shape = $currentSlide->createDrawingShape();
                 $shape->setName('PHPPresentation logo')
-                    ->setPath(public_path('storage/imagePptx/body.png'))
+                    ->setPath(public_path('storage\imagePptx\body.png'))
                     ->setHeight(720)
                     ->setWidth(959.04)
                     ->setOffsetX(0)
@@ -184,7 +184,7 @@ class PptxFomat
                     ->setColor(new Color('#000'));
                 $shape = $currentSlide->createDrawingShape();
                 $shape->setName('PHPPresentation logo')
-                    ->setPath(public_path(k'storage/app/public/content/' . $map[$i]))
+                    ->setPath(public_path('storage/app/public/content/' . $map[$i]))
                     ->setHeight(367.68)
                     ->setWidth(736.32)
                     ->setOffsetX(136.32)
@@ -217,7 +217,7 @@ class PptxFomat
         $currentSlide = $objPHPPowerPoint->createSlide();
         $shape = $currentSlide->createDrawingShape();
         $shape->setName('PHPPresentation logo')
-            ->setPath(public_path('storage/imagePptx/end.png'))
+            ->setPath(public_path('storage\imagePptx\end.png'))
             ->setHeight(720)
             ->setWidth(959.04)
             ->setOffsetX(0)
