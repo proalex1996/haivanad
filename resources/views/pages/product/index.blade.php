@@ -38,11 +38,11 @@
                 <form class="post-form-sort" action="{{url('/product')}}" method="post">
                     @csrf
                         <div class="row">
-                            <div class="col-md-3 col-sm-12 m-t-10">
+                            <!-- <div class="col-md-3 col-sm-12 m-t-10">
                                 <label for="exampleFormControlInput1 ">Mã Pano</label>
                                 <input type="text" class="form-control" id="id_banner" name="id_banner"
                                        placeholder="Mã Pano">
-                            </div>
+                            </div> -->
                             <div class="col-md-3 col-sm-12 m-t-10">
                                 <label for="exampleFormControlInput1 ">Tên Pano</label>
                                 <input type="text" class="form-control" id="_name_banner" name="_name_banner"
@@ -54,6 +54,15 @@
                                     <option value="">Tất Cả</option>
                                     @foreach($type_banners as $type_banner)
                                         <option value="{{$type_banner->id_typebanner}}">{{$type_banner->name_type}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-3 col-sm-12 m-t-10">
+                                <label for="exampleFormControlInput1 ">Trạng thái</label>
+                                <select type="text" class="form-control" id="id_status" name="id_status">
+                                    <option value="">Tất Cả</option>
+                                    @foreach($status_banners as $status)
+                                        <option value="{{$status->id_status}}">{{$status->name_status}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -74,16 +83,8 @@
                                 <option value="">--Quận/Huyện--</option>
                             </select>
                         </div>
-                        <div class="col-md-3 col-sm-12 m-t-10">
-                                <label for="exampleFormControlInput1 ">Trạng thái</label>
-                                <select type="text" class="form-control" id="id_status" name="id_status">
-                                    <option value="">Tất Cả</option>
-                                    @foreach($status_banners as $status)
-                                        <option value="{{$status->id_status}}">{{$status->name_status}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        <div class="col-md-2 col-sm-12 m-t-40" >
+                        
+                        <div class="col-md-3 col-sm-12 m-t-40" >
                             <label for="exampleFormControlInput1 "></label>
                             <button class="btn btn-primary btn-block" type="submit" aria-expanded="false">Tìm
                             </button>

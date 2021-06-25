@@ -766,7 +766,7 @@ class ContractController extends Controller
             return array(
                 'success' => true,
                 'status' => 200,
-                'message' => 'Cập nhận thành công'
+                'message' => 'Cập nhật thành công'
             );
     }
     public function addSttContract(Request $request){
@@ -801,7 +801,7 @@ class ContractController extends Controller
             return array(
                 'success' => true,
                 'status' => 200,
-                'message' => 'Cập nhận thành công'
+                'message' => 'Cập nhật thành công'
             );
         }catch (\Exception $e){
             return array(
@@ -821,7 +821,7 @@ class ContractController extends Controller
             return array(
                 'success' => true,
                 'status' => 200,
-                'message' => 'Cập nhận thành công'
+                'message' => 'Cập nhật thành công'
             );
         }else{
             return array(
