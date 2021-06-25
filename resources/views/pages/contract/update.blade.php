@@ -289,7 +289,7 @@
                                         <label for="exampleFormControlInput1 uname">Tổng(VND)</label>
                                     </div>
                                     <div class="col-md-3 col-sm-12">
-                                        <input type="text" class="form-control" data-type="currency_vnd" value="{{number_format($contract->vl_contract_vnd).' ₫'}}" step="0.01" id="tongvat_" name="tongvat"
+                                        <input type="text" class="form-control" data-type="currency_vnd" onchange='updateTongVat()' value="{{number_format($contract->vl_contract_vnd).' ₫'}}" step="0.01" id="tongvat_" name="tongvat"
                                                placeholder="Tổng Giá Trị hợp Đồng" {{$contract->readonly}}>
                                     </div>
                                     <div class="col-md-3 col-sm-12">
@@ -421,7 +421,7 @@
                                    data-target="#due" onclick="setDue()" {{$contract->readonly}}><i class="fas fa-pen" ></i>Gia Hạn</a>
                             </div>
                         <div class="col-md-2">
-                            <button type="submit" class="au-btn au-btn-icon au-btn--blue m-b-25" {{$contract->readonly}}>
+                            <button type="button" class="au-btn au-btn-icon au-btn--blue m-b-25" onclick='checkTongUpdate()' {{$contract->readonly}}>
                                 <i class="far fa-edit"></i>Lưu
                             </button>
                         </div>

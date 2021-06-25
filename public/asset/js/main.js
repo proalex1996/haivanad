@@ -1865,10 +1865,10 @@ $('#addrowPayment').on('click', function () {
                                                required>
                                     </td>
                                     <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onchange="setRatio(this),totalPrice()" name="ratio[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract value_contract" onchange="setValueContract(this),totalPrice()" id="id_value_contract" data-type="currency_vnd" 
+                                    <td><input type="text" class="form-control display-input id_value_contract value_contract" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" onchange="setValueContract(this),totalPrice(),formatCurrency_VND(this)" id="id_value_contract"  
                                                name="id_value_contract[]" placeholder="Số Tiền (VND)"></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" value="10" id="id_vat" name="id_vat[]"></td>
-                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND)" data-type="currency_vnd" onchange="totalPrice()" id="total" name="total_value[]"></td>
+                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND)" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" onchange="totalPrice(),formatCurrency_VND(this)" id="total" name="total_value[]"></td>
                                     <td><input type="date" class="form-control display-input" name="_pay_due[]" required>
                                     </td>
                                 </tr>
@@ -1877,7 +1877,7 @@ $('#addrowPayment').on('click', function () {
 
 
 
-})
+});
 $('#addrowPayment1').on('click', function () {
     $('#idBodyPayment').append(
         `
@@ -1888,17 +1888,17 @@ $('#addrowPayment1').on('click', function () {
                                                required>
                                     </td>
                                     <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onchange="setRatio(this),totalPrice()" name="ratio[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract value_contract" onchange="setValueContract(this),totalPrice()" data-type="currency_vnd" id="id_value_contract"
+                                    <td><input type="text" class="form-control display-input id_value_contract value_contract" onkeyup="formatCurrency_VND(this)" onchange="setValueContract(this),totalPrice(),formatCurrency_VND(this)" data-type="currency_vnd" id="id_value_contract"
                                                name="id_value_contract[]" placeholder="Số Tiền (VND)"></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" value="10" id="id_vat" name="id_vat[]"></td>
-                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND)" data-type="currency_vnd" onchange="totalPrice()" id="total" name="total_value[]"></td>
+                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND)" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" onchange="totalPrice(),formatCurrency_VND(this)" id="total" name="total_value[]"></td>
                                     <td><input type="date" class="form-control display-input" name="_pay_due[]" required>
 
                                </tr>
 
 `
     )
-})
+});
 
 
 function deleteRowPayment() {
@@ -2048,7 +2048,6 @@ function totalPrice(){
     var tong_tien = 0;
     for(i =0; i<money.length; i++){
         tt = $(money[i]).val();
-        if(parseInt(tong_tien) < parseInt(tien)){
             if(tt === ""){
                 tong_tien = tong_tien;
             }else{
@@ -2056,20 +2055,67 @@ function totalPrice(){
                 tt = tt.split(',').join("");
                 tong_tien = tong_tien + parseInt(tt);
             }
-        }else{
-            alert("Tổng tiền trước thuế đã vượt mức ban đầu!");
-        }
     }
     var tong_tien_vat = tong_tien + (tong_tien * parseInt(thue) / 100);
-    if( parseInt(tong_tile) == 100 && ((tong_tien != parseInt(tien)) || (tong_tien_vat != parseInt(tien_vat)))){
-        alert("Tổng tiền không đạt mức ban đâu");
-        exit();
-    }
     tong_tien = tong_tien;
     tong_tien_vat = tong_tien_vat;
     $('#total_price').val(format(tong_tien));
     $('#total_price_vat').val(format(tong_tien_vat));
 
+}
+
+function setTongVat(){
+    var tong = $('#tongvat').val();
+        tong = tong.split('₫').join("");
+        tong = tong.split(',').join("");
+    $('#tong').val(format(parseInt(tong)+(parseInt(tong)*10/100)));
+}
+
+function updateTongVat(){
+    var tong = $('#tongvat').val();
+        tong = tong.split('₫').join("");
+        tong = tong.split(',').join("");
+    $('#tong').val(format(parseInt(tong)+(parseInt(tong)*10/100)));
+}
+
+function checkTong(){
+    var total_price = $('#total_price').val();
+        total_price = total_price.split('₫').join("");
+        total_price = total_price.split(',').join("");
+    var tongvat = $('#tongvat').val();
+        tongvat = tongvat.split('₫').join("");
+        tongvat = tongvat.split(',').join("");
+    var total_price_vat = $('#total_price_vat').val();
+        total_price_vat = total_price_vat.split('₫').join("");
+        total_price_vat = total_price_vat.split(',').join("");
+    var tong = $('#tong').val();
+        tong = tong.split('₫').join("");
+        tong = tong.split(',').join("");
+    if((parseInt(total_price) != parseInt(tongvat)) || (parseInt(total_price_vat) != parseInt(tong))){
+        alert("Tổng tiền trước thuế không đạt định mức ban đầu");
+    }else {
+        $('#add').attr('type','submit');
+    }
+}
+
+function checkTongUpdate(){
+    var total_price = $('#total_price').val();
+        total_price = total_price.split('₫').join("");
+        total_price = total_price.split(',').join("");
+    var tongvat = $('#tongvat_').val();
+        tongvat = tongvat.split('₫').join("");
+        tongvat = tongvat.split(',').join("");
+    var total_price_vat = $('#total_price_vat').val();
+        total_price_vat = total_price_vat.split('₫').join("");
+        total_price_vat = total_price_vat.split(',').join("");
+    var tong = $('#tong_').val();
+        tong = tong.split('₫').join("");
+        tong = tong.split(',').join("");
+    if((parseInt(total_price) != parseInt(tongvat)) || (parseInt(total_price_vat) != parseInt(tong))){
+        alert("Tổng tiền trước thuế không đạt định mức ban đầu");
+    }else {
+        $('#add').attr('type','submit');
+    }
 }
 
 function updatePrice(){
@@ -2235,10 +2281,10 @@ function Ratio() {
                                                required>
                                     </td>
                                     <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" value="${ele.ratio}" id="ratio" onchange="setRatio(this),totalPrice()" name="ratio[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract" data-type="currency_vnd" value="${format(ele.id_value_contract)}" id="id_value_contract" onchange="setValueContract(this),totalPrice()"
+                                    <td><input type="text" class="form-control display-input id_value_contract" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" value="${format(ele.id_value_contract)}" id="id_value_contract" onchange="setValueContract(this),totalPrice(),formatCurrency_VND(this)"
                                                name="id_value_contract[]" ></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat" value="${ele.id_vat}" name="id_vat[]" ></td>
-                                    <td><input type="text" class="form-control display-input total" data-type="currency_vnd" onchange="totalPrice()" value="${format(ele.total_value)}" id="total" name="total_value[]" ></td>
+                                    <td><input type="text" class="form-control display-input total" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" onchange="totalPrice(),formatCurrency_VND(this)" value="${format(ele.total_value)}" id="total" name="total_value[]" ></td>
                                     <td><input type="date" class="form-control display-input" value="${ele._pay_due}" name="_pay_due[]" required>
                                     </td>
                                 </tr>` )
@@ -2443,13 +2489,13 @@ $('input[data-type="currency_vnd"]').on({
         formatCurrency_vnd($(this));
     },
     blur: function() {
-        formatCurrency_vnd($(this), "blur");
+        formatCurrency_vnd($(this));
     }
 });
 function formatNumber_vnd(n){
     return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-function formatCurrency_vnd(input, bur){
+function formatCurrency_vnd(input){
     // get input value
     var input_val = input.val();
 
@@ -2480,9 +2526,9 @@ function formatCurrency_vnd(input, bur){
         right_side = formatNumber_vnd(right_side);
 
         // On blur make sure 2 numbers after decimal
-        if (blur === "blur") {
-            right_side += "00";
-        }
+        // if (blur === "blur") {
+        //     right_side += "00";
+        // }
 
         // Limit decimal to only 2 digits
         right_side = right_side.substring(0, 2);
@@ -2497,9 +2543,9 @@ function formatCurrency_vnd(input, bur){
         input_val =  input_val + " ₫";
 
         // final formatting
-        if (blur === "blur") {
-            input_val += ".00";
-        }
+        // if (blur === "blur") {
+        //     input_val += ".00";
+        // }
     }
     // send updated string to input
     input.val(input_val);
@@ -2508,6 +2554,58 @@ function formatCurrency_vnd(input, bur){
     var updated_len = input_val.length;
     caret_pos = updated_len - original_len + caret_pos;
     input[0].setSelectionRange(caret_pos, caret_pos);
+}
+
+function formatCurrency_VND(input){
+    // get input value
+    var input_val = $(input).val();
+
+    // don't validate empty input
+    if (input_val === "") { return; }
+
+    // original length
+    var original_len = input_val.length;
+
+    // initial caret position
+    var caret_pos = $(input).prop("selectionStart");
+
+    // check for decimal
+    if (input_val.indexOf(".") >= 0){
+        // get position of first decimal
+        // this prevents multiple decimals from
+        // being entered
+        var decimal_pos = input_val.indexOf(".");
+
+        // split number by decimal point
+        var left_side = input_val.substring(0, decimal_pos);
+        var right_side = input_val.substring(decimal_pos);
+
+        // add commas to left side of number
+        left_side = formatNumber_vnd(left_side);
+
+        // validate right side
+        right_side = formatNumber_vnd(right_side);
+
+        // Limit decimal to only 2 digits
+        right_side = right_side.substring(0, 2);
+
+        // join number by .
+        input_val = left_side + "." + right_side + " ₫" ;
+    }else{
+        // no decimal entered
+        // add commas to number
+        // remove all non-digits
+        input_val = formatNumber_vnd(input_val);
+        input_val =  input_val + " ₫";
+
+    }
+    // send updated string to input
+    $(input).val(input_val);
+
+    // put caret back in the right position
+    var updated_len = input_val.length;
+    caret_pos = updated_len - original_len + caret_pos;
+    $(input).setSelectionRange(caret_pos, caret_pos);
 }
 // Jquery Dependency
 
@@ -2589,6 +2687,74 @@ function formatCurrency(input, blur) {
     caret_pos = updated_len - original_len + caret_pos;
     input[0].setSelectionRange(caret_pos, caret_pos);
 }
+
+function formatCurrency_usd(input) {
+    // appends $ to value, validates decimal side
+    // and puts cursor back in right position.
+
+    // get input value
+    var input_val = $(input).val();
+
+    // don't validate empty input
+    if (input_val === "") { return; }
+
+    // original length
+    var original_len = input_val.length;
+
+    // initial caret position
+    var caret_pos = $(input).prop("selectionStart");
+
+    // check for decimal
+    if (input_val.indexOf(".") >= 0) {
+
+        // get position of first decimal
+        // this prevents multiple decimals from
+        // being entered
+        var decimal_pos = input_val.indexOf(".");
+
+        // split number by decimal point
+        var left_side = input_val.substring(0, decimal_pos);
+        var right_side = input_val.substring(decimal_pos);
+
+        // add commas to left side of number
+        left_side = formatNumber(left_side);
+
+        // validate right side
+        right_side = formatNumber(right_side);
+
+        // On blur make sure 2 numbers after decimal
+        // if (blur === "blur") {
+        //     right_side += "00";
+        // }
+
+        // Limit decimal to only 2 digits
+        right_side = right_side.substring(0, 2);
+
+        // join number by .
+        input_val = "$" + left_side + "." + right_side;
+
+    } else {
+        // no decimal entered
+        // add commas to number
+        // remove all non-digits
+        input_val = formatNumber(input_val);
+        input_val = "$" + input_val;
+
+        // final formatting
+        // if (blur === "blur") {
+        //     input_val += ".00";
+        // }
+    }
+
+    // send updated string to input
+    $(input).val(input_val);
+
+    // put caret back in the right position
+    var updated_len = input_val.length;
+    caret_pos = updated_len - original_len + caret_pos;
+    $(input).setSelectionRange(caret_pos, caret_pos);
+}
+
 $('#submit_kind').on('click',function () {
     var id = $('#id_kind').val();
     var name = $('#kind_name').val();
@@ -3526,7 +3692,7 @@ $('#more_product').on('click',function () {
                                 <label for="exampleFormControlInput1 uname">Đơn giá</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
-                                <input type="text" class="form-control price" id="gianam_${baloon}" data-type="currency" name="gianam[]" onchange="updatePrice()"
+                                <input type="text" class="form-control price" id="gianam_${baloon}" data-type="currency" name="gianam[]" onkeyup="formatCurrency_usd(this)" onchange="updatePrice(),formatCurrency_usd(this)"
                                        placeholder="Đơn giá" value="" required>
                                 <div class="invalid-feedback">Địa chỉ không được để trống</div>
                             </div>
@@ -3763,7 +3929,7 @@ function showProduct() {
                                 <label for="exampleFormControlInput1 uname">Đơn giá</label>
                             </div>
                             <div class="col-md-9 col-sm-12">
-                                <input type="text" class="form-control" id="gianam" name="gianam[]" data-type="currency"
+                                <input type="text" class="form-control" id="gianam" name="gianam[]" data-type="currency" onkeyup="formatCurrency_usd(this)" onchange="updatePrice(),formatCurrency_usd(this)"
                                        placeholder="Đơn giá" value="${ele.real_value}" ${ele.readonly}>
                             </div>
                         </div>

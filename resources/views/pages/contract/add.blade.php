@@ -410,7 +410,7 @@
                                         <label for="exampleFormControlInput1 uname">Tổng(VND)</label>
                                     </div>
                                     <div class="col-md-3 col-sm-12">
-                                        <input type="text" class="form-control" data-type="currency_vnd" value="" id="tongvat" name="value_contract"
+                                        <input type="text" class="form-control" data-type="currency_vnd" value="" id="tongvat" name="value_contract" onchange='setTongVat()'
                                                placeholder="VND" >
                                     </div>
                                     <div class="col-md-3 col-sm-12">
@@ -503,7 +503,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="au-btn au-btn-icon au-btn--blue float-right m-b-25">
+                    <button type="button" id='add' class="au-btn au-btn-icon au-btn--blue float-right m-b-25" onclick='checkTong()'>
                         <i class="zmdi zmdi-plus"></i>Thêm
                     </button>
 
