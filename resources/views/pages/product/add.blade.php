@@ -375,17 +375,17 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-3 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Giá Năm(USD): </label>
+                                        <label for="exampleFormControlInput1 uname">Giá Sản Phẩm (USD): </label>
                                     </div>
                                     <div class="col-md-9 col-sm-12">
                                         @if(!empty(Session::get('product')->gianam))
                                             <input class="form-customer-input" type="text"  value="{{Session::get('product')->gianam}}" id="gianam" data-type="currency"
                                                    pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" name="gianam"
-                                                   placeholder="Giá Năm">
+                                                   placeholder="Giá Sản Phẩm">
                                         @else
                                             <input class="form-customer-input" type="text" id="gianam" data-type="currency"
                                                    pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" name="gianam"
-                                                   placeholder="Giá Năm">
+                                                   placeholder="Giá Sản Phẩm">
                                         @endif
 
                                     </div>
@@ -393,29 +393,6 @@
                             </div>
                         </div>
 
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname">Ghi Chú: </label>
-                                    </div>
-                                    <div class="col-md-9 col-sm-12">
-                                        @if(!empty(Session::get('product')->note_banner))
-                                            <input class="form-customer-input" type="text" id="note_banner" value="{{Session::get('product')->note_banner}}"
-                                                   name="note_banner"
-                                                   placeholder="Ghi Chú">
-                                        @else
-                                            <input class="form-customer-input" type="text" id="note_banner"
-                                                   name="note_banner"
-                                                   placeholder="Ghi Chú">
-                                        @endif
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="form-group">
                         <div class="row">
@@ -443,10 +420,112 @@
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Đặc Điểm:</label>
                             <textarea class="form-control text-aria" id="dac_diem" name="dac_diem" rows="5"></textarea>
-
-
                     </div>
+                    <fieldset class="border-text">
+                        <legend class='text-left'>Giấy phép quảng cáo</legend>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="license_number_advertise">Số giấy phép</label>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <input type="text" name="license_number_advertise" placeholder="Số giấy phép quảng cáo">
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="start_date_advertise">Từ ngày</label>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <input type="date" name="start_date_advertise">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="date_range_advertise">Ngày cấp</label>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <input type="date" name="date_range_advertise">
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="end_date_advertise">Đến ngày</label>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <input type="date" name="end_date_advertise">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="content_advertise">Nội dung giấy phép</label>
+                                </div>
+                                <div class="col-md-9 col-sm-12">
+                                    <input class="form-customer-input" type="text" name="content_advertise" placeholder="Nội dung">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="border-text">
+                        <legend class='text-left'>Giấy phép xây dựng</legend>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="license_number_build">Số giấy phép</label>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <input type="text" name="license_number_build" placeholder="Số giấy phép xây dựng">
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="start_date_build">Từ ngày</label>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <input type="date" name="start_date_build">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="date_range_build">Ngày cấp</label>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <input type="date" name="date_range_build">
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="end_date_build">Đến ngày</label>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <input type="date" name="end_date_build">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="content_build">Nội dung giấy phép</label>
+                                </div>
+                                <div class="col-md-9 col-sm-12">
+                                    <input class="form-customer-input" type="text" name="content_build" placeholder="Nội dung">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Ghi Chú: </label>
+                                    </div>
+                                    <div class="col-md-9 col-sm-12">
+                                        @if(!empty(Session::get('product')->note_banner))
+                                            <input class="form-customer-input" type="text" id="note_banner" value="{{Session::get('product')->note_banner}}"
+                                                   name="note_banner"
+                                                   placeholder="Ghi Chú">
+                                        @else
+                                            <input class="form-customer-input" type="text" id="note_banner"
+                                                   name="note_banner"
+                                                   placeholder="Ghi Chú">
+                                        @endif
 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-3 col-sm-12 label-views">

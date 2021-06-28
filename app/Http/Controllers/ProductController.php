@@ -45,7 +45,7 @@ class ProductController extends Controller
             ->join('status_banner', 'banner.name_status', '=', 'status_banner.id_status')
             ->join('type_banner','banner.id_typebanner','=','type_banner.id_typebanner')
             ->join('province','banner.tinh','=','province._code')
-            ->select('banner.id', 'status_banner.name_status','province._name', 'banner.gianam','type_banner.name_type','banner._name_banner','status_banner.id_status', 'banner.id_banner');
+            ->select('banner.id', 'status_banner.name_status','province._name', 'banner.gianam','type_banner.name_type','banner._name_banner','status_banner.id_status', 'banner.id_banner', 'banner.v_light');
         if (!empty($request->id_banner)) {
             $banners = $banners->where('banner.id_banner', '=',  $request->id_banner );
         }
@@ -69,11 +69,25 @@ class ProductController extends Controller
             ->join('banner', 'contract.id_banner', '=', 'banner.id_banner')
             ->join('customer', 'contract.id_customer', '=', 'customer.customer_id')
             ->select('banner.id_banner', 'contract.id_contract', 'customer.name_customer')->groupBy('contract.id')->orderBy('contract.id', 'DESC')->get();
+
+        $price_banners = array();
+        $i=0;
+        foreach($banners as $banner){
+            $v_light = $banner->v_light;
+                $v_light = str_replace(',','',$v_light);
+                $v_light = str_replace('$','',$v_light);
+            $gianam = $banner->gianam;
+                $gianam = str_replace(',','',$gianam);
+                $gianam = str_replace('$','',$gianam);
+            $price_banners[$i] = (int)$v_light + (int)$gianam;
+            $i++;
+        }
         return view('pages.product.index', [
             'banners' => $banners,
             'status_banners' => $status_banner,
             'provinces' => $province,
-            'type_banners' => $type_banner
+            'type_banners' => $type_banner,
+            'price_banners' => $price_banners
         ]);
     }
 
@@ -116,6 +130,16 @@ class ProductController extends Controller
         $product->escom = $request->escom;
         $product->note_banner = $request->note_banner;
         $product->dien_tich = $request->dien_tich;
+        $product->license_number_advertise = $request->license_number_advertise;
+        $product->start_date_advertise = $request->start_date_advertise;
+        $product->end_date_advertise = $request->end_date_advertise;
+        $product->date_range_advertise = $request->date_range_advertise;
+        $product->content_advertise = $request->content_advertise;
+        $product->license_number_build = $request->license_number_build;
+        $product->start_date_build = $request->start_date_build;
+        $product->end_date_build = $request->end_date_build;
+        $product->date_range_build = $request->date_range_build;
+        $product->content_build = $request->content_build;
         $product->save();
 
         $maps = array($request->file('maps'));

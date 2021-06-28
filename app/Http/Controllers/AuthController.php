@@ -62,7 +62,7 @@ class AuthController extends Controller
                 }
             }
             else{
-                $params1 = session()->flash('error', 'Tài Khoảng Không Được Phép Truy Cập');
+                $params1 = session()->flash('error', 'Tài Khoản Không Được Phép Truy Cập');
                 return redirect('auth/login');
             }
 
@@ -103,7 +103,7 @@ class AuthController extends Controller
             return array(
                 'success' => true,
                 'status' => 200,
-                'message' => 'Cập nhận thành công'
+                'message' => 'Cập nhật thành công'
             );
         }else{
             return array(
@@ -123,13 +123,13 @@ class AuthController extends Controller
             return array(
                 'success' => true,
                 'status' => 200,
-                'message' => 'Cập nhận thành công'
+                'message' => 'Cập nhật thành công'
             );
         }catch (\Exception $e){
             return array(
                 'success' => false,
                 'status' => 200,
-                'message' => 'Mã trạng thái đã đã được liên kết với sản phẩm, bạn phải cập nhật lại sản phẩm đó trước'
+                'message' => 'Mã trạng thái đã được liên kết với sản phẩm, bạn phải cập nhật lại sản phẩm đó trước'
             );
         }
 
@@ -173,7 +173,7 @@ class AuthController extends Controller
             return array(
                 'success' => true,
                 'status' => 200,
-                'message' => 'Cập nhận thành công'
+                'message' => 'Cập nhật thành công'
             );
         }else{
             return array(
@@ -193,7 +193,7 @@ class AuthController extends Controller
             return array(
                 'success' => true,
                 'status' => 200,
-                'message' => 'Cập nhận thành công'
+                'message' => 'Cập nhật thành công'
             );
         }catch (\Exception $e){
             return array(
@@ -243,7 +243,7 @@ class AuthController extends Controller
             return array(
                 'success' => true,
                 'status' => 200,
-                'message' => 'Cập nhận thành công'
+                'message' => 'Cập nhật thành công'
             );
         }else{
             return array(
@@ -263,13 +263,13 @@ class AuthController extends Controller
             return array(
                 'success' => true,
                 'status' => 200,
-                'message' => 'Cập nhận thành công'
+                'message' => 'Cập nhật thành công'
             );
         }catch (\Exception $e){
             return array(
                 'success' => false,
                 'status' => 200,
-                'message' => 'Mã chi nhánh đã đã được liên kết với sản phẩm bạn phải cập nhật lại sản phẩm đó trước'
+                'message' => 'Mã chi nhánh đã được liên kết với sản phẩm bạn phải cập nhật lại sản phẩm đó trước'
             );
         }
 

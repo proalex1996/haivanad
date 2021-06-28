@@ -205,7 +205,7 @@ class staffController extends Controller
                 return array(
                     'success' => true,
                     'status' => 200,
-                    'message' => 'Cập nhận thành công'
+                    'message' => 'Cập nhật thành công'
                 );
             }else{
                 return array(
@@ -228,7 +228,7 @@ class staffController extends Controller
             return array(
                 'success' => true,
                 'status' => 200,
-                'message' => 'Cập nhận thành công'
+                'message' => 'Cập nhật thành công'
             );
         }else{
             return array(
@@ -246,7 +246,7 @@ class staffController extends Controller
             return array(
                 'success' => true,
                 'status' => 200,
-                'message' => 'Cập nhận thành công'
+                'message' => 'Cập nhật thành công'
             );
         }catch (\Exception $e){
             return array(

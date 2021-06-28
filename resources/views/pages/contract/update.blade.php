@@ -262,8 +262,7 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12">
                                         <input type="text" class="form-control" data-type="currency_vnd" value="{{$contract->exchange}}" onchange="getTongUpdate()" id="exchange"
-                                               name="exchange"
-                                               placeholder="VND" {{$contract->readonly}}>
+                                               name="exchange" placeholder="VND" {{$contract->readonly}}>
                                     </div>
                                 </div>
                             </div>
@@ -327,11 +326,11 @@
                                                class="display-input m-r-5" {{$contract->readonly}} ></td>
                                     <td><input type="text" class="display-input form-control payment_period" data-target="{{$contract->id_contract}}"  value="" id="payment_period" name="payment_period[]" required {{$contract->readonly}}>
                                     </td>
-                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onchange="setRatio(this),totalPrice()" name="ratio[]" required {{$contract->readonly}}></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract value_contract" id="id_value_contract" onchange="setValueContract(this),totalPrice()" data-type="currency_vnd"
+                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onchange="setRatioUpdate(this),totalPriceUpdate()" name="ratio[]" required {{$contract->readonly}}></td>
+                                    <td><input type="text" class="form-control display-input id_value_contract value_contract" id="id_value_contract" onchange="setValueContract(this),totalPriceUpdate()" data-type="currency_vnd"
                                                name="id_value_contract[]" required {{$contract->readonly}}></td>
                                     <td><input type="text" class="form-control display-input id_vat" value="10" placeholder="Thuế (%)" id="id_vat"  name="id_vat[]" required {{$contract->readonly}}></td>
-                                    <td><input type="text" class="form-control display-input total" id="total" name="total_value[]" data-type="currency_vnd" onchange="totalPrice()" required {{$contract->readonly}}></td>
+                                    <td><input type="text" class="form-control display-input total" id="total" name="total_value[]" data-type="currency_vnd" onchange="totalPriceUpdate()" required {{$contract->readonly}}></td>
                                     <td><input type="date" class="form-control display-input" id="_pay_due" name="_pay_due[]" required {{$contract->readonly}}> </td>
 
                                 </tr>
@@ -421,7 +420,7 @@
                                    data-target="#due" onclick="setDue()" {{$contract->readonly}}><i class="fas fa-pen" ></i>Gia Hạn</a>
                             </div>
                         <div class="col-md-2">
-                            <button type="button" class="au-btn au-btn-icon au-btn--blue m-b-25" onclick='checkTongUpdate()' {{$contract->readonly}}>
+                            <button type="button" class="au-btn au-btn-icon au-btn--blue m-b-25" id="add" onclick='checkTongUpdate()' {{$contract->readonly}}>
                                 <i class="far fa-edit"></i>Lưu
                             </button>
                         </div>

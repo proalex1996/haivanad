@@ -640,10 +640,11 @@ class ContractController extends Controller
     public function getRatio(Request $request)
     {
         $request->all();
+        $id_contract = str_replace('&','/',$request->id_contract);
         $data = DB::table('detail_payment')
             ->join('contract', 'detail_payment.id_contract', '=', 'contract.id_contract')
             ->select('detail_payment.*')
-            ->where('detail_payment.id_contract', '=', $request->id_contract)
+            ->where('detail_payment.id_contract', '=', $id_contract)
             ->groupBy('detail_payment.payment_period')->get();
         return json_encode(['detail' => $data], 200);
     }
@@ -894,7 +895,7 @@ class ContractController extends Controller
             return array(
                 'success' => true,
                 'status' => 200,
-                'message' => 'Cập nhận thành công'
+                'message' => 'Cập nhật thành công'
             );
         }else{
             return array(
@@ -914,7 +915,7 @@ class ContractController extends Controller
             return array(
                 'success' => true,
                 'status' => 200,
-                'message' => 'Cập nhận thành công'
+                'message' => 'Cập nhật thành công'
             );
         }catch (\Exception $e){
             return array(
@@ -959,7 +960,7 @@ class ContractController extends Controller
             return array(
                 'success' => true,
                 'status' => 200,
-                'message' => 'Cập nhận thành công'
+                'message' => 'Cập nhật thành công'
             );
         }else{
             return array(
@@ -979,7 +980,7 @@ class ContractController extends Controller
             return array(
                 'success' => true,
                 'status' => 200,
-                'message' => 'Cập nhận thành công'
+                'message' => 'Cập nhật thành công'
             );
         }catch (\Exception $e){
             return array(
@@ -1029,14 +1030,16 @@ class ContractController extends Controller
         ]);
     }
     public function showProduct(Request $request){
-        $show = DB::table('banner')
+        $id_contract = str_replace('&','/',$request->id_contract);
+        $show = DB::table('product_in_contract')
+            ->join('banner','banner.id_banner','=','product_in_contract.id_banner')
             ->join('type_banner', 'banner.id_typebanner', '=', 'type_banner.id_typebanner')
             ->join('province','banner.tinh','=','province._code')
             ->join('district','banner.quan','=','district.id_district')
-            ->join('product_in_contract','banner.id_banner','=','product_in_contract.id_banner')
             ->join('contract','contract.id_contract','=','product_in_contract.id_contract')
             ->select('banner.*','type_banner.*','province.*','district.*','product_in_contract.*','contract.readonly')
-            ->where('product_in_contract.id_contract',$request->id_contract)->get();
+            // ->select('*')
+            ->where('product_in_contract.id_contract',$id_contract)->get();
         return json_encode(['show' => $show], 200);
     }
     public function downloadContent(Request $request){
