@@ -2301,7 +2301,7 @@ Ratio();
 function Ratio() {
     var url = $('#domain').attr('href');
     var data = $('#id_contract').val();
-        data = data.replace('/','&');
+        data = data.replaceAll('/','&');
     $.ajax({
         url: url + '/api/contract/ratio/' + data,
         async: false,
@@ -3877,7 +3877,7 @@ function getListproduct(element) {
 showProduct()
 function showProduct() {
     var data = $('#id_contract').val();
-        data = data.replace('/','&');
+        data = data.replaceAll('/','&');
     var url = $('#domain').attr('href');
     $.ajax({
         url: url + '/api/contract/show/'+ data,
