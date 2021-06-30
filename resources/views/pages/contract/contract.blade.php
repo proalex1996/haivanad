@@ -139,7 +139,7 @@
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->name_customer}}</a></td>
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->name_kind}}</a></td>
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->id_banner}}</a></td>
-                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->date_end}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{date_format(date_create("$contract->date_end"),"d-m-Y")}}</a></td>
                                     <td class="value_contract"><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}"><span>{{number_format($contract->vl_contract_vat_vnd)}}</span>
                                         VND</a>
                                     </td>
@@ -159,7 +159,7 @@
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->name_customer}}</a></td>
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->name_kind}}</a></td>
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->id_banner}}</a></td>
-                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->date_end}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{date_format(date_create("$contract->date_end"),"d-m-Y")}}</a></td>
                                     <td class="value_contract"><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}"><span>{{number_format($contract->vl_contract_vat_vnd)}}</span>
                                         VND</a>
                                     </td>
@@ -176,7 +176,7 @@
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->name_customer}}</a></td>
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->name_kind}}</a></td>
                                     <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->id_banner}}</a></td>
-                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{$contract->date_end}}</a></td>
+                                    <td><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}">{{date_format(date_create("$contract->date_end"),"d-m-Y")}}</a></td>
                                     <td class="value_contract"><a class="text-dark" href="{{\Illuminate\Support\Facades\URL::to('contract/update')."/".$contract->id}}"><span>{{number_format($contract->vl_contract_vat_vnd)}}</span>
                                         VND</a>
                                     </td>

@@ -31,6 +31,16 @@ class ProductModel extends Model
         'gianam',
         'dien_tich',
         'v_light',
-        'content'
+        'content',
+        'license_number_advertise',
+        'start_date_advertise',
+        'end_date_advertise',
+        'date_range_advertise',
+        'content_advertise',
+        'license_number_build',
+        'start_date_build',
+        'end_date_build',
+        'date_range_build',
+        'content_build'
     ];
 }

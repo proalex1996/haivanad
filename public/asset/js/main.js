@@ -1864,11 +1864,11 @@ $('#addrowPayment').on('click', function () {
                                     <td><input type="text" class="display-input form-control payment_period" data-target="{{$contract->id_contract}}" id="payment_period" name="payment_period[]"
                                                required>
                                     </td>
-                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onchange="setRatio(this),totalPrice()" name="ratio[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract value_contract" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" onchange="setValueContract(this),totalPrice(),formatCurrency_VND(this)" id="id_value_contract"  
+                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" id="ratio" onchange="setRatioUpdate(this),totalPriceUpdate()" name="ratio[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_value_contract value_contract" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" onchange="setValueContract(this),totalPriceUpdate(),formatCurrency_VND(this)" id="id_value_contract"  
                                                name="id_value_contract[]" placeholder="Số Tiền (VND)"></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" value="10" id="id_vat" name="id_vat[]"></td>
-                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND)" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" onchange="totalPrice(),formatCurrency_VND(this)" id="total" name="total_value[]"></td>
+                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND)" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" onchange="totalPriceUpdate(),formatCurrency_VND(this)" id="total" name="total_value[]"></td>
                                     <td><input type="date" class="form-control display-input" name="_pay_due[]" required>
                                     </td>
                                 </tr>
@@ -2064,6 +2064,54 @@ function totalPrice(){
 
 }
 
+function totalPriceUpdate(){
+    var parent = $('.ratio').closest('tr');
+    //Total Ratio
+    var tile = [];
+    var tile = parent.children('td').find('.ratio');
+    var tong_tile = 0;
+    for(var i = 0; i<tile.length; i++){
+        if(tong_tile < 100){
+            if($(tile[i]).val() === ""){
+                tong_tile = tong_tile;
+            }else{
+                tong_tile = tong_tile + parseInt($(tile[i]).val());
+            }
+        }else{
+            alert("Tổng tỉ lệ đã vượt 100%");
+            break;
+        }
+    }
+    $('#total_ratio').val(tong_tile);
+    //Total Money
+    var money = [];
+    var money = parent.children('td').find('.value_contract');
+    var tien = $('#tongvat_').val();
+        tien = tien.split('₫').join("");
+        tien = tien.split(',').join("");
+    var thue = $('#id_vat').val();
+    var tien_vat = $('#tong_').val();
+        tien_vat = tien_vat.split('₫').join("");
+        tien_vat = tien_vat.split(',').join("");
+    var tong_tien = 0;
+    for(i =0; i<money.length; i++){
+        tt = $(money[i]).val();
+            if(tt === ""){
+                tong_tien = tong_tien;
+            }else{
+                tt = tt.split('₫').join("");
+                tt = tt.split(',').join("");
+                tong_tien = tong_tien + parseInt(tt);
+            }
+    }
+    var tong_tien_vat = tong_tien + (tong_tien * parseInt(thue) / 100);
+    tong_tien = tong_tien;
+    tong_tien_vat = tong_tien_vat;
+    $('#total_price').val(format(tong_tien));
+    $('#total_price_vat').val(format(tong_tien_vat));
+
+}
+
 function setTongVat(){
     var tong = $('#tongvat').val();
         tong = tong.split('₫').join("");
@@ -2072,10 +2120,10 @@ function setTongVat(){
 }
 
 function updateTongVat(){
-    var tong = $('#tongvat').val();
+    var tong = $('#tongvat_').val();
         tong = tong.split('₫').join("");
         tong = tong.split(',').join("");
-    $('#tong').val(format(parseInt(tong)+(parseInt(tong)*10/100)));
+    $('#tong_').val(format(parseInt(tong)+(parseInt(tong)*10/100)));
 }
 
 function checkTong(){
@@ -2172,8 +2220,8 @@ function sumPrice() {
         $('#tong').val(parseInt(gianam));
     }
     else{
-        v_light = v_light.split('$').join("");
-        v_light = v_light.split(',').join("");
+        v_light = v_light?.split('$').join("");
+        v_light = v_light?.split(',').join("");
         var tong = parseInt(gianam) + parseInt(v_light);
         $('#tong').val(parseInt(tong));
     }
@@ -2182,15 +2230,30 @@ function sumPrice() {
 function setRatio(elements) {
     var parent = $(elements).closest('tr');
     var gia = parent.children('td').find('.ratio');
-    var value = $('#value_contract').val();
-    var exchange = $('#exchange').val();
-    exchange = exchange.split('₫').join("");
-    exchange = exchange.split(',').join("");
+    var value = $('#tongvat').val();
     var id_value = parent.children('td').find('.id_value_contract');
         value = value.split('$').join("");
         value = value.split(',').join("");
-        var total_value = value * exchange;
-    value_contract = (total_value * $(gia).val())/100;
+    value_contract = (parseInt(value) * $(gia).val())/100;
+    $(id_value).val(format(parseInt(value_contract)));
+    var price =  $(id_value).val();
+        price = price.split('₫').join("");
+        price = price.split(',').join("");
+    var thue = parent.children('td').find('.id_vat');
+    var total = parent.children('td').find('.total');
+    var vat = ($(thue).val() * parseInt(price))/ 100;
+    tong = parseInt(price) + parseInt(vat);
+    $(total).val(format(tong));
+}
+
+function setRatioUpdate(elements) {
+    var parent = $(elements).closest('tr');
+    var gia = parent.children('td').find('.ratio');
+    var value = $('#tongvat_').val();
+    var id_value = parent.children('td').find('.id_value_contract');
+        value = value.split('$').join("");
+        value = value.split(',').join("");
+    value_contract = (parseInt(value) * $(gia).val())/100;
     $(id_value).val(format(parseInt(value_contract)));
     var price =  $(id_value).val();
         price = price.split('₫').join("");
@@ -2250,6 +2313,7 @@ Ratio();
 function Ratio() {
     var url = $('#domain').attr('href');
     var data = $('#id_contract').val();
+        data = data?.replaceAll('/','&');
     $.ajax({
         url: url + '/api/contract/ratio/' + data,
         async: false,
@@ -2280,11 +2344,11 @@ function Ratio() {
                                     <td><input type="text" class="display-input form-control payment_period" id="payment_period" value="${ele.payment_period}" name="payment_period[]"
                                                required>
                                     </td>
-                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" value="${ele.ratio}" id="ratio" onchange="setRatio(this),totalPrice()" name="ratio[]" required></td>
-                                    <td><input type="text" class="form-control display-input id_value_contract" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" value="${format(ele.id_value_contract)}" id="id_value_contract" onchange="setValueContract(this),totalPrice(),formatCurrency_VND(this)"
+                                    <td><input type="text" class="form-control display-input ratio" placeholder="Tỉ Lệ(%)" value="${ele.ratio}" id="ratio" onchange="setRatioUpdate(this),totalPriceUpdate()" name="ratio[]" required></td>
+                                    <td><input type="text" class="form-control display-input id_value_contract value_contract" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" value="${format(ele.id_value_contract)}" id="id_value_contract" onchange="setValueContract(this),totalPriceUpdate(),formatCurrency_VND(this)"
                                                name="id_value_contract[]" ></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat" value="${ele.id_vat}" name="id_vat[]" ></td>
-                                    <td><input type="text" class="form-control display-input total" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" onchange="totalPrice(),formatCurrency_VND(this)" value="${format(ele.total_value)}" id="total" name="total_value[]" ></td>
+                                    <td><input type="text" class="form-control display-input total" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" onchange="totalPriceUpdate(),formatCurrency_VND(this)" value="${format(ele.total_value)}" id="total" name="total_value[]" ></td>
                                     <td><input type="date" class="form-control display-input" value="${ele._pay_due}" name="_pay_due[]" required>
                                     </td>
                                 </tr>` )
@@ -2368,7 +2432,7 @@ $('[id^="row_staff"]').click(function () {
     location.assign(url+"/users/update/"+data)
 })
 
-getPhoto()
+getPhoto();
 function getPhoto() {
     var url = $('#domain').attr('href');
     var data = $('#id_banner').val();
@@ -2436,8 +2500,8 @@ $(document).ready(function(){
     $(".chosen-select").chosen({no_results_text: "Không có kết quả nào!"+" "})
 });
 $('.input-images-map').imageUploader({
-    imagesInputName: 'maps',
-    maxFiles: 1
+    // imagesInputName: 'maps',
+    // maxFiles: 1
 })
 
 function getCheckedBox() {
@@ -2480,8 +2544,16 @@ $('#export_ppt_form').submit(function(e){
 // });
 
 function format(n) {
-    return n.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + " ₫";
-  }
+    n += '';
+    x = n.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2 + ' ₫';
+}
 
 // format number vnd 
 $('input[data-type="currency_vnd"]').on({
@@ -3817,6 +3889,7 @@ function getListproduct(element) {
 showProduct()
 function showProduct() {
     var data = $('#id_contract').val();
+        data = data.replaceAll('/','&');
     var url = $('#domain').attr('href');
     $.ajax({
         url: url + '/api/contract/show/'+ data,

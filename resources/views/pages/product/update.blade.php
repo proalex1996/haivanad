@@ -1,4 +1,3 @@
-
 @extends('pages.top-page.master')
 @section('title','Chi Tiết Pano')
 @section('content')

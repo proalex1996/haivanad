@@ -121,7 +121,7 @@
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->name_status}}</a>
                                     </td>
 
-                                    <td>{{$price_banners[$i]}}</td>
+                                    <td>{{'$'.number_format($price_banners[$i])}}</td>
 
 
                             @elseif($banner->id_status==1)
@@ -135,7 +135,7 @@
                                     <td><a class="id_banner text text-dark" href="product/update/{{$banner->id}}" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->name_status}}</a>
                                     </td>
-                                    <td>{{$price_banners[$i]}}</td>
+                                    <td>{{'$'.number_format($price_banners[$i])}}</td>
                             @else
                                 <tr class="id_banners">
                                     <td><input type="checkbox" id="check-box" data-target="{{$banner->id}}" name="check_box[]" onchange="getCheckedBox()" onclick="getSession()" value="{{$banner->id_banner}}"
@@ -147,7 +147,7 @@
                                     <td><a class="id_banner text text-dark" href="product/update/{{$banner->id}}" aria-haspopup="true"
                                            aria-expanded="false" id="dropdownMenuLink"> {{$banner->name_status}}</a>
                                     </td>
-                                    <td>{{$price_banners[$i]}}</td>
+                                    <td>{{'$'.number_format($price_banners[$i])}}</td>
                             @endif
                             <p style="display:none;">{{$i++}}</p>
                         @endforeach

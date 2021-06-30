@@ -283,7 +283,6 @@ class ContractController extends Controller
 
         }
 
-
         return view('pages.contract.contract', [
             'contracts' => $contracts,
             'users' => $staff,
@@ -428,7 +427,7 @@ class ContractController extends Controller
 
     public function getDownload(Request $request)
     {
-        return redirect('public/storage/contract/'.$request->contented);
+        return redirect('storage/app/public/contract/'.$request->contented);
 
     }
 
@@ -479,18 +478,35 @@ class ContractController extends Controller
         }
 
         if (!empty($data)) {
-            if (!empty($data['content'])) {
-                $data['content'] = basename($request->content_contract->getClientOriginalName());
-                $file = $request->file('content');
-                $fileName = $request->file('content')->getClientOriginalName();
+            // if (!empty($data['content_contract'])) {
+            //     $datas['content'] = basename($request->content_contract->getClientOriginalName());
+            //     $file = $request->file('content_contract');
+            //     $fileName = $request->file('content_contract')->getClientOriginalName();
+            //     $storage = Storage::putFileAs('contract', $file, $fileName);
+            // }
+            // if (!empty($data['contented'])) {
+            //     $datas['contented'] = basename($request->contented->getClientOriginalName());
+            //     $contented = $request->file('contented');
+            //     $contentedName = $request->file('contented')->getClientOriginalName();
+            //     $storage = Storage::putFileAs('contract', $contented, $contentedName);
+
+            // }
+            if(!empty($data['content_contract'])){
+                $datas['contented'] = basename($request->content_contract->getClientOriginalName());
+                $file = $request->file('content_contract');
+                $fileName = $request->file('content_contract')->getClientOriginalName();
                 $storage = Storage::putFileAs('contract', $file, $fileName);
+            }else{
+                $datas['contented'] = 'Bổ Sung Sau';
             }
-            if (!empty($data['contented'])) {
-                $data['contented'] = basename($request->contented->getClientOriginalName());
+            if(!empty($data['contented'])){
+                $datas['contented'] = basename($request->contented->getClientOriginalName());
                 $contented = $request->file('contented');
                 $contentedName = $request->file('contented')->getClientOriginalName();
                 $storage = Storage::putFileAs('contract', $contented, $contentedName);
-
+                $datas['contented'] = $contentedName;
+            }else{
+                $datas['contented'] = 'Bổ Sung Sau';
             }
             
             DB::table('product_in_contract')->where('id_contract', $data['id_contract'])->delete();
@@ -1043,7 +1059,7 @@ class ContractController extends Controller
         return json_encode(['show' => $show], 200);
     }
     public function downloadContent(Request $request){
-        //PDF file is stored under project/public/download/info.pdf
+        // PDF file is stored under project/public/download/info.pdf
             $file= public_path(). "/contract/".$request->data;
 
         $headers = array(
