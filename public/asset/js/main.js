@@ -2277,17 +2277,6 @@ function setValueContract(elements) {
     $(total).val(format(tong));
 }
 
-// function getRatio(element) {
-//     var parent = $(element).closest('tr');
-//     var gia = parent.children('td').find('.id_value_contract');
-//
-//     // var gia = $('#id_value_contract').val();
-//     // var thue = (($('#id_vat').val() * gia) / 100);
-//     // $('[id^="total"]').val(parseInt(gia) + parseInt(thue));
-// }
-
-
-
 function getProduct() {
     var url = $('#domain').attr('href');
     var data = $('#id_banner').val();
@@ -2307,7 +2296,6 @@ function getProduct() {
         }
     });
 }
-
 
 Ratio();
 function Ratio() {
