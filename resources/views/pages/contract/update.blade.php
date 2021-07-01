@@ -12,27 +12,29 @@
             <div class="container-fluid">
                 <div class="form-staff">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <div class="row">
-                                <div class="col-xl-6 col-sm-12">
+                                <div class="col-md-4 col-sm-12">
                                     <label for="exampleFormControlInput1 uname">Mã Hợp đồng</label>
-                                    <!-- <input type="button" class="btn btn-primary" value="Lấy mã" onclick="getCode()"> -->
                                 </div>
-                                <div class="col-xl-6 col-sm-12">
-                                    <!-- <input type="text" style="display: none;" class="form-control" value="{{$contract->id_contract}}" id="code"
-                                           placeholder="Tên Hợp đồng"> -->
+                                <div class="col-md-4 col-sm-12">
+                                    <label for="exampleFormControlSelect2">Nhân Viên Phụ Trách</label>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <label for="exampleFormControlSelect1">Loại hợp đồng</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
                                     <input type="text" class="form-control" value="{{$contract->id_contract}}" id="id_contract" name="id_contract"
                                            placeholder="Tên Hợp đồng" {{$contract->readonly}}>
                                     <div class="invalid-feedback">Tên Hợp đồng không được để trống</div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="row">
-                                <div class="col-xl-7 col-sm-12">
-                                    <label for="exampleFormControlSelect2">Nhân Viên Phụ Trách</label>
-                                </div>
-                                <div class="col-xl-5 col-sm-12">
+                                <div class="col-md-4 col-sm-12">
                                     <select class="form-control " id="exampleFormControlSelect2" name="id_staff" required required {{$contract->readonly}}>
                                         @foreach($staffs as $staff)
                                             @if ($staff->id_staff == $contract ->id_staff)
@@ -43,14 +45,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="row">
-                                <div class="col-xl-6 col-sm-12">
-                                    <label for="exampleFormControlSelect1">Loại hợp đồng</label>
-                                </div>
-                                <div class="col-xl-6 col-sm-12">
+                                <div class="col-md-4 col-sm-12">
                                     <select class="form-control" id="kind_name" name="kind" required {{$contract->readonly}}>
                                         @foreach($kind_contract as $kind)
                                             @if($kind->id_contract == $contract ->kind)
@@ -69,12 +64,12 @@
                     <legend class='text-left'>Khách Hàng</legend>
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-12">
+                                    <div class="col-md-3 col-sm-12">
                                         <label for="exampleFormControlSelect1">Tên khách hàng</label>
                                     </div>
-                                    <div class="col-md-6 col-sm-12">
+                                    <div class="col-md-9 col-sm-12">
                                         <select class="form-control chosen-select" id="id_customer" name="name_customer"
                                                 onchange="getCustomer()" required {{$contract->readonly}}>
                                             @foreach($customers as $customer)
@@ -89,20 +84,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlSelect1">Nguồn Khách Hàng</label>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12">
-                                        <select class="form-control" id="id_nguoncustomer" name="id_nguoncustomer" required {{$contract->readonly}}>
-
-                                        </select>
-                                    </div>
-
-                                </div>
-
-                            </div>
+                            
                         </div>
                         <div class="row">
                             <div class="col-md-3 col-sm-12">
@@ -131,16 +113,14 @@
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
-                                        <label for="exampleFormControlInput1 uname" style="width: 284px;">Số Điện
-                                            Thoại</label>
+                                        <label for="exampleFormControlSelect1">Nguồn Khách Hàng</label>
                                     </div>
                                     <div class="col-md-6 col-sm-12">
-                                        <input type="text" class="form-control" id="phone_customer"
-                                               name="phone_customer"
-                                               placeholder="Số Điện Thoại"
-                                               maxlength="10" value="" required required {{$contract->readonly}}>
-                                        <div class="invalid-feedback">Số điện thoại không được để trống</div>
+                                        <select class="form-control" id="id_nguoncustomer" name="id_nguoncustomer" required {{$contract->readonly}}>
+
+                                        </select>
                                     </div>
+
                                 </div>
 
                             </div>

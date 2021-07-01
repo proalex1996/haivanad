@@ -2,18 +2,15 @@
 @section('title','Chi Tiết Pano')
 @section('content')
     <div class="container-fluid">
-        <div class="col-md-12 m-b-40">
-            <div class="overview-wrap">
-                <h2 class="title-1">Chi Tiết Pano</h2>
-            </div>
-        </div>
         <form action="{{\Illuminate\Support\Facades\URL::to('/product/update/' . $banners->id)}}"
               enctype="multipart/form-data" class="needs-validation" method="post">
             @csrf
 
             <div class="container">
                 <div class="container-fluid">
-                    <div class="form-group">
+                    <fieldset class="border-text">
+                        <legend class='text-left'><h2 class="title-1">Chi Tiết Sản Phẩm</h2></legend>
+                        <div class="form-group">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
@@ -301,21 +298,23 @@
                         </div>
                     </div>
 
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-12">
-                                    <label for="exampleFormControlInput1 uname">Nội Dung Quảng Cáo Hiện Tại: </label>
-                                </div>
-                                <div class="col-md-9 col-sm-12">
-                                    <input class="form-customer-input" type="text" value="{{$banners->content}}" name="content"
-                                           placeholder="content">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-12">
+                                        <label for="exampleFormControlInput1 uname">Nội Dung Quảng Cáo Hiện Tại: </label>
+                                    </div>
+                                    <div class="col-md-9 col-sm-12">
+                                        <input class="form-customer-input" type="text" value="{{$banners->content}}" name="content"
+                                            placeholder="content">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    </fieldset>
+                    
 
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Đặc Điểm:</label>
@@ -332,18 +331,18 @@
                                     <input type="text" name="license_number_advertise" value="{{$banners->license_number_advertise}}" placeholder="Số giấy phép quảng cáo">
                                 </div>
                                 <div class="col-md-3 col-sm-12">
-                                    <label for="start_date_advertise">Từ ngày</label>
-                                </div>
-                                <div class="col-md-3 col-sm-12">
-                                    <input type="date" name="start_date_advertise" value="{{$banners->start_date_advertise}}">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-12">
                                     <label for="date_range_advertise">Ngày cấp</label>
                                 </div>
                                 <div class="col-md-3 col-sm-12">
                                     <input type="date" name="date_range_advertise" value="{{$banners->date_range_advertise}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="start_date_advertise">Từ ngày</label>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <input type="date" name="start_date_advertise" value="{{$banners->start_date_advertise}}">
                                 </div>
                                 <div class="col-md-3 col-sm-12">
                                     <label for="end_date_advertise">Đến ngày</label>
@@ -373,18 +372,18 @@
                                     <input type="text" name="license_number_build" placeholder="Số giấy phép xây dựng" value="{{$banners->license_number_build}}">
                                 </div>
                                 <div class="col-md-3 col-sm-12">
-                                    <label for="start_date_build">Từ ngày</label>
-                                </div>
-                                <div class="col-md-3 col-sm-12">
-                                    <input type="date" name="start_date_build" value="{{$banners->start_date_build}}">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-12">
                                     <label for="date_range_build">Ngày cấp</label>
                                 </div>
                                 <div class="col-md-3 col-sm-12">
                                     <input type="date" name="date_range_build" value="{{$banners->date_range_build}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-12">
+                                    <label for="start_date_build">Từ ngày</label>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <input type="date" name="start_date_build" value="{{$banners->start_date_build}}">
                                 </div>
                                 <div class="col-md-3 col-sm-12">
                                     <label for="end_date_build">Đến ngày</label>
@@ -418,21 +417,21 @@
                             </div>
                         </div>
                     </div>
-                <div class="form-group">
-                    <div class="row" id="views-photo">
-                        <div class="col-md-3 col-sm-12 label-views">
-                            <label for="exampleFormControlInput1 uname">Hướng Nhìn 1: </label>
-                        </div>
-                        <div class="col-md-3 col-sm-12 label-views">
-                            <label for="exampleFormControlInput1 uname">Hướng Nhìn 2: </label>
-                        </div>
-                        <div class="col-md-3 col-sm-12 label-views">
-                            <label for="exampleFormControlInput1 uname">Hướng Nhìn 3: </label>
-                        </div>
-                        <div class="col-md-3 col-sm-12 label-views">
-                            <label for="exampleFormControlInput1 uname">Hướng Nhìn 4: </label>
-                        </div>
-                </div>
+                    <div class="form-group">
+                        <div class="row" id="views-photo">
+                            <div class="col-md-3 col-sm-12 label-views">
+                                <label for="exampleFormControlInput1 uname">Hướng Nhìn 1: </label>
+                            </div>
+                            <div class="col-md-3 col-sm-12 label-views">
+                                <label for="exampleFormControlInput1 uname">Hướng Nhìn 2: </label>
+                            </div>
+                            <div class="col-md-3 col-sm-12 label-views">
+                                <label for="exampleFormControlInput1 uname">Hướng Nhìn 3: </label>
+                            </div>
+                            <div class="col-md-3 col-sm-12 label-views">
+                                <label for="exampleFormControlInput1 uname">Hướng Nhìn 4: </label>
+                            </div>
+                    </div>
                     <div class="form-group">
                         <label for="exampleFormControlSelect1" >Hình Ảnh:</label>
                         <div class="input-images-2">
