@@ -53,7 +53,7 @@ Route::group(['prefix' => 'product'], function () {
     Route::get('/province/{id}','ProductController@province');
     Route::post('/photo/{id_banner}','ProductController@getPhoto');
     Route::get('/photo/','ProductController@getPhoto');
-
+    Route::get('/find/{id_banner}','ProductController@findProduct');
 
 });
 

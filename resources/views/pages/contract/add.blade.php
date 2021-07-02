@@ -17,13 +17,30 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="row">
-                                <div class="col-xl-6 col-sm-12">
+                                <div class="col-md-12 col-sm-12">
                                     <label for="exampleFormControlInput1 uname">Mã Hợp đồng</label>
-                                    <!-- <input type="button" class="btn btn-primary" value="Lấy mã" onclick="getCode()"> -->
                                 </div>
-                                <div class="col-xl-6 col-sm-12">
-                                    <!-- <input type="text" style="display: none;" class="form-control" value="{{$codes}}" id="code"
-                                           placeholder="Tên Hợp đồng" > -->
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <label for="exampleFormControlSelect2">Nhân Viên Phụ Trách</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <label for="exampleFormControlSelect1">Loại hợp đồng</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
                                     <input type="text" class="form-control" value="{{$codes}}" id="id_contracts" name="id_contract"
                                            placeholder="Tên Hợp đồng" >
                                     <div class="invalid-feedback">Mã Hợp đồng không được để trống</div>
@@ -32,10 +49,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="row">
-                                <div class="col-xl-7 col-sm-12">
-                                    <label for="exampleFormControlSelect2">Nhân Viên Phụ Trách</label>
-                                </div>
-                                <div class="col-xl-5 col-sm-12">
+                                <div class="col-md-12 col-sm-12">
                                     <select class="form-control chosen-select" id="exampleFormControlSelect2" name="id_staff" required>
                                         @foreach($staffs as $staff)
                                             <option value="{{$staff->id_staff}}">{{$staff->name}}</option>
@@ -46,10 +60,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="row">
-                                <div class="col-xl-6 col-sm-12">
-                                    <label for="exampleFormControlSelect1">Loại hợp đồng</label>
-                                </div>
-                                <div class="col-xl-6 col-sm-12">
+                                <div class="col-md-12 col-sm-12">
                                     <select class="form-control" id="kind_name" name="kind_name">
                                         @foreach($kind_contract as $kind)
                                             <option value="{{$kind->id_contract}}">{{$kind->name_kind}}</option>

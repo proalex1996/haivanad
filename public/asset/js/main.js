@@ -1901,6 +1901,29 @@ $('#addrowPayment1').on('click', function () {
 });
 
 $('#id_finder').on('click', function(){
+    var url = $('#domain').attr('href');
+    var data = $('#_name_banner').val();
+    $.ajax({
+        url: url + '/api/product/find/' + data,
+        async: false,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*'
+        },
+        method: 'POST',
+        success: function (result) {
+            var datas = JSON.parse(result).detail
+            if (datas.length > 0) {
+                if (datas.length == 1) {
+                    
+                }
+                else if (datas.length > 1) {
+                    
+                }
+
+            }
+        }
+    })
     $('#info_finder').append(
         `
         <div class="container">
@@ -3243,7 +3266,7 @@ $('#submit_kind').on('click',function () {
 
             },
             error: function () {
-                alert('Đã xãy ra lỗi');
+                alert('Đã xảy ra lỗi');
 
             }
 
@@ -3347,7 +3370,7 @@ $(document).on("click", ".delete_kind", function(){
             }
         },
         error: function () {
-            alert('Đã xãy ra lỗi');
+            alert('Đã xảy ra lỗi');
         }
     })
 });
@@ -3400,7 +3423,7 @@ $('#add_status_contract').on('click',function () {
 
             },
             error: function () {
-                alert('Đã xãy ra lỗi')
+                alert('Đã xảy ra lỗi')
             }
         })
     }
@@ -3424,7 +3447,7 @@ $(document).on("click", ".delete_status_contract", function(){
             }
         },
         error: function () {
-            alert('Đã xãy ra lỗi');
+            alert('Đã xảy ra lỗi');
         }
     })
 });
@@ -3451,7 +3474,7 @@ $('#submit_status_contract').on('click',function () {
 
         },
         error: function () {
-            alert('Đã xãy ra lỗi');
+            alert('Đã xảy ra lỗi');
 
         }
 
@@ -3481,7 +3504,7 @@ $('#add_branch').on('click',function () {
 
         },
         error: function () {
-            alert('Đã xãy ra lỗi')
+            alert('Đã xảy ra lỗi')
         }
     })
 
@@ -3492,7 +3515,7 @@ $('#submit_branch').on('click',function () {
     var data = {id: id,name: name};
     var url = $('#domain').attr('href');
     if (name == ""){
-        alert('Vui lòng nhập đày đủ thông tin')
+        alert('Vui lòng nhập đầy đủ thông tin')
     }else {
         $.ajax({
             method: 'POST',
@@ -3511,7 +3534,7 @@ $('#submit_branch').on('click',function () {
                 }
             },
             error: function () {
-                alert('Đã xãy ra lỗi');
+                alert('Đã xảy ra lỗi');
             }
 
         })
@@ -3537,7 +3560,7 @@ $(document).on("click", ".delete_branch", function(){
             }
         },
         error: function () {
-            alert('Đã xãy ra lỗi');
+            alert('Đã xảy ra lỗi');
         }
     })
 });
@@ -3562,7 +3585,7 @@ $('#submit_type_product').on('click',function () {
 
         },
         error: function () {
-            alert('Đã xãy ra lỗi');
+            alert('Đã xảy ra lỗi');
 
         }
 
@@ -3574,7 +3597,7 @@ $('#submit_type').on('click',function () {
     var data = {id: id,name: name};
     var url = $('#domain').attr('href');
     if (name == ""){
-        alert('Vui lòng nhập đày đủ thông tin')
+        alert('Vui lòng nhập đầy đủ thông tin')
     }else {
         $.ajax({
             method: 'POST',
@@ -3593,7 +3616,7 @@ $('#submit_type').on('click',function () {
                 }
             },
             error: function () {
-                alert('Đã xãy ra lỗi');
+                alert('Đã xảy ra lỗi');
             }
 
         })
@@ -3619,7 +3642,7 @@ $(document).on("click", ".delete_type_banner", function(){
             }
         },
         error: function () {
-            alert('Đã xãy ra lỗi');
+            alert('Đã xảy ra lỗi');
         }
     })
 });
@@ -3647,7 +3670,7 @@ $('#submit_product').on('click',function () {
 
         },
         error: function () {
-            alert('Đã xãy ra lỗi');
+            alert('Đã xảy ra lỗi');
 
         }
 
@@ -3659,7 +3682,7 @@ $('#submit_status_banner').on('click',function () {
     var data = {id: id,name: name};
     var url = $('#domain').attr('href');
     if (name == ""){
-        alert('Vui lòng nhập đày đủ thông tin')
+        alert('Vui lòng nhập đầy đủ thông tin')
     }else {
         $.ajax({
             method: 'POST',
@@ -3677,7 +3700,7 @@ $('#submit_status_banner').on('click',function () {
                 }
             },
             error: function () {
-                alert('Đã xãy ra lỗi');
+                alert('Đã xảy ra lỗi');
             }
 
         })
@@ -3703,7 +3726,7 @@ $(document).on("click", ".delete_status_banner", function(){
             }
         },
         error: function () {
-            alert('Đã xãy ra lỗi');
+            alert('Đã xảy ra lỗi');
         }
     })
 });
@@ -3733,7 +3756,7 @@ $('#submit_nguon').on('click',function () {
 
             },
             error: function () {
-                alert('Đã xãy ra lỗi');
+                alert('Đã xảy ra lỗi');
 
             }
 
@@ -3747,7 +3770,7 @@ $('#submit_nguon_customer').on('click',function () {
     var data = {id: id,name: name};
     var url = $('#domain').attr('href');
     if (name == ""){
-        alert('Vui lòng nhập đày đủ thông tin')
+        alert('Vui lòng nhập đầy đủ thông tin')
     }else {
         $.ajax({
             method: 'POST',
@@ -3765,7 +3788,7 @@ $('#submit_nguon_customer').on('click',function () {
                 }
             },
             error: function () {
-                alert('Đã xãy ra lỗi');
+                alert('Đã xảy ra lỗi');
             }
         })
     }
@@ -3788,7 +3811,7 @@ $(document).on("click", ".delete_nguon", function(){
             }
         },
         error: function () {
-            alert('Đã xãy ra lỗi');
+            alert('Đã xảy ra lỗi');
         }
     })
 });
@@ -3799,7 +3822,7 @@ $('#add_position').on('click',function (){
     var data = {id: id,name: name};
     var url = $('#domain').attr('href');
     if (name == ""){
-        alert('Vui lòng nhập đày đủ thông tin')
+        alert('Vui lòng nhập đầy đủ thông tin')
     }else {
         $.ajax({
             method: 'POST',
@@ -3815,7 +3838,7 @@ $('#add_position').on('click',function (){
                 }
             },
             error: function () {
-                alert('Đã xãy ra lỗi');
+                alert('Đã xảy ra lỗi');
             }
         })
     }
@@ -3827,7 +3850,7 @@ $('#modal_submit_position').on('click',function () {
     var data = {id: id,name: name};
     var url = $('#domain').attr('href');
     if (name == ""){
-        alert('Vui lòng nhập đày đủ thông tin')
+        alert('Vui lòng nhập đầy đủ thông tin')
     }else {
         $.ajax({
             method: 'POST',
@@ -3843,7 +3866,7 @@ $('#modal_submit_position').on('click',function () {
                 }
             },
             error: function () {
-                alert('Đã xãy ra lỗi');
+                alert('Đã xảy ra lỗi');
             }
         })
     }
@@ -3866,7 +3889,7 @@ $(document).on("click", ".delete_position", function(){
             }
         },
         error: function () {
-            alert('Đã xãy ra lỗi');
+            alert('Đã xảy ra lỗi');
         }
     })
 });
@@ -3896,7 +3919,7 @@ $('#submit_type_customer').on('click',function () {
 
             },
             error: function () {
-                alert('Đã xãy ra lỗi');
+                alert('Đã xảy ra lỗi');
             }
         })
     }
@@ -3907,7 +3930,7 @@ $('#modal_submit_type_customer').on('click',function () {
     var data = {id: id,name: name};
     var url = $('#domain').attr('href');
     if (name == ""){
-        alert('Vui lòng nhập đày đủ thông tin')
+        alert('Vui lòng nhập đầy đủ thông tin')
     }else {
         $.ajax({
             method: 'POST',
@@ -3925,7 +3948,7 @@ $('#modal_submit_type_customer').on('click',function () {
                 }
             },
             error: function () {
-                alert('Đã xãy ra lỗi');
+                alert('Đã xảy ra lỗi');
             }
 
         })
@@ -3950,7 +3973,7 @@ $(document).on("click", ".delete_type_customer", function(){
             }
         },
         error: function () {
-            alert('Đã xãy ra lỗi');
+            alert('Đã xảy ra lỗi');
         }
     })
 });
