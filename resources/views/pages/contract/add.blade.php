@@ -460,17 +460,17 @@
                                     <td><input type="text" class="form-control display-input id_value_contract value_contract" data-type="currency_vnd" onchange="setValueContract(this),totalPrice()" id="id_value_contract"
                                                name="id_value_contract[]" placeholder="Số Tiền(VND)"></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat"  value="10" name="id_vat[]" ></td>
-                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền(VND)" data-type="currency_vnd" onchange="totalPrice()" id="total" name="total_value[]"></td>
+                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền(VND)" data-type="currency_vnd" onchange="totalPriceVat()" id="total" name="total_value[]"></td>
                                     <td><input type="date" class="form-control display-input" name="_pay_due[]" required></td>
                                 </tr>
                                 </tbody>
                                 <tr>
                                     <td></td>
                                     <td><input type="text" class="form-control display-input" placeholder="Tổng" value="Tổng" readonly></td>
-                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tỉ Lệ (%)" id="total_ratio" name="" readonly></td>
-                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND)" data-type="currency_vnd" id="total_price" name="" readonly></td>
+                                    <td><input type="text" class="form-control display-input " placeholder="Tổng Tỉ Lệ (%)" id="total_ratio" name="" readonly></td>
+                                    <td><input type="text" class="form-control display-input " placeholder="Tổng Tiền (VND)" data-type="currency_vnd" id="total_price" name="" readonly></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat"  value="10" name="id_vat[]" readonly ></td>
-                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND + Thuế)" data-type="currency_vnd" id="total_price_vat" name="" readonly></td>
+                                    <td><input type="text" class="form-control display-input " placeholder="Tổng Tiền (VND + Thuế)" data-type="currency_vnd" id="total_price_vat" name="" readonly></td>
                                     <td></td>
                                 </tr>
 

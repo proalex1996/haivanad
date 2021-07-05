@@ -1,5 +1,7 @@
 
 
+
+
 (function ($) {
     // USE STRICT
     "use strict";
@@ -1868,7 +1870,7 @@ $('#addrowPayment').on('click', function () {
                                     <td><input type="text" class="form-control display-input id_value_contract value_contract" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" onchange="setValueContract(this),totalPriceUpdate(),formatCurrency_VND(this)" id="id_value_contract"  
                                                name="id_value_contract[]" placeholder="Số Tiền (VND)"></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" value="10" id="id_vat" name="id_vat[]"></td>
-                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND)" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" onchange="totalPriceUpdate(),formatCurrency_VND(this)" id="total" name="total_value[]"></td>
+                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND)" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" onchange="totalPriceVat(),formatCurrency_VND(this)" id="total" name="total_value[]"></td>
                                     <td><input type="date" class="form-control display-input" name="_pay_due[]" required>
                                     </td>
                                 </tr>
@@ -1891,7 +1893,7 @@ $('#addrowPayment1').on('click', function () {
                                     <td><input type="text" class="form-control display-input id_value_contract value_contract" onkeyup="formatCurrency_VND(this)" onchange="setValueContract(this),totalPrice(),formatCurrency_VND(this)" data-type="currency_vnd" id="id_value_contract"
                                                name="id_value_contract[]" placeholder="Số Tiền (VND)"></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" value="10" id="id_vat" name="id_vat[]"></td>
-                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND)" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" onchange="totalPrice(),formatCurrency_VND(this)" id="total" name="total_value[]"></td>
+                                    <td><input type="text" class="form-control display-input total" placeholder="Tổng Tiền (VND)" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" onchange="totalPriceVat(),formatCurrency_VND(this)" id="total" name="total_value[]"></td>
                                     <td><input type="date" class="form-control display-input" name="_pay_due[]" required>
 
                                </tr>
@@ -1913,6 +1915,7 @@ $('#id_finder').on('click', function(){
         method: 'POST',
         success: function (result) {
             var datas = JSON.parse(result).detail
+            alert(datas)
             if (datas.length > 0) {
                 if (datas.length == 1) {
                     
@@ -2491,6 +2494,20 @@ function totalPrice(){
 
 }
 
+function totalPriceVat(){
+    var parent = $('.total').closest('tr');
+    var tile = [];
+    var tile = parent.children('td').find('.total');
+    var tong_tien_vat = 0;
+    for(var i=0; i<tile.length; i++){
+        var price = $(tile[i]).val();
+            price = price.split('₫').join("");
+            price = price.split(',').join("");
+        tong_tien_vat = tong_tien_vat + parseInt(price);
+    }
+    $('#total_price_vat').val(format(tong_tien_vat));
+}
+
 function totalPriceUpdate(){
     var parent = $('.ratio').closest('tr');
     //Total Ratio
@@ -2763,7 +2780,7 @@ function Ratio() {
                                     <td><input type="text" class="form-control display-input id_value_contract value_contract" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" value="${format(ele.id_value_contract)}" id="id_value_contract" onchange="setValueContract(this),totalPriceUpdate(),formatCurrency_VND(this)"
                                                name="id_value_contract[]" ></td>
                                     <td><input type="text" class="form-control display-input id_vat" placeholder="Thuế (%)" id="id_vat" value="${ele.id_vat}" name="id_vat[]" ></td>
-                                    <td><input type="text" class="form-control display-input total" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" onchange="totalPriceUpdate(),formatCurrency_VND(this)" value="${format(ele.total_value)}" id="total" name="total_value[]" ></td>
+                                    <td><input type="text" class="form-control display-input total" data-type="currency_vnd" onkeyup="formatCurrency_VND(this)" onchange="totalPriceVat(),formatCurrency_VND(this)" value="${format(ele.total_value)}" id="total" name="total_value[]" ></td>
                                     <td><input type="date" class="form-control display-input" value="${ele._pay_due}" name="_pay_due[]" required>
                                     </td>
                                 </tr>` )

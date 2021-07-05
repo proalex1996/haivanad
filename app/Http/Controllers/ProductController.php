@@ -484,7 +484,9 @@ class ProductController extends Controller
             return Response::download(public_path('storage/PPTX/'.$datas[0].'.zip'));
         }
 
-
+    public function findProduct($id){
+        return "done";
+    }
 
 
 
