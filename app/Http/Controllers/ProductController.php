@@ -485,7 +485,8 @@ class ProductController extends Controller
         }
 
     public function findProduct($id){
-        return "done";
+        $data = DB::table();
+        return json_encode(['district' => $test], 200);
     }
 
 
