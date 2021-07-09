@@ -603,6 +603,9 @@ class ContractController extends Controller
      */
     public function destroy($id)
     {
+        $contract = ContractModel::select('*')->where('id',$id)->first();
+        Product_in_Contract::where('id_contract',$contract->id_contract)->delete();
+        DetailModel::where('id_contract',$contract->id_contract)->delete();
         $del = ContractModel::find($id);
         $del->delete();
         return redirect('/contract');

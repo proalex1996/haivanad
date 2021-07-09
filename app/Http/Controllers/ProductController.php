@@ -364,6 +364,9 @@ class ProductController extends Controller
     public function destroy(Request $request,$id)
     {
         try {
+            Product_in_Contract::where('id_banner',$id)->delete();
+            PhotoModel::where('id_banner',$id)->delete();
+            MapModel::where('id_banner',$id)->delete();
             $del = ProductModel::where('id_banner',$id);
             $del->delete();
             return redirect('/product');
@@ -484,11 +487,32 @@ class ProductController extends Controller
             return Response::download(public_path('storage/PPTX/'.$datas[0].'.zip'));
         }
 
-    public function findProduct($id){
-        $data = DB::table();
-        return json_encode(['district' => $test], 200);
+    public function findProduct($id){    
+        $data = DB::table('banner')
+            ->join('status_banner', 'banner.name_status', '=', 'status_banner.id_status')
+            ->join('district', 'banner.quan', '=', 'district.id_district')
+            ->join('type_banner', 'banner.id_typebanner', '=', 'type_banner.id_typebanner')
+            ->join('province', 'banner.tinh', '=', 'province._code')
+            ->select('banner.*','status_banner.name_status as name_st','district._name_district as name_dt','type_banner.name_type as name_type','province._name as name_province')
+            ->where('id_banner', $id)->get();
+        $contracts = DB::table('product_in_contract')
+            ->join('contract','contract.id_contract','=','product_in_contract.id_contract')
+            ->join('customer','customer.customer_id','=','contract.id_customer')
+            ->join('kind_contract','kind_contract.id_contract','=','contract.kind')
+            ->join('contract_status','contract_status.id_contract','=','contract.status_contract')
+            ->select('contract.*','customer.name_customer','kind_contract.name_kind','contract_status.name_status')
+            ->where('product_in_contract.id_banner',$id)->get();
+        $products = DB::select("
+            SELECT ct.id_banner
+            FROM
+            (
+                SELECT pic.id_contract
+                FROM product_in_contract pic
+                WHERE pic.id_banner = '{$id}'
+            ) a 
+            JOIN product_in_contract ct ON a.id_contract = ct.id_contract
+        ");
+        return json_encode(['data' => $data, 'contract' => $contracts, 'product' => $products], 200);
     }
-
-
 
 }
